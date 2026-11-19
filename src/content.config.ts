@@ -1,11 +1,13 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
-import { CATEGORIES, CATEGORY_KEYS, type CategoryKey } from './consts';
+import { MID_KEYS, ALL_TAGS, TYPES, topicOwner } from './consts';
 
 // 空欄（""）は未入力として扱う（Pages CMS で空のまま保存した場合への対応）
-const optDate = z.preprocess((v) => (v === '' || v === null ? undefined : v), z.coerce.date().optional());
-const optStr = z.preprocess((v) => (v === '' || v === null ? undefined : v), z.string().optional());
+const blank = (v: unknown) => (v === '' || v === null ? undefined : v);
+const optDate = z.preprocess(blank, z.coerce.date().optional());
+const optStr = z.preprocess(blank, z.string().optional());
+const TYPE_KEYS = TYPES.map((t) => t.key);
 
 const posts = defineCollection({
   // 先頭が _ のファイルは公開されない（下書き置き場として使える）
@@ -13,19 +15,45 @@ const posts = defineCollection({
   schema: z
     .object({
       title: z.string(),
-      description: z.string(),
+      description: z.preprocess(blank, z.string().default('')),
       pubDate: z.coerce.date(),
       updatedDate: optDate,
-      category: z.enum(CATEGORY_KEYS as [CategoryKey, ...CategoryKey[]]),
-      topic: optStr, // 小項目（consts.ts の slug）
-      tags: z.preprocess((v) => (v === null ? [] : v), z.array(z.string()).default([])),
+      category: optStr, // 中カテゴリー（taxonomy.json の mids[].key）
+      topic: optStr, // 小カテゴリー（taxonomy.json の topics[].slug）
+      type: optStr, // 記事タイプ（taxonomy.json の types[].key）
+      tags: z.preprocess(
+        (v) => (v === null || v === '' ? [] : typeof v === 'string' ? v.split(/[,、]\s*/) : v),
+        z.array(z.string()).default([]),
+      ),
       lawBaseDate: optDate, // 法令の基準日
       draft: z.boolean().default(false),
     })
-    .refine(
-      (d) => !d.topic || CATEGORIES[d.category].topics.some((x: { slug: string }) => x.slug === d.topic),
-      { message: 'topic が category の小項目にありません（src/consts.ts を確認）', path: ['topic'] },
-    ),
+    // 入力ミスがあってもビルドを止めない：小カテゴリーから中カテゴリーを決め、合わないものは外す
+    .transform((d) => {
+      const warn = (msg: string) => console.warn(`[しおり] 「${d.title}」：${msg}`);
+      const owner = topicOwner(d.topic);
+      let category = d.category;
+      let topic = d.topic;
+      if (owner && owner !== category) {
+        if (category) warn(`小カテゴリー ${topic} に合わせて中カテゴリーを ${category} → ${owner} に補正しました`);
+        category = owner;
+      } else if (topic && !owner) {
+        warn(`小カテゴリー ${topic} は存在しないため外しました`);
+        topic = undefined;
+      }
+      if (!category || !MID_KEYS.includes(category)) {
+        warn('中カテゴリーが未設定または不正のため「考え方・理念」に入れました');
+        category = 'mindset';
+      }
+      let type = d.type;
+      if (!type || !TYPE_KEYS.includes(type)) {
+        if (type) warn(`記事タイプ ${type} は存在しないため「解説」にしました`);
+        type = 'explainer';
+      }
+      const tags = [...new Set(d.tags)].filter((t) => ALL_TAGS.includes(t) || (warn(`タグ ${t} は一覧にないため外しました`), false));
+      if (tags.length > 5) warn('タグが5個を超えたため、先頭の5個だけを使います');
+      return { ...d, category, topic, type, tags: tags.slice(0, 5) };
+    }),
 });
 
 export const collections = { posts };

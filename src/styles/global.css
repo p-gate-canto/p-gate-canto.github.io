@@ -131,6 +131,66 @@ a:hover { color: var(--accent); }
 .hero-no { color: var(--accent); font-size: 0.6em; letter-spacing: 0.1em; margin-right: 12px; vertical-align: middle; }
 .badge a { color: var(--accent); text-decoration: none; }
 
+/* article parts */
+.preview-banner { margin: 24px 0 0; padding: 10px 14px; background: var(--deep); color: #fff; font-size: 13px; border-left: 4px solid var(--lime); }
+.stale { margin-top: 10px; font-size: 13px; padding: 10px 14px; border-left: 3px solid #d98c00; background: #fff8e6; color: #6b4a00; }
+.tags a { color: var(--muted); text-decoration: none; }
+.tags a:hover { color: var(--accent); }
+.article-toc { margin: 28px 0 0; padding: 16px 20px; background: var(--surface); border: 1px solid var(--line); }
+.article-toc-title { margin: 0 0 6px; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: var(--ink); }
+.article-toc ol { margin: 0; padding-left: 1.4em; font-size: 14px; line-height: 1.9; }
+.article-toc li.lv3 { list-style: none; margin-left: 0.4em; font-size: 13px; }
+.article-toc li.lv3::before { content: '– '; color: var(--muted); }
+.article-toc a { text-decoration: none; }
+.article-toc a:hover { text-decoration: underline; }
+.prose img { max-width: 100%; height: auto; border: 1px solid var(--line); }
+.callout { margin: 24px 0; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--green); }
+.callout > p { margin: 0.4em 0; }
+.callout .callout-label { margin: 0 0 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); }
+.callout-conclusion { border-left-color: var(--ink); background: #f6f8f4; }
+.callout-conclusion .callout-label { color: var(--ink); }
+.callout-caution { border-left-color: #d98c00; background: #fffaf0; }
+.callout-caution .callout-label { color: #a86a00; }
+.callout-note { border-left-color: #9aa3ab; }
+.callout-note .callout-label { color: var(--muted); }
+.author { display: flex; gap: 16px; align-items: flex-start; margin: 8px 0 32px; padding: 20px; background: var(--surface); border: 1px solid var(--line); }
+.author-mark { flex: none; width: 12px; height: 36px; background: linear-gradient(180deg, var(--green), var(--lime) 70%, var(--yellow)); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%); }
+.author p { margin: 0 0 4px; }
+.author-name { font-weight: 700; color: var(--ink); }
+.author-bio { font-size: 14px; color: var(--muted); }
+.author a { font-size: 13px; }
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 40px; }
+.pager a { display: block; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; font-size: 14px; font-weight: 700; color: var(--ink); line-height: 1.6; }
+.pager a:hover { border-color: var(--green); }
+.pager a span { display: block; font-size: 12px; font-weight: 400; color: var(--muted); margin-bottom: 2px; }
+.pager-next { text-align: right; }
+.related { margin-bottom: 48px; }
+/* search (Pagefind) */
+#search { --pagefind-ui-primary: #4f9a32; --pagefind-ui-text: #0b1820; --pagefind-ui-background: #ffffff; --pagefind-ui-border: #d9dde2; --pagefind-ui-tag: #eef0f3; --pagefind-ui-border-radius: 0; --pagefind-ui-font: inherit; }
+
+/* home hero：検索窓と読者別の入口 */
+.hero-search { display: flex; margin: 24px 0 0; max-width: 520px; background: #fff; border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(8, 21, 29, 0.06); }
+.hero-search input { flex: 1; min-width: 0; border: 0; padding: 12px 14px; font: inherit; font-size: 15px; background: transparent; color: var(--text); }
+.hero-search input:focus { outline: 2px solid var(--green); outline-offset: -2px; }
+.hero-search button { border: 0; padding: 0 20px; font: inherit; font-size: 14px; font-weight: 700; color: #fff; background: var(--ink); cursor: pointer; }
+.hero-search button:hover { background: var(--accent); }
+.reader-lead { margin: 28px 0 10px !important; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: var(--ink) !important; }
+.readers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.reader { position: relative; display: block; padding: 14px 14px 12px; background: rgba(255, 255, 255, 0.9); border: 1px solid var(--line); text-decoration: none; }
+.reader::after { content: '→'; position: absolute; right: 12px; top: 13px; font-size: 13px; color: var(--accent); }
+.reader:hover { border-color: var(--green); color: var(--text); }
+.reader strong { display: block; font-size: 14px; color: var(--ink); padding-right: 16px; }
+.reader span { display: block; margin-top: 4px; font-size: 12px; line-height: 1.6; color: var(--muted); }
+/* WORK の地図 */
+.workmap .layer { margin-bottom: 26px; }
+.layer-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; margin: 0 0 10px; font-size: 16px; color: var(--ink); }
+.layer-no { font-size: 12px; font-weight: 700; color: #fff; background: var(--ink); padding: 1px 8px; letter-spacing: 0.08em; }
+.layer-q { font-size: 12px; font-weight: 400; color: var(--muted); }
+.type-chip { display: inline-block; padding: 0 8px; font-size: 11px; line-height: 20px; color: var(--ink); background: #eef0f3; border: 1px solid var(--line); text-decoration: none; }
+a.type-chip:hover { border-color: var(--green); }
+.pillars.pillars-3 { grid-template-columns: repeat(3, 1fr); }
+.pillar-en { font-size: 11px; letter-spacing: 0.12em; color: var(--accent); font-weight: 700; margin: 0 0 2px !important; }
+
 /* pillars */
 .pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 .pillar { position: relative; display: block; padding: 18px 18px 16px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; overflow: hidden; box-shadow: 0 1px 2px rgba(8, 21, 29, 0.04); }
@@ -169,7 +229,12 @@ a:hover { color: var(--accent); }
   .site-header .wrap { padding-bottom: 0; }
   .nav-home { display: none; }
   .toc { grid-template-columns: 1fr; }
-  .pillars { grid-template-columns: 1fr; }
+  .pillars, .pillars.pillars-3 { grid-template-columns: 1fr; }
+  .readers { grid-template-columns: 1fr 1fr; }
+  .hero-home::after { display: none; }
+  .reader strong { font-size: 13px; }
+  .pager { grid-template-columns: 1fr; }
+  .pager-next { text-align: left; }
   .topics { grid-template-columns: 1fr 1fr; }
   .topic { font-size: 12.5px; padding: 8px 9px; letter-spacing: 0; white-space: nowrap; }
   .nav { gap: 12px; flex-wrap: nowrap; overflow-x: auto; width: 100%; padding-bottom: 12px; scrollbar-width: none; }

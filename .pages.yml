@@ -1,5 +1,5 @@
 # Pages CMS の設定（https://app.pagescms.org で編集画面として使う）
-# 分野・項目を増減したら、src/consts.ts とこのファイルの両方を直す
+# 分類（中カテゴリー・小カテゴリー・タグ・記事タイプ）は src/data/taxonomy.json と同じ内容にそろえる
 media:
 - name: images
   label: 画像
@@ -20,6 +20,7 @@ content:
     primary: title
     fields:
     - title
+    - type
     - category
     - pubDate
     - draft
@@ -31,15 +32,515 @@ content:
     type: string
     required: true
   - name: slug
-    label: URL用の英字名（半角小文字・数字・ハイフン。例：executive-pay-change）
+    label: URL用の英字名（必須。半角小文字・数字・ハイフン。例：executive-pay-change）
     type: string
     pattern:
-      regex: ^[a-z0-9-]*$
+      regex: ^[a-z0-9]+(-[a-z0-9]+)*$
       message: 半角の小文字英字・数字・ハイフン（-）だけで入力してください（例：executive-pay-change）
+    required: true
   - name: description
     label: 要約（一覧と検索結果に出る。60〜100字）
     type: text
     required: true
+  - name: type
+    label: 記事タイプ（見出しの型は「記事の型（テンプレート集）」を参照）
+    type: select
+    required: true
+    default: explainer
+    options:
+      values:
+      - name: explainer
+        label: 解説
+      - name: comparison
+        label: 比較・判断
+      - name: checklist
+        label: 手順・チェックリスト
+      - name: news
+        label: 改正ニュース
+      - name: glossary
+        label: 用語解説
+      - name: case
+        label: 事例
+      - name: study-log
+        label: 学習記録
+      - name: essay
+        label: エッセイ
+      - name: tool
+        label: ツール紹介
+  - name: category
+    label: 中カテゴリー（小カテゴリーを選べば自動で補正される）
+    type: select
+    required: true
+    options:
+      values:
+      - name: philosophy
+        label: WORK｜経営理念・ビジョン
+      - name: management-plan
+        label: WORK｜経営計画
+      - name: corporate-strategy
+        label: WORK｜企業戦略
+      - name: ma
+        label: WORK｜M&A・組織再編
+      - name: succession
+        label: WORK｜事業承継
+      - name: governance
+        label: WORK｜ガバナンス・リスク管理
+      - name: competitive-strategy
+        label: WORK｜競争戦略
+      - name: new-business
+        label: WORK｜新規事業開発
+      - name: business-model
+        label: WORK｜ビジネスモデル
+      - name: turnaround
+        label: WORK｜事業再生・収益改善
+      - name: marketing
+        label: WORK｜マーケティング
+      - name: sales
+        label: WORK｜営業・顧客管理
+      - name: hr
+        label: WORK｜組織・人事
+      - name: labor
+        label: WORK｜労務管理
+      - name: finance
+        label: WORK｜財務・資金調達
+      - name: management-accounting
+        label: WORK｜管理会計・予算
+      - name: corporate-tax
+        label: WORK｜法人税務
+      - name: personal-tax
+        label: WORK｜個人・資産税務
+      - name: dx
+        label: WORK｜DX・IT・AI
+      - name: subsidy
+        label: WORK｜補助金・助成金
+      - name: study-method
+        label: LEARNING｜勉強法
+      - name: study-plan
+        label: LEARNING｜学習計画
+      - name: memory-output
+        label: LEARNING｜記憶とアウトプット
+      - name: reading
+        label: LEARNING｜読書・インプット
+      - name: relearning
+        label: LEARNING｜実務の学び直し
+      - name: learning-tools
+        label: LEARNING｜学習ツール・AI活用
+      - name: motivation
+        label: LEARNING｜モチベーション維持
+      - name: exam-prep
+        label: LEARNING｜試験直前・本番対策
+      - name: time-management
+        label: LIFE｜時間管理
+      - name: habits
+        label: LIFE｜習慣化
+      - name: health
+        label: LIFE｜体調管理
+      - name: productivity
+        label: LIFE｜仕事術・生産性
+      - name: mindset
+        label: LIFE｜考え方・理念
+      - name: career
+        label: LIFE｜キャリア
+      - name: team-building
+        label: LIFE｜チームづくり
+      - name: communication
+        label: LIFE｜コミュニケーション
+  - name: topic
+    label: 小カテゴリー
+    type: select
+    options:
+      values:
+      - name: mvv
+        label: 経営理念・ビジョン｜MVV策定
+      - name: credo
+        label: 経営理念・ビジョン｜行動指針・クレド
+      - name: philosophy-penetration
+        label: 経営理念・ビジョン｜理念浸透
+      - name: judgment-axis
+        label: 経営理念・ビジョン｜経営者の判断軸
+      - name: midterm-plan
+        label: 経営計画｜中期経営計画
+      - name: kpi
+        label: 経営計画｜経営目標・KPI設計
+      - name: business-plan
+        label: 経営計画｜事業計画書
+      - name: plan-operation
+        label: 経営計画｜計画の運用・経営会議
+      - name: domain
+        label: 企業戦略｜ドメイン設定
+      - name: growth-strategy
+        label: 企業戦略｜成長戦略（製品×市場）
+      - name: diversification
+        label: 企業戦略｜多角化
+      - name: portfolio
+        label: 企業戦略｜事業ポートフォリオ
+      - name: vertical-integration
+        label: 企業戦略｜垂直統合・外部化
+      - name: exit
+        label: 企業戦略｜撤退・縮小
+      - name: ma-strategy
+        label: M&A・組織再編｜M&A戦略・候補先探索
+      - name: due-diligence
+        label: M&A・組織再編｜デューデリジェンス
+      - name: valuation
+        label: M&A・組織再編｜企業価値評価
+      - name: ma-scheme
+        label: M&A・組織再編｜M&Aスキーム
+      - name: pmi
+        label: M&A・組織再編｜PMI
+      - name: reorganization
+        label: M&A・組織再編｜組織再編・持株会社化
+      - name: succession-plan
+        label: 事業承継｜承継計画
+      - name: family-succession
+        label: 事業承継｜親族内承継
+      - name: employee-succession
+        label: 事業承継｜従業員承継
+      - name: third-party-succession
+        label: 事業承継｜第三者承継
+      - name: successor-development
+        label: 事業承継｜後継者育成
+      - name: decision-authority
+        label: ガバナンス・リスク管理｜意思決定・権限設計
+      - name: internal-control
+        label: ガバナンス・リスク管理｜内部統制
+      - name: compliance
+        label: ガバナンス・リスク管理｜コンプライアンス
+      - name: fraud-audit
+        label: ガバナンス・リスク管理｜不正防止・内部監査
+      - name: bcp
+        label: ガバナンス・リスク管理｜BCP
+      - name: security
+        label: ガバナンス・リスク管理｜情報セキュリティ
+      - name: industry-analysis
+        label: 競争戦略｜業界・競合分析
+      - name: competitive-advantage
+        label: 競争戦略｜競争優位（差別化・コスト・集中）
+      - name: positioning
+        label: 競争戦略｜ポジショニング
+      - name: vrio
+        label: 競争戦略｜強みの分析（VRIO）
+      - name: competitive-position
+        label: 競争戦略｜競争地位別戦略
+      - name: business-planning
+        label: 新規事業開発｜事業企画
+      - name: market-validation
+        label: 新規事業開発｜市場調査・検証
+      - name: commercialization
+        label: 新規事業開発｜事業化・収益計画
+      - name: alliance
+        label: 新規事業開発｜提携・アライアンス
+      - name: revenue-structure
+        label: ビジネスモデル｜収益構造
+      - name: value-proposition
+        label: ビジネスモデル｜価値提案
+      - name: subscription
+        label: ビジネスモデル｜ストック型・サブスク
+      - name: platform
+        label: ビジネスモデル｜プラットフォーム
+      - name: breakeven
+        label: 事業再生・収益改善｜損益分岐点・限界利益
+      - name: unprofitable-business
+        label: 事業再生・収益改善｜不採算事業の見直し
+      - name: cost-reduction
+        label: 事業再生・収益改善｜コスト削減
+      - name: rehabilitation-plan
+        label: 事業再生・収益改善｜再生計画・金融支援
+      - name: stp
+        label: マーケティング｜STP
+      - name: 4p-pricing
+        label: マーケティング｜4P・価格設定
+      - name: branding
+        label: マーケティング｜ブランド
+      - name: web-seo
+        label: マーケティング｜Web・SEO・AIO
+      - name: advertising
+        label: マーケティング｜広告
+      - name: promotion
+        label: マーケティング｜販促・紹介制度
+      - name: sales-process
+        label: 営業・顧客管理｜営業プロセス
+      - name: sales-kpi
+        label: 営業・顧客管理｜営業KPI・営業組織
+      - name: crm-ltv
+        label: 営業・顧客管理｜CRM・LTV
+      - name: proposal
+        label: 営業・顧客管理｜提案・見積
+      - name: org-design
+        label: 組織・人事｜組織設計
+      - name: recruiting
+        label: 組織・人事｜採用
+      - name: evaluation
+        label: 組織・人事｜人事評価制度
+      - name: compensation
+        label: 組織・人事｜賃金制度
+      - name: talent-development
+        label: 組織・人事｜人材育成
+      - name: retention
+        label: 組織・人事｜定着・エンゲージメント
+      - name: culture
+        label: 組織・人事｜組織風土
+      - name: work-rules
+        label: 労務管理｜就業規則
+      - name: working-hours
+        label: 労務管理｜労働時間・残業
+      - name: social-insurance
+        label: 労務管理｜社会保険
+      - name: payroll
+        label: 労務管理｜給与計算
+      - name: labor-disputes
+        label: 労務管理｜労務トラブル
+      - name: labor-law-changes
+        label: 労務管理｜法改正対応
+      - name: financial-policy
+        label: 財務・資金調達｜財務方針・資本構成
+      - name: bank-loans
+        label: 財務・資金調達｜融資・金融機関対応
+      - name: cash-flow
+        label: 財務・資金調達｜資金繰り
+      - name: capital-policy
+        label: 財務・資金調達｜資本政策
+      - name: financial-health
+        label: 財務・資金調達｜財務体質改善
+      - name: investment
+        label: 財務・資金調達｜投資判断
+      - name: segment-profit
+        label: 管理会計・予算｜部門別・製品別採算
+      - name: budgeting
+        label: 管理会計・予算｜予算策定
+      - name: budget-control
+        label: 管理会計・予算｜予実管理
+      - name: cost-accounting
+        label: 管理会計・予算｜原価計算・原価管理
+      - name: corporate-income-tax
+        label: 法人税務｜法人税
+      - name: consumption-tax
+        label: 法人税務｜消費税・インボイス
+      - name: officer-pay
+        label: 法人税務｜役員報酬
+      - name: tax-planning
+        label: 法人税務｜節税・タックスプランニング
+      - name: group-tax
+        label: 法人税務｜グループ・組織再編税制
+      - name: international-tax
+        label: 法人税務｜国際税務
+      - name: tax-audit
+        label: 法人税務｜税務調査・税務リスク
+      - name: income-tax
+        label: 個人・資産税務｜所得税・確定申告
+      - name: inheritance-tax
+        label: 個人・資産税務｜相続税
+      - name: gift-tax
+        label: 個人・資産税務｜贈与税
+      - name: stock-valuation
+        label: 個人・資産税務｜自社株評価・事業承継税制
+      - name: incorporation
+        label: 個人・資産税務｜法人成り
+      - name: income-split
+        label: 個人・資産税務｜法人と個人の所得配分
+      - name: dx-strategy
+        label: DX・IT・AI｜DX構想・IT投資
+      - name: bpr
+        label: DX・IT・AI｜業務改革（BPR）
+      - name: automation
+        label: DX・IT・AI｜業務自動化（Excel・VBA・RPA）
+      - name: generative-ai
+        label: DX・IT・AI｜生成AI活用
+      - name: data-dashboard
+        label: DX・IT・AI｜データ活用・ダッシュボード
+      - name: system-implementation
+        label: DX・IT・AI｜システム導入
+      - name: subsidies
+        label: 補助金・助成金｜補助金
+      - name: employment-grants
+        label: 補助金・助成金｜助成金（雇用関係）
+      - name: application
+        label: 補助金・助成金｜申請・事業計画書
+      - name: post-approval
+        label: 補助金・助成金｜採択後の手続き
+      - name: subsidy-tax
+        label: 補助金・助成金｜補助金の税務
+      - name: subject-strategy
+        label: 勉強法｜科目別の攻略
+      - name: understanding-memorizing
+        label: 勉強法｜理解と暗記の使い分け
+      - name: self-study
+        label: 勉強法｜独学と予備校
+      - name: multiple-qualifications
+        label: 勉強法｜複数資格の並行
+      - name: annual-plan
+        label: 学習計画｜年間・月間計画
+      - name: daily-schedule
+        label: 学習計画｜1日のスケジュール
+      - name: progress-tracking
+        label: 学習計画｜進捗管理
+      - name: replanning
+        label: 学習計画｜計画の立て直し
+      - name: memorization
+        label: 記憶とアウトプット｜暗記術
+      - name: past-exams
+        label: 記憶とアウトプット｜過去問・問題演習
+      - name: review-cycle
+        label: 記憶とアウトプット｜復習サイクル
+      - name: written-answers
+        label: 記憶とアウトプット｜記述・答案練習
+      - name: reading-method
+        label: 読書・インプット｜読書法
+      - name: book-reviews
+        label: 読書・インプット｜本の紹介
+      - name: information-gathering
+        label: 読書・インプット｜情報収集
+      - name: seminars
+        label: 読書・インプット｜研修・セミナー
+      - name: law-updates
+        label: 実務の学び直し｜法改正のキャッチアップ
+      - name: reading-statutes
+        label: 実務の学び直し｜条文・通達の読み方
+      - name: other-professions
+        label: 実務の学び直し｜他士業領域の学び
+      - name: accounting-basics
+        label: 実務の学び直し｜会計・数字の基礎
+      - name: study-apps
+        label: 学習ツール・AI活用｜学習アプリ
+      - name: ai-practice
+        label: 学習ツール・AI活用｜AIでの問題演習
+      - name: progress-tools
+        label: 学習ツール・AI活用｜進捗管理ツール
+      - name: note-taking
+        label: 学習ツール・AI活用｜ノート・まとめ術
+      - name: work-study-balance
+        label: モチベーション維持｜仕事との両立
+      - name: slump
+        label: モチベーション維持｜スランプ対策
+      - name: after-failure
+        label: モチベーション維持｜不合格からの立て直し
+      - name: study-environment
+        label: モチベーション維持｜学習環境・仲間
+      - name: final-weeks
+        label: 試験直前・本番対策｜直前期の過ごし方
+      - name: time-allocation
+        label: 試験直前・本番対策｜当日の時間配分
+      - name: exam-condition
+        label: 試験直前・本番対策｜体調・メンタル調整
+      - name: after-passing
+        label: 試験直前・本番対策｜合格後の手続き
+      - name: task-management
+        label: 時間管理｜タスク管理
+      - name: schedule-design
+        label: 時間管理｜スケジュール設計
+      - name: focus-time
+        label: 時間管理｜集中時間の確保
+      - name: busy-season
+        label: 時間管理｜繁忙期の乗り切り方
+      - name: morning-routine
+        label: 習慣化｜朝の習慣
+      - name: keeping-habits
+        label: 習慣化｜習慣の続け方
+      - name: reflection
+        label: 習慣化｜振り返り・日記
+      - name: quitting-habits
+        label: 習慣化｜やめる習慣
+      - name: sleep
+        label: 体調管理｜睡眠
+      - name: exercise
+        label: 体調管理｜運動
+      - name: diet
+        label: 体調管理｜食事
+      - name: recovery
+        label: 体調管理｜疲労回復
+      - name: systemization
+        label: 仕事術・生産性｜仕組み化・テンプレート化
+      - name: document-creation
+        label: 仕事術・生産性｜資料作成
+      - name: excel-tools
+        label: 仕事術・生産性｜Excel・ツール術
+      - name: file-organization
+        label: 仕事術・生産性｜情報整理・ファイル管理
+      - name: work-philosophy
+        label: 考え方・理念｜仕事観
+      - name: decision-axis
+        label: 考え方・理念｜判断軸
+      - name: learning-from-failure
+        label: 考え方・理念｜失敗からの学び
+      - name: words-and-books
+        label: 考え方・理念｜影響を受けた言葉・本
+      - name: professional-career
+        label: キャリア｜士業のキャリア
+      - name: executive-view
+        label: キャリア｜役員の視点
+      - name: using-qualifications
+        label: キャリア｜資格の活かし方
+      - name: market-value
+        label: キャリア｜市場価値の言語化
+      - name: team-management
+        label: チームづくり｜マネジメント
+      - name: coaching
+        label: チームづくり｜育成・指導
+      - name: delegation
+        label: チームづくり｜仕事の任せ方
+      - name: evaluator-view
+        label: チームづくり｜評価する側の視点
+      - name: client-dialogue
+        label: コミュニケーション｜顧問先との対話
+      - name: explaining
+        label: コミュニケーション｜説明・プレゼン
+      - name: internal-coordination
+        label: コミュニケーション｜報連相・社内調整
+      - name: listening
+        label: コミュニケーション｜聞く力・質問力
+  - name: tags
+    label: タグ（最大5個）
+    type: select
+    options:
+      multiple: true
+      max: 5
+      values:
+      - name: 中小企業診断士
+        label: 資格｜中小企業診断士
+      - name: 社会保険労務士
+        label: 資格｜社会保険労務士
+      - name: 税理士試験
+        label: 資格｜税理士試験
+      - name: 経営者向け
+        label: 読者｜経営者向け
+      - name: 経理担当者向け
+        label: 読者｜経理担当者向け
+      - name: 実務家向け
+        label: 読者｜実務家向け
+      - name: 受験生向け
+        label: 読者｜受験生向け
+      - name: 創業期
+        label: 会社のステージ｜創業期
+      - name: 成長期
+        label: 会社のステージ｜成長期
+      - name: 成熟期
+        label: 会社のステージ｜成熟期
+      - name: 承継期
+        label: 会社のステージ｜承継期
+      - name: 再生期
+        label: 会社のステージ｜再生期
+      - name: 建設業
+        label: 業種｜建設業
+      - name: 飲食業
+        label: 業種｜飲食業
+      - name: 医療・介護
+        label: 業種｜医療・介護
+      - name: IT・Web
+        label: 業種｜IT・Web
+      - name: 不動産
+        label: 業種｜不動産
+      - name: 小売・EC
+        label: 業種｜小売・EC
+      - name: 令和8年度税制改正
+        label: 時事｜令和8年度税制改正
+      - name: 令和9年度税制改正
+        label: 時事｜令和9年度税制改正
+      - name: 法改正
+        label: 時事｜法改正
+      - name: 税理士×社労士
+        label: 視点｜税理士×社労士
+      - name: 税理士×診断士
+        label: 視点｜税理士×診断士
   - name: pubDate
     label: 公開日
     type: date
@@ -52,239 +553,6 @@ content:
     default: ''
     options:
       format: yyyy-MM-dd
-  - name: category
-    label: 分野
-    type: select
-    required: true
-    options:
-      values:
-      - name: strategy
-        label: 仕事｜経営戦略
-      - name: finance
-        label: 仕事｜財務・会計戦略
-      - name: tax
-        label: 仕事｜税務戦略
-      - name: bizdev
-        label: 仕事｜事業開発戦略
-      - name: ma
-        label: 仕事｜M&A・組織再編戦略
-      - name: marketing
-        label: 仕事｜マーケティング・営業戦略
-      - name: hr
-        label: 仕事｜組織・人事戦略
-      - name: dx
-        label: 仕事｜DX・IT・AI戦略
-      - name: risk
-        label: 仕事｜リスク・ガバナンス戦略
-      - name: study
-        label: 学び
-      - name: self
-        label: 自己管理
-      - name: tools
-        label: ツール
-  - name: topic
-    label: 項目（分野と同じグループから選ぶ。ツールは空欄）
-    type: select
-    options:
-      values:
-      - name: vision
-        label: 経営戦略｜経営理念・ビジョン策定
-      - name: midterm-plan
-        label: 経営戦略｜中期経営計画策定
-      - name: corporate-strategy
-        label: 経営戦略｜経営戦略策定
-      - name: portfolio
-        label: 経営戦略｜事業ポートフォリオ戦略
-      - name: restructuring
-        label: 経営戦略｜事業再構築戦略
-      - name: resource-allocation
-        label: 経営戦略｜経営資源配分戦略
-      - name: management-system
-        label: 経営戦略｜経営管理体制構築
-      - name: succession
-        label: 経営戦略｜経営承継戦略
-      - name: financial-strategy
-        label: 財務・会計戦略｜財務戦略策定
-      - name: fundraising
-        label: 財務・会計戦略｜資金調達戦略
-      - name: cash-flow
-        label: 財務・会計戦略｜資金繰り改善戦略
-      - name: capital-policy
-        label: 財務・会計戦略｜資本政策
-      - name: management-accounting
-        label: 財務・会計戦略｜管理会計導入
-      - name: budgeting
-        label: 財務・会計戦略｜予算管理体制構築
-      - name: profit-improvement
-        label: 財務・会計戦略｜利益改善戦略
-      - name: cost-management
-        label: 財務・会計戦略｜原価管理戦略
-      - name: financial-health
-        label: 財務・会計戦略｜財務体質改善
-      - name: investment
-        label: 財務・会計戦略｜投資判断支援
-      - name: tax-planning
-        label: 税務戦略｜節税戦略
-      - name: corporate-tax
-        label: 税務戦略｜法人税最適化
-      - name: income-allocation
-        label: 税務戦略｜所得配分戦略
-      - name: group-tax
-        label: 税務戦略｜グループ税務戦略
-      - name: entity-design
-        label: 税務戦略｜法人設計戦略
-      - name: executive-pay
-        label: 税務戦略｜役員報酬戦略
-      - name: succession-tax
-        label: 税務戦略｜事業承継税務戦略
-      - name: ma-tax
-        label: 税務戦略｜M&A税務戦略
-      - name: international-tax
-        label: 税務戦略｜国際税務戦略
-      - name: tax-risk
-        label: 税務戦略｜税務リスク管理
-      - name: new-business
-        label: 事業開発戦略｜新規事業開発
-      - name: commercialization
-        label: 事業開発戦略｜事業化支援
-      - name: business-model
-        label: 事業開発戦略｜ビジネスモデル構築
-      - name: market-entry
-        label: 事業開発戦略｜市場参入戦略
-      - name: product-development
-        label: 事業開発戦略｜商品・サービス開発
-      - name: pricing
-        label: 事業開発戦略｜価格戦略
-      - name: alliance
-        label: 事業開発戦略｜事業提携戦略
-      - name: diversification
-        label: 事業開発戦略｜多角化戦略
-      - name: turnaround
-        label: 事業開発戦略｜事業再生戦略
-      - name: exit
-        label: 事業開発戦略｜撤退戦略
-      - name: ma-strategy
-        label: M&A・組織再編戦略｜M&A戦略策定
-      - name: target-screening
-        label: M&A・組織再編戦略｜M&A候補先選定
-      - name: financial-dd
-        label: M&A・組織再編戦略｜財務デューデリジェンス
-      - name: tax-dd
-        label: M&A・組織再編戦略｜税務デューデリジェンス
-      - name: valuation
-        label: M&A・組織再編戦略｜企業価値評価
-      - name: ma-scheme
-        label: M&A・組織再編戦略｜M&Aスキーム検討
-      - name: pmi
-        label: M&A・組織再編戦略｜PMI
-      - name: reorganization
-        label: M&A・組織再編戦略｜組織再編
-      - name: succession-ma
-        label: M&A・組織再編戦略｜事業承継M&A
-      - name: marketing-strategy
-        label: マーケティング・営業戦略｜マーケティング戦略
-      - name: market-analysis
-        label: マーケティング・営業戦略｜市場分析
-      - name: customer-analysis
-        label: マーケティング・営業戦略｜顧客分析
-      - name: branding
-        label: マーケティング・営業戦略｜ブランド戦略
-      - name: web-marketing
-        label: マーケティング・営業戦略｜Webマーケティング
-      - name: lead-generation
-        label: マーケティング・営業戦略｜集客戦略
-      - name: sales-strategy
-        label: マーケティング・営業戦略｜営業戦略
-      - name: sales-organization
-        label: マーケティング・営業戦略｜営業組織構築
-      - name: crm
-        label: マーケティング・営業戦略｜CRM戦略
-      - name: sales-promotion
-        label: マーケティング・営業戦略｜販売促進戦略
-      - name: organization
-        label: 組織・人事戦略｜組織戦略
-      - name: workforce-planning
-        label: 組織・人事戦略｜人員計画
-      - name: recruiting
-        label: 組織・人事戦略｜採用戦略
-      - name: evaluation
-        label: 組織・人事戦略｜人事評価制度
-      - name: compensation
-        label: 組織・人事戦略｜賃金制度
-      - name: development
-        label: 組織・人事戦略｜人材育成戦略
-      - name: retention
-        label: 組織・人事戦略｜人材定着戦略
-      - name: labor-management
-        label: 組織・人事戦略｜労務管理体制
-      - name: culture
-        label: 組織・人事戦略｜組織風土改革
-      - name: successor-development
-        label: 組織・人事戦略｜後継者育成
-      - name: dx-strategy
-        label: DX・IT・AI戦略｜DX戦略策定
-      - name: it-strategy
-        label: DX・IT・AI戦略｜IT戦略
-      - name: bpr
-        label: DX・IT・AI戦略｜業務改革（BPR）
-      - name: automation
-        label: DX・IT・AI戦略｜業務自動化
-      - name: ai
-        label: DX・IT・AI戦略｜AI導入戦略
-      - name: data
-        label: DX・IT・AI戦略｜データ活用戦略
-      - name: system-implementation
-        label: DX・IT・AI戦略｜システム導入支援
-      - name: internal-control-dx
-        label: DX・IT・AI戦略｜内部統制DX
-      - name: digital-marketing
-        label: DX・IT・AI戦略｜デジタルマーケティング
-      - name: productivity
-        label: DX・IT・AI戦略｜生産性改善
-      - name: risk-management
-        label: リスク・ガバナンス戦略｜リスクマネジメント
-      - name: internal-control
-        label: リスク・ガバナンス戦略｜内部統制構築
-      - name: compliance
-        label: リスク・ガバナンス戦略｜コンプライアンス
-      - name: governance
-        label: リスク・ガバナンス戦略｜ガバナンス構築
-      - name: internal-audit
-        label: リスク・ガバナンス戦略｜内部監査体制
-      - name: fraud-prevention
-        label: リスク・ガバナンス戦略｜不正防止対策
-      - name: bcp
-        label: リスク・ガバナンス戦略｜BCP策定
-      - name: security
-        label: リスク・ガバナンス戦略｜情報セキュリティ
-      - name: method
-        label: 学び｜勉強法
-      - name: planning
-        label: 学び｜学習計画
-      - name: memory
-        label: 学び｜記憶とアウトプット
-      - name: shindanshi
-        label: 学び｜中小企業診断士
-      - name: sharoshi
-        label: 学び｜社会保険労務士
-      - name: zeirishi-exam
-        label: 学び｜税理士試験
-      - name: time
-        label: 自己管理｜時間管理
-      - name: habit
-        label: 自己管理｜習慣化
-      - name: health
-        label: 自己管理｜体調管理
-      - name: work-style
-        label: 自己管理｜仕事術
-      - name: mindset
-        label: 自己管理｜考え方・理念
-      - name: career
-        label: 自己管理｜キャリア
-  - name: tags
-    label: タグ
-    type: string
-    list: true
   - name: lawBaseDate
     label: 法令の基準日（税務・労務の記事は必ず入れる）
     type: date
@@ -302,6 +570,55 @@ content:
       format: markdown
       media: images
       path: public/images
+    default: '## 結論
+
+
+      （ここに結論を2〜3行で書く。記事タイプに合わせて、見出しは「記事の型（テンプレート集）」から差し替える）
+
+
+      ## 根拠
+
+
+      - 根拠条文：〇〇法第〇条
+
+      - 関連通達：〇〇基本通達〇-〇-〇
+
+      - 適用時期：YYYY/MM/DD以後に開始する事業年度から
+
+
+      ## ひとことで言うと
+
+
+      > ポイント：経営者に説明するときの、平易な言い換えを書く。
+
+
+      ## 実務での注意点
+
+
+      > 注意：期限・提出先・よくある誤りを書く。
+
+
+      ## あわせて考えたいこと
+
+
+      労務・補助金・経営面で関係する論点があれば一言。
+
+      '
+- name: templates
+  label: 記事の型（テンプレート集）
+  type: file
+  path: templates/types.md
+  format: yaml-frontmatter
+  fields:
+  - name: title
+    label: タイトル
+    type: string
+  - name: body
+    label: 本文
+    type: rich-text
+    options:
+      format: markdown
+      media: false
 - name: about
   label: このブログについて
   type: file
@@ -341,4 +658,10 @@ content:
     type: text
   - name: footerNote
     label: ページ下部の注意書き
+    type: text
+  - name: authorName
+    label: 筆者名（記事末の筆者欄）
+    type: string
+  - name: authorBio
+    label: 筆者紹介（記事末の筆者欄）
     type: text

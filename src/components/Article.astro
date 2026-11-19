@@ -1,0 +1,79 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import { AUTHOR_NAME, AUTHOR_BIO, url, midOf, midUrl, pillarOf, pillarUrl, typeOf, typeUrl, tagUrl, fmtDate, isoDate, topicLabel } from '../consts';
+import { relatedPosts, readingMinutes, isStale } from '../lib';
+import PostList from './PostList.astro';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  all: CollectionEntry<'posts'>[];
+  preview?: boolean;
+}
+const { post, all, preview = false } = Astro.props;
+const { Content, headings } = await render(post);
+const d = post.data;
+const mid = midOf(d.category)!;
+const pil = pillarOf(mid.pillar)!;
+const tLabel = topicLabel(d.category, d.topic);
+const type = typeOf(d.type)!;
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const showToc = toc.filter((h) => h.depth === 2).length >= 3;
+const related = preview ? [] : relatedPosts(post, all);
+const idx = all.findIndex((p) => p.id === post.id);
+const newer = idx > 0 ? all[idx - 1] : undefined;
+const older = idx >= 0 && idx < all.length - 1 ? all[idx + 1] : undefined;
+const minutes = readingMinutes(post.body);
+---
+<article class="wrap" data-pagefind-body={preview ? undefined : ''}>
+  {preview && <p class="preview-banner">下書きプレビューです。公開されておらず、検索にも出ません。</p>}
+  <header class="article-head">
+    <div class="meta">
+      <time datetime={isoDate(d.pubDate)}>{fmtDate(d.pubDate)}</time>{d.updatedDate && <Fragment>{'\n'}<span>更新 <time datetime={isoDate(d.updatedDate)}>{fmtDate(d.updatedDate)}</time></span></Fragment>}
+      <span class="badge"><a href={pillarUrl(pil.key)}>{pil.en}</a> › <a href={midUrl(d.category)}>{mid.label}</a>{d.topic && tLabel && <Fragment> › <a href={midUrl(d.category, d.topic)}>{tLabel}</a></Fragment>}</span>
+      <a class="type-chip" href={typeUrl(type.key)}>{type.label}</a>
+      <span>約{minutes}分で読めます</span>
+    </div>
+    <h1 data-pagefind-meta="title">{d.title}</h1>
+    {d.tags.length > 0 && (
+      <div class="tags">{d.tags.map((t) => <Fragment>{'\n'}{preview ? <span>#{t}</span> : <a href={tagUrl(t)}>#{t}</a>}</Fragment>)}</div>
+    )}
+    {d.lawBaseDate && <p class="basedate">この記事は {fmtDate(d.lawBaseDate)} 時点の法令にもとづいています。</p>}
+    {isStale(d.lawBaseDate) && (
+      <p class="stale">基準日から1年以上たっています。その後の税制改正・法改正で内容が変わっている可能性があります。</p>
+    )}
+  </header>
+
+  {showToc && (
+    <nav class="article-toc" aria-label="この記事の目次" data-pagefind-ignore>
+      <p class="article-toc-title">この記事の目次</p>
+      <ol>
+        {toc.map((h) => <li class={`lv${h.depth}`}><a href={`#${h.slug}`}>{h.text}</a></li>)}
+      </ol>
+    </nav>
+  )}
+
+  <div class="prose"><Content /></div>
+
+  <aside class="author" data-pagefind-ignore>
+    <span class="author-mark" aria-hidden="true"></span>
+    <div>
+      <p class="author-name">{AUTHOR_NAME}</p>
+      <p class="author-bio">{AUTHOR_BIO}</p>
+      <a href={url('/about/')}>このブログについて →</a>
+    </div>
+  </aside>
+
+  {(newer || older) && (
+    <nav class="pager" aria-label="前後の記事" data-pagefind-ignore>
+      {older ? <a class="pager-prev" href={url(`/posts/${older.id}/`)}><span>← 前の記事</span>{older.data.title}</a> : <span />}
+      {newer ? <a class="pager-next" href={url(`/posts/${newer.id}/`)}><span>次の記事 →</span>{newer.data.title}</a> : <span />}
+    </nav>
+  )}
+
+  {related.length > 0 && (
+    <section class="related" data-pagefind-ignore>
+      <h2 class="section-title">関連する記事</h2>
+      <PostList posts={related} />
+    </section>
+  )}
+</article>

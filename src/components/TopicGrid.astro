@@ -1,12 +1,13 @@
 ---
-import { CATEGORIES, catUrl, type CategoryKey } from '../consts';
-interface Props { cat: CategoryKey; counts: Record<string, number> }
-const { cat, counts } = Astro.props;
+import { midOf, midUrl } from '../consts';
+interface Props { mid: string; counts: Record<string, number> }
+const { mid, counts } = Astro.props;
+const m = midOf(mid);
 ---
 <ul class="topics">
-  {CATEGORIES[cat].topics.map((x) => (
+  {m?.topics.map((x) => (
     <li>
-      <a class={counts[x.slug] ? 'topic' : 'topic is-empty'} href={catUrl(cat, x.slug)}>
+      <a class={counts[x.slug] ? 'topic' : 'topic is-empty'} href={midUrl(mid, x.slug)}>
         <span>{x.label}</span>
         {counts[x.slug] ? <span class="topic-count">{counts[x.slug]}</span> : null}
       </a>

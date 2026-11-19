@@ -1,0 +1,14 @@
+---
+import { midOf, midUrl } from '../consts';
+interface Props { mid: string; count: number; no?: string }
+const { mid, count, no } = Astro.props;
+const m = midOf(mid)!;
+---
+<a class="toc-card" href={midUrl(mid)}>
+  {no && <span class="toc-no">{no}</span>}
+  <span class="toc-body">
+    <strong>{m.label}</strong>
+    <span class="toc-en">{m.topics.map((t) => t.label).slice(0, 3).join('・')}など</span>
+  </span>
+  <span class="toc-count">{m.topics.length}項目・{count}記事</span>
+</a>

@@ -18,17 +18,19 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL(url('/og.png'), Astro.site).href;
 const nav = [
   { href: url('/'), label: 'ホーム', key: 'home' },
-  { href: url('/contents/'), label: '仕事', key: 'business' },
-  { href: url('/category/study/'), label: '学び', key: 'study' },
-  { href: url('/category/self/'), label: '自己管理', key: 'self' },
-  { href: url('/tools/'), label: 'ツール', key: 'tools' },
+  { href: url('/work/'), label: 'WORK', key: 'work' },
+  { href: url('/learning/'), label: 'LEARNING', key: 'learning' },
+  { href: url('/life/'), label: 'LIFE', key: 'life' },
+  { href: url('/types/'), label: '記事タイプ', key: 'types' },
   { href: url('/about/'), label: 'このブログ', key: 'about' },
+  { href: url('/search/'), label: '検索', key: 'search' },
 ];
 ---
 <!doctype html>
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
+    <slot name="head" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />

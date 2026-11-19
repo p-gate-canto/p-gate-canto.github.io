@@ -1,0 +1,34 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PostList from '../../../components/PostList.astro';
+import { MIDS, midOf, pillarOf, pillarUrl, midUrl } from '../../../consts';
+import { getPosts } from '../../../lib';
+import { breadcrumbLd } from '../../../seo';
+export function getStaticPaths() {
+  return MIDS.flatMap((m) => m.topics.map((t) => ({ params: { pillar: m.pillar, mid: m.key, topic: t.slug }, props: { label: t.label } })));
+}
+const { pillar, mid, topic } = Astro.params;
+const { label } = Astro.props;
+const m = midOf(mid)!;
+const p = pillarOf(pillar)!;
+const posts = (await getPosts()).filter((x) => x.data.category === mid && x.data.topic === topic);
+---
+<Base
+  title={`${label}｜${m.label}`}
+  description={`${m.label}のうち「${label}」の記事一覧`}
+  current={pillar}
+  noindex={posts.length === 0}
+  jsonld={[breadcrumbLd([[p.en, pillarUrl(pillar)], [m.label, midUrl(mid)], [label, Astro.url.pathname]])]}
+>
+  <section class="hero">
+    <div class="wrap">
+      <p class="crumb"><a href={pillarUrl(pillar)}>{p.en}</a> › <a href={midUrl(mid)}>{m.label}</a></p>
+      <h1>{label}</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      {posts.length === 0 ? <p class="empty">この項目の記事は準備中です。</p> : <PostList posts={posts} />}
+    </div>
+  </section>
+</Base>

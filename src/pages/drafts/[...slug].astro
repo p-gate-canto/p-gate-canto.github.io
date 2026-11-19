@@ -1,0 +1,14 @@
+---
+// 下書きプレビュー：draft: true の記事を、検索に出ない URL で確認するためのページ
+import Base from '../../layouts/Base.astro';
+import Article from '../../components/Article.astro';
+import { getDrafts } from '../../lib';
+export async function getStaticPaths() {
+  const drafts = await getDrafts();
+  return drafts.map((post) => ({ params: { slug: post.id }, props: { post, all: drafts } }));
+}
+const { post, all } = Astro.props;
+---
+<Base title={`【下書き】${post.data.title}`} description={post.data.description} noindex>
+  <Article post={post} all={all} preview />
+</Base>

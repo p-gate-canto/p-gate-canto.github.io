@@ -1,0 +1,44 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PostList from '../../../components/PostList.astro';
+import TopicGrid from '../../../components/TopicGrid.astro';
+import { MIDS, LAYERS, midOf, pillarOf, pillarUrl } from '../../../consts';
+import { getPosts, countBy } from '../../../lib';
+import { breadcrumbLd } from '../../../seo';
+export function getStaticPaths() {
+  return MIDS.map((m) => ({ params: { pillar: m.pillar, mid: m.key } }));
+}
+const { pillar, mid } = Astro.params;
+const m = midOf(mid)!;
+const p = pillarOf(pillar)!;
+const layer = LAYERS.find((l) => l.key === m.layer);
+const posts = (await getPosts()).filter((x) => x.data.category === mid);
+const counts = countBy(posts);
+---
+<Base
+  title={m.label}
+  description={`${m.label}（${m.topics.map((t) => t.label).join('、')}）の記事一覧`}
+  current={pillar}
+  noindex={posts.length === 0}
+  jsonld={[breadcrumbLd([[p.en, pillarUrl(pillar)], [m.label, Astro.url.pathname]])]}
+>
+  <section class="hero">
+    <div class="wrap">
+      <p class="crumb"><a href={pillarUrl(pillar)}>{p.en}</a>{layer && <Fragment> › {layer.label}</Fragment>}</p>
+      <h1>{m.label}</h1>
+      {layer && <p>{layer.question}</p>}
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title">小カテゴリー</h2>
+      <TopicGrid mid={mid} counts={counts} />
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title">記事</h2>
+      <PostList posts={posts} />
+    </div>
+  </section>
+</Base>

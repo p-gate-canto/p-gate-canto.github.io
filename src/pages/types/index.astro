@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import { TYPES, typeUrl } from '../../consts';
+import { getPosts, countBy } from '../../lib';
+const counts = countBy(await getPosts());
+---
+<Base title="記事タイプ" description="解説・比較・チェックリスト・改正ニュースなど、記事の型から探す" current="types">
+  <section class="hero">
+    <div class="wrap">
+      <h1>記事タイプ</h1>
+      <p>記事の書き方の型から探せます。</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <div class="cats">
+        {TYPES.map((t) => (
+          <a class="cat" href={typeUrl(t.key)}>
+            <strong>{t.label}</strong>
+            <span>{t.desc}・{counts[`type:${t.key}`] ?? 0}記事</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

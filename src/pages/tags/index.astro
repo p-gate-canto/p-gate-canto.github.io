@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import { TAG_GROUPS, tagUrl } from '../../consts';
+import { getPosts, countBy } from '../../lib';
+const counts = countBy(await getPosts());
+---
+<Base title="タグ一覧" description="読者・会社のステージ・業種・時事などの切り口から探す" noindex>
+  <section class="hero">
+    <div class="wrap">
+      <h1>タグ一覧</h1>
+      <p>読者・会社のステージ・業種などの切り口から探せます。</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      {TAG_GROUPS.map((g) => (
+        <div class="toc-block">
+          <h2 class="toc-head">{g.group}</h2>
+          <ul class="topics">
+            {g.tags.map((t) => (
+              <li><a class={counts[`tag:${t}`] ? 'topic' : 'topic is-empty'} href={tagUrl(t)}><span>#{t}</span>{counts[`tag:${t}`] ? <span class="topic-count">{counts[`tag:${t}`]}</span> : null}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>

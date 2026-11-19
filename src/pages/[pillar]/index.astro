@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import MidCard from '../../components/MidCard.astro';
+import WorkMap from '../../components/WorkMap.astro';
+import { PILLARS, MIDS, pillarOf } from '../../consts';
+import { getPosts, countBy, pillarOfPost } from '../../lib';
+import { breadcrumbLd } from '../../seo';
+export function getStaticPaths() {
+  return PILLARS.map((p) => ({ params: { pillar: p.key } }));
+}
+const { pillar } = Astro.params;
+const p = pillarOf(pillar)!;
+const posts = (await getPosts()).filter((x) => pillarOfPost(x) === pillar);
+const counts = countBy(posts);
+---
+<Base title={`${p.en}｜${p.label}`} description={p.desc} current={pillar} jsonld={[breadcrumbLd([[p.en, Astro.url.pathname]])]}>
+  <section class="hero">
+    <div class="wrap">
+      <p class="pillar-en">{p.en}</p>
+      <h1>{p.label}</h1>
+      <p>{p.desc}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title">分野</h2>
+      {pillar === 'work' ? (
+        <WorkMap counts={counts} />
+      ) : (
+        <div class="toc">{MIDS.filter((m) => m.pillar === pillar).map((m) => <MidCard mid={m.key} count={counts[m.key] ?? 0} />)}</div>
+      )}
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title">新着記事</h2>
+      <PostList posts={posts.slice(0, 10)} />
+    </div>
+  </section>
+</Base>

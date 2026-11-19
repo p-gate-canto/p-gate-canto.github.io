@@ -1,51 +1,90 @@
 ---
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
-import TocCard from '../components/TocCard.astro';
-import { SITE_TITLE, SITE_TAGLINE, MAIN_KEYS, PILLARS, url } from '../consts';
-import { getPosts } from '../lib';
+import WorkMap from '../components/WorkMap.astro';
+import { SITE_TITLE, SITE_TAGLINE, PILLARS, READERS, TYPES, MIDS, AUTHOR_NAME, AUTHOR_BIO, url, pillarUrl, tagUrl, typeUrl } from '../consts';
+import { getPosts, countBy } from '../lib';
 import { websiteLd } from '../seo';
 const all = await getPosts();
-const posts = all.slice(0, 10);
-const countOf = (cat: string) => all.filter((p) => p.data.category === cat).length;
-const pillarCount = (key: string) =>
-  key === 'business' ? all.filter((p) => (MAIN_KEYS as string[]).includes(p.data.category)).length : countOf(key);
+const counts = countBy(all);
+const featuredTypes = ['glossary', 'news', 'checklist', 'tool'].map((k) => TYPES.find((t) => t.key === k)!);
 ---
 <Base current="home" jsonld={[websiteLd()]}>
-  <section class="hero">
+  <section class="hero hero-home">
     <div class="wrap">
       <h1>{SITE_TITLE}</h1>
       <p>{SITE_TAGLINE}</p>
-    </div>
-  </section>
-  <section class="section">
-    <div class="wrap">
-      <h2 class="section-title">新着記事</h2>
-      <PostList posts={posts} />
-    </div>
-  </section>
-  <section class="section">
-    <div class="wrap">
-      <h2 class="section-title">3つの柱</h2>
-      <div class="pillars">
-        {PILLARS.map((p) => (
-          <a class="pillar" href={url(p.href)}>
-            <span class="pillar-en">{p.en}</span>
-            <strong>{p.label}</strong>
-            <span class="pillar-desc">{p.desc}</span>
-            <span class="toc-count">{pillarCount(p.key)}記事</span>
+      <form class="hero-search" action={url('/search/')} method="get" role="search">
+        <input type="search" name="q" placeholder="キーワードで探す（例：役員報酬）" aria-label="サイト内検索" />
+        <button type="submit">検索</button>
+      </form>
+      <p class="reader-lead">あなたに合った入口から読む</p>
+      <div class="readers">
+        {READERS.map((r) => (
+          <a class="reader" href={tagUrl(r.tag)}>
+            <strong>{r.label}</strong>
+            <span>{r.desc}</span>
           </a>
         ))}
       </div>
     </div>
   </section>
+
   <section class="section">
     <div class="wrap">
-      <h2 class="section-title">仕事の目次</h2>
-      <div class="toc">
-        {MAIN_KEYS.map((k) => <TocCard cat={k} count={countOf(k)} />)}
+      <h2 class="section-title">新着記事</h2>
+      <PostList posts={all.slice(0, 6)} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title">3つの柱</h2>
+      <div class="pillars pillars-3">
+        {PILLARS.map((p) => (
+          <a class="pillar" href={pillarUrl(p.key)}>
+            <span class="pillar-en">{p.en}</span>
+            <strong>{p.label}</strong>
+            <span class="pillar-desc">{p.desc}</span>
+            <span class="toc-count">{MIDS.filter((m) => m.pillar === p.key).length}分野・{counts[`pillar:${p.key}`] ?? 0}記事</span>
+          </a>
+        ))}
       </div>
-      <p class="more"><a href={url('/contents/')}>すべての項目を見る →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title">WORKの地図</h2>
+      <WorkMap counts={counts} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title">記事タイプから探す</h2>
+      <div class="cats">
+        {featuredTypes.map((t) => (
+          <a class="cat" href={typeUrl(t.key)}>
+            <strong>{t.label}</strong>
+            <span>{t.desc}</span>
+          </a>
+        ))}
+      </div>
+      <p class="more"><a href={url('/types/')}>すべての記事タイプ →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <aside class="author">
+        <span class="author-mark" aria-hidden="true"></span>
+        <div>
+          <p class="author-name">{AUTHOR_NAME}</p>
+          <p class="author-bio">{AUTHOR_BIO}</p>
+          <a href={url('/about/')}>このブログについて →</a>
+        </div>
+      </aside>
     </div>
   </section>
 </Base>

@@ -1,38 +1,26 @@
 ---
-import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import { CATEGORIES, url, catUrl, fmtDate, isoDate, topicLabel } from '../../consts';
+import Article from '../../components/Article.astro';
+import { midOf, midUrl, pillarOf, pillarUrl, topicLabel } from '../../consts';
 import { getPosts } from '../../lib';
 import { articleLd, breadcrumbLd } from '../../seo';
 export async function getStaticPaths() {
   const posts = await getPosts();
-  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post, all: posts } }));
 }
-const { post } = Astro.props;
-const { Content } = await render(post);
+const { post, all } = Astro.props;
 const d = post.data;
-const cat = CATEGORIES[d.category];
 const tLabel = topicLabel(d.category, d.topic);
-const crumbs: [string, string][] = [[cat.label, catUrl(d.category)]];
-if (d.topic && tLabel) crumbs.push([tLabel, catUrl(d.category, d.topic)]);
+const mid = midOf(d.category)!;
+const pil = pillarOf(mid.pillar)!;
+const crumbs: [string, string][] = [[pil.en, pillarUrl(pil.key)], [mid.label, midUrl(d.category)]];
+if (d.topic && tLabel) crumbs.push([tLabel, midUrl(d.category, d.topic)]);
 crumbs.push([d.title, Astro.url.pathname]);
 const jsonld = [
   articleLd({ title: d.title, description: d.description, path: Astro.url.pathname, published: d.pubDate, modified: d.updatedDate }),
   breadcrumbLd(crumbs),
 ];
 ---
-<Base title={d.title} description={d.description} current={d.category} type="article" published={d.pubDate} modified={d.updatedDate} jsonld={jsonld}>
-  <article class="wrap">
-    <header class="article-head">
-      <div class="meta">
-        <time datetime={isoDate(d.pubDate)}>{fmtDate(d.pubDate)}</time>{d.updatedDate && <Fragment>{'\n'}<span>更新 <time datetime={isoDate(d.updatedDate)}>{fmtDate(d.updatedDate)}</time></span></Fragment>}
-        <span class="badge"><a href={catUrl(d.category)}>{cat.label}</a>{d.topic && <Fragment> › <a href={catUrl(d.category, d.topic)}>{topicLabel(d.category, d.topic)}</a></Fragment>}</span>
-      </div>
-      <h1>{d.title}</h1>
-      {d.tags.length > 0 && <div class="tags">{d.tags.map((t) => <Fragment>{'\n'}<span>#{t}</span></Fragment>)}</div>}
-      {d.lawBaseDate && <p class="basedate">この記事は {fmtDate(d.lawBaseDate)} 時点の法令にもとづいています。</p>}
-    </header>
-    <div class="prose"><Content /></div>
-    <a class="back" href={url('/')}>← 記事一覧へ</a>
-  </article>
+<Base title={d.title} description={d.description} current={mid.pillar} type="article" published={d.pubDate} modified={d.updatedDate} jsonld={jsonld}>
+  <Article post={post} all={all} />
 </Base>

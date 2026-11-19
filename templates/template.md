@@ -3,9 +3,10 @@
 title: "記事のタイトル（結論が伝わる一文）"
 description: "一覧に表示される要約。60〜100字程度"
 pubDate: 2026-11-19
-category: tax        # 分野：strategy / finance / tax / bizdev / ma / marketing / hr / dx / risk（仕事）、study（学び）、self（自己管理）、tools（ツール）
-topic: tax-planning  # 項目（src/consts.ts の英字）。ツールの記事ならこの行を消す
-tags: ["タグ1", "タグ2"]
+category: corporate-tax   # 中カテゴリー（src/data/taxonomy.json の mids[].key）
+topic: officer-pay        # 小カテゴリー（同 topics[].slug）
+type: explainer          # 記事タイプ：explainer / comparison / checklist / news / glossary / case / study-log / essay / tool
+tags: ["経営者向け"]      # タグ（taxonomy.json の tagGroups から最大5個）
 lawBaseDate: 2026-11-19   # 法令の基準日。税務・労務以外の記事ならこの行を消す
 draft: true          # 公開するときに false にする
 ---

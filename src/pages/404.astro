@@ -3,6 +3,27 @@ import Base from '../layouts/Base.astro';
 import { url } from '../consts';
 ---
 <Base title="ページが見つかりません" noindex>
+  <script is:inline slot="head">
+    // 旧URL（/zeirishi-shiori/〜、/contents/、/category/〜、/tools/）を新しいURLへ転送する。
+    // 画面を描く前に実行し、「ページが見つかりません」が一瞬見えないようにする
+    (function () {
+      var OLD = {
+        strategy: '/work/corporate-strategy/', finance: '/work/finance/', tax: '/work/corporate-tax/',
+        bizdev: '/work/new-business/', ma: '/work/ma/', marketing: '/work/marketing/', hr: '/work/hr/',
+        dx: '/work/dx/', risk: '/work/governance/', study: '/learning/', self: '/life/', work: '/life/',
+      };
+      var p = location.pathname;
+      var n = p.replace(/^\/zeirishi-shiori(?=\/|$)/, '') || '/';
+      if (n === '/contents/') n = '/work/';
+      if (n === '/tools/') n = '/types/tool/';
+      var m = n.match(/^\/category\/([\w-]+)\//);
+      if (m) n = OLD[m[1]] || '/';
+      if (n !== p) {
+        document.documentElement.style.visibility = 'hidden';
+        location.replace(n + location.search + location.hash);
+      }
+    })();
+  </script>
   <section class="hero">
     <div class="wrap">
       <h1>ページが見つかりません</h1>
@@ -11,16 +32,7 @@ import { url } from '../consts';
   </section>
   <section class="section">
     <div class="wrap">
-      <p><a href={url('/')}>トップページへ</a>　<a href={url('/contents/')}>仕事の目次へ</a></p>
+      <p><a href={url('/')}>トップページへ</a>　<a href={url('/work/')}>WORKの地図へ</a></p>
     </div>
   </section>
-  <script is:inline>
-    // 旧URL（/zeirishi-shiori/〜、/category/work/〜）を新しいURLへ転送する
-    (function () {
-      var p = location.pathname;
-      var n = p.replace(/^\/zeirishi-shiori(?=\/|$)/, '').replace(/^\/category\/work\//, '/category/self/');
-      if (n === '') n = '/';
-      if (n !== p) location.replace(n + location.search + location.hash);
-    })();
-  </script>
 </Base>

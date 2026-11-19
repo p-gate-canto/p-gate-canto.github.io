@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../consts';
+---
+<Base title="サイト内検索" description="税理士のしおりの記事を検索" current="search" noindex>
+  <section class="hero">
+    <div class="wrap">
+      <h1>サイト内検索</h1>
+      <p>キーワードで記事を探せます。</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <div id="search"></div>
+    </div>
+  </section>
+  <link rel="stylesheet" href={url('/pagefind/pagefind-ui.css')} />
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', function () {
+      var ui = new PagefindUI({
+        element: '#search',
+        showSubResults: true,
+        showImages: false,
+        translations: { placeholder: 'キーワードを入力', zero_results: '「[SEARCH_TERM]」に一致する記事は見つかりませんでした' },
+      });
+      var q = new URLSearchParams(location.search).get('q');
+      if (q) ui.triggerSearch(q);
+    });
+  </script>
+</Base>
