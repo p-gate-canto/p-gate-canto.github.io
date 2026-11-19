@@ -9,9 +9,9 @@ const tools: { name: string; desc: string; path: string }[] = [
 ];
 const posts = (await getPosts()).filter((p) => p.data.category === 'tools');
 ---
-<Base title="ツール" description={CATEGORIES.tools.desc} current="tools">
+<Base title="ツール" description="自作の実務ツールと使い方" current="tools" noindex={tools.length === 0 && posts.length === 0}>
   <section class="hero"><div class="wrap">
-    <h1>ツール</h1><p>{CATEGORIES.tools.desc}</p>
+    <h1>ツール</h1><p>自作の実務ツールと使い方</p>
   </div></section>
   <section class="section"><div class="wrap">
     <h2 class="section-title">ツール一覧</h2>

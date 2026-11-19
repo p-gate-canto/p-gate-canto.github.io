@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { CATEGORIES, url, fmtDate, isoDate } from '../consts';
+import { CATEGORIES, url, fmtDate, isoDate, topicLabel } from '../consts';
 interface Props { posts: CollectionEntry<'posts'>[] }
 const { posts } = Astro.props;
 ---
@@ -13,7 +13,7 @@ const { posts } = Astro.props;
         <a class="card" href={url(`/posts/${p.id}/`)}>
           <div class="meta">
             <time datetime={isoDate(p.data.pubDate)}>{fmtDate(p.data.pubDate)}</time>
-            <span class="badge">{CATEGORIES[p.data.category].label}</span>
+            <span class="badge">{topicLabel(p.data.category, p.data.topic) ?? CATEGORIES[p.data.category].label}</span>
           </div>
           <h3 class="card-title">{p.data.title}</h3>
           <p class="card-desc">{p.data.description}</p>

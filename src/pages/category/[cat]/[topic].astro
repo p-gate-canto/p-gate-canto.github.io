@@ -1,0 +1,31 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PostList from '../../../components/PostList.astro';
+import { CATEGORIES, MAIN_KEYS, catUrl, url, type CategoryKey } from '../../../consts';
+import { getPosts } from '../../../lib';
+import { breadcrumbLd } from '../../../seo';
+export function getStaticPaths() {
+  return MAIN_KEYS.flatMap((cat) =>
+    CATEGORIES[cat].topics.map((x) => ({ params: { cat, topic: x.slug }, props: { label: x.label } })),
+  );
+}
+const cat = Astro.params.cat as CategoryKey;
+const { topic } = Astro.params;
+const { label } = Astro.props;
+const info = CATEGORIES[cat];
+const crumbsFn = () => breadcrumbLd([['目次', url('/contents/')], [info.label, catUrl(cat)], [label, Astro.url.pathname]]);
+const posts = (await getPosts()).filter((p) => p.data.category === cat && p.data.topic === topic);
+---
+<Base title={`${label}｜${info.label}`} description={`${info.label}のうち「${label}」の記事一覧`} current="contents" noindex={posts.length === 0} jsonld={[crumbsFn()]}>
+  <section class="hero">
+    <div class="wrap">
+      <p class="crumb"><a href={url('/contents/')}>目次</a> › <a href={catUrl(cat)}>{info.label}</a></p>
+      <h1>{label}</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      {posts.length === 0 ? <p class="empty">この項目の記事は準備中です。</p> : <PostList posts={posts} />}
+    </div>
+  </section>
+</Base>

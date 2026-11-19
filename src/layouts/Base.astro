@@ -1,16 +1,25 @@
 ---
 import '../styles/global.css';
-import { SITE_TITLE, SITE_DESCRIPTION, url } from '../consts';
-interface Props { title?: string; description?: string; current?: string; type?: 'website' | 'article' }
-const { title, description = SITE_DESCRIPTION, current = '', type = 'website' } = Astro.props;
-const pageTitle = title ? `${title}｜${SITE_TITLE}` : SITE_TITLE;
+import { SITE_TITLE, SITE_SUBTITLE, SITE_DESCRIPTION, url } from '../consts';
+interface Props {
+  title?: string;
+  description?: string;
+  current?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+  published?: Date;
+  modified?: Date;
+  jsonld?: object[];
+}
+const { title, description = SITE_DESCRIPTION, current = '', type = 'website', noindex = false, published, modified, jsonld = [] } =
+  Astro.props;
+const pageTitle = title ? `${title}｜${SITE_TITLE}` : `${SITE_TITLE}｜${SITE_SUBTITLE}`;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(url('/og.png'), Astro.site).href;
 const nav = [
   { href: url('/'), label: 'ホーム', key: 'home' },
-  { href: url('/category/tax/'), label: '税務', key: 'tax' },
-  { href: url('/category/labor/'), label: '労務', key: 'labor' },
-  { href: url('/category/management/'), label: '経営', key: 'management' },
-  { href: url('/category/work/'), label: '仕事術', key: 'work' },
+  { href: url('/contents/'), label: '目次', key: 'contents' },
+  { href: url('/category/work/'), label: '仕事術・理念', key: 'work' },
   { href: url('/tools/'), label: 'ツール', key: 'tools' },
   { href: url('/about/'), label: 'このブログ', key: 'about' },
 ];
@@ -22,7 +31,7 @@ const nav = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
     <meta name="theme-color" content="#131315" />
     <meta property="og:site_name" content={SITE_TITLE} />
     <meta property="og:locale" content="ja_JP" />
@@ -30,7 +39,13 @@ const nav = [
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    {published && <meta property="article:published_time" content={published.toISOString()} />}
+    {modified && <meta property="article:modified_time" content={modified.toISOString()} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    {jsonld.map((j) => <script type="application/ld+json" set:html={JSON.stringify(j)} />)}
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
     <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href={url('/rss.xml')} />
     <link rel="sitemap" href={url('/sitemap-index.xml')} />

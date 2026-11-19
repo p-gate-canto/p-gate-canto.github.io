@@ -1,28 +1,49 @@
 ---
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
-import { SITE_TITLE, SITE_TAGLINE, CATEGORIES, url } from '../consts';
+import TocCard from '../components/TocCard.astro';
+import { SITE_TITLE, SITE_TAGLINE, MAIN_KEYS, CATEGORIES, catUrl, url } from '../consts';
 import { getPosts } from '../lib';
-const posts = (await getPosts()).slice(0, 10);
+import { websiteLd } from '../seo';
+const all = await getPosts();
+const posts = all.slice(0, 10);
+const countOf = (cat: string) => all.filter((p) => p.data.category === cat).length;
 ---
-<Base current="home">
-  <section class="hero"><div class="wrap">
-    <h1>{SITE_TITLE}</h1>
-    <p>{SITE_TAGLINE}</p>
-  </div></section>
-  <section class="section"><div class="wrap">
-    <h2 class="section-title">新着記事</h2>
-    <PostList posts={posts} />
-  </div></section>
-  <section class="section"><div class="wrap">
-    <h2 class="section-title">カテゴリ</h2>
-    <div class="cats">
-      {Object.entries(CATEGORIES).map(([key, c]) => (
-        <Fragment>{'\n'}<a class="cat" href={key === 'tools' ? url('/tools/') : url(`/category/${key}/`)}>
-          <strong>{c.label}</strong>
-          <span>{c.desc}</span>
-        </a></Fragment>
-      ))}
+<Base current="home" jsonld={[websiteLd()]}>
+  <section class="hero">
+    <div class="wrap">
+      <h1>{SITE_TITLE}</h1>
+      <p>{SITE_TAGLINE}</p>
     </div>
-  </div></section>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title">新着記事</h2>
+      <PostList posts={posts} />
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title">目次</h2>
+      <div class="toc">
+        {MAIN_KEYS.map((k) => <TocCard cat={k} count={countOf(k)} />)}
+      </div>
+      <p class="more"><a href={url('/contents/')}>すべての項目を見る →</a></p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title">そのほか</h2>
+      <div class="cats">
+        <a class="cat" href={catUrl('work')}>
+          <strong>{CATEGORIES.work.label}</strong>
+          <span>行動様式、仕組み化、考え方</span>
+        </a>
+        <a class="cat" href={catUrl('tools')}>
+          <strong>{CATEGORIES.tools.label}</strong>
+          <span>自作の実務ツールと使い方</span>
+        </a>
+      </div>
+    </div>
+  </section>
 </Base>

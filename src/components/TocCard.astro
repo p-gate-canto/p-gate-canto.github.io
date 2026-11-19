@@ -1,0 +1,15 @@
+---
+import { CATEGORIES, MAIN_KEYS, catUrl, type CategoryKey } from '../consts';
+interface Props { cat: CategoryKey; count: number }
+const { cat, count } = Astro.props;
+const c = CATEGORIES[cat];
+const no = String(MAIN_KEYS.indexOf(cat) + 1).padStart(2, '0');
+---
+<a class="toc-card" href={catUrl(cat)}>
+  <span class="toc-no">{no}</span>
+  <span class="toc-body">
+    <strong>{c.label}</strong>
+    <span class="toc-en">{c.en}</span>
+  </span>
+  <span class="toc-count">{c.topics.length}項目・{count}記事</span>
+</a>

@@ -1,0 +1,15 @@
+---
+import { CATEGORIES, catUrl, type CategoryKey } from '../consts';
+interface Props { cat: CategoryKey; counts: Record<string, number> }
+const { cat, counts } = Astro.props;
+---
+<ul class="topics">
+  {CATEGORIES[cat].topics.map((x) => (
+    <li>
+      <a class={counts[x.slug] ? 'topic' : 'topic is-empty'} href={catUrl(cat, x.slug)}>
+        <span>{x.label}</span>
+        {counts[x.slug] ? <span class="topic-count">{counts[x.slug]}</span> : null}
+      </a>
+    </li>
+  ))}
+</ul>

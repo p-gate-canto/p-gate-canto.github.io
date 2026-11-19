@@ -3,7 +3,8 @@
 title: "記事のタイトル（結論が伝わる一文）"
 description: "一覧に表示される要約。60〜100字程度"
 pubDate: 2026-11-19
-category: tax        # tax / labor / management / work / tools のどれか
+category: tax        # 大分類：strategy / finance / tax / bizdev / ma / marketing / hr / dx / risk / work / tools
+topic: tax-planning  # 小項目（src/consts.ts の英字）。work・tools の記事ならこの行を消す
 tags: ["タグ1", "タグ2"]
 lawBaseDate: 2026-11-19   # 法令の基準日。税務・労務以外の記事ならこの行を消す
 draft: true          # 公開するときに false にする
