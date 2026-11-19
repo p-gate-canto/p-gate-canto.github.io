@@ -18,9 +18,10 @@ const posts = (await getPosts()).slice(0, 10);
     <h2 class="section-title">カテゴリ</h2>
     <div class="cats">
       {Object.entries(CATEGORIES).map(([key, c]) => (
-        <a class="cat" href={key === 'tools' ? url('/tools/') : url(`/category/${key}/`)}>
-          <strong>{c.label}</strong><span>{c.desc}</span>
-        </a>
+        <Fragment>{'\n'}<a class="cat" href={key === 'tools' ? url('/tools/') : url(`/category/${key}/`)}>
+          <strong>{c.label}</strong>
+          <span>{c.desc}</span>
+        </a></Fragment>
       ))}
     </div>
   </div></section>

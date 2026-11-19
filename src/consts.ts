@@ -21,3 +21,6 @@ export const url = (path = '') =>
 /** 日付を YYYY/MM/DD で表示 */
 export const fmtDate = (d: Date) =>
   `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}`;
+
+/** <time datetime> 用に YYYY-MM-DD を返す */
+export const isoDate = (d: Date) => fmtDate(d).replaceAll('/', '-');

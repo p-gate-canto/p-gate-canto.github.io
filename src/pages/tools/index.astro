@@ -17,7 +17,7 @@ const posts = (await getPosts()).filter((p) => p.data.category === 'tools');
     <h2 class="section-title">ツール一覧</h2>
     {tools.length === 0 ? <p class="empty">準備中です。</p> : (
       <div class="cats">
-        {tools.map((t) => <a class="cat" href={url(t.path)}><strong>{t.name}</strong><span>{t.desc}</span></a>)}
+        {tools.map((t) => <Fragment>{'\n'}<a class="cat" href={url(t.path)}><strong>{t.name}</strong> <span>{t.desc}</span></a></Fragment>)}
       </div>
     )}
   </div></section>
