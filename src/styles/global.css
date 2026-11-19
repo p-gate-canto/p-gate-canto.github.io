@@ -131,6 +131,15 @@ a:hover { color: var(--accent); }
 .hero-no { color: var(--accent); font-size: 0.6em; letter-spacing: 0.1em; margin-right: 12px; vertical-align: middle; }
 .badge a { color: var(--accent); text-decoration: none; }
 
+/* pillars */
+.pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.pillar { position: relative; display: block; padding: 18px 18px 16px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; overflow: hidden; box-shadow: 0 1px 2px rgba(8, 21, 29, 0.04); }
+.pillar::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--green), var(--lime) 70%, var(--yellow)); }
+.pillar:hover { border-color: var(--green); color: var(--text); }
+.pillar-en { display: block; font-size: 11px; letter-spacing: 0.12em; color: var(--accent); font-weight: 700; }
+.pillar strong { display: block; font-size: 18px; color: var(--ink); margin: 2px 0 4px; }
+.pillar-desc { display: block; font-size: 13px; color: var(--muted); line-height: 1.7; }
+
 /* footer：地球の夜景をイメージした濃紺の帯と、地平線の光 */
 .site-footer {
   position: relative; overflow: hidden; margin-top: 48px; padding: 88px 0 32px; font-size: 12px; color: #9aa6ad;
@@ -160,6 +169,7 @@ a:hover { color: var(--accent); }
   .site-header .wrap { padding-bottom: 0; }
   .nav-home { display: none; }
   .toc { grid-template-columns: 1fr; }
+  .pillars { grid-template-columns: 1fr; }
   .topics { grid-template-columns: 1fr 1fr; }
   .topic { font-size: 12.5px; padding: 8px 9px; letter-spacing: 0; white-space: nowrap; }
   .nav { gap: 12px; flex-wrap: nowrap; overflow-x: auto; width: 100%; padding-bottom: 12px; scrollbar-width: none; }

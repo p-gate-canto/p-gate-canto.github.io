@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../consts';
+---
+<Base title="ページが見つかりません" noindex>
+  <section class="hero">
+    <div class="wrap">
+      <h1>ページが見つかりません</h1>
+      <p>移転や整理により、URLが変わった可能性があります。</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <p><a href={url('/')}>トップページへ</a>　<a href={url('/contents/')}>仕事の目次へ</a></p>
+    </div>
+  </section>
+  <script is:inline>
+    // 旧URL（/zeirishi-shiori/〜、/category/work/〜）を新しいURLへ転送する
+    (function () {
+      var p = location.pathname;
+      var n = p.replace(/^\/zeirishi-shiori(?=\/|$)/, '').replace(/^\/category\/work\//, '/category/self/');
+      if (n === '') n = '/';
+      if (n !== p) location.replace(n + location.search + location.hash);
+    })();
+  </script>
+</Base>

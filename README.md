@@ -22,15 +22,16 @@
 | 下書き | `draft: true` のままにするか、ファイル名の先頭に `_` を付ける |
 | 法令の基準日 | 税務・労務の記事は `lawBaseDate` を必ず書く（記事の冒頭に表示される） |
 
-### カテゴリ（category に書く値）
+### 分野（category に書く値）
 
-| 値 | 表示名 |
+| 柱 | 値 |
 |---|---|
-| tax | 税務 |
-| labor | 労務 |
-| management | 経営 |
-| work | 仕事術・理念 |
-| tools | ツール |
+| 仕事 | strategy / finance / tax / bizdev / ma / marketing / hr / dx / risk |
+| 学び | study |
+| 自己管理 | self |
+| ツール | tools |
+
+項目（topic）の値は `src/consts.ts` を参照。ブラウザで編集する場合は https://app.pagescms.org からプルダウンで選べる。
 
 ## ツールを載せる
 

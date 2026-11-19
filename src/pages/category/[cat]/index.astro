@@ -14,13 +14,13 @@ const posts = (await getPosts()).filter((p) => p.data.category === cat);
 const counts: Record<string, number> = {};
 for (const p of posts) if (p.data.topic) counts[p.data.topic] = (counts[p.data.topic] ?? 0) + 1;
 const idx = MAIN_KEYS.indexOf(cat);
-const crumbs: [string, string][] = idx >= 0 ? [['目次', url('/contents/')]] : [];
+const crumbs: [string, string][] = idx >= 0 ? [['仕事', url('/contents/')]] : [];
 crumbs.push([info.label, Astro.url.pathname]);
 ---
-<Base title={info.label} description={`${info.label}（${info.en}）の記事一覧`} current={idx >= 0 ? 'contents' : cat} noindex={posts.length === 0} jsonld={[breadcrumbLd(crumbs)]}>
+<Base title={info.label} description={`${info.label}（${info.en}）の記事一覧`} current={idx >= 0 ? 'business' : cat} noindex={posts.length === 0} jsonld={[breadcrumbLd(crumbs)]}>
   <section class="hero">
     <div class="wrap">
-      <p class="crumb"><a href={url('/contents/')}>目次</a></p>
+      {idx >= 0 && <p class="crumb"><a href={url('/contents/')}>仕事</a></p>}
       <h1>{idx >= 0 && <span class="hero-no">{String(idx + 1).padStart(2, '0')}</span>}{info.label}</h1>
       <p>{info.en}</p>
     </div>

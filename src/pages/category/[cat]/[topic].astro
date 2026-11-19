@@ -1,25 +1,30 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import PostList from '../../../components/PostList.astro';
-import { CATEGORIES, MAIN_KEYS, catUrl, url, type CategoryKey } from '../../../consts';
+import { CATEGORIES, CATEGORY_KEYS, MAIN_KEYS, catUrl, url, type CategoryKey } from '../../../consts';
 import { getPosts } from '../../../lib';
 import { breadcrumbLd } from '../../../seo';
 export function getStaticPaths() {
-  return MAIN_KEYS.flatMap((cat) =>
-    CATEGORIES[cat].topics.map((x) => ({ params: { cat, topic: x.slug }, props: { label: x.label } })),
+  return CATEGORY_KEYS.flatMap((cat) =>
+    (CATEGORIES[cat].topics as { slug: string; label: string }[]).map((x) => ({
+      params: { cat, topic: x.slug },
+      props: { label: x.label },
+    })),
   );
 }
 const cat = Astro.params.cat as CategoryKey;
 const { topic } = Astro.params;
 const { label } = Astro.props;
 const info = CATEGORIES[cat];
-const crumbsFn = () => breadcrumbLd([['目次', url('/contents/')], [info.label, catUrl(cat)], [label, Astro.url.pathname]]);
+const isWork = MAIN_KEYS.includes(cat);
+const crumbs: [string, string][] = isWork ? [['仕事', url('/contents/')]] : [];
+crumbs.push([info.label, catUrl(cat)], [label, Astro.url.pathname]);
 const posts = (await getPosts()).filter((p) => p.data.category === cat && p.data.topic === topic);
 ---
-<Base title={`${label}｜${info.label}`} description={`${info.label}のうち「${label}」の記事一覧`} current="contents" noindex={posts.length === 0} jsonld={[crumbsFn()]}>
+<Base title={`${label}｜${info.label}`} description={`${info.label}のうち「${label}」の記事一覧`} current={isWork ? 'business' : cat} noindex={posts.length === 0} jsonld={[breadcrumbLd(crumbs)]}>
   <section class="hero">
     <div class="wrap">
-      <p class="crumb"><a href={url('/contents/')}>目次</a> › <a href={catUrl(cat)}>{info.label}</a></p>
+      <p class="crumb">{isWork && <Fragment><a href={url('/contents/')}>仕事</a> › </Fragment>}<a href={catUrl(cat)}>{info.label}</a></p>
       <h1>{label}</h1>
     </div>
   </section>

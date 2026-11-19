@@ -8,11 +8,11 @@ const all = await getPosts();
 const counts: Record<string, number> = {};
 for (const p of all) if (p.data.topic) counts[p.data.topic] = (counts[p.data.topic] ?? 0) + 1;
 ---
-<Base title="目次" description="経営・財務・税務・人事・DXの9分野の目次" current="contents" jsonld={[breadcrumbLd([['目次', url('/contents/')]])]}>
+<Base title="仕事の目次" description="経営・財務・税務・人事・DXなど、仕事の9分野の目次" current="business" jsonld={[breadcrumbLd([['仕事', url('/contents/')]])]}>
   <section class="hero">
     <div class="wrap">
-      <h1>目次</h1>
-      <p>9つの分野と、その中の項目です。</p>
+      <h1>仕事</h1>
+      <p>経営・財務・税務・人事・DXなど、9つの分野と、その中の項目です。</p>
     </div>
   </section>
   <section class="section">

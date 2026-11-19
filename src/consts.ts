@@ -154,14 +154,45 @@ export const CATEGORIES = {
       t('security', '情報セキュリティ'),
     ],
   },
-  work: { label: '仕事術・理念', en: 'Work & Philosophy', topics: [] },
+  study: {
+    label: '学び',
+    en: 'Learning',
+    topics: [
+      t('method', '勉強法'),
+      t('planning', '学習計画'),
+      t('memory', '記憶とアウトプット'),
+      t('shindanshi', '中小企業診断士'),
+      t('sharoshi', '社会保険労務士'),
+      t('zeirishi-exam', '税理士試験'),
+    ],
+  },
+  self: {
+    label: '自己管理',
+    en: 'Self-management',
+    topics: [
+      t('time', '時間管理'),
+      t('habit', '習慣化'),
+      t('health', '体調管理'),
+      t('work-style', '仕事術'),
+      t('mindset', '考え方・理念'),
+      t('career', 'キャリア'),
+    ],
+  },
   tools: { label: 'ツール', en: 'Tools', topics: [] },
 } satisfies Record<string, Category>;
 
 export type CategoryKey = keyof typeof CATEGORIES;
 export const CATEGORY_KEYS = Object.keys(CATEGORIES) as CategoryKey[];
-/** 目次の本体（9分野） */
-export const MAIN_KEYS = CATEGORY_KEYS.filter((k) => k !== 'work' && k !== 'tools');
+/** 「仕事」の柱に入る9分野 */
+export const MAIN_KEYS = CATEGORY_KEYS.filter((k) => !['study', 'self', 'tools'].includes(k));
+
+/** ブログの3本柱＋ツール */
+export const PILLARS = [
+  { key: 'business', label: '仕事', en: 'Work', desc: '経営・財務・税務・人事・DXなど、9分野の実務の論点', href: '/contents/' },
+  { key: 'study', label: '学び', en: 'Learning', desc: '資格の勉強法、学習計画、記憶とアウトプット', href: '/category/study/' },
+  { key: 'self', label: '自己管理', en: 'Self-management', desc: '時間管理、習慣、体調、仕事術、考え方', href: '/category/self/' },
+  { key: 'tools', label: 'ツール', en: 'Tools', desc: '実務と勉強で使っている自作ツール', href: '/tools/' },
+] as const;
 
 export const topicLabel = (cat: CategoryKey, slug?: string) =>
   (CATEGORIES[cat].topics as Topic[]).find((x) => x.slug === slug)?.label;

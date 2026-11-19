@@ -18,8 +18,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL(url('/og.png'), Astro.site).href;
 const nav = [
   { href: url('/'), label: 'ホーム', key: 'home' },
-  { href: url('/contents/'), label: '目次', key: 'contents' },
-  { href: url('/category/work/'), label: '仕事術・理念', key: 'work' },
+  { href: url('/contents/'), label: '仕事', key: 'business' },
+  { href: url('/category/study/'), label: '学び', key: 'study' },
+  { href: url('/category/self/'), label: '自己管理', key: 'self' },
   { href: url('/tools/'), label: 'ツール', key: 'tools' },
   { href: url('/about/'), label: 'このブログ', key: 'about' },
 ];

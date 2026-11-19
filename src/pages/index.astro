@@ -2,12 +2,14 @@
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
 import TocCard from '../components/TocCard.astro';
-import { SITE_TITLE, SITE_TAGLINE, MAIN_KEYS, CATEGORIES, catUrl, url } from '../consts';
+import { SITE_TITLE, SITE_TAGLINE, MAIN_KEYS, PILLARS, url } from '../consts';
 import { getPosts } from '../lib';
 import { websiteLd } from '../seo';
 const all = await getPosts();
 const posts = all.slice(0, 10);
 const countOf = (cat: string) => all.filter((p) => p.data.category === cat).length;
+const pillarCount = (key: string) =>
+  key === 'business' ? all.filter((p) => (MAIN_KEYS as string[]).includes(p.data.category)).length : countOf(key);
 ---
 <Base current="home" jsonld={[websiteLd()]}>
   <section class="hero">
@@ -24,26 +26,26 @@ const countOf = (cat: string) => all.filter((p) => p.data.category === cat).leng
   </section>
   <section class="section">
     <div class="wrap">
-      <h2 class="section-title">目次</h2>
-      <div class="toc">
-        {MAIN_KEYS.map((k) => <TocCard cat={k} count={countOf(k)} />)}
+      <h2 class="section-title">3つの柱</h2>
+      <div class="pillars">
+        {PILLARS.map((p) => (
+          <a class="pillar" href={url(p.href)}>
+            <span class="pillar-en">{p.en}</span>
+            <strong>{p.label}</strong>
+            <span class="pillar-desc">{p.desc}</span>
+            <span class="toc-count">{pillarCount(p.key)}記事</span>
+          </a>
+        ))}
       </div>
-      <p class="more"><a href={url('/contents/')}>すべての項目を見る →</a></p>
     </div>
   </section>
   <section class="section">
     <div class="wrap">
-      <h2 class="section-title">そのほか</h2>
-      <div class="cats">
-        <a class="cat" href={catUrl('work')}>
-          <strong>{CATEGORIES.work.label}</strong>
-          <span>行動様式、仕組み化、考え方</span>
-        </a>
-        <a class="cat" href={catUrl('tools')}>
-          <strong>{CATEGORIES.tools.label}</strong>
-          <span>自作の実務ツールと使い方</span>
-        </a>
+      <h2 class="section-title">仕事の目次</h2>
+      <div class="toc">
+        {MAIN_KEYS.map((k) => <TocCard cat={k} count={countOf(k)} />)}
       </div>
+      <p class="more"><a href={url('/contents/')}>すべての項目を見る →</a></p>
     </div>
   </section>
 </Base>
