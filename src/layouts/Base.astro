@@ -1,0 +1,48 @@
+---
+import '../styles/global.css';
+import { SITE_TITLE, SITE_DESCRIPTION, url } from '../consts';
+interface Props { title?: string; description?: string; current?: string }
+const { title, description = SITE_DESCRIPTION, current = '' } = Astro.props;
+const pageTitle = title ? `${title}｜${SITE_TITLE}` : SITE_TITLE;
+const nav = [
+  { href: url('/'), label: 'ホーム', key: 'home' },
+  { href: url('/category/tax/'), label: '税務', key: 'tax' },
+  { href: url('/category/labor/'), label: '労務', key: 'labor' },
+  { href: url('/category/management/'), label: '経営', key: 'management' },
+  { href: url('/category/work/'), label: '仕事術', key: 'work' },
+  { href: url('/tools/'), label: 'ツール', key: 'tools' },
+  { href: url('/about/'), label: 'このブログ', key: 'about' },
+];
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href={url('/rss.xml')} />
+    <link rel="sitemap" href={url('/sitemap-index.xml')} />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="logo" href={url('/')}><span class="logo-mark"></span><span class="logo-text">{SITE_TITLE}</span></a>
+        <nav class="nav">
+          {nav.map((n) => <a href={n.href} class={n.key === 'home' ? 'nav-home' : undefined} aria-current={current === n.key ? 'page' : undefined}>{n.label}</a>)}
+        </nav>
+      </div>
+    </header>
+    <main><slot /></main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>{SITE_TITLE}</p>
+        <p>記事は執筆時点・基準日時点の法令にもとづく個人の見解です。最新の制度は必ずご確認ください。</p>
+      </div>
+    </footer>
+  </body>
+</html>

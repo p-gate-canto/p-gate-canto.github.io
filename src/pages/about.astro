@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE_TITLE } from '../consts';
+---
+<Base title="このブログについて" current="about">
+  <article class="wrap">
+    <header class="article-head"><h1>このブログについて</h1></header>
+    <div class="prose">
+      <p>{SITE_TITLE}は、経営と財務のコンサルティング会社で働く税理士が、実務と勉強の途中で考えたことを書き留めるブログです。</p>
+      <h2>書いていること</h2>
+      <ul>
+        <li>税務：制度の趣旨や、条文・通達の読み方</li>
+        <li>労務・経営：社会保険労務士・中小企業診断士の受験勉強で学んだこと</li>
+        <li>仕事術・理念：仕組み化、行動様式、考え方</li>
+        <li>ツール：実務で使っている自作ツール</li>
+      </ul>
+      <h2>ご注意</h2>
+      <p>記事は執筆時点・記載の基準日時点の法令にもとづく個人の見解です。所属組織の見解ではありません。個別のご相談には応じていません。</p>
+    </div>
+  </article>
+</Base>

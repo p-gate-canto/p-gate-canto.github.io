@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import { CATEGORIES, url } from '../../consts';
+import { getPosts } from '../../lib';
+// 自作ツールの一覧（ツールのHTMLは public/tools/フォルダ名/index.html に置く）
+const tools: { name: string; desc: string; path: string }[] = [
+  // 例：{ name: '資金繰り表ビューア', desc: 'Excelの資金繰り表を読み込んでグラフ表示', path: '/tools/cashflow/' },
+];
+const posts = (await getPosts()).filter((p) => p.data.category === 'tools');
+---
+<Base title="ツール" description={CATEGORIES.tools.desc} current="tools">
+  <section class="hero"><div class="wrap">
+    <h1>ツール</h1><p>{CATEGORIES.tools.desc}</p>
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2 class="section-title">ツール一覧</h2>
+    {tools.length === 0 ? <p class="empty">準備中です。</p> : (
+      <div class="cats">
+        {tools.map((t) => <a class="cat" href={url(t.path)}><strong>{t.name}</strong><span>{t.desc}</span></a>)}
+      </div>
+    )}
+  </div></section>
+  <section class="section"><div class="wrap">
+    <h2 class="section-title">ツールの記事</h2>
+    <PostList posts={posts} />
+  </div></section>
+</Base>

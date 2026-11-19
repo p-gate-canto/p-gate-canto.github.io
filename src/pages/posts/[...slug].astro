@@ -1,0 +1,30 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { CATEGORIES, url, fmtDate } from '../../consts';
+import { getPosts } from '../../lib';
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+const d = post.data;
+const cat = CATEGORIES[d.category];
+---
+<Base title={d.title} description={d.description} current={d.category}>
+  <article class="wrap">
+    <header class="article-head">
+      <div class="meta">
+        <span>{fmtDate(d.pubDate)}</span>
+        {d.updatedDate && <span>更新 {fmtDate(d.updatedDate)}</span>}
+        <a class="badge" href={d.category === 'tools' ? url('/tools/') : url(`/category/${d.category}/`)}>{cat.label}</a>
+      </div>
+      <h1>{d.title}</h1>
+      {d.tags.length > 0 && <div class="tags">{d.tags.map((t) => <span>#{t}</span>)}</div>}
+      {d.lawBaseDate && <p class="basedate">この記事は {fmtDate(d.lawBaseDate)} 時点の法令にもとづいています。</p>}
+    </header>
+    <div class="prose"><Content /></div>
+    <a class="back" href={url('/')}>← 記事一覧へ</a>
+  </article>
+</Base>

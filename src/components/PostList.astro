@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { CATEGORIES, url, fmtDate } from '../consts';
+interface Props { posts: CollectionEntry<'posts'>[] }
+const { posts } = Astro.props;
+---
+{posts.length === 0 ? (
+  <p class="empty">まだ記事はありません。</p>
+) : (
+  <ul class="posts">
+    {posts.map((p) => (
+      <li>
+        <a class="card" href={url(`/posts/${p.id}/`)}>
+          <div class="meta">
+            <span>{fmtDate(p.data.pubDate)}</span>
+            <span class="badge">{CATEGORIES[p.data.category].label}</span>
+          </div>
+          <p class="card-title">{p.data.title}</p>
+          <p class="card-desc">{p.data.description}</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+)}
