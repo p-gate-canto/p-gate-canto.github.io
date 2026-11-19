@@ -46,7 +46,10 @@ const nav = [
     {modified && <meta property="article:modified_time" content={modified.toISOString()} />}
     <meta name="twitter:card" content="summary_large_image" />
     {jsonld.map((j) => <script type="application/ld+json" set:html={JSON.stringify(j)} />)}
+    <link rel="icon" href={url('/favicon.ico')} sizes="48x48" />
+    <link rel="icon" type="image/png" href={url('/favicon-96.png')} sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
     <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href={url('/rss.xml')} />
     <link rel="sitemap" href={url('/sitemap-index.xml')} />
   </head>

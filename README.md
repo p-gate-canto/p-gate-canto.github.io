@@ -1,10 +1,10 @@
 # 税理士のしおり
 
-公開URL：https://p-gate-canto.github.io/zeirishi-shiori/
+公開URL：https://p-gate-canto.github.io/
 
 ## 記事の書き方（GitHubの画面だけで完結）
 
-1. GitHubで `p-gate-canto/zeirishi-shiori` を開く
+1. GitHubで `p-gate-canto/p-gate-canto.github.io` を開く
 2. `src/content/posts` フォルダを開き、「Add file」→「Create new file」
 3. ファイル名を `英数字とハイフン.md` にする（例：`invoice-basics.md`）。これが記事のURLになる
 4. `templates/template.md` の中身を貼り付けて書き換える

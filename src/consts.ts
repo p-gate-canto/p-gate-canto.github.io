@@ -1,6 +1,6 @@
 export const SITE_TITLE = '税理士のしおり';
 export const SITE_SUBTITLE = '経営・財務・税務を横断する税理士のブログ';
-export const SITE_URL = 'https://p-gate-canto.github.io/zeirishi-shiori/';
+export const SITE_URL = 'https://p-gate-canto.github.io/';
 export const SITE_TAGLINE = '数字の外側に、そっと挟んでおく覚え書き。';
 export const SITE_DESCRIPTION =
   '経営・財務・税務・人事・DX。実務と勉強の途中で考えたことを、しおりのように書き留めるブログ。';
@@ -163,7 +163,7 @@ export const MAIN_KEYS = CATEGORY_KEYS.filter((k) => k !== 'work' && k !== 'tool
 export const topicLabel = (cat: CategoryKey, slug?: string) =>
   (CATEGORIES[cat].topics as Topic[]).find((x) => x.slug === slug)?.label;
 
-/** base（/zeirishi-shiori/）付きのURLを作る */
+/** サイト内のURLを作る */
 export const url = (path = '') =>
   `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
 

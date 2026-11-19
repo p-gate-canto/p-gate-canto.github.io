@@ -1,6 +1,6 @@
 import { SITE_TITLE, SITE_URL, SITE_DESCRIPTION } from './consts';
 
-const abs = (path: string) => new URL(path.replace(/^\/zeirishi-shiori\//, ''), SITE_URL).href;
+const abs = (path: string) => new URL(path, SITE_URL).href;
 
 export const websiteLd = () => ({
   '@context': 'https://schema.org',
@@ -11,7 +11,7 @@ export const websiteLd = () => ({
   inLanguage: 'ja',
 });
 
-/** パンくず：[['目次', '/zeirishi-shiori/contents/'], ...] */
+/** パンくず：[['目次', '/contents/'], ...] */
 export const breadcrumbLd = (items: [string, string][]) => ({
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',

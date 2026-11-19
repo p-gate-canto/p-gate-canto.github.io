@@ -56,7 +56,6 @@ function formatOutput() {
 
 export default defineConfig({
   site: 'https://p-gate-canto.github.io',
-  base: '/zeirishi-shiori',
   trailingSlash: 'always',
   build: { assets: 'assets' },
   compressHTML: false,

@@ -1,14 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
 import TopicGrid from '../components/TopicGrid.astro';
-import { CATEGORIES, MAIN_KEYS, catUrl } from '../consts';
+import { CATEGORIES, MAIN_KEYS, catUrl, url } from '../consts';
 import { getPosts } from '../lib';
 import { breadcrumbLd } from '../seo';
 const all = await getPosts();
 const counts: Record<string, number> = {};
 for (const p of all) if (p.data.topic) counts[p.data.topic] = (counts[p.data.topic] ?? 0) + 1;
 ---
-<Base title="目次" description="経営・財務・税務・人事・DXの9分野の目次" current="contents" jsonld={[breadcrumbLd([['目次', '/zeirishi-shiori/contents/']])]}>
+<Base title="目次" description="経営・財務・税務・人事・DXの9分野の目次" current="contents" jsonld={[breadcrumbLd([['目次', url('/contents/')]])]}>
   <section class="hero">
     <div class="wrap">
       <h1>目次</h1>
