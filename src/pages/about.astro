@@ -1,16 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE_TITLE } from '../consts';
+// 本文は src/content/pages/about.md（Pages CMS の「このブログについて」）で編集する
+import { Content, frontmatter } from '../content/pages/about.md';
 ---
-<Base title="このブログについて" current="about">
+<Base title={frontmatter.title} description={frontmatter.description} current="about">
   <article class="wrap">
-    <header class="article-head"><h1>このブログについて</h1></header>
-    <div class="prose">
-      <p>{SITE_TITLE}は、経営と財務のコンサルティング会社で働く税理士が、実務と勉強の途中で考えたことを書き留めるブログです。</p>
-      <h2>書いていること</h2>
-      <p>経営戦略、財務・会計、税務、事業開発、M&amp;A・組織再編、マーケティング・営業、組織・人事、DX・IT・AI、リスク・ガバナンスの9分野を軸に、仕事術や考え方、実務で使っている自作ツールについても書いています。</p>
-      <h2>ご注意</h2>
-      <p>記事は執筆時点・記載の基準日時点の法令にもとづく個人の見解です。所属組織の見解ではありません。個別のご相談には応じていません。</p>
-    </div>
+    <header class="article-head"><h1>{frontmatter.title}</h1></header>
+    <div class="prose"><Content /></div>
   </article>
 </Base>

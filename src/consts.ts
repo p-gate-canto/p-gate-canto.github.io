@@ -1,9 +1,12 @@
-export const SITE_TITLE = '税理士のしおり';
-export const SITE_SUBTITLE = '経営・財務・税務を横断する税理士のブログ';
+import site from './data/site.json';
+
+// サイト名・説明文などは src/data/site.json（Pages CMS の「サイト設定」）で編集する
+export const SITE_TITLE = site.title;
+export const SITE_SUBTITLE = site.subtitle;
 export const SITE_URL = 'https://p-gate-canto.github.io/';
-export const SITE_TAGLINE = '数字の外側に、そっと挟んでおく覚え書き。';
-export const SITE_DESCRIPTION =
-  '経営・財務・税務・人事・DX。実務と勉強の途中で考えたことを、しおりのように書き留めるブログ。';
+export const SITE_TAGLINE = site.tagline;
+export const SITE_DESCRIPTION = site.description;
+export const FOOTER_NOTE = site.footerNote;
 
 type Topic = { slug: string; label: string };
 type Category = { label: string; en: string; topics: Topic[] };

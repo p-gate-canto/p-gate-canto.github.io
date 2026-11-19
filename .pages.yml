@@ -1,0 +1,313 @@
+# Pages CMS の設定（https://app.pagescms.org で編集画面として使う）
+# 分野・項目を増減したら、src/consts.ts とこのファイルの両方を直す
+media:
+  - name: images
+    label: 画像
+    input: public/images
+    output: /images
+    categories: [image]
+
+content:
+  - name: posts
+    label: 記事
+    type: collection
+    path: src/content/posts
+    format: yaml-frontmatter
+    filename: "{year}-{month}-{day}-{fields.slug}.md"
+    exclude: [README.md]
+    view:
+      primary: title
+      fields: [title, category, pubDate, draft]
+      sort: pubDate
+      order: desc
+    fields:
+      - name: title
+        label: タイトル（結論が伝わる一文）
+        type: string
+        required: true
+      - name: slug
+        label: URL用の英字名（例：executive-pay-change）※新規作成時のみ使用
+        type: string
+        pattern: "^[a-z0-9-]+$"
+      - name: description
+        label: 要約（一覧と検索結果に出る。60〜100字）
+        type: text
+        required: true
+      - name: pubDate
+        label: 公開日
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: updatedDate
+        label: 更新日（更新したときだけ）
+        type: date
+        default: ""
+        options:
+          format: yyyy-MM-dd
+      - name: category
+        label: 分野
+        type: select
+        required: true
+        options:
+          values:
+            - name: strategy
+              label: "経営戦略"
+            - name: finance
+              label: "財務・会計戦略"
+            - name: tax
+              label: "税務戦略"
+            - name: bizdev
+              label: "事業開発戦略"
+            - name: ma
+              label: "M&A・組織再編戦略"
+            - name: marketing
+              label: "マーケティング・営業戦略"
+            - name: hr
+              label: "組織・人事戦略"
+            - name: dx
+              label: "DX・IT・AI戦略"
+            - name: risk
+              label: "リスク・ガバナンス戦略"
+            - name: work
+              label: "仕事術・理念"
+            - name: tools
+              label: "ツール"
+      - name: topic
+        label: 項目（分野と同じグループから選ぶ。仕事術・ツールは空欄）
+        type: select
+        options:
+          values:
+            - name: vision
+              label: "経営戦略｜経営理念・ビジョン策定"
+            - name: midterm-plan
+              label: "経営戦略｜中期経営計画策定"
+            - name: corporate-strategy
+              label: "経営戦略｜経営戦略策定"
+            - name: portfolio
+              label: "経営戦略｜事業ポートフォリオ戦略"
+            - name: restructuring
+              label: "経営戦略｜事業再構築戦略"
+            - name: resource-allocation
+              label: "経営戦略｜経営資源配分戦略"
+            - name: management-system
+              label: "経営戦略｜経営管理体制構築"
+            - name: succession
+              label: "経営戦略｜経営承継戦略"
+            - name: financial-strategy
+              label: "財務・会計戦略｜財務戦略策定"
+            - name: fundraising
+              label: "財務・会計戦略｜資金調達戦略"
+            - name: cash-flow
+              label: "財務・会計戦略｜資金繰り改善戦略"
+            - name: capital-policy
+              label: "財務・会計戦略｜資本政策"
+            - name: management-accounting
+              label: "財務・会計戦略｜管理会計導入"
+            - name: budgeting
+              label: "財務・会計戦略｜予算管理体制構築"
+            - name: profit-improvement
+              label: "財務・会計戦略｜利益改善戦略"
+            - name: cost-management
+              label: "財務・会計戦略｜原価管理戦略"
+            - name: financial-health
+              label: "財務・会計戦略｜財務体質改善"
+            - name: investment
+              label: "財務・会計戦略｜投資判断支援"
+            - name: tax-planning
+              label: "税務戦略｜節税戦略"
+            - name: corporate-tax
+              label: "税務戦略｜法人税最適化"
+            - name: income-allocation
+              label: "税務戦略｜所得配分戦略"
+            - name: group-tax
+              label: "税務戦略｜グループ税務戦略"
+            - name: entity-design
+              label: "税務戦略｜法人設計戦略"
+            - name: executive-pay
+              label: "税務戦略｜役員報酬戦略"
+            - name: succession-tax
+              label: "税務戦略｜事業承継税務戦略"
+            - name: ma-tax
+              label: "税務戦略｜M&A税務戦略"
+            - name: international-tax
+              label: "税務戦略｜国際税務戦略"
+            - name: tax-risk
+              label: "税務戦略｜税務リスク管理"
+            - name: new-business
+              label: "事業開発戦略｜新規事業開発"
+            - name: commercialization
+              label: "事業開発戦略｜事業化支援"
+            - name: business-model
+              label: "事業開発戦略｜ビジネスモデル構築"
+            - name: market-entry
+              label: "事業開発戦略｜市場参入戦略"
+            - name: product-development
+              label: "事業開発戦略｜商品・サービス開発"
+            - name: pricing
+              label: "事業開発戦略｜価格戦略"
+            - name: alliance
+              label: "事業開発戦略｜事業提携戦略"
+            - name: diversification
+              label: "事業開発戦略｜多角化戦略"
+            - name: turnaround
+              label: "事業開発戦略｜事業再生戦略"
+            - name: exit
+              label: "事業開発戦略｜撤退戦略"
+            - name: ma-strategy
+              label: "M&A・組織再編戦略｜M&A戦略策定"
+            - name: target-screening
+              label: "M&A・組織再編戦略｜M&A候補先選定"
+            - name: financial-dd
+              label: "M&A・組織再編戦略｜財務デューデリジェンス"
+            - name: tax-dd
+              label: "M&A・組織再編戦略｜税務デューデリジェンス"
+            - name: valuation
+              label: "M&A・組織再編戦略｜企業価値評価"
+            - name: ma-scheme
+              label: "M&A・組織再編戦略｜M&Aスキーム検討"
+            - name: pmi
+              label: "M&A・組織再編戦略｜PMI"
+            - name: reorganization
+              label: "M&A・組織再編戦略｜組織再編"
+            - name: succession-ma
+              label: "M&A・組織再編戦略｜事業承継M&A"
+            - name: marketing-strategy
+              label: "マーケティング・営業戦略｜マーケティング戦略"
+            - name: market-analysis
+              label: "マーケティング・営業戦略｜市場分析"
+            - name: customer-analysis
+              label: "マーケティング・営業戦略｜顧客分析"
+            - name: branding
+              label: "マーケティング・営業戦略｜ブランド戦略"
+            - name: web-marketing
+              label: "マーケティング・営業戦略｜Webマーケティング"
+            - name: lead-generation
+              label: "マーケティング・営業戦略｜集客戦略"
+            - name: sales-strategy
+              label: "マーケティング・営業戦略｜営業戦略"
+            - name: sales-organization
+              label: "マーケティング・営業戦略｜営業組織構築"
+            - name: crm
+              label: "マーケティング・営業戦略｜CRM戦略"
+            - name: sales-promotion
+              label: "マーケティング・営業戦略｜販売促進戦略"
+            - name: organization
+              label: "組織・人事戦略｜組織戦略"
+            - name: workforce-planning
+              label: "組織・人事戦略｜人員計画"
+            - name: recruiting
+              label: "組織・人事戦略｜採用戦略"
+            - name: evaluation
+              label: "組織・人事戦略｜人事評価制度"
+            - name: compensation
+              label: "組織・人事戦略｜賃金制度"
+            - name: development
+              label: "組織・人事戦略｜人材育成戦略"
+            - name: retention
+              label: "組織・人事戦略｜人材定着戦略"
+            - name: labor-management
+              label: "組織・人事戦略｜労務管理体制"
+            - name: culture
+              label: "組織・人事戦略｜組織風土改革"
+            - name: successor-development
+              label: "組織・人事戦略｜後継者育成"
+            - name: dx-strategy
+              label: "DX・IT・AI戦略｜DX戦略策定"
+            - name: it-strategy
+              label: "DX・IT・AI戦略｜IT戦略"
+            - name: bpr
+              label: "DX・IT・AI戦略｜業務改革（BPR）"
+            - name: automation
+              label: "DX・IT・AI戦略｜業務自動化"
+            - name: ai
+              label: "DX・IT・AI戦略｜AI導入戦略"
+            - name: data
+              label: "DX・IT・AI戦略｜データ活用戦略"
+            - name: system-implementation
+              label: "DX・IT・AI戦略｜システム導入支援"
+            - name: internal-control-dx
+              label: "DX・IT・AI戦略｜内部統制DX"
+            - name: digital-marketing
+              label: "DX・IT・AI戦略｜デジタルマーケティング"
+            - name: productivity
+              label: "DX・IT・AI戦略｜生産性改善"
+            - name: risk-management
+              label: "リスク・ガバナンス戦略｜リスクマネジメント"
+            - name: internal-control
+              label: "リスク・ガバナンス戦略｜内部統制構築"
+            - name: compliance
+              label: "リスク・ガバナンス戦略｜コンプライアンス"
+            - name: governance
+              label: "リスク・ガバナンス戦略｜ガバナンス構築"
+            - name: internal-audit
+              label: "リスク・ガバナンス戦略｜内部監査体制"
+            - name: fraud-prevention
+              label: "リスク・ガバナンス戦略｜不正防止対策"
+            - name: bcp
+              label: "リスク・ガバナンス戦略｜BCP策定"
+            - name: security
+              label: "リスク・ガバナンス戦略｜情報セキュリティ"
+      - name: tags
+        label: タグ
+        type: string
+        list: true
+      - name: lawBaseDate
+        label: 法令の基準日（税務・労務の記事は必ず入れる）
+        type: date
+        default: ""
+        options:
+          format: yyyy-MM-dd
+      - name: draft
+        label: 下書き（オンの間は公開されない）
+        type: boolean
+        default: true
+      - name: body
+        label: 本文
+        type: rich-text
+        options:
+          format: markdown
+          media: images
+          path: public/images
+
+  - name: about
+    label: このブログについて
+    type: file
+    path: src/content/pages/about.md
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: ページ名
+        type: string
+      - name: description
+        label: 説明文（検索結果に出る）
+        type: text
+      - name: body
+        label: 本文
+        type: rich-text
+        options:
+          format: markdown
+          media: images
+          path: public/images
+
+  - name: site
+    label: サイト設定
+    type: file
+    path: src/data/site.json
+    format: json
+    fields:
+      - name: title
+        label: サイト名
+        type: string
+      - name: subtitle
+        label: トップページのタイトルに添える一文
+        type: string
+      - name: tagline
+        label: キャッチコピー
+        type: string
+      - name: description
+        label: サイトの説明文（検索結果に出る）
+        type: text
+      - name: footerNote
+        label: ページ下部の注意書き
+        type: text

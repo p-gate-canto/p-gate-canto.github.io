@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { SITE_TITLE, SITE_SUBTITLE, SITE_DESCRIPTION, url } from '../consts';
+import { SITE_TITLE, SITE_SUBTITLE, SITE_DESCRIPTION, FOOTER_NOTE, url } from '../consts';
 interface Props {
   title?: string;
   description?: string;
@@ -69,7 +69,7 @@ const nav = [
     <footer class="site-footer">
       <div class="wrap">
         <p>&copy; {new Date().getFullYear()} {SITE_TITLE}</p>
-        <p>記事は執筆時点・基準日時点の法令にもとづく個人の見解です。最新の制度は必ずご確認ください。</p>
+        <p>{FOOTER_NOTE}</p>
       </div>
     </footer>
   </body>

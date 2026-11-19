@@ -15,8 +15,8 @@ function usedSections() {
     if (!f.endsWith('.md') || f.startsWith('_')) continue;
     const fm = readFileSync(`${dir}/${f}`, 'utf8').split('---')[1] ?? '';
     if (/^draft:\s*true/m.test(fm)) continue;
-    const cat = fm.match(/^category:\s*([\w-]+)/m)?.[1];
-    const topic = fm.match(/^topic:\s*([\w-]+)/m)?.[1];
+    const cat = fm.match(/^category:\s*["']?([\w-]+)/m)?.[1];
+    const topic = fm.match(/^topic:\s*["']?([\w-]+)/m)?.[1];
     if (cat) used.add(cat);
     if (cat && topic) used.add(`${cat}/${topic}`);
   }
