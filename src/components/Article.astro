@@ -33,6 +33,7 @@ const EXAM_NAMES: Record<string, string> = {
 const examName = d.tags.map((t) => EXAM_NAMES[t]).find(Boolean);
 // サイト内検索の結果カードに出す情報（日付・分類・記事タイプ）は、記事の先頭の hidden の span で渡す
 ---
+{/* 読み進み具合のバーと、目次の「いま読んでいる見出し」の表示（スクリプトは末尾） */}
 <div class="read-progress" aria-hidden="true"><span></span></div>
 <div class="article-layout">
 <article class="article-main" data-pagefind-body={preview ? undefined : ''}>
@@ -106,7 +107,6 @@ const examName = d.tags.map((t) => EXAM_NAMES[t]).find(Boolean);
 )}
 </div>
 <script is:inline>
-  // 読み進み具合のバーと、目次の「いま読んでいる見出し」の表示
   (function () {
     var bar = document.querySelector('.read-progress span');
     var main = document.querySelector('.article-main');

@@ -92,7 +92,7 @@ export default defineConfig({
   compressHTML: false,
   vite: {
     build: {
-      cssMinify: false,
+      cssMinify: true, // 公開するCSSからコメントを除く
       rollupOptions: { output: { assetFileNames: 'assets/style[extname]' } },
     },
   },
