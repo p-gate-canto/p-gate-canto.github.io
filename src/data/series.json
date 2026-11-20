@@ -33,7 +33,15 @@
   },
   {
     "name": "DXと経理のデジタル化",
-    "posts": ["dx-vs-digitalization", "electronic-transaction-data-storage"]
+    "posts": ["dx-vs-digitalization", "electronic-transaction-data-storage", "ai-task-selection", "sme-security-basics"]
+  },
+  {
+    "name": "営業の仕組みづくり",
+    "posts": ["sales-pipeline-management", "selling-time-ratio", "crm-adoption", "customer-lifetime-value"]
+  },
+  {
+    "name": "現場の生産性を上げる",
+    "posts": ["labor-productivity", "seven-wastes-office-work", "business-flow-chart", "inventory-turnover-days"]
   },
   {
     "name": "診断士 企業経営理論：経営戦略",
