@@ -88,10 +88,17 @@ a:hover { color: var(--accent); }
 .article-head { padding: 48px 0 24px; border-bottom: 1px solid var(--line); }
 .article-head h1 { font-size: 26px; margin: 8px 0 12px; color: var(--ink); }
 .basedate { margin-top: 16px; font-size: 13px; padding: 10px 14px; border-left: 3px solid var(--green); background: var(--surface); color: var(--muted); }
+.basedate + .basedate { margin-top: 8px; }
 .prose { padding: 28px 0 48px; }
 .prose h2 { font-size: 21px; margin: 48px 0 16px; padding-left: 14px; border-left: 4px solid; border-image: linear-gradient(180deg, var(--green), var(--lime) 70%, var(--yellow)) 1; color: var(--ink); }
 .prose h3 { font-size: 17px; margin: 32px 0 12px; color: var(--ink); }
 .prose blockquote { margin: 24px 0; padding: 12px 16px; background: var(--surface); border-left: 3px solid var(--line); color: var(--muted); }
+/* 図版（公的データを描き直した図など）：図と出典を共通の枠で表示する */
+.prose figure.fig { margin: 24px 0; padding: 18px 18px 12px; border: 1px solid var(--line); background: var(--surface); }
+.prose figure.fig img { display: block; width: 100%; max-width: 440px; height: auto; margin: 0 auto; }
+.prose figure.fig figcaption { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 12px; line-height: 1.7; color: var(--muted); }
+.prose figure.fig figcaption a { color: inherit; }
+.nw { white-space: nowrap; }
 .prose table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 20px 0; }
 .prose th, .prose td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; background: var(--surface); }
 .prose th { background: #eef0f3; white-space: nowrap; }
@@ -240,6 +247,7 @@ a.type-chip:hover { border-color: var(--green); }
   .hero::after { width: 140px; height: 96px; }
   .hero h1 { font-size: 24px; }
   .article-head h1 { font-size: 22px; }
+  .prose figure.fig { padding: 12px 10px 10px; }
   /* 表（スマホ）：3列以下は画面幅に収める。4列以上は行ごとのカードにする */
   .prose table { font-size: 13px; table-layout: auto; }
   .prose th, .prose td { padding: 7px 8px; min-width: 0; }

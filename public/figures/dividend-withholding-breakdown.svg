@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 222" role="img" aria-labelledby="t d">
+<title id="t">配当の源泉徴収税率の内訳（2026年まで）</title>
+<desc id="d">非上場株式の配当は20.42%がすべて国に納める分（所得税と復興特別所得税）。上場株式の配当（大口株主以外）は、国に納める分15.315%と地方に納める分（住民税）5%の合計20.315%。</desc>
+<g font-family="'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP','Meiryo UI',Meiryo,sans-serif">
+<rect x="0" y="4" width="11" height="11" rx="2" fill="#2f6f9f"/><text x="17" y="14" font-size="12.5" fill="#0b1820">国に納める分（所得税＋復興特別所得税）</text>
+<rect x="0" y="24" width="11" height="11" rx="2" fill="#4f9a32"/><text x="17" y="34" font-size="12.5" fill="#0b1820">地方に納める分（住民税）</text>
+<line x1="0" y1="50" x2="360" y2="50" stroke="#d9dde2" stroke-width="1"/>
+<text x="0" y="77" font-size="13.5" font-weight="700" fill="#0b1820">非上場株式の配当</text>
+<path d="M0.0,86 H278.0 Q282.0,86 282.0,90 V108 Q282.0,112 278.0,112 H0.0 Z" fill="#2f6f9f"/>
+<text x="289.0" y="104" font-size="14" font-weight="700" fill="#0b1820">20.42%</text>
+<text x="141.0" y="128" font-size="12" fill="#5f666d" text-anchor="middle">所得税20% × 1.021</text>
+<text x="0" y="157" font-size="13.5" font-weight="700" fill="#0b1820">上場株式の配当（大口株主以外）</text>
+<rect x="0.0" y="166" width="211.5" height="26" fill="#2f6f9f"/>
+<path d="M213.5,166 H276.5 Q280.5,166 280.5,170 V188 Q280.5,192 276.5,192 H213.5 Z" fill="#4f9a32"/>
+<text x="287.5" y="184" font-size="14" font-weight="700" fill="#0b1820">20.315%</text>
+<text x="105.7" y="208" font-size="12" fill="#5f666d" text-anchor="middle">所得税15% × 1.021 ＝ 15.315%</text>
+<text x="247.0" y="208" font-size="12" fill="#5f666d" text-anchor="middle">住民税5%</text>
+</g></svg>

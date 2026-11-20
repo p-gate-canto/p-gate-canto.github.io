@@ -25,6 +25,11 @@ const posts = defineCollection({
         (v) => (v === null || v === '' ? [] : typeof v === 'string' ? v.split(/[,、]\s*/) : v),
         z.array(z.string()).default([]),
       ),
+      // 受験生向けの記事だけに付ける：中小企業診断士1次試験の科目名（冒頭に「〇〇で問われる内容です」と表示する）
+      exam: z.preprocess(
+        (v) => (v === null || v === '' || v === undefined ? [] : typeof v === 'string' ? v.split(/[,、]\s*/) : v),
+        z.array(z.string()).default([]),
+      ),
       lawBaseDate: optDate, // 法令の基準日
       draft: z.boolean().default(false),
     })

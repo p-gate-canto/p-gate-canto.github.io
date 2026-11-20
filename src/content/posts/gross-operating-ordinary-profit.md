@@ -7,7 +7,6 @@ category: management-accounting
 tags:
 - 経営者向け
 - 経理担当者向け
-- 中小企業診断士
 pubDate: 2026-11-20
 draft: true
 ---

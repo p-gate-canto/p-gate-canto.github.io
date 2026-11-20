@@ -39,6 +39,7 @@ const minutes = readingMinutes(post.body);
     {d.tags.length > 0 && (
       <div class="tags">{d.tags.map((t) => <Fragment>{'\n'}{preview ? <span>#{t}</span> : <a href={tagUrl(t)}>#{t}</a>}</Fragment>)}</div>
     )}
+    {d.exam.length > 0 && <p class="basedate exam-lead">中小企業診断士1次試験の{d.exam.map((s) => `「${s}」`).join('')}で問われる内容です。</p>}
     {d.lawBaseDate && <p class="basedate">この記事は {fmtDate(d.lawBaseDate)} 時点の法令にもとづいています。</p>}
     {isStale(d.lawBaseDate) && (
       <p class="stale">基準日から1年以上たっています。その後の税制改正・法改正で内容が変わっている可能性があります。</p>

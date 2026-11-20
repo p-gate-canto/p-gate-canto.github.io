@@ -5,9 +5,10 @@ description: 経営戦略は、計画だけを指す言葉ではありません�
 type: explainer
 category: corporate-strategy
 tags:
-- 経営者向け
 - 中小企業診断士
 - 受験生向け
+exam:
+- 企業経営理論
 pubDate: 2026-11-20
 draft: true
 ---

@@ -2,6 +2,8 @@
 // 1. 「> ポイント：」「> 注意：」「> 結論：」「> 補足：」で始まる引用を、色付きの要点ボックスにする
 // 2. 画像を遅延読み込みにする
 // 3. 未記入の「実務メモ」欄（見出し＋「筆者記入欄」を含む引用）は表示しない
+// 6. 日付（令和8年4月1日、2026年11月20日、2026/11/20 など）は途中で改行しない（span.nw で囲む）
+// 5. 図版：画像だけの段落の直後に「出典：」で始まる段落があれば、図と出典を共通の枠（figure.fig）にまとめる
 // 4. 表：各セルに列見出しを data-label として付ける。4列以上の表と、長い文のある3列の表は、スマホで行ごとのカード表示にする（tbl-stack）
 const TYPES = { 結論: 'conclusion', ポイント: 'point', 注意: 'caution', 補足: 'note' };
 const RE = /^\s*(結論|ポイント|注意|補足)\s*[：:]\s*/;
@@ -64,9 +66,56 @@ function tableLabels(table) {
   }
 }
 
+function isEl(n, tag) { return n && n.type === 'element' && n.tagName === tag; }
+
+function wrapFigures(tree) {
+  const kids = tree.children ?? [];
+  for (let i = 0; i < kids.length; i++) {
+    const p = kids[i];
+    if (!isEl(p, 'p')) continue;
+    const inner = p.children.filter((c) => !(c.type === 'text' && !c.value.trim()));
+    if (inner.length !== 1 || !isEl(inner[0], 'img')) continue;
+    let j = i + 1;
+    while (j < kids.length && kids[j].type === 'text' && !kids[j].value.trim()) j++;
+    const cap = kids[j];
+    if (!isEl(cap, 'p') || !/^\s*出典[：:]/.test(textOf(cap))) continue;
+    const img = inner[0];
+    img.properties = { ...img.properties, loading: 'lazy', decoding: 'async' };
+    kids.splice(i, j - i + 1, {
+      type: 'element',
+      tagName: 'figure',
+      properties: { className: ['fig'] },
+      children: [img, { type: 'element', tagName: 'figcaption', properties: {}, children: cap.children }],
+    });
+  }
+}
+
+const DATE_RE = /((?:令和|平成|昭和)\d{1,2}年\d{1,2}月\d{1,2}日|\d{4}年\d{1,2}月\d{1,2}日|\d{4}\/\d{1,2}\/\d{1,2})/g;
+
+function noBreakDates(node) {
+  if (node.type !== 'element' && node.type !== 'root') return;
+  if (node.type === 'element' && ['code', 'pre', 'script', 'style', 'title'].includes(node.tagName)) return;
+  const out = [];
+  for (const c of node.children ?? []) {
+    if (c.type === 'text' && DATE_RE.test(c.value)) {
+      DATE_RE.lastIndex = 0;
+      c.value.split(DATE_RE).forEach((part, k) => {
+        if (!part) return;
+        out.push(k % 2 ? { type: 'element', tagName: 'span', properties: { className: ['nw'] }, children: [{ type: 'text', value: part }] } : { type: 'text', value: part });
+      });
+    } else {
+      noBreakDates(c);
+      out.push(c);
+    }
+  }
+  if (node.children) node.children = out;
+}
+
 export default function rehypeShiori() {
   return (tree) => {
     dropEmptyMemo(tree);
+    wrapFigures(tree);
+    noBreakDates(tree);
     walk(tree, (node) => {
       if (node.type !== 'element') return;
       if (node.tagName === 'table') tableLabels(node);
