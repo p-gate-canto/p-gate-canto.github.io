@@ -8,6 +8,8 @@ topic: work-philosophy
 type: essay
 tags:
 - 経営者向け
+- 経理担当者向け
+- 実務家向け
 - 受験生向け
 draft: false
 ---

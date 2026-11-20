@@ -10,7 +10,7 @@ tags:
 - 経理担当者向け
 pubDate: 2026-11-20
 lawBaseDate: 2026-11-20
-draft: true
+draft: false
 ---
 ## 結論
 

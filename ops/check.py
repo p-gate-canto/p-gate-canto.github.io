@@ -3,7 +3,7 @@
 
 使い方:  npm run build && python3 ops/check.py
 - dist を一時サーバーで配信し、全ページ種類と全記事・全下書きを PC（1280px）とスマホ（390px）で開く
-- 横スクロール、表のはみ出し、記事本文の画像ファイルの有無、ページの読み込み失敗を調べる
+- 横スクロール、表のはみ出し、記事本文の画像ファイルの有無、記事へのリンク切れ、ページの読み込み失敗を調べる
 - 問題が1つでもあれば終了コード1で止まる
 必要なもの: pip install playwright（ブラウザは /usr/bin/google-chrome、なければ playwright 同梱の chromium）
 """
@@ -66,12 +66,16 @@ def main():
                 v = pg.evaluate("""() => [
                   document.documentElement.scrollWidth > innerWidth,
                   [...document.querySelectorAll('.prose table')].filter(t => t.scrollWidth - t.clientWidth > 2).length,
-                  [...document.querySelectorAll('.prose img')].map(i => i.getAttribute('src'))
+                  [...document.querySelectorAll('.prose img')].map(i => i.getAttribute('src')),
+                  [...document.querySelectorAll('a[href^="/posts/"]')].map(a => a.getAttribute('href'))
                 ]""")
                 if v[0]:
                     problems.append(f'{w}px {u}：横スクロールが出ている')
                 if v[1]:
                     problems.append(f'{w}px {u}：はみ出している表が{v[1]}個')
+                dead = sorted({h for h in v[3] if not (DIST / urllib.parse.unquote(h.split('#')[0]).lstrip('/') / 'index.html').exists()})
+                if dead and w == 1280 and not u.startswith('/drafts/'):  # 下書きプレビューは対象外
+                    problems.append(f'{u}：リンク先の記事がない（未公開・削除）{dead}')
                 broken = [s for s in v[2] if s and s.startswith('/') and not (DIST / urllib.parse.unquote(s).lstrip('/')).exists()]
                 if broken:
                     problems.append(f'{w}px {u}：画像ファイルがない {broken}')

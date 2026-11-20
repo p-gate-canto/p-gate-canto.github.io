@@ -1,4 +1,8 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
 // 記事本文の後処理
+// 7. まだ下書き（draft: true）の記事への本文中のリンクは、リンクを外して文字だけにする（公開後のビルドで自動的にリンクに戻る）
 // 1. 「> ポイント：」「> 注意：」「> 結論：」「> 補足：」で始まる引用を、色付きの要点ボックスにする
 // 2. 画像を遅延読み込みにする
 // 3. 未記入の「実務メモ」欄（見出し＋「筆者記入欄」を含む引用）は表示しない
@@ -111,6 +115,31 @@ function noBreakDates(node) {
   if (node.children) node.children = out;
 }
 
+let DRAFTS = null;
+function draftSlugs() {
+  if (DRAFTS) return DRAFTS;
+  DRAFTS = new Set();
+  const dir = path.resolve('src/content/posts');
+  for (const f of fs.readdirSync(dir)) {
+    if (!f.endsWith('.md')) continue;
+    const text = fs.readFileSync(path.join(dir, f), 'utf8');
+    const fm = text.match(/^---\n([\s\S]*?)\n---/);
+    if (!fm || !/^draft:\s*true\s*$/m.test(fm[1])) continue;
+    const slug = (fm[1].match(/^slug:\s*(\S+)\s*$/m) || [])[1] || f.replace(/\.md$/, '');
+    DRAFTS.add(slug);
+  }
+  return DRAFTS;
+}
+
+function unlinkDrafts(node) {
+  const href = node.properties?.href;
+  const m = typeof href === 'string' && href.match(/^\/posts\/([^/#?]+)\/?(?:[#?].*)?$/);
+  if (m && draftSlugs().has(m[1])) {
+    node.tagName = 'span';
+    node.properties = {};
+  }
+}
+
 export default function rehypeShiori() {
   return (tree) => {
     dropEmptyMemo(tree);
@@ -118,6 +147,7 @@ export default function rehypeShiori() {
     noBreakDates(tree);
     walk(tree, (node) => {
       if (node.type !== 'element') return;
+      if (node.tagName === 'a') unlinkDrafts(node);
       if (node.tagName === 'table') tableLabels(node);
       if (node.tagName === 'img') {
         node.properties = { loading: 'lazy', decoding: 'async', ...node.properties };
