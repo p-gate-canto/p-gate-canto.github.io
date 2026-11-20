@@ -713,3 +713,7 @@ content:
     label: トップの検索窓の下に出すキーワード（6個前後）
     type: string
     list: true
+  - name: featured
+    label: トップの「まず読む3本」（記事のスラッグを3つ。例：officer-pay-vs-dividend）
+    type: string
+    list: true

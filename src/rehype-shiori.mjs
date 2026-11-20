@@ -144,12 +144,24 @@ function unlinkDrafts(node) {
   }
 }
 
+// 11文字以上の長い文節は、カタカナ語の切れ目でも改行できるようにする（src/lib.ts と同じ）
+function splitLong(seg) {
+  if (seg.length <= 10) return [seg];
+  const out = [];
+  for (const p of seg.split(/(?<=[ァ-ヴー])(?=[^ァ-ヴー・])/)) {
+    if (out.length && (p.length < 3 || out[out.length - 1].length < 3)) out[out.length - 1] += p;
+    else out.push(p);
+  }
+  return out;
+}
 function wbrHeading(node) {
   const kids = [];
   for (const c of node.children ?? []) {
     if (c.type !== 'text') { if (c.type === 'element') wbrHeading(c); kids.push(c); continue; }
     const segs = [];
-    for (const seg of budoux.parse(c.value)) {
+    for (let seg of budoux.parse(c.value).flatMap(splitLong)) {
+      const lead = seg.match(/^[｜|／]+/);
+      if (lead && segs.length) { segs[segs.length - 1] += lead[0]; seg = seg.slice(lead[0].length); if (!seg) continue; }
       if (segs.length && seg.length <= 2) segs[segs.length - 1] += seg;
       else segs.push(seg);
     }

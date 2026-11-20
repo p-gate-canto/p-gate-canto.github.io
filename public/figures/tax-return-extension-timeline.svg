@@ -2,13 +2,13 @@
 <title id="t">法人税の申告期限の延長と見込納付（3月決算の例）</title>
 <desc id="d">本来の申告と納付の期限は5月31日。延長の特例を受けると申告期限は6月30日になるが、納付期限は延びないため、5月31日までに見込みで納付する。延長した期間は利子税の対象。</desc>
 <g font-family="'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP','Meiryo UI',Meiryo,sans-serif">
-<line x1="16" y1="96" x2="344" y2="96" stroke="#9aa3ab" stroke-width="2"/>
-<path d="M229.8,126 V132 H314.7 V126" fill="none" stroke="#5f666d" stroke-width="1.2"/>
-<text x="272.2" y="148" font-size="12" fill="#5f666d" text-anchor="middle">利子税の対象期間</text>
+<line x1="16" y1="96" x2="344" y2="96" stroke="#a3a3ae" stroke-width="2"/>
+<path d="M229.8,126 V132 H314.7 V126" fill="none" stroke="#6b6b78" stroke-width="1.2"/>
+<text x="272.2" y="148" font-size="12" fill="#6b6b78" text-anchor="middle">利子税の対象期間</text>
 <circle cx="48.2" cy="96" r="5" fill="#2f6f9f"/>
-<text x="42.2" y="118" font-size="12.5" fill="#0b1820" text-anchor="start">期末 3/31</text>
-<circle cx="226.9" cy="96" r="7" fill="#4f9a32" stroke="#ffffff" stroke-width="2"/>
-<text x="232.9" y="82" font-size="12.5" fill="#0b1820" text-anchor="end" font-weight="700">5/31：納付期限（見込納付）</text>
+<text x="42.2" y="118" font-size="12.5" fill="#16161d" text-anchor="start">期末 3/31</text>
+<circle cx="226.9" cy="96" r="7" fill="#6a9e1f" stroke="#ffffff" stroke-width="2"/>
+<text x="232.9" y="82" font-size="12.5" fill="#16161d" text-anchor="end" font-weight="700">5/31：納付期限（見込納付）</text>
 <circle cx="314.7" cy="96" r="5" fill="#2f6f9f"/>
-<text x="320.7" y="118" font-size="12.5" fill="#0b1820" text-anchor="end">6/30：延長後の申告期限</text>
+<text x="320.7" y="118" font-size="12.5" fill="#16161d" text-anchor="end">6/30：延長後の申告期限</text>
 </g></svg>

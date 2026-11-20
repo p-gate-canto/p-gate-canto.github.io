@@ -24,9 +24,15 @@ const nav = [
   { href: url('/work/'), label: 'WORK', key: 'work' },
   { href: url('/learning/'), label: 'LEARNING', key: 'learning' },
   { href: url('/life/'), label: 'LIFE', key: 'life' },
-  { href: url('/types/'), label: '記事タイプ', key: 'types' },
+  { href: url('/posts/'), label: '記事一覧', key: 'posts' },
   { href: url('/about/'), label: 'このブログ', key: 'about' },
   { href: url('/search/'), label: '検索', key: 'search' },
+];
+// スマホのメニューとフッターだけに出す補助の入口
+const subNav = [
+  { href: url('/types/'), label: '記事タイプ', key: 'types' },
+  { href: url('/tags/'), label: 'タグ一覧', key: 'tags' },
+  { href: url('/rss.xml'), label: 'RSS', key: 'rss' },
 ];
 ---
 <!doctype html>
@@ -38,7 +44,7 @@ const nav = [
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
-    <meta name="theme-color" content="#f3f4f6" />
+    <meta name="theme-color" content="#16161d" />
     <meta property="og:site_name" content={SITE_TITLE} />
     <meta property="og:locale" content="ja_JP" />
     <meta property="og:type" content={type} />
@@ -67,8 +73,15 @@ const nav = [
           <span class="logo-text">{SITE_TITLE}</span>
         </a>
         <nav class="nav" aria-label="メインメニュー">
-          {nav.map((n) => <Fragment>{'\n'}<a href={n.href} class={n.key === 'home' ? 'nav-home' : undefined} aria-current={current === n.key ? 'page' : undefined}>{n.label}</a></Fragment>)}
+          {nav.filter((n) => n.key !== 'home').map((n) => <Fragment>{'\n'}<a href={n.href} aria-current={current === n.key ? 'page' : undefined}>{n.label}</a></Fragment>)}
         </nav>
+        <details class="menu">
+          <summary aria-label="メニューを開く"><span class="menu-icon" aria-hidden="true"></span>メニュー</summary>
+          <nav class="menu-panel" aria-label="メニュー">
+            {nav.map((n) => <a href={n.href} aria-current={current === n.key ? 'page' : undefined}>{n.label}</a>)}
+            <div class="menu-sub">{subNav.map((n) => <a href={n.href}>{n.label}</a>)}</div>
+          </nav>
+        </details>
       </div>
     </header>
     <main class:list={[{ full: layout === 'full' }]}>
@@ -83,9 +96,21 @@ const nav = [
       )}
     </main>
     <footer class="site-footer">
-      <div class="wrap">
-        <p>&copy; {new Date().getFullYear()} {SITE_TITLE}</p>
+      <div class="wrap footer-grid">
+        <div class="footer-brand">
+          <a class="logo" href={url('/')}>
+            <span class="logo-mark" aria-hidden="true"></span>
+            <span class="logo-text">{SITE_TITLE}</span>
+          </a>
+          <p>{SITE_SUBTITLE}</p>
+        </div>
+        <nav class="footer-nav" aria-label="サイトの案内">
+          {[...nav.filter((n) => n.key !== 'home'), ...subNav].map((n) => <a href={n.href}>{n.label}</a>)}
+        </nav>
+      </div>
+      <div class="wrap footer-bottom">
         <p>{FOOTER_NOTE}</p>
+        <p>&copy; {new Date().getFullYear()} {SITE_TITLE}</p>
       </div>
     </footer>
   </body>

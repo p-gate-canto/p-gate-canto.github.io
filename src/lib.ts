@@ -58,9 +58,23 @@ export const isStale = (d?: Date) => !!d && Date.now() - d.valueOf() > 365 * 24 
 // 2文字以下の区切りは前の文節につなげ、行末に1〜2文字だけ残る「泣き別れ」を防ぐ
 import { loadDefaultJapaneseParser } from 'budoux';
 const budoux = loadDefaultJapaneseParser();
+// 11文字以上の長い文節は、カタカナ語の切れ目でも改行できるようにする（例：ネットワーク｜外部性などを整理）
+export function splitLong(seg: string): string[] {
+  if (seg.length <= 10) return [seg];
+  const parts = seg.split(/(?<=[ァ-ヴー])(?=[^ァ-ヴー・])/);
+  const out: string[] = [];
+  for (const p of parts) {
+    if (out.length && (p.length < 3 || out[out.length - 1].length < 3)) out[out.length - 1] += p;
+    else out.push(p);
+  }
+  return out;
+}
 export function phrases(text: string): string[] {
   const out: string[] = [];
-  for (const seg of budoux.parse(text)) {
+  for (let seg of budoux.parse(text).flatMap(splitLong)) {
+    // 区切り記号（｜・／）は前の文節に付け、行頭に来ないようにする
+    const lead = seg.match(/^[｜|／]+/);
+    if (lead && out.length) { out[out.length - 1] += lead[0]; seg = seg.slice(lead[0].length); if (!seg) continue; }
     if (out.length && seg.length <= 2) out[out.length - 1] += seg;
     else out.push(seg);
   }

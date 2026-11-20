@@ -15,7 +15,7 @@ const counts = countBy(await getPosts());
           <h3 class="layer-head">{g.group}</h3>
           <ul class="topics">
             {g.tags.map((t) => (
-              <li><a class="topic" href={tagUrl(t)}><span>#{t}</span><Count n={counts[`tag:${t}`]} /></a></li>
+              <li><a class="topic" href={tagUrl(t)}><span>{t}</span><Count n={counts[`tag:${t}`]} /></a></li>
             ))}
           </ul>
         </section>

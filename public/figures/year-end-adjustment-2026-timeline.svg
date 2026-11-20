@@ -2,15 +2,15 @@
 <title id="t">令和8年分の改正が年末調整で精算されるまで</title>
 <desc id="d">令和8年11月までは改正前の税額表で毎月源泉徴収し、12月1日の施行後、12月の年末調整で1年分を精算する。年末調整分の納期限は令和9年1月12日、納期の特例を受けている場合は1月20日。</desc>
 <g font-family="'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP','Meiryo UI',Meiryo,sans-serif">
-<rect x="16.0" y="38" width="169.7" height="76" fill="#eef3f7"/>
-<text x="100.8" y="50" font-size="11.5" fill="#5f666d" text-anchor="middle">11月まで：改正前の税額表</text>
-<line x1="16" y1="96" x2="344" y2="96" stroke="#9aa3ab" stroke-width="2"/>
-<path d="M188.5,126 V132 H273.3 V126" fill="none" stroke="#5f666d" stroke-width="1.2"/>
-<text x="230.9" y="148" font-size="12" fill="#5f666d" text-anchor="middle">12月：年末調整で精算</text>
+<rect x="16.0" y="38" width="169.7" height="76" fill="#ebebef"/>
+<text x="100.8" y="50" font-size="11.5" fill="#6b6b78" text-anchor="middle">11月まで：改正前の税額表</text>
+<line x1="16" y1="96" x2="344" y2="96" stroke="#a3a3ae" stroke-width="2"/>
+<path d="M188.5,126 V132 H273.3 V126" fill="none" stroke="#6b6b78" stroke-width="1.2"/>
+<text x="230.9" y="148" font-size="12" fill="#6b6b78" text-anchor="middle">12月：年末調整で精算</text>
 <circle cx="188.5" cy="96" r="5" fill="#2f6f9f"/>
-<text x="194.5" y="82" font-size="12.5" fill="#0b1820" text-anchor="end">12/1 施行</text>
-<circle cx="307.2" cy="96" r="7" fill="#4f9a32" stroke="#ffffff" stroke-width="2"/>
-<text x="313.2" y="82" font-size="12.5" fill="#0b1820" text-anchor="end" font-weight="700">1/12 納期限</text>
+<text x="194.5" y="82" font-size="12.5" fill="#16161d" text-anchor="end">12/1 施行</text>
+<circle cx="307.2" cy="96" r="7" fill="#6a9e1f" stroke="#ffffff" stroke-width="2"/>
+<text x="313.2" y="82" font-size="12.5" fill="#16161d" text-anchor="end" font-weight="700">1/12 納期限</text>
 <circle cx="329.9" cy="96" r="5" fill="#2f6f9f"/>
-<text x="335.9" y="118" font-size="12.5" fill="#0b1820" text-anchor="end">1/20 特例</text>
+<text x="335.9" y="118" font-size="12.5" fill="#16161d" text-anchor="end">1/20 特例</text>
 </g></svg>

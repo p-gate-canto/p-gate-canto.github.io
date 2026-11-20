@@ -1,20 +1,29 @@
 ---
+// トップページ：何のメディアか → まず読む3本 → 読む人から探す → 新着 → 分野から探す → 筆者
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
 import WorkMap from '../components/WorkMap.astro';
 import Count from '../components/Count.astro';
-import { SITE_TITLE, SITE_TAGLINE, SITE_KEYWORDS, PILLARS, READERS, TYPES, MIDS, AUTHOR_NAME, AUTHOR_BIO, url, pillarUrl, tagUrl, typeUrl } from '../consts';
-import { getPosts, countBy } from '../lib';
+import { SITE_TITLE, SITE_SUBTITLE, SITE_TAGLINE, SITE_KEYWORDS, SITE_FEATURED, PILLARS, READERS, MIDS, AUTHOR_NAME, AUTHOR_BIO, url, pillarUrl, tagUrl, midOf, typeOf, topicLabel, fmtDate, isoDate } from '../consts';
+import { getPosts, countBy, phraseHtml } from '../lib';
 import { websiteLd } from '../seo';
 const all = await getPosts();
 const counts = countBy(all);
-const featuredTypes = ['glossary', 'news', 'checklist', 'tool'].map((k) => TYPES.find((t) => t.key === k)!);
+const featured = SITE_FEATURED.map((s) => all.find((p) => p.id === s)).filter((p) => p !== undefined).slice(0, 3);
+const featuredIds = new Set(featured.map((p) => p.id));
+const latest = all.filter((p) => !featuredIds.has(p.id)).slice(0, 8);
 ---
 <Base current="home" jsonld={[websiteLd()]} layout="full">
-  <section class="hero hero-home">
+  <section class="hero-home">
     <div class="wrap">
+      <p class="home-eyebrow">{SITE_SUBTITLE}</p>
       <h1>{SITE_TITLE}</h1>
-      <p>{SITE_TAGLINE}</p>
+      <p class="home-tagline">{SITE_TAGLINE}</p>
+      <ul class="home-trust">
+        <li>根拠の条文と、法令の基準日を明記</li>
+        <li>国税庁などの一次情報で確認</li>
+        <li>税理士・会社役員が執筆</li>
+      </ul>
       <form class="hero-search" action={url('/search/')} method="get" role="search">
         <input type="search" name="q" placeholder="例：役員報酬、源泉徴収" aria-label="サイト内検索" />
         <button type="submit">検索</button>
@@ -28,12 +37,29 @@ const featuredTypes = ['glossary', 'news', 'checklist', 'tool'].map((k) => TYPES
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-      <h2 class="section-title">新着記事</h2>
-      <PostList posts={all.slice(0, 6)} />
-    </div>
-  </section>
+  {featured.length > 0 && (
+    <section class="section">
+      <div class="wrap">
+        <h2 class="section-title">まず読む{featured.length}本</h2>
+        <p class="section-lead">初めての方に。中小企業の経営者と経理の担当者から、よく聞かれるテーマです。</p>
+        <ul class="featured">
+          {featured.map((p, i) => (
+            <li>
+              <a class="feature" href={url(`/posts/${p.id}/`)}>
+                <span class="feature-no">{String(i + 1).padStart(2, '0')}</span>
+                <span class="meta">
+                  <span class="badge">{topicLabel(p.data.category, p.data.topic) ?? midOf(p.data.category)?.label}</span>
+                  <span class="type-chip">{typeOf(p.data.type)?.label}</span>
+                </span>
+                <span class="card-title" set:html={phraseHtml(p.data.title)} />
+                <span class="card-desc">{p.data.description}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
 
   <section class="section section-band">
     <div class="wrap">
@@ -53,7 +79,16 @@ const featuredTypes = ['glossary', 'news', 'checklist', 'tool'].map((k) => TYPES
 
   <section class="section">
     <div class="wrap">
-      <h2 class="section-title">3つの柱</h2>
+      <h2 class="section-title">新着記事</h2>
+      <PostList posts={latest} />
+      <p class="more"><a href={url('/posts/')}>記事一覧へ（{all.length}本） →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title">分野から探す</h2>
+      <p class="section-lead">仕事（WORK）・学び（LEARNING）・暮らしと働き方（LIFE）の3つの柱で整理しています。</p>
       <div class="cats cats-3">
         {PILLARS.map((p) => (
           <a class="cat" href={pillarUrl(p.key)}>
@@ -64,36 +99,16 @@ const featuredTypes = ['glossary', 'news', 'checklist', 'tool'].map((k) => TYPES
           </a>
         ))}
       </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <h2 class="section-title">WORKの地図</h2>
-      <WorkMap counts={counts} compact />
+      <div class="home-workmap">
+        <WorkMap counts={counts} compact />
+      </div>
       <p class="more"><a href={pillarUrl('work')}>WORKの全分野を見る →</a></p>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap">
-      <h2 class="section-title">記事タイプから探す</h2>
-      <div class="cats">
-        {featuredTypes.map((t) => (
-          <a class="cat" href={typeUrl(t.key)}>
-            <strong>{t.label}</strong>
-            <span class="cat-desc">{t.desc}</span>
-            <span class="card-meta"><Count n={counts[`type:${t.key}`]} /></span>
-          </a>
-        ))}
-      </div>
-      <p class="more"><a href={url('/types/')}>すべての記事タイプ →</a></p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <aside class="author">
+      <aside class="author home-author">
         <span class="author-mark" aria-hidden="true"></span>
         <div>
           <p class="author-name">{AUTHOR_NAME}</p>

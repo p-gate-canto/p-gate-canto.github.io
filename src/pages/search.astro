@@ -42,8 +42,7 @@ import { SITE_KEYWORDS, url } from '../consts';
           (m.category ? '<span class="badge">' + esc(m.category) + '</span>' : '') +
           (m.type ? '<span class="type-chip">' + esc(m.type) + '</span>' : '') + '</span>' +
           '<span class="card-title">' + esc(m.title) + '</span>' +
-          '<span class="card-desc">' + (r.excerpt || '') + '</span>' +
-          '<span class="card-more" aria-hidden="true">続きを読む →</span></a>';
+          '<span class="card-desc">' + (r.excerpt || '') + '</span></a>';
         if (subs.length) {
           html += '<ul class="card-hits" aria-label="記事の中の該当箇所">' + subs.map(function (s) {
             return '<li><a href="' + esc(s.url) + '"><span class="card-hits-title">' + esc(s.title) + '</span><span class="card-hits-text">' + (s.excerpt || '') + '</span></a></li>';

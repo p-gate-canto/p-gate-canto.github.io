@@ -61,23 +61,17 @@ const examName = d.tags.map((t) => EXAM_NAMES[t]).find(Boolean);
   </header>
 
   {showToc && (
-    <nav class="article-toc toc-inline" aria-label="この記事の目次" data-pagefind-ignore>
-      <p class="article-toc-title">この記事の目次</p>
-      <ol>
-        {toc.map((h) => <li class={`lv${h.depth}`}><a href={`#${h.slug}`}>{h.text}</a></li>)}
-      </ol>
-    </nav>
+    <details class="article-toc toc-inline" open={toc.length <= 6} data-pagefind-ignore>
+      <summary class="article-toc-title">この記事の目次<span class="toc-n">{toc.filter((h) => h.depth === 2).length}項目</span></summary>
+      <nav aria-label="この記事の目次">
+        <ol>
+          {toc.map((h) => <li class={`lv${h.depth}`}><a href={`#${h.slug}`}>{h.text}</a></li>)}
+        </ol>
+      </nav>
+    </details>
   )}
 
   <div class="prose"><Content /></div>
-
-  {series && (
-    <section class="series-next" data-pagefind-ignore>
-      <h2 class="section-title">次に読む</h2>
-      <p class="series-name">{series.wrapped ? `シリーズ「${series.name}」の最初の記事に戻る` : `シリーズ「${series.name}」の${series.index + 1}本目（全${series.total}本）`}</p>
-      <PostList posts={[series.next]} />
-    </section>
-  )}
 
   <aside class="author" data-pagefind-ignore>
     <span class="author-mark" aria-hidden="true"></span>
@@ -88,11 +82,12 @@ const examName = d.tags.map((t) => EXAM_NAMES[t]).find(Boolean);
     </div>
   </aside>
 
-  {(newer || older) && (
-    <nav class="pager" aria-label="前後の記事" data-pagefind-ignore>
-      {older ? <a class="pager-prev" href={url(`/posts/${older.id}/`)}><span>← 前の記事</span>{older.data.title}</a> : <span />}
-      {newer ? <a class="pager-next" href={url(`/posts/${newer.id}/`)}><span>次の記事 →</span>{newer.data.title}</a> : <span />}
-    </nav>
+  {series && (
+    <section class="series-next" data-pagefind-ignore>
+      <h2 class="section-title">次に読む</h2>
+      <p class="series-name">{series.wrapped ? `シリーズ「${series.name}」の最初の記事に戻る` : `シリーズ「${series.name}」の${series.index + 1}本目（全${series.total}本）`}</p>
+      <PostList posts={[series.next]} />
+    </section>
   )}
 
   {related.length > 0 && (
@@ -101,6 +96,13 @@ const examName = d.tags.map((t) => EXAM_NAMES[t]).find(Boolean);
       <PostList posts={related} />
     </section>
   )}
+  {(newer || older) && (
+    <nav class="pager" aria-label="前後の記事" data-pagefind-ignore>
+      {older ? <a class="pager-prev" href={url(`/posts/${older.id}/`)}><span>← 前の記事</span>{older.data.title}</a> : <span />}
+      {newer ? <a class="pager-next" href={url(`/posts/${newer.id}/`)}><span>次の記事 →</span>{newer.data.title}</a> : <span />}
+    </nav>
+  )}
+
 </article>
 {showToc ? (
   <aside class="article-side" aria-label="目次" data-pagefind-ignore>

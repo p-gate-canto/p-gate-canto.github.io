@@ -21,7 +21,6 @@ const { posts, base = '/posts/', empty = '記事は準備中です。', compact 
           </span>
           <span class="card-title" set:html={phraseHtml(p.data.title)} />
           {!compact && <span class="card-desc">{p.data.description}</span>}
-          {!compact && <span class="card-more" aria-hidden="true">続きを読む →</span>}
         </a>
       </li>
     ))}

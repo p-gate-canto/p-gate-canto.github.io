@@ -2,15 +2,15 @@
 <title id="t">決算賞与を今期の損金にするための日程（3月決算の例）</title>
 <desc id="d">3月31日（期末）までに各人へ支給額を通知し、今期に費用として計上する。4月30日（期末の翌日から1か月）までに全員へ支払う。</desc>
 <g font-family="'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP','Meiryo UI',Meiryo,sans-serif">
-<rect x="16.0" y="38" width="140.6" height="76" fill="#eef3f7"/>
-<text x="86.3" y="50" font-size="11.5" fill="#5f666d" text-anchor="middle">今期</text>
-<rect x="161.3" y="38" width="182.7" height="76" fill="#eef3f7"/>
-<text x="252.6" y="50" font-size="11.5" fill="#5f666d" text-anchor="middle">翌期</text>
-<line x1="16" y1="96" x2="344" y2="96" stroke="#9aa3ab" stroke-width="2"/>
-<path d="M161.3,126 V132 H297.1 V126" fill="none" stroke="#5f666d" stroke-width="1.2"/>
-<text x="229.2" y="148" font-size="12" fill="#5f666d" text-anchor="middle">全員へ支払う（1か月以内）</text>
-<circle cx="156.6" cy="96" r="7" fill="#4f9a32" stroke="#ffffff" stroke-width="2"/>
-<text x="162.6" y="82" font-size="12.5" fill="#0b1820" text-anchor="end" font-weight="700">期末 3/31：通知・計上</text>
+<rect x="16.0" y="38" width="140.6" height="76" fill="#ebebef"/>
+<text x="86.3" y="50" font-size="11.5" fill="#6b6b78" text-anchor="middle">今期</text>
+<rect x="161.3" y="38" width="182.7" height="76" fill="#ebebef"/>
+<text x="252.6" y="50" font-size="11.5" fill="#6b6b78" text-anchor="middle">翌期</text>
+<line x1="16" y1="96" x2="344" y2="96" stroke="#a3a3ae" stroke-width="2"/>
+<path d="M161.3,126 V132 H297.1 V126" fill="none" stroke="#6b6b78" stroke-width="1.2"/>
+<text x="229.2" y="148" font-size="12" fill="#6b6b78" text-anchor="middle">全員へ支払う（1か月以内）</text>
+<circle cx="156.6" cy="96" r="7" fill="#6a9e1f" stroke="#ffffff" stroke-width="2"/>
+<text x="162.6" y="82" font-size="12.5" fill="#16161d" text-anchor="end" font-weight="700">期末 3/31：通知・計上</text>
 <circle cx="297.1" cy="96" r="5" fill="#2f6f9f"/>
-<text x="303.1" y="118" font-size="12.5" fill="#0b1820" text-anchor="end">4/30：支払の期限</text>
+<text x="303.1" y="118" font-size="12.5" fill="#16161d" text-anchor="end">4/30：支払の期限</text>
 </g></svg>

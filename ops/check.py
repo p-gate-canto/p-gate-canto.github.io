@@ -20,7 +20,7 @@ DIST = ROOT / 'dist'
 
 
 def pages():
-    fixed = ['/', '/types/', '/tags/', '/search/', '/about/', '/drafts/', '/404.html']
+    fixed = ['/', '/posts/', '/types/', '/tags/', '/search/', '/about/', '/drafts/', '/404.html']
     out = list(fixed)
     for d in ('posts', 'drafts', 'types', 'tags'):
         base = DIST / d
