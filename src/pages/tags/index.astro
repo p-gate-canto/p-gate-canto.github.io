@@ -7,7 +7,7 @@ import { getPosts, countBy } from '../../lib';
 const counts = countBy(await getPosts());
 ---
 <Base title="タグ一覧" description="読者・会社のステージ・業種・時事などの切り口から探す" noindex>
-  <PageHero title="タグ一覧" lead="読者・会社のステージ・業種などの切り口から探せます。" />
+  <PageHero slot="hero" title="タグ一覧" lead="読者・会社のステージ・業種などの切り口から探せます。" />
   <section class="section">
     <div class="wrap">
       {TAG_GROUPS.map((g) => (

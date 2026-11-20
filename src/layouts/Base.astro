@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { SITE_TITLE, SITE_SUBTITLE, SITE_DESCRIPTION, FOOTER_NOTE, url } from '../consts';
+import Sidebar from '../components/Sidebar.astro';
 interface Props {
   title?: string;
   description?: string;
@@ -10,8 +11,10 @@ interface Props {
   published?: Date;
   modified?: Date;
   jsonld?: object[];
+  // side：本文＋右サイドバー（PCの広い画面だけ）。full：トップページ用の広い1列。plain：記事ページ（自前で目次の列を持つ）
+  layout?: 'side' | 'full' | 'plain';
 }
-const { title, description = SITE_DESCRIPTION, current = '', type = 'website', noindex = false, published, modified, jsonld = [] } =
+const { title, description = SITE_DESCRIPTION, current = '', type = 'website', noindex = false, published, modified, jsonld = [], layout = 'side' } =
   Astro.props;
 const pageTitle = title ? `${title}｜${SITE_TITLE}` : `${SITE_TITLE}｜${SITE_SUBTITLE}`;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -68,7 +71,17 @@ const nav = [
         </nav>
       </div>
     </header>
-    <main><slot /></main>
+    <main class:list={[{ full: layout === 'full' }]}>
+      <slot name="hero" />
+      {layout === 'side' ? (
+        <div class="layout">
+          <div class="layout-main"><slot /></div>
+          <Sidebar />
+        </div>
+      ) : (
+        <slot />
+      )}
+    </main>
     <footer class="site-footer">
       <div class="wrap">
         <p>&copy; {new Date().getFullYear()} {SITE_TITLE}</p>

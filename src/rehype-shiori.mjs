@@ -1,8 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { loadDefaultJapaneseParser } from 'budoux';
+
+const budoux = loadDefaultJapaneseParser();
 
 // 記事本文の後処理
 // 7. まだ下書き（draft: true）の記事への本文中のリンクは、リンクを外して文字だけにする（公開後のビルドで自動的にリンクに戻る）
+// 8. 本文の見出し（h2・h3）に文節の区切り（<wbr>）を入れる。2文字以下の区切りは前につなげる（泣き別れ防止）
 // 1. 「> ポイント：」「> 注意：」「> 結論：」「> 補足：」で始まる引用を、色付きの要点ボックスにする
 // 2. 画像を遅延読み込みにする
 // 3. 未記入の「実務メモ」欄（見出し＋「筆者記入欄」を含む引用）は表示しない
@@ -140,6 +144,23 @@ function unlinkDrafts(node) {
   }
 }
 
+function wbrHeading(node) {
+  const kids = [];
+  for (const c of node.children ?? []) {
+    if (c.type !== 'text') { if (c.type === 'element') wbrHeading(c); kids.push(c); continue; }
+    const segs = [];
+    for (const seg of budoux.parse(c.value)) {
+      if (segs.length && seg.length <= 2) segs[segs.length - 1] += seg;
+      else segs.push(seg);
+    }
+    segs.forEach((seg, i) => {
+      if (i) kids.push({ type: 'element', tagName: 'wbr', properties: {}, children: [] });
+      kids.push({ type: 'text', value: seg });
+    });
+  }
+  node.children = kids;
+}
+
 export default function rehypeShiori() {
   return (tree) => {
     dropEmptyMemo(tree);
@@ -147,6 +168,7 @@ export default function rehypeShiori() {
     noBreakDates(tree);
     walk(tree, (node) => {
       if (node.type !== 'element') return;
+      if (node.tagName === 'h2' || node.tagName === 'h3') wbrHeading(node);
       if (node.tagName === 'a') unlinkDrafts(node);
       if (node.tagName === 'table') tableLabels(node);
       if (node.tagName === 'img') {
@@ -162,7 +184,7 @@ export default function rehypeShiori() {
         node.children.unshift({
           type: 'element',
           tagName: 'p',
-          properties: { className: ['callout-label'] },
+          properties: { className: ['callout-label'], dataPagefindIgnore: '' },
           children: [{ type: 'text', value: m[1] }],
         });
       }

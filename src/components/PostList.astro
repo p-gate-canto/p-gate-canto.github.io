@@ -1,24 +1,27 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { midOf, typeOf, url, fmtDate, isoDate, topicLabel } from '../consts';
+import { phraseHtml } from '../lib';
 // base：記事ページの置き場所（下書き一覧では /drafts/）。empty：記事がないときの文言
-interface Props { posts: CollectionEntry<'posts'>[]; base?: string; empty?: string }
-const { posts, base = '/posts/', empty = '記事は準備中です。' } = Astro.props;
+// compact：サイドバー用の小さい一覧（日付＋タイトルだけ）
+interface Props { posts: CollectionEntry<'posts'>[]; base?: string; empty?: string; compact?: boolean }
+const { posts, base = '/posts/', empty = '記事は準備中です。', compact = false } = Astro.props;
 ---
 {posts.length === 0 ? (
   <p class="empty">{empty}</p>
 ) : (
-  <ul class="posts">
+  <ul class:list={['posts', { 'posts-compact': compact }]}>
     {posts.map((p) => (
       <li>
         <a class="card" href={url(`${base}${p.id}/`)}>
-          <div class="meta">
+          <span class="meta">
             <time datetime={isoDate(p.data.pubDate)}>{fmtDate(p.data.pubDate)}</time>
-            <span class="badge">{topicLabel(p.data.category, p.data.topic) ?? midOf(p.data.category)?.label}</span>
-            <span class="type-chip">{typeOf(p.data.type)?.label}</span>
-          </div>
-          <h3 class="card-title">{p.data.title}</h3>
-          <p class="card-desc">{p.data.description}</p>
+            {!compact && <span class="badge">{topicLabel(p.data.category, p.data.topic) ?? midOf(p.data.category)?.label}</span>}
+            {!compact && <span class="type-chip">{typeOf(p.data.type)?.label}</span>}
+          </span>
+          <span class="card-title" set:html={phraseHtml(p.data.title)} />
+          {!compact && <span class="card-desc">{p.data.description}</span>}
+          {!compact && <span class="card-more" aria-hidden="true">続きを読む →</span>}
         </a>
       </li>
     ))}

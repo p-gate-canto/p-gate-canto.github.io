@@ -1,0 +1,26 @@
+---
+// PCの広い画面（1120px以上）だけに出す右側のサイドバー。スマホでは表示しない
+// 中身はどのページでも同じ：読む人から探す（6つ）＋新着記事（5本）
+import { READERS, tagUrl } from '../consts';
+import { getPosts, countBy } from '../lib';
+import Count from './Count.astro';
+import PostList from './PostList.astro';
+const all = await getPosts();
+const counts = countBy(all);
+---
+<aside class="side" aria-label="サイドバー" data-pagefind-ignore>
+  <div class="side-inner">
+    <section class="side-block">
+      <h2 class="layer-head">読む人から探す</h2>
+      <ul class="topics side-topics">
+        {READERS.map((r) => (
+          <li><a class="topic" href={tagUrl(r.tag)}><span>{r.label}</span><Count n={counts[`tag:${r.tag}`]} /></a></li>
+        ))}
+      </ul>
+    </section>
+    <section class="side-block">
+      <h2 class="layer-head">新着記事</h2>
+      <PostList posts={all.slice(0, 5)} compact />
+    </section>
+  </div>
+</aside>

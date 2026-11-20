@@ -5,7 +5,7 @@ import Base from '../layouts/Base.astro';
 import { Content, frontmatter } from '../content/pages/about.md';
 ---
 <Base title={frontmatter.title} description={frontmatter.description} current="about">
-  <PageHero title={frontmatter.title} lead={frontmatter.description} />
+  <PageHero slot="hero" title={frontmatter.title} lead={frontmatter.description} />
   <article class="wrap">
     <div class="prose"><Content /></div>
   </article>

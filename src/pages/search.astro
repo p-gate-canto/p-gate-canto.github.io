@@ -1,27 +1,86 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import { url } from '../consts';
+import { SITE_KEYWORDS, url } from '../consts';
 ---
 <Base title="サイト内検索" description="税理士のしおりの記事を検索" current="search" noindex>
-  <PageHero title="サイト内検索" lead="キーワードで記事を探せます。" />
+  <PageHero slot="hero" title="サイト内検索" lead="キーワードで記事を探せます。" />
   <section class="section">
     <div class="wrap">
-      <div id="search"></div>
+      <form class="search-box" role="search" action={url('/search/')} onsubmit="return false">
+        <span class="search-icon" aria-hidden="true"></span>
+        <input id="q" name="q" type="search" placeholder="キーワードを入力（例：役員報酬、源泉徴収）" autocomplete="off" aria-label="検索キーワード" />
+        <button type="button" class="search-clear" hidden>クリア</button>
+      </form>
+      <div id="search-suggest" class="search-suggest">
+        <p class="search-count">よく読まれているキーワード</p>
+        <ul class="topics">
+          {SITE_KEYWORDS.map((k) => <li><a class="topic" href={url(`/search/?q=${encodeURIComponent(k)}`)}><span>{k}</span></a></li>)}
+        </ul>
+      </div>
+      <p id="search-count" class="search-count" aria-live="polite" hidden></p>
+      <ul id="search-results" class="posts search-results"></ul>
+      <p class="more"><button type="button" id="search-more" class="btn-more" hidden>さらに表示</button></p>
     </div>
   </section>
-  <link rel="stylesheet" href={url('/pagefind/pagefind-ui.css')} />
-  <script is:inline src="/pagefind/pagefind-ui.js"></script>
   <script is:inline>
-    window.addEventListener('DOMContentLoaded', function () {
-      var ui = new PagefindUI({
-        element: '#search',
-        showSubResults: true,
-        showImages: false,
-        translations: { placeholder: 'キーワードを入力', zero_results: '「[SEARCH_TERM]」に一致する記事は見つかりませんでした' },
-      });
-      var q = new URLSearchParams(location.search).get('q');
-      if (q) ui.triggerSearch(q);
-    });
+    (function () {
+      var PAGE = 10;
+      var input = document.getElementById('q');
+      var clear = document.querySelector('.search-clear');
+      var suggest = document.getElementById('search-suggest');
+      var count = document.getElementById('search-count');
+      var list = document.getElementById('search-results');
+      var more = document.getElementById('search-more');
+      var pagefind = null, results = [], shown = 0, seq = 0;
+      function esc(t) { return String(t || '').replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+      function card(r) {
+        var m = r.meta || {};
+        var subs = (r.sub_results || []).filter(function (s) { return s.url !== r.url && s.title !== m.title; }).slice(0, 3);
+        var html = '<li><a class="card" href="' + esc(r.url) + '">' +
+          '<span class="meta">' + (m.date ? '<time>' + esc(m.date) + '</time>' : '') +
+          (m.category ? '<span class="badge">' + esc(m.category) + '</span>' : '') +
+          (m.type ? '<span class="type-chip">' + esc(m.type) + '</span>' : '') + '</span>' +
+          '<span class="card-title">' + esc(m.title) + '</span>' +
+          '<span class="card-desc">' + (r.excerpt || '') + '</span>' +
+          '<span class="card-more" aria-hidden="true">続きを読む →</span></a>';
+        if (subs.length) {
+          html += '<ul class="card-hits" aria-label="記事の中の該当箇所">' + subs.map(function (s) {
+            return '<li><a href="' + esc(s.url) + '"><span class="card-hits-title">' + esc(s.title) + '</span><span class="card-hits-text">' + (s.excerpt || '') + '</span></a></li>';
+          }).join('') + '</ul>';
+        }
+        return html + '</li>';
+      }
+      async function showMore() {
+        var next = results.slice(shown, shown + PAGE);
+        var my = seq;
+        var data = await Promise.all(next.map(function (r) { return r.data(); }));
+        if (my !== seq) return;
+        list.insertAdjacentHTML('beforeend', data.map(card).join(''));
+        shown += next.length;
+        more.hidden = shown >= results.length;
+      }
+      async function run(q) {
+        var my = ++seq;
+        clear.hidden = !q;
+        var u = new URL(location.href);
+        if (q) u.searchParams.set('q', q); else u.searchParams.delete('q');
+        history.replaceState(null, '', u);
+        if (!q) { list.innerHTML = ''; count.hidden = true; more.hidden = true; suggest.hidden = false; return; }
+        if (!pagefind) { pagefind = await import('/pagefind/pagefind.js'); await pagefind.init(); }
+        var s = await pagefind.debouncedSearch(q, {}, 200);
+        if (s === null || my !== seq) return;
+        results = s.results; shown = 0; list.innerHTML = '';
+        suggest.hidden = results.length > 0;
+        count.hidden = false;
+        count.textContent = results.length ? '「' + q + '」の検索結果：' + results.length + '件' : '「' + q + '」に一致する記事は見つかりませんでした。別のことばでも試してみてください。';
+        await showMore();
+      }
+      input.addEventListener('input', function () { run(input.value.trim()); });
+      clear.addEventListener('click', function () { input.value = ''; run(''); input.focus(); });
+      more.addEventListener('click', showMore);
+      var q0 = new URLSearchParams(location.search).get('q');
+      if (q0) { input.value = q0; run(q0); }
+    })();
   </script>
 </Base>

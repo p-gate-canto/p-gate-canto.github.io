@@ -12,7 +12,7 @@ const { t } = Astro.props;
 const posts = (await getPosts()).filter((p) => p.data.type === t.key);
 ---
 <Base title={t.label} description={`${t.desc}の記事一覧`} current="types" noindex={posts.length === 0} jsonld={[breadcrumbLd([['記事タイプ', url('/types/')], [t.label, Astro.url.pathname]])]}>
-  <PageHero title={t.label} lead={t.desc} crumbs={[['記事タイプ', url('/types/')]]} />
+  <PageHero slot="hero" title={t.label} lead={t.desc} crumbs={[['記事タイプ', url('/types/')]]} />
   <section class="section">
     <div class="wrap">
       <PostList posts={posts} empty="この記事タイプの記事は準備中です。" />

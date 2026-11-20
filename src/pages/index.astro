@@ -10,7 +10,7 @@ const all = await getPosts();
 const counts = countBy(all);
 const featuredTypes = ['glossary', 'news', 'checklist', 'tool'].map((k) => TYPES.find((t) => t.key === k)!);
 ---
-<Base current="home" jsonld={[websiteLd()]}>
+<Base current="home" jsonld={[websiteLd()]} layout="full">
   <section class="hero hero-home">
     <div class="wrap">
       <h1>{SITE_TITLE}</h1>

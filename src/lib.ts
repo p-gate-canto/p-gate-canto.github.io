@@ -53,3 +53,20 @@ export const readingMinutes = (body = '') =>
 
 /** 法令の基準日から 1 年以上たっているか */
 export const isStale = (d?: Date) => !!d && Date.now() - d.valueOf() > 365 * 24 * 60 * 60 * 1000;
+
+// 見出し・タイトル用：BudouX で文節に区切り、区切りに <wbr> を入れる（CSS の word-break: keep-all と組み合わせて、単語の途中で改行させない）
+// 2文字以下の区切りは前の文節につなげ、行末に1〜2文字だけ残る「泣き別れ」を防ぐ
+import { loadDefaultJapaneseParser } from 'budoux';
+const budoux = loadDefaultJapaneseParser();
+export function phrases(text: string): string[] {
+  const out: string[] = [];
+  for (const seg of budoux.parse(text)) {
+    if (out.length && seg.length <= 2) out[out.length - 1] += seg;
+    else out.push(seg);
+  }
+  return out;
+}
+const esc = (t: string) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+export function phraseHtml(text: string): string {
+  return phrases(text).map(esc).join('<wbr>');
+}

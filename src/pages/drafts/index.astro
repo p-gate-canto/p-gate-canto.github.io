@@ -7,7 +7,7 @@ import { getDrafts } from '../../lib';
 const drafts = await getDrafts();
 ---
 <Base title="下書き一覧" noindex>
-  <PageHero title="下書き一覧" lead="公開前の記事のプレビューです。このページは検索に出ません。" />
+  <PageHero slot="hero" title="下書き一覧" lead="公開前の記事のプレビューです。このページは検索に出ません。" />
   <section class="section">
     <div class="wrap">
       <PostList posts={drafts} base="/drafts/" empty="下書きはありません。" />

@@ -9,6 +9,6 @@ export async function getStaticPaths() {
 }
 const { post, all } = Astro.props;
 ---
-<Base title={`【下書き】${post.data.title}`} description={post.data.description} noindex>
+<Base title={`【下書き】${post.data.title}`} description={post.data.description} noindex layout="plain">
   <Article post={post} all={all} preview />
 </Base>

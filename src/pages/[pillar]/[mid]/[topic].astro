@@ -21,7 +21,7 @@ const posts = (await getPosts()).filter((x) => x.data.category === mid && x.data
   noindex={posts.length === 0}
   jsonld={[breadcrumbLd([[p.en, pillarUrl(pillar)], [m.label, midUrl(mid)], [label, Astro.url.pathname]])]}
 >
-  <PageHero title={label} lead={`${m.label}の小カテゴリー`} crumbs={[[p.en, pillarUrl(pillar)], [m.label, midUrl(mid)]]} />
+  <PageHero slot="hero" title={label} lead={`${m.label}の小カテゴリー`} crumbs={[[p.en, pillarUrl(pillar)], [m.label, midUrl(mid)]]} />
   <section class="section">
     <div class="wrap">
       <h2 class="section-title">記事</h2>

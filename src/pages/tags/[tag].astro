@@ -13,7 +13,7 @@ const { posts } = Astro.props;
 const reader = READERS.find((r) => r.tag === tag);
 ---
 <Base title={reader ? reader.label : `#${tag}`} description={`タグ「${tag}」の記事一覧`} noindex>
-  <PageHero title={reader ? reader.label : `#${tag}`} lead={reader ? reader.desc : `タグ「${tag}」の記事`} crumbs={[['タグ', url('/tags/')]]} />
+  <PageHero slot="hero" title={reader ? reader.label : `#${tag}`} lead={reader ? reader.desc : `タグ「${tag}」の記事`} crumbs={[['タグ', url('/tags/')]]} />
   <section class="section">
     <div class="wrap">
       <PostList posts={posts} empty="このタグの記事は準備中です。" />

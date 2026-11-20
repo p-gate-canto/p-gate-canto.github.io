@@ -16,7 +16,7 @@ const posts = (await getPosts()).filter((x) => pillarOfPost(x) === pillar);
 const counts = countBy(posts);
 ---
 <Base title={`${p.en}｜${p.label}`} description={p.desc} current={pillar} jsonld={[breadcrumbLd([[p.en, Astro.url.pathname]])]}>
-  <PageHero title={p.label} lead={p.desc} />
+  <PageHero slot="hero" title={p.label} lead={p.desc} />
   <section class="section">
     <div class="wrap">
       <h2 class="section-title">分野</h2>
