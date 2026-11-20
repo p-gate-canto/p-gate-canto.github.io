@@ -35,6 +35,30 @@ function usedSections() {
   return { used };
 }
 const { used } = usedSections();
+
+// サイトマップの lastmod：記事は更新日（なければ公開日）。Googleが新しい記事・更新した記事を優先して見に来やすくする
+function postDates() {
+  const dir = './src/content/posts';
+  const out = {};
+  for (const f of readdirSync(dir)) {
+    if (!f.endsWith('.md') || f.startsWith('_')) continue;
+    const fm = readFileSync(`${dir}/${f}`, 'utf8').split('---')[1] ?? '';
+    if (/^draft:\s*true/m.test(fm)) continue;
+    const slug = fm.match(/^slug:\s*(\S+)/m)?.[1] ?? f.replace(/\.md$/, '');
+    const d = fm.match(/^updatedDate:\s*(\d{4}-\d{2}-\d{2})/m)?.[1] ?? fm.match(/^pubDate:\s*(\d{4}-\d{2}-\d{2})/m)?.[1];
+    if (d) out[slug] = d;
+  }
+  return out;
+}
+const lastmods = postDates();
+const latestPost = Object.values(lastmods).sort().at(-1);
+const sitemapSerialize = (item) => {
+  const path = new URL(item.url).pathname;
+  const m = path.match(/^\/posts\/([^/]+)\/$/);
+  const d = m ? lastmods[m[1]] : path === '/' ? latestPost : undefined;
+  if (d) item.lastmod = `${d}T00:00:00+09:00`;
+  return item;
+};
 const sitemapFilter = (page) => {
   const path = new URL(page).pathname.replace(/^\/|\/$/g, '');
   if (/^(drafts|tags|search)(\/|$)/.test(path)) return false;
@@ -97,5 +121,5 @@ export default defineConfig({
     },
   },
   markdown: { rehypePlugins: [rehypeShiori] },
-  integrations: [sitemap({ filter: sitemapFilter }), formatOutput()],
+  integrations: [sitemap({ filter: sitemapFilter, serialize: sitemapSerialize }), formatOutput()],
 });

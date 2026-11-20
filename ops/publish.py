@@ -2,7 +2,8 @@
 """公開キューの先頭から、まだ下書きの記事を N 本だけ公開設定にする。
 
 使い方:
-  python3 ops/publish.py --count 10 --date 2026-11-21           # 実行（毎朝は最大10本）
+  python3 ops/publish.py --count 10 --date 2026-11-21 --daily   # 毎日の定期公開（同じ日に2回目は何もしない）
+  python3 ops/publish.py --count 3 --date 2026-11-21            # スポット公開
   python3 ops/publish.py --count 5 --date 2026-11-21 --dry-run  # 確認だけ（ファイルは変えない）
 
 - 対象の記事は draft: true → false、pubDate を公開日にする
@@ -20,6 +21,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 POSTS = ROOT / 'src' / 'content' / 'posts'
 QUEUE = ROOT / 'ops' / 'publish-queue.txt'
 LOG = ROOT / 'ops' / 'published.log'
+DAILY = ROOT / 'ops' / 'last-daily-run.txt'  # 定期公開を実行した日（同じ日に2回動かないようにする）
 
 
 def read_queue():
@@ -49,9 +51,15 @@ def main():
     ap.add_argument('--count', type=int, default=5)
     ap.add_argument('--date', required=True, help='公開日 YYYY-MM-DD（日本時間）')
     ap.add_argument('--dry-run', action='store_true')
+    ap.add_argument('--daily', action='store_true', help='毎日の定期公開として実行（同じ日に2回目は何もしない）')
     a = ap.parse_args()
     if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', a.date):
         sys.exit('エラー：--date は YYYY-MM-DD で指定してください')
+
+    if a.daily and DAILY.exists() and DAILY.read_text(encoding='utf-8').strip() == a.date:
+        print(f'本日（{a.date}）の定期公開は実行済み')
+        print('公開した本数：0')
+        return
 
     queue = read_queue()
     pending, missing = [], []
@@ -78,6 +86,8 @@ def main():
             p.write_text(f'---\n{fm2}\n---\n{body}', encoding='utf-8')
         print(('（確認のみ）' if a.dry_run else '') + f'公開設定：{slug}')
 
+    if a.daily and not a.dry_run:
+        DAILY.write_text(a.date + '\n', encoding='utf-8')
     if not a.dry_run and targets:
         with LOG.open('a', encoding='utf-8') as f:
             for slug in targets:
