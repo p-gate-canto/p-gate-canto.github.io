@@ -1,0 +1,45 @@
+# 公開キュー（2026/11/20 ユーザー承認）
+# 上から順に1日5本ずつ公開する。1行に1記事のslug。# 以降はコメント。
+# 新しい記事をここに足すときは、ユーザーの承認を得てから。
+
+# 1日目
+officer-pay-vs-dividend
+withholding-20-42-vs-20-315
+sonkin-vs-keihi
+swot-cross-swot
+ppm-sbu
+# 2日目
+officer-pay-three-types
+withholding-10-21-vs-20-42
+kintowari
+3c-analysis
+five-forces
+# 3日目
+corporate-taxes-overview
+gensen-noki-tokurei
+management-purpose-plan
+vrio-core-competence
+porter-generic-strategies
+# 4日目
+gensen-choshuhyo-vs-shiharai-chosho
+gross-operating-ordinary-profit
+contribution-margin-breakeven
+kotler-competitive-position
+strategy-basics-5p
+# 5日目
+mission-vision-value
+family-business-models
+ma-methods-glossary
+domain-diversification
+decision-making-simon-ansoff
+# 6日目
+effectuation
+csr-esg-sdgs-csv
+organization-theory-history
+innovation-types-au-model
+economics-of-business
+# 7日目
+ir-framework
+first-mover-advantage
+valley-of-death
+takeover-defense-glossary
