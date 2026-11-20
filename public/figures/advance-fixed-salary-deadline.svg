@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 158" role="img" aria-labelledby="t d">
+<title id="t">事前確定届出給与の届出期限の例（3月決算、株主総会6月26日）</title>
+<desc id="d">期首4月1日、株主総会6月26日。総会から1か月を経過する日は7月26日、期首から4か月を経過する日は7月31日。早いほうの7月26日が提出期限。</desc>
+<g font-family="'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP','Meiryo UI',Meiryo,sans-serif">
+<line x1="20" y1="92" x2="320" y2="92" stroke="#9aa3ab" stroke-width="2"/>
+<path d="M230.1,62 V56 H303.4 V62" fill="none" stroke="#5f666d" stroke-width="1.2"/>
+<text x="266.7" y="50" font-size="12" fill="#5f666d" text-anchor="middle">1か月</text>
+<path d="M20.0,122 V128 H315.6 V122" fill="none" stroke="#5f666d" stroke-width="1.2"/>
+<text x="167.8" y="144" font-size="12" fill="#5f666d" text-anchor="middle">期首から4か月</text>
+<circle cx="20.0" cy="92" r="5" fill="#2f6f9f"/>
+<text x="14.0" y="78" font-size="12.5" fill="#0b1820">期首 4/1</text>
+<circle cx="230.1" cy="92" r="5" fill="#2f6f9f"/>
+<text x="230.1" y="78" font-size="12.5" fill="#0b1820" text-anchor="end">総会 6/26</text>
+<circle cx="315.6" cy="92" r="5" fill="#2f6f9f"/>
+<text x="326" y="96.5" font-size="12.5" fill="#0b1820">7/31</text>
+<line x1="303.4" y1="92" x2="303.4" y2="22" stroke="#4f9a32" stroke-width="2"/>
+<circle cx="303.4" cy="92" r="7" fill="#4f9a32" stroke="#ffffff" stroke-width="2"/>
+<text x="340.0" y="17" font-size="13.5" font-weight="700" fill="#0b1820" text-anchor="end">提出期限 7/26（早いほう）</text>
+</g></svg>
