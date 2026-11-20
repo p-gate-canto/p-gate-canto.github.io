@@ -36,7 +36,7 @@
 
 | 項目 | 内容 | 定義ファイル |
 |---|---|---|
-| 大分類 | WORK / LEARNING / LIFE | `src/data/taxonomy.json` の pillars |
+| 大分類 | WORK / GROWTH | `src/data/taxonomy.json` の pillars |
 | 中カテゴリー（category） | 36個。WORKは理念→企業戦略→競争戦略→機能別戦略の4層 | 同 mids |
 | 小カテゴリー（topic） | 169個 | 同 mids[].topics |
 | タグ（tags） | 資格・読者・会社のステージ・業種・時事・視点。1記事に最大5個 | 同 tagGroups |

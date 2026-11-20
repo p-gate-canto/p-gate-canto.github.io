@@ -108,12 +108,12 @@ export default defineConfig({
     '/zeirishi-shiori/posts/hello-shiori': '/posts/hello-shiori/',
     '/contents': '/work/',
     '/tools': '/types/tool/',
-    '/category/self': '/life/',
-    '/category/self/mindset': '/life/career/mindset/',
-    '/category/work': '/life/',
+    '/category/self': '/growth/',
+    '/category/self/mindset': '/growth/career/mindset/',
+    '/category/work': '/growth/',
     '/category/tax': '/work/tax/',
     '/category/strategy': '/work/strategy/',
-    // 2026/11 の分類の作り直し（4層20分野＋LEARNING → WORK 13分野・LIFE 4分野）で変わった分類ページのURL
+    // 2026/11 の分類の作り直し（4層20分野＋LEARNING → WORK 13分野・LIFE 4分野。LIFEは2026/11/21にGROWTHへ改名）で変わった分類ページのURL
     ...Object.fromEntries(Object.entries(classRedirects).map(([from, to]) => [from.replace(/\/$/, ''), to])),
   },
   // CSSはHTMLの中に埋め込む。CSSのファイルを別に読まないので最初の表示が速く、公開直後に古いCSSと新しいHTMLが混ざって崩れることもない

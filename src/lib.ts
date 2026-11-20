@@ -15,7 +15,7 @@ export async function getDrafts() {
 }
 
 /** 記事が属する大分類 */
-export const pillarOfPost = (p: Post) => midOf(p.data.category)?.pillar ?? 'life';
+export const pillarOfPost = (p: Post) => midOf(p.data.category)?.pillar ?? 'growth';
 
 /** 件数の集計（中カテゴリー・小カテゴリー・大分類・タグ・記事タイプ） */
 export function countBy(posts: Post[]) {

@@ -100,13 +100,13 @@ content:
       - name: ma
         label: WORK｜M&A
       - name: study
-        label: LIFE｜勉強法・資格
+        label: GROWTH｜勉強法・資格
       - name: learn
-        label: LIFE｜学び直し・読書
+        label: GROWTH｜学び直し・読書
       - name: workstyle
-        label: LIFE｜仕事術・習慣
+        label: GROWTH｜仕事術・習慣
       - name: career
-        label: LIFE｜考え方・キャリア
+        label: GROWTH｜考え方・キャリア
   - name: topic
     label: 小カテゴリー
     type: select

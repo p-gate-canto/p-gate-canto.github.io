@@ -7,10 +7,10 @@
       "desc": "経営戦略・税務・人事労務など、13分野の実務の論点"
     },
     {
-      "key": "life",
-      "en": "LIFE",
-      "label": "学びと働き方",
-      "desc": "勉強法・学び直し・仕事術・キャリアなど、学び方と働き方"
+      "key": "growth",
+      "en": "GROWTH",
+      "label": "学びと成長",
+      "desc": "勉強法・学び直し・仕事術・キャリアなど、自分を育てる学びと習慣"
     }
   ],
   "mids": [
@@ -472,7 +472,7 @@
     },
     {
       "key": "study",
-      "pillar": "life",
+      "pillar": "growth",
       "label": "勉強法・資格",
       "desc": "勉強法・学習計画・記憶・試験対策",
       "topics": [
@@ -503,7 +503,7 @@
     },
     {
       "key": "learn",
-      "pillar": "life",
+      "pillar": "growth",
       "label": "学び直し・読書",
       "desc": "実務の学び直し・読書・学習ツール",
       "topics": [
@@ -526,7 +526,7 @@
     },
     {
       "key": "workstyle",
-      "pillar": "life",
+      "pillar": "growth",
       "label": "仕事術・習慣",
       "desc": "時間管理・習慣化・生産性・体調管理",
       "topics": [
@@ -553,7 +553,7 @@
     },
     {
       "key": "career",
-      "pillar": "life",
+      "pillar": "growth",
       "label": "考え方・キャリア",
       "desc": "考え方・キャリア・チームづくり・コミュニケーション",
       "topics": [
