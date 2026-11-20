@@ -1,0 +1,34 @@
+[
+  {
+    "name": "役員報酬の基本",
+    "posts": ["officer-pay-three-types", "advance-fixed-salary-notification", "officer-pay-vs-dividend", "withholding-20-42-vs-20-315", "year-end-bonus-deduction"]
+  },
+  {
+    "name": "源泉徴収の実務",
+    "posts": ["withholding-10-21-vs-20-42", "withholding-20-42-vs-20-315", "gensen-noki-tokurei", "gensen-choshuhyo-vs-shiharai-chosho"]
+  },
+  {
+    "name": "法人税のしくみ",
+    "posts": ["corporate-taxes-overview", "sonkin-vs-keihi", "kintowari", "entertainment-expenses-10000yen", "small-depreciable-assets-40man", "year-end-bonus-deduction", "loss-carryforward-carryback", "tax-return-deadline-extension"]
+  },
+  {
+    "name": "会社の数字の読み方",
+    "posts": ["gross-operating-ordinary-profit", "contribution-margin-breakeven"]
+  },
+  {
+    "name": "経営計画のつくり方",
+    "posts": ["mission-vision-value", "management-purpose-plan", "swot-cross-swot", "3c-analysis", "effectuation", "csr-esg-sdgs-csv"]
+  },
+  {
+    "name": "事業承継とM&A",
+    "posts": ["family-business-models", "ma-methods-glossary"]
+  },
+  {
+    "name": "診断士 企業経営理論：経営戦略",
+    "posts": ["corporate-vs-competitive-strategy", "strategy-basics-5p", "domain-diversification", "ppm-sbu", "economics-of-business", "five-forces", "porter-generic-strategies", "kotler-competitive-position", "vrio-core-competence", "first-mover-advantage", "ir-framework", "takeover-defense-glossary"]
+  },
+  {
+    "name": "診断士 企業経営理論：技術経営と組織",
+    "posts": ["innovation-types-au-model", "valley-of-death", "decision-making-simon-ansoff", "organization-theory-history"]
+  }
+]

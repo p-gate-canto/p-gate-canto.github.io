@@ -70,3 +70,18 @@ const esc = (t: string) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&l
 export function phraseHtml(text: string): string {
   return phrases(text).map(esc).join('<wbr>');
 }
+
+// シリーズ（読む順番）：src/data/series.json。記事の末尾に「次に読む」を出す。下書きは飛ばす
+import seriesData from './data/series.json';
+export function nextInSeries(post: Post, all: Post[]) {
+  const published = new Set(all.map((p) => p.id));
+  for (const s of seriesData as { name: string; posts: string[] }[]) {
+    const list = s.posts.filter((id) => published.has(id) || id === post.id);
+    const i = list.indexOf(post.id);
+    if (i < 0) continue;
+    const nextId = list[i + 1] ?? (list.length > 1 ? list[0] : undefined);
+    const next = nextId && nextId !== post.id ? all.find((p) => p.id === nextId) : undefined;
+    if (next) return { name: s.name, index: i + 1, total: list.length, next, wrapped: i + 1 >= list.length };
+  }
+  return undefined;
+}

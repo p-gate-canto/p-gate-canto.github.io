@@ -1,7 +1,7 @@
 ---
 import { render, type CollectionEntry } from 'astro:content';
 import { AUTHOR_NAME, AUTHOR_BIO, url, midOf, midUrl, pillarOf, pillarUrl, typeOf, typeUrl, tagUrl, fmtDate, isoDate, topicLabel } from '../consts';
-import { relatedPosts, readingMinutes, isStale, phraseHtml } from '../lib';
+import { relatedPosts, readingMinutes, isStale, phraseHtml, nextInSeries } from '../lib';
 import PostList from './PostList.astro';
 import Sidebar from './Sidebar.astro';
 
@@ -19,7 +19,8 @@ const tLabel = topicLabel(d.category, d.topic);
 const type = typeOf(d.type)!;
 const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
 const showToc = toc.filter((h) => h.depth === 2).length >= 3;
-const related = preview ? [] : relatedPosts(post, all);
+const series = preview ? undefined : nextInSeries(post, all);
+const related = preview ? [] : relatedPosts(post, all, 4).filter((p) => p.id !== series?.next.id).slice(0, 3);
 const idx = all.findIndex((p) => p.id === post.id);
 const newer = idx > 0 ? all[idx - 1] : undefined;
 const older = idx >= 0 && idx < all.length - 1 ? all[idx + 1] : undefined;
@@ -69,6 +70,14 @@ const examName = d.tags.map((t) => EXAM_NAMES[t]).find(Boolean);
   )}
 
   <div class="prose"><Content /></div>
+
+  {series && (
+    <section class="series-next" data-pagefind-ignore>
+      <h2 class="section-title">次に読む</h2>
+      <p class="series-name">{series.wrapped ? `シリーズ「${series.name}」の最初の記事に戻る` : `シリーズ「${series.name}」の${series.index + 1}本目（全${series.total}本）`}</p>
+      <PostList posts={[series.next]} />
+    </section>
+  )}
 
   <aside class="author" data-pagefind-ignore>
     <span class="author-mark" aria-hidden="true"></span>

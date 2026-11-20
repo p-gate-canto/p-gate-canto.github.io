@@ -226,6 +226,8 @@ a:hover { color: var(--accent); }
 .pager a span { display: block; font-size: 12px; font-weight: 400; color: var(--muted); margin-bottom: 2px; }
 .pager-next { text-align: right; }
 .related { margin-bottom: 48px; }
+.series-next { margin: 40px 0 0; }
+.series-name { margin: -8px 0 10px; font-size: 13px; font-weight: 700; color: var(--accent); }
 /* search (Pagefind) */
 #search { --pagefind-ui-primary: #4f9a32; --pagefind-ui-text: #0b1820; --pagefind-ui-background: #ffffff; --pagefind-ui-border: #d9dde2; --pagefind-ui-tag: #eef0f3; --pagefind-ui-border-radius: 0; --pagefind-ui-font: inherit; }
 
