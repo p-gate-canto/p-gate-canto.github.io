@@ -3,7 +3,7 @@ title: ファイブフォース分析とは？5つの競争要因・7つの参�
 slug: five-forces
 description: ファイブフォース分析は、業界の収益性を左右する5つの競争要因（業界内の競争・新規参入・代替品・売り手・買い手）を分析する方法です。それぞれの力が強くなる条件、ポーターが挙げた7つの参入障壁、業界構造の5つのタイプ、中小企業での使い方、試験のポイントを整理します。
 type: explainer
-category: competitive-strategy
+category: strategy
 topic: industry-analysis
 tags:
 - 診断士受験生向け

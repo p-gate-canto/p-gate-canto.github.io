@@ -4,7 +4,7 @@ slug: 3c-analysis
 description: 3C分析は、顧客（Customer）・競合（Competitor）・自社（Company）の3つの視点で事業環境を整理し、成功のカギ（KSF）を見つける方法です。提唱者と背景、分析項目、進める順番、飲食店の例、SWOT・4Pへのつなげ方を整理します。
 type: explainer
 category: marketing
-topic: stp
+topic: market-analysis
 tags:
 - 経営層向け
 - マーケ・営業向け

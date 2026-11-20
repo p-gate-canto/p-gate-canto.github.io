@@ -3,8 +3,8 @@ title: サイモンの意思決定プロセスとアンゾフの意思決定の3
 slug: decision-making-simon-ansoff
 description: サイモンは意思決定を「情報・設計・選択・検討」の4つの活動に分け、人の合理性には限界があるという「限定合理性」を示しました。アンゾフは意思決定を戦略的・管理的・業務的の3つに分類しました。定型的・非定型的意思決定、価値前提と事実前提、試験のポイント、実務での使い方まで整理します。
 type: explainer
-category: philosophy
-topic: judgment-axis
+category: strategy
+topic: judgment
 tags:
 - 診断士受験生向け
 exam:

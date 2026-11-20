@@ -9,7 +9,7 @@ const m = midOf(mid)!;
   {no && <span class="toc-no">{no}</span>}
   <span class="toc-body">
     <strong>{m.label}</strong>
-    <span class="toc-en">{m.topics.map((t) => t.label).slice(0, 3).join('・')}など</span>
+    <span class="toc-en">{m.desc}</span>
     <span class="card-meta"><span>{m.topics.length}項目</span><Count n={count} /></span>
   </span>
 </a>

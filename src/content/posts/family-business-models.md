@@ -4,7 +4,7 @@ slug: family-business-models
 description: ファミリービジネス（同族会社・オーナー企業）を理解するための代表的な枠組みが、スリー・サークル・モデルと4Cモデルです。所有・事業・家族の3つの円と7つの立場、ファミリービジネスの強みと弱み、4つのC、事業承継での使い方と事業承継税制の期限を整理します。
 type: explainer
 category: succession
-topic: family-succession
+topic: family-business
 tags:
 - 経営層向け
 - 承継期

@@ -3,8 +3,8 @@ title: 源泉徴収票と支払調書の違いは？対象・渡す相手・提�
 slug: gensen-choshuhyo-vs-shiharai-chosho
 description: 源泉徴収票は給与や退職金などを支払ったとき、支払調書は報酬や家賃などを支払ったときに作る書類です。本人に渡す義務の有無、税務署への提出基準、令和8年分から始まる源泉徴収票の「みなし提出」まで整理します。
 type: comparison
-category: personal-tax
-topic: income-tax
+category: tax
+topic: withholding
 tags:
 - 経理担当者向け
 - 実務家向け

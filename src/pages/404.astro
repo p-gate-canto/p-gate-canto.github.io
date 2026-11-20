@@ -9,9 +9,9 @@ import { url } from '../consts';
     // 画面を描く前に実行し、「ページが見つかりません」が一瞬見えないようにする（ヘッダーだけ残し、本文とフッターを隠す）
     (function () {
       var OLD = {
-        strategy: '/work/corporate-strategy/', finance: '/work/finance/', tax: '/work/corporate-tax/',
-        bizdev: '/work/new-business/', ma: '/work/ma/', marketing: '/work/marketing/', hr: '/work/hr/',
-        dx: '/work/dx/', risk: '/work/governance/', study: '/learning/', self: '/life/', work: '/life/',
+        strategy: '/work/strategy/', finance: '/work/finance/', tax: '/work/tax/',
+        bizdev: '/work/innovation/', ma: '/work/ma/', marketing: '/work/marketing/', hr: '/work/hr/',
+        dx: '/work/dx/', risk: '/work/strategy/', study: '/life/study/', self: '/life/', work: '/life/',
       };
       var p = location.pathname;
       var n = p.replace(/^\/zeirishi-shiori(?=\/|$)/, '') || '/';
@@ -30,7 +30,7 @@ import { url } from '../consts';
     <div class="wrap">
       <div class="cats">
         <a class="cat" href={url('/')}><strong>トップページ</strong><span class="cat-desc">新着記事と、読む人別の入口</span></a>
-        <a class="cat" href={url('/work/')}><strong>WORK</strong><span class="cat-desc">経営・財務・税務など20分野の地図</span></a>
+        <a class="cat" href={url('/work/')}><strong>WORK</strong><span class="cat-desc">経営戦略・税務・人事労務など13分野の地図</span></a>
         <a class="cat" href={url('/search/')}><strong>サイト内検索</strong><span class="cat-desc">キーワードで記事を探す</span></a>
       </div>
     </div>

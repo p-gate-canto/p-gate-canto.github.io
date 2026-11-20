@@ -3,8 +3,8 @@ title: 魔の川・死の谷・ダーウィンの海とは？研究から産業�
 slug: valley-of-death
 description: 新しい技術が研究から事業になり、産業として定着するまでには「魔の川」「死の谷」「ダーウィンの海」という3つの障壁があるとされます。それぞれの意味、障壁が生まれる理由、乗り越えるための考え方と公的支援、ステージゲート法、試験のポイントを整理します。
 type: glossary
-category: new-business
-topic: commercialization
+category: innovation
+topic: product-development
 tags:
 - 診断士受験生向け
 exam:

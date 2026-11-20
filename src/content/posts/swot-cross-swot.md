@@ -3,7 +3,7 @@ title: SWOT分析とクロスSWOT分析のやり方｜4つの要素・4つの戦
 slug: swot-cross-swot
 description: SWOT分析は、自社の強み・弱み（内部環境）と、機会・脅威（外部環境）を整理する方法です。クロスSWOT分析で組み合わせると具体的な打ち手になります。要素の洗い出し方、4つの戦略、建設会社の記入例、補助金の事業計画書での使い方を整理します。
 type: explainer
-category: competitive-strategy
+category: strategy
 topic: industry-analysis
 tags:
 - 経営層向け

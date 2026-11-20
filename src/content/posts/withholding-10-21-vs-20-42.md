@@ -3,8 +3,8 @@ title: 10.21%と20.42%の違いは？報酬・料金の源泉徴収は「100万�
 slug: withholding-10-21-vs-20-42
 description: 税理士報酬や原稿料などを個人に支払うときの源泉徴収税率は、1回の支払いが100万円以下なら10.21%、100万円を超える部分は20.42%です。計算式、消費税の扱い、納付期限、よくある間違いを整理します。
 type: comparison
-category: personal-tax
-topic: income-tax
+category: tax
+topic: withholding
 tags:
 - 経理担当者向け
 - 経営層向け

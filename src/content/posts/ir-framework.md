@@ -3,7 +3,8 @@ title: I-Rフレームワークとは？グローバル・インターナショ�
 slug: ir-framework
 description: I-Rフレームワークは、海外事業を「グローバル統合（Integration）」と「現地適応（Responsiveness）」の2軸で整理する考え方です。国際経営の4つの類型の違いを、本社と現地法人の関係、向いている業種、中小企業の海外展開での使い方、試験のポイントとあわせて整理します。
 type: comparison
-category: corporate-strategy
+category: strategy
+topic: corporate-strategy
 tags:
 - 診断士受験生向け
 exam:

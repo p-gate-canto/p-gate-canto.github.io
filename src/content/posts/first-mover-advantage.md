@@ -3,8 +3,8 @@ title: 先発優位と後発優位の違い｜最初に参入するメリット�
 slug: first-mover-advantage
 description: 先発優位は最初に市場へ参入した企業が持つ優位性、後発優位は先発企業の動きを見てから参入する企業が持つ優位性です。それぞれの源泉、先発者が不利になる理由、どちらを選ぶかの判断軸、中小企業での使い方、試験のポイントを整理します。
 type: comparison
-category: competitive-strategy
-topic: positioning
+category: strategy
+topic: competitive-strategy
 tags:
 - 診断士受験生向け
 exam:

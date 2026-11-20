@@ -3,8 +3,8 @@ title: イノベーションの種類と製品アーキテクチャ｜A-Uモデ�
 slug: innovation-types-au-model
 description: イノベーションは、プロダクトとプロセス、インクリメンタルとラディカル、持続的と破壊的、クローズドとオープンなどに分類されます。シュンペーターの新結合、製品アーキテクチャ、A-Uモデル、技術S字カーブ、イノベーションのジレンマ、中小企業での使い方、試験のポイントを整理します。
 type: explainer
-category: new-business
-topic: commercialization
+category: innovation
+topic: product-development
 tags:
 - 診断士受験生向け
 exam:

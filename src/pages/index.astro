@@ -98,21 +98,13 @@ const readerGroups = [
   <section class="section">
     <div class="wrap">
       <h2 class="section-title">分野から探す</h2>
-      <p class="section-lead">仕事（WORK）・学び（LEARNING）・暮らしと働き方（LIFE）の3つの柱で整理しています。</p>
-      <div class="cats cats-3">
-        {PILLARS.map((p) => (
-          <a class="cat" href={pillarUrl(p.key)}>
-            <span class="cat-en">{p.en}</span>
-            <strong>{p.label}</strong>
-            <span class="cat-desc">{p.desc}</span>
-            <span class="card-meta"><span>{MIDS.filter((m) => m.pillar === p.key).length}分野</span><Count n={counts[`pillar:${p.key}`]} /></span>
-          </a>
-        ))}
-      </div>
-      <div class="home-workmap">
-        <WorkMap counts={counts} compact />
-      </div>
-      <p class="more"><a href={pillarUrl('work')}>WORKの全分野を見る →</a></p>
+      <p class="section-lead">仕事（WORK）の13分野と、学びと働き方（LIFE）の4分野に分けています。</p>
+      {PILLARS.map((p) => (
+        <section class="layer">
+          <h3 class="layer-head"><a href={pillarUrl(p.key)}>{p.en}</a><span class="layer-q">{p.label}</span><Count n={counts[`pillar:${p.key}`]} /></h3>
+          <WorkMap counts={counts} pillar={p.key} compact />
+        </section>
+      ))}
     </div>
   </section>
 

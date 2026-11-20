@@ -3,7 +3,7 @@ title: 交際費の「1人1万円」基準と中小法人の800万円枠｜会�
 slug: entertainment-expenses-10000yen
 description: 社外の人との飲食は、1人当たり1万円以下なら書類を残すことで交際費から除けます。中小法人は交際費を年800万円まで損金にできます。1万円基準の要件、800万円と接待飲食費50%の選び方、会議費・福利厚生費との違い、特例の期限を整理します。
 type: explainer
-category: corporate-tax
+category: tax
 topic: corporate-income-tax
 tags:
 - 経営層向け

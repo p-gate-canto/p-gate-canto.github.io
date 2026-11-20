@@ -3,7 +3,7 @@ title: 赤字の年にやっておくこと｜欠損金の繰越控除（10年�
 slug: loss-carryforward-carryback
 description: 法人が赤字になった年の欠損金は、青色申告なら10年間繰り越して将来の黒字と相殺できます。中小企業者等は、前期に納めた法人税を取り戻す繰戻し還付も使えます。それぞれの要件、計算方法、期限内申告の重要性、地方税の扱いを整理します。
 type: explainer
-category: corporate-tax
+category: tax
 topic: corporate-income-tax
 tags:
 - 経営層向け

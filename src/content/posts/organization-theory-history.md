@@ -3,7 +3,7 @@ title: 組織論の変遷を整理｜テイラー・ファヨール・ウェー�
 slug: organization-theory-history
 description: 組織論は、古典的管理論（テイラー・ファヨール・ウェーバー）から人間関係論（メイヨー）、近代的組織論（バーナード、サイモン）、コンティンジェンシー理論へと発展しました。それぞれの主張と批判、ファヨールの14の管理原則、組織設計の5原則、試験のポイント、中小企業での使い方まで整理します。
 type: explainer
-category: hr
+category: organization
 topic: org-design
 tags:
 - 診断士受験生向け

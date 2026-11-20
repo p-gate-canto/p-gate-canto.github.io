@@ -62,7 +62,7 @@ const sitemapSerialize = (item) => {
 const sitemapFilter = (page) => {
   const path = new URL(page).pathname.replace(/^\/|\/$/g, '');
   if (/^(drafts|tags|search)(\/|$)/.test(path)) return false;
-  if (/^(work|learning|life)\/[\w-]+/.test(path) || /^types\/[\w-]+/.test(path)) return used.has(path);
+  if (/^(work|life)\/[\w-]+/.test(path) || /^types\/[\w-]+/.test(path)) return used.has(path);
   return true;
 };
 
@@ -95,6 +95,8 @@ function formatOutput() {
   };
 }
 
+import classRedirects from './src/data/redirects.json' with { type: 'json' };
+
 export default defineConfig({
   site: 'https://p-gate-canto.github.io',
   trailingSlash: 'always',
@@ -107,10 +109,12 @@ export default defineConfig({
     '/contents': '/work/',
     '/tools': '/types/tool/',
     '/category/self': '/life/',
-    '/category/self/mindset': '/life/mindset/',
+    '/category/self/mindset': '/life/career/mindset/',
     '/category/work': '/life/',
-    '/category/tax': '/work/corporate-tax/',
-    '/category/strategy': '/work/corporate-strategy/',
+    '/category/tax': '/work/tax/',
+    '/category/strategy': '/work/strategy/',
+    // 2026/11 の分類の作り直し（4層20分野＋LEARNING → WORK 13分野・LIFE 4分野）で変わった分類ページのURL
+    ...Object.fromEntries(Object.entries(classRedirects).map(([from, to]) => [from.replace(/\/$/, ''), to])),
   },
   // CSSはHTMLの中に埋め込む。CSSのファイルを別に読まないので最初の表示が速く、公開直後に古いCSSと新しいHTMLが混ざって崩れることもない
   build: { assets: 'assets', inlineStylesheets: 'always' },

@@ -3,7 +3,7 @@ title: 決算賞与を今期の損金にする3つの要件｜通知・1か月�
 slug: year-end-bonus-deduction
 description: 期末に決めて翌期に払う決算賞与は、法人税法施行令72条の3の要件を満たせば、支払う前の今期の損金にできます。各人別・全員への通知、期末の翌日から1か月以内の支払、損金経理の3要件と、支給日在籍要件を付けると要件を欠く理由、社会保険と源泉徴収の扱いを解説します。
 type: explainer
-category: corporate-tax
+category: tax
 topic: corporate-income-tax
 tags:
 - 経営層向け

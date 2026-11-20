@@ -3,8 +3,8 @@ title: 限界利益と損益分岐点の計算方法｜例題で分かる「あ�
 slug: contribution-margin-breakeven
 description: 限界利益は売上から変動費を差し引いた利益、損益分岐点は利益がちょうどゼロになる売上高です。計算式と例題、目標利益を達成する売上の求め方、安全余裕率の見方を整理します。
 type: explainer
-category: turnaround
-topic: breakeven
+category: accounting
+topic: management-accounting
 tags:
 - 経営層向け
 - マーケ・営業向け

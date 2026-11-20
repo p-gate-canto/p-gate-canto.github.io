@@ -3,8 +3,8 @@ title: エフェクチュエーションとは？熟達した起業家の5つの
 slug: effectuation
 description: エフェクチュエーションは、熟達した起業家に共通する考え方を体系化したものです。生まれた背景、目的から逆算するコーゼーションとの違い、手中の鳥・許容可能な損失・クレイジーキルト・レモネード・飛行機のパイロットの5つの原則、創業や新規事業での使い方を整理します。
 type: explainer
-category: new-business
-topic: business-planning
+category: innovation
+topic: new-business
 tags:
 - 経営層向け
 - 創業期

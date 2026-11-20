@@ -3,7 +3,7 @@ title: 経営理念・ミッション・ビジョン・バリューの違いは�
 slug: mission-vision-value
 description: 経営理念、ミッション、ビジョン、バリューは、どれも会社の「よりどころ」を表す言葉ですが、答える問いが違います。それぞれの意味と違い、中小企業での作る順番、よくある失敗を整理します。
 type: comparison
-category: philosophy
+category: strategy
 topic: mvv
 tags:
 - 経営層向け

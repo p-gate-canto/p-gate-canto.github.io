@@ -3,8 +3,8 @@ title: 源泉所得税の納期の特例とは？年2回（7月10日・1月20日
 slug: gensen-noki-tokurei
 description: 給与を支払う人が常時10人未満の会社は、源泉所得税の納付を年2回にまとめられます。納期限、申請の手続き、対象になる支払い・ならない支払い、10人以上になったときの届出を整理します。
 type: explainer
-category: personal-tax
-topic: income-tax
+category: tax
+topic: withholding
 tags:
 - 経理担当者向け
 - 経営層向け

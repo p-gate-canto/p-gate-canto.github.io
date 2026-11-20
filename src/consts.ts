@@ -16,11 +16,12 @@ export const SITE_FEATURED: string[] = (site as { featured?: string[] }).feature
 
 // 分類（大分類・中カテゴリー・小カテゴリー・タグ・記事タイプ）は src/data/taxonomy.json で定義する
 export type Topic = { slug: string; label: string };
-export type Mid = { key: string; pillar: string; layer: string | null; label: string; topics: Topic[] };
+export type Mid = { key: string; pillar: string; label: string; desc: string; topics: Topic[] };
 
 export const PILLARS = taxonomy.pillars;
-export const LAYERS = taxonomy.layers;
 export const MIDS = taxonomy.mids as Mid[];
+/** 分野の番号（柱ごとに 01〜） */
+export const midNo = (key: string) => { const m = midOf(key); return m ? String(MIDS.filter((x) => x.pillar === m.pillar).indexOf(m) + 1).padStart(2, '0') : ''; };
 export const TAG_GROUPS = taxonomy.tagGroups;
 export const ALL_TAGS = TAG_GROUPS.flatMap((g) => g.tags);
 export const READERS = taxonomy.readers;

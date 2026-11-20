@@ -3,8 +3,8 @@ title: ドメインと多角化戦略の種類｜エーベルの3次元・アン
 slug: domain-diversification
 description: ドメインは「どの領域で事業を行うか」の定義です。物理的定義と機能的定義、マーケティング・マイオピア、エーベルの3次元、アンゾフの成長マトリクス、多角化の動機と4類型、ルメルトの研究、内部成長と外部成長、試験のポイントと中小企業での使い方を整理します。
 type: explainer
-category: corporate-strategy
-topic: diversification
+category: strategy
+topic: corporate-strategy
 tags:
 - 診断士受験生向け
 exam:

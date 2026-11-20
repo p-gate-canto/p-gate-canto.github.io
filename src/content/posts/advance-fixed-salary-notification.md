@@ -3,7 +3,7 @@ title: 事前確定届出給与の届出期限はいつ？期限の数え方・�
 slug: advance-fixed-salary-notification
 description: 役員賞与を損金にするには、事前確定届出給与の届出を期限までに出し、届け出たとおりに支給する必要があります。届出期限の数え方（株主総会から1か月・期首から4か月・新設法人は2か月）、届出書の書き方、変更届出、社会保険と源泉徴収の扱いを整理します。
 type: explainer
-category: corporate-tax
+category: tax
 topic: officer-pay
 tags:
 - 経営層向け

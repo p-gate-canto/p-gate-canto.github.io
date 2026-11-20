@@ -3,7 +3,7 @@ title: 損金と経費の違いは？「会計の費用」と「税務の損金�
 slug: sonkin-vs-keihi
 description: 経費は日常的な言葉で、法人税の計算では「損金」、会計では「費用」と呼びます。会計の費用がそのまま損金になるとは限りません。ずれが生まれる理由と、交際費・役員給与・減価償却などの代表例を整理します。
 type: comparison
-category: corporate-tax
+category: tax
 topic: corporate-income-tax
 tags:
 - 経営層向け

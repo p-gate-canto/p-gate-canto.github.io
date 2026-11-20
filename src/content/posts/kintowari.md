@@ -3,8 +3,8 @@ title: 法人住民税の均等割とは？赤字でもかかる税金の金額�
 slug: kintowari
 description: 法人住民税の均等割は、利益に関係なく、資本金等の額と従業者数で決まる定額の税金です。赤字でも毎年かかります。標準税率での金額表、判定の基準、月割の計算、資本金を決めるときの注意点を整理します。
 type: glossary
-category: corporate-tax
-topic: corporate-income-tax
+category: tax
+topic: local-tax
 tags:
 - 経営層向け
 - 経理担当者向け

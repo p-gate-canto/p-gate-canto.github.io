@@ -4,137 +4,357 @@
       "key": "work",
       "en": "WORK",
       "label": "仕事",
-      "desc": "経営・財務・税務・人事・DXなど、20分野の実務の論点"
-    },
-    {
-      "key": "learning",
-      "en": "LEARNING",
-      "label": "学び",
-      "desc": "資格の勉強法・学び方・学び直し"
+      "desc": "経営戦略・税務・人事労務など、13分野の実務の論点"
     },
     {
       "key": "life",
       "en": "LIFE",
-      "label": "暮らしと働き方",
-      "desc": "時間・習慣・体調・仕事術・キャリアなど、自己管理と働き方"
-    }
-  ],
-  "layers": [
-    {
-      "key": "philosophy",
-      "no": "0",
-      "label": "理念",
-      "question": "なぜ存在するか"
-    },
-    {
-      "key": "corporate",
-      "no": "1",
-      "label": "企業戦略",
-      "question": "どの事業で戦うか"
-    },
-    {
-      "key": "competitive",
-      "no": "2",
-      "label": "競争戦略",
-      "question": "その事業でどう勝つか"
-    },
-    {
-      "key": "functional",
-      "no": "3",
-      "label": "機能別戦略",
-      "question": "各部門がどう支えるか"
+      "label": "学びと働き方",
+      "desc": "勉強法・学び直し・仕事術・キャリアなど、学び方と働き方"
     }
   ],
   "mids": [
     {
-      "key": "philosophy",
+      "key": "strategy",
       "pillar": "work",
-      "layer": "philosophy",
-      "label": "経営理念・ビジョン",
+      "label": "経営戦略",
+      "desc": "経営理念・全社戦略・事業戦略・経営計画・ガバナンス",
       "topics": [
         {
           "slug": "mvv",
-          "label": "MVV策定"
+          "label": "経営理念・ビジョン"
         },
         {
-          "slug": "credo",
-          "label": "行動指針・クレド"
-        },
-        {
-          "slug": "philosophy-penetration",
-          "label": "理念浸透"
-        },
-        {
-          "slug": "judgment-axis",
+          "slug": "judgment",
           "label": "経営者の判断軸"
+        },
+        {
+          "slug": "corporate-strategy",
+          "label": "全社戦略・多角化"
+        },
+        {
+          "slug": "competitive-strategy",
+          "label": "事業戦略・競争優位"
+        },
+        {
+          "slug": "industry-analysis",
+          "label": "環境分析"
+        },
+        {
+          "slug": "management-plan",
+          "label": "経営計画・KPI"
+        },
+        {
+          "slug": "turnaround",
+          "label": "事業再生・収益改善"
+        },
+        {
+          "slug": "governance",
+          "label": "ガバナンス・CSR"
         }
       ]
     },
     {
-      "key": "management-plan",
+      "key": "marketing",
       "pillar": "work",
-      "layer": "corporate",
-      "label": "経営計画",
+      "label": "マーケティング",
+      "desc": "市場・顧客・ブランド・価格・集客・販路",
       "topics": [
         {
-          "slug": "midterm-plan",
-          "label": "中期経営計画"
+          "slug": "market-analysis",
+          "label": "市場・顧客分析"
         },
         {
-          "slug": "kpi",
-          "label": "経営目標・KPI設計"
+          "slug": "branding",
+          "label": "ブランド"
         },
         {
-          "slug": "business-plan",
-          "label": "事業計画書"
+          "slug": "pricing",
+          "label": "価格"
         },
         {
-          "slug": "plan-operation",
-          "label": "計画の運用・経営会議"
+          "slug": "promotion",
+          "label": "集客・販促"
+        },
+        {
+          "slug": "channel",
+          "label": "販路"
         }
       ]
     },
     {
-      "key": "corporate-strategy",
+      "key": "sales",
       "pillar": "work",
-      "layer": "corporate",
-      "label": "企業戦略",
+      "label": "営業",
+      "desc": "営業組織・営業プロセス・顧客開拓・販売力",
       "topics": [
         {
-          "slug": "domain",
-          "label": "ドメイン設定"
+          "slug": "sales-organization",
+          "label": "営業組織"
         },
         {
-          "slug": "growth-strategy",
-          "label": "成長戦略（製品×市場）"
+          "slug": "sales-process",
+          "label": "営業プロセス"
         },
         {
-          "slug": "diversification",
-          "label": "多角化"
+          "slug": "prospecting",
+          "label": "顧客開拓"
         },
         {
-          "slug": "portfolio",
-          "label": "事業ポートフォリオ"
+          "slug": "customer-management",
+          "label": "顧客管理・販売力"
+        }
+      ]
+    },
+    {
+      "key": "organization",
+      "pillar": "work",
+      "label": "組織",
+      "desc": "組織設計・組織開発・組織風土",
+      "topics": [
+        {
+          "slug": "org-design",
+          "label": "組織設計"
         },
         {
-          "slug": "vertical-integration",
-          "label": "垂直統合・外部化"
+          "slug": "org-development",
+          "label": "組織開発"
         },
         {
-          "slug": "exit",
-          "label": "撤退・縮小"
+          "slug": "culture",
+          "label": "組織風土"
+        }
+      ]
+    },
+    {
+      "key": "hr",
+      "pillar": "work",
+      "label": "人事・労務",
+      "desc": "採用・育成・評価・報酬・社会保険・給与計算・就業規則",
+      "topics": [
+        {
+          "slug": "recruiting",
+          "label": "採用・配置"
+        },
+        {
+          "slug": "talent-development",
+          "label": "育成"
+        },
+        {
+          "slug": "evaluation",
+          "label": "評価・報酬"
+        },
+        {
+          "slug": "retention",
+          "label": "人材定着"
+        },
+        {
+          "slug": "social-insurance",
+          "label": "社会保険"
+        },
+        {
+          "slug": "payroll",
+          "label": "給与計算"
+        },
+        {
+          "slug": "work-rules",
+          "label": "就業規則・労働時間"
+        }
+      ]
+    },
+    {
+      "key": "accounting",
+      "pillar": "work",
+      "label": "会計",
+      "desc": "財務会計・管理会計・決算・経営分析",
+      "topics": [
+        {
+          "slug": "financial-statements",
+          "label": "決算書の読み方"
+        },
+        {
+          "slug": "management-accounting",
+          "label": "管理会計・損益分岐点"
+        },
+        {
+          "slug": "budgeting",
+          "label": "予算・業績管理"
+        },
+        {
+          "slug": "closing",
+          "label": "決算・経理実務"
+        }
+      ]
+    },
+    {
+      "key": "tax",
+      "pillar": "work",
+      "label": "税務",
+      "desc": "法人税・消費税・所得税・源泉徴収・年末調整・相続税",
+      "topics": [
+        {
+          "slug": "corporate-income-tax",
+          "label": "法人税"
+        },
+        {
+          "slug": "local-tax",
+          "label": "法人住民税・事業税"
+        },
+        {
+          "slug": "consumption-tax",
+          "label": "消費税・インボイス"
+        },
+        {
+          "slug": "officer-pay",
+          "label": "役員報酬・配当"
+        },
+        {
+          "slug": "withholding",
+          "label": "源泉徴収・年末調整"
+        },
+        {
+          "slug": "income-tax",
+          "label": "所得税・確定申告"
+        },
+        {
+          "slug": "inheritance-tax",
+          "label": "相続税・贈与税"
+        },
+        {
+          "slug": "tax-planning",
+          "label": "節税・タックスプランニング"
+        },
+        {
+          "slug": "tax-audit",
+          "label": "税務調査"
+        }
+      ]
+    },
+    {
+      "key": "finance",
+      "pillar": "work",
+      "label": "財務",
+      "desc": "資金調達・投資・資本政策・財務体質・補助金",
+      "topics": [
+        {
+          "slug": "fundraising",
+          "label": "資金調達・融資"
+        },
+        {
+          "slug": "investment",
+          "label": "設備投資"
+        },
+        {
+          "slug": "capital-policy",
+          "label": "資本政策"
+        },
+        {
+          "slug": "financial-health",
+          "label": "財務体質"
+        },
+        {
+          "slug": "subsidy",
+          "label": "補助金・助成金"
+        }
+      ]
+    },
+    {
+      "key": "operations",
+      "pillar": "work",
+      "label": "オペレーション",
+      "desc": "生産・品質・在庫・物流・業務プロセス・生産性",
+      "topics": [
+        {
+          "slug": "production",
+          "label": "生産・品質"
+        },
+        {
+          "slug": "inventory",
+          "label": "在庫・物流"
+        },
+        {
+          "slug": "business-process",
+          "label": "業務プロセス・生産性"
+        }
+      ]
+    },
+    {
+      "key": "dx",
+      "pillar": "work",
+      "label": "DX",
+      "desc": "IT・AI・デジタル化・システム・データ活用",
+      "topics": [
+        {
+          "slug": "digitalization",
+          "label": "デジタル化・IT"
+        },
+        {
+          "slug": "ai",
+          "label": "AI活用"
+        },
+        {
+          "slug": "systems",
+          "label": "業務システム"
+        },
+        {
+          "slug": "data",
+          "label": "データ活用"
+        }
+      ]
+    },
+    {
+      "key": "innovation",
+      "pillar": "work",
+      "label": "イノベーション",
+      "desc": "新規事業・商品開発・ビジネスモデル変革",
+      "topics": [
+        {
+          "slug": "new-business",
+          "label": "新規事業"
+        },
+        {
+          "slug": "product-development",
+          "label": "商品開発・技術経営"
+        },
+        {
+          "slug": "business-model",
+          "label": "ビジネスモデル"
+        }
+      ]
+    },
+    {
+      "key": "succession",
+      "pillar": "work",
+      "label": "事業承継",
+      "desc": "後継者・株式承継・承継計画・承継スキーム",
+      "topics": [
+        {
+          "slug": "family-business",
+          "label": "後継者・親族内承継"
+        },
+        {
+          "slug": "stock-succession",
+          "label": "株式承継・自社株評価"
+        },
+        {
+          "slug": "succession-plan",
+          "label": "承継計画"
+        },
+        {
+          "slug": "succession-scheme",
+          "label": "承継スキーム"
         }
       ]
     },
     {
       "key": "ma",
       "pillar": "work",
-      "layer": "corporate",
-      "label": "M&A・組織再編",
+      "label": "M&A",
+      "desc": "M&A戦略・デューデリジェンス・企業価値評価・スキーム・PMI",
       "topics": [
         {
           "slug": "ma-strategy",
-          "label": "M&A戦略・候補先探索"
+          "label": "M&A戦略"
         },
         {
           "slug": "due-diligence",
@@ -150,863 +370,103 @@
         },
         {
           "slug": "pmi",
-          "label": "PMI"
-        },
-        {
-          "slug": "reorganization",
-          "label": "組織再編・持株会社化"
+          "label": "PMI・組織再編"
         }
       ]
     },
     {
-      "key": "succession",
-      "pillar": "work",
-      "layer": "corporate",
-      "label": "事業承継",
-      "topics": [
-        {
-          "slug": "succession-plan",
-          "label": "承継計画"
-        },
-        {
-          "slug": "family-succession",
-          "label": "親族内承継"
-        },
-        {
-          "slug": "employee-succession",
-          "label": "従業員承継"
-        },
-        {
-          "slug": "third-party-succession",
-          "label": "第三者承継"
-        },
-        {
-          "slug": "successor-development",
-          "label": "後継者育成"
-        }
-      ]
-    },
-    {
-      "key": "governance",
-      "pillar": "work",
-      "layer": "corporate",
-      "label": "ガバナンス・リスク管理",
-      "topics": [
-        {
-          "slug": "decision-authority",
-          "label": "意思決定・権限設計"
-        },
-        {
-          "slug": "internal-control",
-          "label": "内部統制"
-        },
-        {
-          "slug": "compliance",
-          "label": "コンプライアンス"
-        },
-        {
-          "slug": "fraud-audit",
-          "label": "不正防止・内部監査"
-        },
-        {
-          "slug": "bcp",
-          "label": "BCP"
-        },
-        {
-          "slug": "security",
-          "label": "情報セキュリティ"
-        }
-      ]
-    },
-    {
-      "key": "competitive-strategy",
-      "pillar": "work",
-      "layer": "competitive",
-      "label": "競争戦略",
-      "topics": [
-        {
-          "slug": "industry-analysis",
-          "label": "業界・競合分析"
-        },
-        {
-          "slug": "competitive-advantage",
-          "label": "競争優位（差別化・コスト・集中）"
-        },
-        {
-          "slug": "positioning",
-          "label": "ポジショニング"
-        },
-        {
-          "slug": "vrio",
-          "label": "強みの分析（VRIO）"
-        },
-        {
-          "slug": "competitive-position",
-          "label": "競争地位別戦略"
-        }
-      ]
-    },
-    {
-      "key": "new-business",
-      "pillar": "work",
-      "layer": "competitive",
-      "label": "新規事業開発",
-      "topics": [
-        {
-          "slug": "business-planning",
-          "label": "事業企画"
-        },
-        {
-          "slug": "market-validation",
-          "label": "市場調査・検証"
-        },
-        {
-          "slug": "commercialization",
-          "label": "事業化・収益計画"
-        },
-        {
-          "slug": "alliance",
-          "label": "提携・アライアンス"
-        }
-      ]
-    },
-    {
-      "key": "business-model",
-      "pillar": "work",
-      "layer": "competitive",
-      "label": "ビジネスモデル",
-      "topics": [
-        {
-          "slug": "revenue-structure",
-          "label": "収益構造"
-        },
-        {
-          "slug": "value-proposition",
-          "label": "価値提案"
-        },
-        {
-          "slug": "subscription",
-          "label": "ストック型・サブスク"
-        },
-        {
-          "slug": "platform",
-          "label": "プラットフォーム"
-        }
-      ]
-    },
-    {
-      "key": "turnaround",
-      "pillar": "work",
-      "layer": "competitive",
-      "label": "事業再生・収益改善",
-      "topics": [
-        {
-          "slug": "breakeven",
-          "label": "損益分岐点・限界利益"
-        },
-        {
-          "slug": "unprofitable-business",
-          "label": "不採算事業の見直し"
-        },
-        {
-          "slug": "cost-reduction",
-          "label": "コスト削減"
-        },
-        {
-          "slug": "rehabilitation-plan",
-          "label": "再生計画・金融支援"
-        }
-      ]
-    },
-    {
-      "key": "marketing",
-      "pillar": "work",
-      "layer": "functional",
-      "label": "マーケティング",
-      "topics": [
-        {
-          "slug": "stp",
-          "label": "STP"
-        },
-        {
-          "slug": "4p-pricing",
-          "label": "4P・価格設定"
-        },
-        {
-          "slug": "branding",
-          "label": "ブランド"
-        },
-        {
-          "slug": "web-seo",
-          "label": "Web・SEO・AIO"
-        },
-        {
-          "slug": "advertising",
-          "label": "広告"
-        },
-        {
-          "slug": "promotion",
-          "label": "販促・紹介制度"
-        }
-      ]
-    },
-    {
-      "key": "sales",
-      "pillar": "work",
-      "layer": "functional",
-      "label": "営業・顧客管理",
-      "topics": [
-        {
-          "slug": "sales-process",
-          "label": "営業プロセス"
-        },
-        {
-          "slug": "sales-kpi",
-          "label": "営業KPI・営業組織"
-        },
-        {
-          "slug": "crm-ltv",
-          "label": "CRM・LTV"
-        },
-        {
-          "slug": "proposal",
-          "label": "提案・見積"
-        }
-      ]
-    },
-    {
-      "key": "hr",
-      "pillar": "work",
-      "layer": "functional",
-      "label": "組織・人事",
-      "topics": [
-        {
-          "slug": "org-design",
-          "label": "組織設計"
-        },
-        {
-          "slug": "recruiting",
-          "label": "採用"
-        },
-        {
-          "slug": "evaluation",
-          "label": "人事評価制度"
-        },
-        {
-          "slug": "compensation",
-          "label": "賃金制度"
-        },
-        {
-          "slug": "talent-development",
-          "label": "人材育成"
-        },
-        {
-          "slug": "retention",
-          "label": "定着・エンゲージメント"
-        },
-        {
-          "slug": "culture",
-          "label": "組織風土"
-        }
-      ]
-    },
-    {
-      "key": "labor",
-      "pillar": "work",
-      "layer": "functional",
-      "label": "労務管理",
-      "topics": [
-        {
-          "slug": "work-rules",
-          "label": "就業規則"
-        },
-        {
-          "slug": "working-hours",
-          "label": "労働時間・残業"
-        },
-        {
-          "slug": "social-insurance",
-          "label": "社会保険"
-        },
-        {
-          "slug": "payroll",
-          "label": "給与計算"
-        },
-        {
-          "slug": "labor-disputes",
-          "label": "労務トラブル"
-        },
-        {
-          "slug": "labor-law-changes",
-          "label": "法改正対応"
-        }
-      ]
-    },
-    {
-      "key": "finance",
-      "pillar": "work",
-      "layer": "functional",
-      "label": "財務・資金調達",
-      "topics": [
-        {
-          "slug": "financial-policy",
-          "label": "財務方針・資本構成"
-        },
-        {
-          "slug": "bank-loans",
-          "label": "融資・金融機関対応"
-        },
-        {
-          "slug": "cash-flow",
-          "label": "資金繰り"
-        },
-        {
-          "slug": "capital-policy",
-          "label": "資本政策"
-        },
-        {
-          "slug": "financial-health",
-          "label": "財務体質改善"
-        },
-        {
-          "slug": "investment",
-          "label": "投資判断"
-        }
-      ]
-    },
-    {
-      "key": "management-accounting",
-      "pillar": "work",
-      "layer": "functional",
-      "label": "管理会計・予算",
-      "topics": [
-        {
-          "slug": "segment-profit",
-          "label": "部門別・製品別採算"
-        },
-        {
-          "slug": "budgeting",
-          "label": "予算策定"
-        },
-        {
-          "slug": "budget-control",
-          "label": "予実管理"
-        },
-        {
-          "slug": "cost-accounting",
-          "label": "原価計算・原価管理"
-        }
-      ]
-    },
-    {
-      "key": "corporate-tax",
-      "pillar": "work",
-      "layer": "functional",
-      "label": "法人税務",
-      "topics": [
-        {
-          "slug": "corporate-income-tax",
-          "label": "法人税"
-        },
-        {
-          "slug": "consumption-tax",
-          "label": "消費税・インボイス"
-        },
-        {
-          "slug": "officer-pay",
-          "label": "役員報酬"
-        },
-        {
-          "slug": "tax-planning",
-          "label": "節税・タックスプランニング"
-        },
-        {
-          "slug": "group-tax",
-          "label": "グループ・組織再編税制"
-        },
-        {
-          "slug": "international-tax",
-          "label": "国際税務"
-        },
-        {
-          "slug": "tax-audit",
-          "label": "税務調査・税務リスク"
-        }
-      ]
-    },
-    {
-      "key": "personal-tax",
-      "pillar": "work",
-      "layer": "functional",
-      "label": "個人・資産税務",
-      "topics": [
-        {
-          "slug": "income-tax",
-          "label": "所得税・確定申告"
-        },
-        {
-          "slug": "inheritance-tax",
-          "label": "相続税"
-        },
-        {
-          "slug": "gift-tax",
-          "label": "贈与税"
-        },
-        {
-          "slug": "stock-valuation",
-          "label": "自社株評価・事業承継税制"
-        },
-        {
-          "slug": "incorporation",
-          "label": "法人成り"
-        },
-        {
-          "slug": "income-split",
-          "label": "法人と個人の所得配分"
-        }
-      ]
-    },
-    {
-      "key": "dx",
-      "pillar": "work",
-      "layer": "functional",
-      "label": "DX・IT・AI",
-      "topics": [
-        {
-          "slug": "dx-strategy",
-          "label": "DX構想・IT投資"
-        },
-        {
-          "slug": "bpr",
-          "label": "業務改革（BPR）"
-        },
-        {
-          "slug": "automation",
-          "label": "業務自動化（Excel・VBA・RPA）"
-        },
-        {
-          "slug": "generative-ai",
-          "label": "生成AI活用"
-        },
-        {
-          "slug": "data-dashboard",
-          "label": "データ活用・ダッシュボード"
-        },
-        {
-          "slug": "system-implementation",
-          "label": "システム導入"
-        }
-      ]
-    },
-    {
-      "key": "subsidy",
-      "pillar": "work",
-      "layer": "functional",
-      "label": "補助金・助成金",
-      "topics": [
-        {
-          "slug": "subsidies",
-          "label": "補助金"
-        },
-        {
-          "slug": "employment-grants",
-          "label": "助成金（雇用関係）"
-        },
-        {
-          "slug": "application",
-          "label": "申請・事業計画書"
-        },
-        {
-          "slug": "post-approval",
-          "label": "採択後の手続き"
-        },
-        {
-          "slug": "subsidy-tax",
-          "label": "補助金の税務"
-        }
-      ]
-    },
-    {
-      "key": "study-method",
-      "pillar": "learning",
-      "layer": null,
-      "label": "勉強法",
-      "topics": [
-        {
-          "slug": "subject-strategy",
-          "label": "科目別の攻略"
-        },
-        {
-          "slug": "understanding-memorizing",
-          "label": "理解と暗記の使い分け"
-        },
-        {
-          "slug": "self-study",
-          "label": "独学と予備校"
-        },
-        {
-          "slug": "multiple-qualifications",
-          "label": "複数資格の並行"
-        }
-      ]
-    },
-    {
-      "key": "study-plan",
-      "pillar": "learning",
-      "layer": null,
-      "label": "学習計画",
-      "topics": [
-        {
-          "slug": "annual-plan",
-          "label": "年間・月間計画"
-        },
-        {
-          "slug": "daily-schedule",
-          "label": "1日のスケジュール"
-        },
-        {
-          "slug": "progress-tracking",
-          "label": "進捗管理"
-        },
-        {
-          "slug": "replanning",
-          "label": "計画の立て直し"
-        }
-      ]
-    },
-    {
-      "key": "memory-output",
-      "pillar": "learning",
-      "layer": null,
-      "label": "記憶とアウトプット",
-      "topics": [
-        {
-          "slug": "memorization",
-          "label": "暗記術"
-        },
-        {
-          "slug": "past-exams",
-          "label": "過去問・問題演習"
-        },
-        {
-          "slug": "review-cycle",
-          "label": "復習サイクル"
-        },
-        {
-          "slug": "written-answers",
-          "label": "記述・答案練習"
-        }
-      ]
-    },
-    {
-      "key": "reading",
-      "pillar": "learning",
-      "layer": null,
-      "label": "読書・インプット",
-      "topics": [
-        {
-          "slug": "reading-method",
-          "label": "読書法"
-        },
-        {
-          "slug": "book-reviews",
-          "label": "本の紹介"
-        },
-        {
-          "slug": "information-gathering",
-          "label": "情報収集"
-        },
-        {
-          "slug": "seminars",
-          "label": "研修・セミナー"
-        }
-      ]
-    },
-    {
-      "key": "relearning",
-      "pillar": "learning",
-      "layer": null,
-      "label": "実務の学び直し",
-      "topics": [
-        {
-          "slug": "law-updates",
-          "label": "法改正のキャッチアップ"
-        },
-        {
-          "slug": "reading-statutes",
-          "label": "条文・通達の読み方"
-        },
-        {
-          "slug": "other-professions",
-          "label": "他士業領域の学び"
-        },
-        {
-          "slug": "accounting-basics",
-          "label": "会計・数字の基礎"
-        }
-      ]
-    },
-    {
-      "key": "learning-tools",
-      "pillar": "learning",
-      "layer": null,
-      "label": "学習ツール・AI活用",
-      "topics": [
-        {
-          "slug": "study-apps",
-          "label": "学習アプリ"
-        },
-        {
-          "slug": "ai-practice",
-          "label": "AIでの問題演習"
-        },
-        {
-          "slug": "progress-tools",
-          "label": "進捗管理ツール"
-        },
-        {
-          "slug": "note-taking",
-          "label": "ノート・まとめ術"
-        }
-      ]
-    },
-    {
-      "key": "motivation",
-      "pillar": "learning",
-      "layer": null,
-      "label": "モチベーション維持",
-      "topics": [
-        {
-          "slug": "work-study-balance",
-          "label": "仕事との両立"
-        },
-        {
-          "slug": "slump",
-          "label": "スランプ対策"
-        },
-        {
-          "slug": "after-failure",
-          "label": "不合格からの立て直し"
-        },
-        {
-          "slug": "study-environment",
-          "label": "学習環境・仲間"
-        }
-      ]
-    },
-    {
-      "key": "exam-prep",
-      "pillar": "learning",
-      "layer": null,
-      "label": "試験直前・本番対策",
-      "topics": [
-        {
-          "slug": "final-weeks",
-          "label": "直前期の過ごし方"
-        },
-        {
-          "slug": "time-allocation",
-          "label": "当日の時間配分"
-        },
-        {
-          "slug": "exam-condition",
-          "label": "体調・メンタル調整"
-        },
-        {
-          "slug": "after-passing",
-          "label": "合格後の手続き"
-        }
-      ]
-    },
-    {
-      "key": "time-management",
+      "key": "study",
       "pillar": "life",
-      "layer": null,
-      "label": "時間管理",
+      "label": "勉強法・資格",
+      "desc": "勉強法・学習計画・記憶・試験対策",
       "topics": [
         {
-          "slug": "task-management",
-          "label": "タスク管理"
+          "slug": "study-method",
+          "label": "勉強法"
         },
         {
-          "slug": "schedule-design",
-          "label": "スケジュール設計"
+          "slug": "study-plan",
+          "label": "学習計画"
         },
         {
-          "slug": "focus-time",
-          "label": "集中時間の確保"
+          "slug": "memory-output",
+          "label": "記憶とアウトプット"
         },
         {
-          "slug": "busy-season",
-          "label": "繁忙期の乗り切り方"
+          "slug": "exam-prep",
+          "label": "試験対策・本番"
+        },
+        {
+          "slug": "motivation",
+          "label": "モチベーション"
         }
       ]
     },
     {
-      "key": "habits",
+      "key": "learn",
       "pillar": "life",
-      "layer": null,
-      "label": "習慣化",
+      "label": "学び直し・読書",
+      "desc": "実務の学び直し・読書・学習ツール",
       "topics": [
         {
-          "slug": "morning-routine",
-          "label": "朝の習慣"
+          "slug": "relearning",
+          "label": "実務の学び直し"
         },
         {
-          "slug": "keeping-habits",
-          "label": "習慣の続け方"
+          "slug": "reading",
+          "label": "読書・インプット"
         },
         {
-          "slug": "reflection",
-          "label": "振り返り・日記"
-        },
-        {
-          "slug": "quitting-habits",
-          "label": "やめる習慣"
+          "slug": "learning-tools",
+          "label": "学習ツール・AI活用"
         }
       ]
     },
     {
-      "key": "health",
+      "key": "workstyle",
       "pillar": "life",
-      "layer": null,
-      "label": "体調管理",
+      "label": "仕事術・習慣",
+      "desc": "時間管理・習慣化・生産性・体調管理",
       "topics": [
         {
-          "slug": "sleep",
-          "label": "睡眠"
+          "slug": "time-management",
+          "label": "時間管理"
         },
         {
-          "slug": "exercise",
-          "label": "運動"
+          "slug": "habits",
+          "label": "習慣化"
         },
         {
-          "slug": "diet",
-          "label": "食事"
+          "slug": "productivity",
+          "label": "仕事術・生産性"
         },
         {
-          "slug": "recovery",
-          "label": "疲労回復"
-        }
-      ]
-    },
-    {
-      "key": "productivity",
-      "pillar": "life",
-      "layer": null,
-      "label": "仕事術・生産性",
-      "topics": [
-        {
-          "slug": "systemization",
-          "label": "仕組み化・テンプレート化"
-        },
-        {
-          "slug": "document-creation",
-          "label": "資料作成"
-        },
-        {
-          "slug": "excel-tools",
-          "label": "Excel・ツール術"
-        },
-        {
-          "slug": "file-organization",
-          "label": "情報整理・ファイル管理"
-        }
-      ]
-    },
-    {
-      "key": "mindset",
-      "pillar": "life",
-      "layer": null,
-      "label": "考え方・理念",
-      "topics": [
-        {
-          "slug": "work-philosophy",
-          "label": "仕事観"
-        },
-        {
-          "slug": "decision-axis",
-          "label": "判断軸"
-        },
-        {
-          "slug": "learning-from-failure",
-          "label": "失敗からの学び"
-        },
-        {
-          "slug": "words-and-books",
-          "label": "影響を受けた言葉・本"
+          "slug": "health",
+          "label": "体調管理"
         }
       ]
     },
     {
       "key": "career",
       "pillar": "life",
-      "layer": null,
-      "label": "キャリア",
+      "label": "考え方・キャリア",
+      "desc": "考え方・キャリア・チームづくり・コミュニケーション",
       "topics": [
         {
-          "slug": "professional-career",
-          "label": "士業のキャリア"
+          "slug": "mindset",
+          "label": "考え方・理念"
         },
         {
-          "slug": "executive-view",
-          "label": "役員の視点"
+          "slug": "career-path",
+          "label": "キャリア"
         },
         {
-          "slug": "using-qualifications",
-          "label": "資格の活かし方"
+          "slug": "team-building",
+          "label": "チームづくり"
         },
         {
-          "slug": "market-value",
-          "label": "市場価値の言語化"
-        }
-      ]
-    },
-    {
-      "key": "team-building",
-      "pillar": "life",
-      "layer": null,
-      "label": "チームづくり",
-      "topics": [
-        {
-          "slug": "team-management",
-          "label": "マネジメント"
-        },
-        {
-          "slug": "coaching",
-          "label": "育成・指導"
-        },
-        {
-          "slug": "delegation",
-          "label": "仕事の任せ方"
-        },
-        {
-          "slug": "evaluator-view",
-          "label": "評価する側の視点"
-        }
-      ]
-    },
-    {
-      "key": "communication",
-      "pillar": "life",
-      "layer": null,
-      "label": "コミュニケーション",
-      "topics": [
-        {
-          "slug": "client-dialogue",
-          "label": "顧問先との対話"
-        },
-        {
-          "slug": "explaining",
-          "label": "説明・プレゼン"
-        },
-        {
-          "slug": "internal-coordination",
-          "label": "報連相・社内調整"
-        },
-        {
-          "slug": "listening",
-          "label": "聞く力・質問力"
+          "slug": "communication",
+          "label": "コミュニケーション"
         }
       ]
     }

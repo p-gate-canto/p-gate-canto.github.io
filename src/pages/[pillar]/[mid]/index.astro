@@ -3,7 +3,7 @@ import PageHero from '../../../components/PageHero.astro';
 import Base from '../../../layouts/Base.astro';
 import PostList from '../../../components/PostList.astro';
 import TopicGrid from '../../../components/TopicGrid.astro';
-import { MIDS, LAYERS, midOf, pillarOf, pillarUrl } from '../../../consts';
+import { MIDS, midOf, pillarOf, pillarUrl } from '../../../consts';
 import { getPosts, countBy } from '../../../lib';
 import { breadcrumbLd } from '../../../seo';
 export function getStaticPaths() {
@@ -12,7 +12,6 @@ export function getStaticPaths() {
 const { pillar, mid } = Astro.params;
 const m = midOf(mid)!;
 const p = pillarOf(pillar)!;
-const layer = LAYERS.find((l) => l.key === m.layer);
 const posts = (await getPosts()).filter((x) => x.data.category === mid);
 const counts = countBy(posts);
 ---
@@ -23,7 +22,7 @@ const counts = countBy(posts);
   noindex={posts.length === 0}
   jsonld={[breadcrumbLd([[p.en, pillarUrl(pillar)], [m.label, Astro.url.pathname]])]}
 >
-  <PageHero slot="hero" title={m.label} lead={layer ? `${layer.label}｜${layer.question}` : `${m.topics.slice(0, 3).map((t) => t.label).join('・')}など`} crumbs={[[p.en, pillarUrl(pillar)]]} />
+  <PageHero slot="hero" title={m.label} lead={m.desc} crumbs={[[p.en, pillarUrl(pillar)]]} />
   <section class="section">
     <div class="wrap">
       <h2 class="section-title">小カテゴリー</h2>

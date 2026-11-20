@@ -3,8 +3,8 @@ title: コトラーの競争地位別戦略｜リーダー・チャレンジャ�
 slug: kotler-competitive-position
 description: コトラーは、市場での地位によって企業をリーダー・チャレンジャー・フォロワー・ニッチャーの4つに分けました。嶋口充輝による経営資源の量と質での分類、戦略目標と定石、リーダーの4つの打ち手、チャレンジャーの5つの攻撃、中小企業での使い方、試験のポイントを整理します。
 type: comparison
-category: competitive-strategy
-topic: competitive-position
+category: strategy
+topic: competitive-strategy
 tags:
 - 診断士受験生向け
 exam:

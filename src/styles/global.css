@@ -116,6 +116,9 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
 .layer-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; margin: 0 0 10px; font-size: 16px; line-height: 1.5; color: var(--ink); }
 .layer-no { font-family: var(--font-en); font-size: 11px; font-weight: 700; color: var(--yellow); background: var(--ink); padding: 2px 8px; letter-spacing: 0.1em; }
 .layer-q { font-size: 12.5px; font-weight: 400; color: var(--muted); }
+.layer-head a { font-family: var(--font-en); letter-spacing: 0.12em; color: var(--ink); text-decoration: none; }
+.layer-head a:hover { text-decoration: underline; text-decoration-color: var(--green); }
+.layer-head .count { align-self: center; }
 .more { margin: 18px 0 0; font-size: 14px; text-align: right; }
 .more a { font-weight: 700; color: var(--ink); text-decoration: none; }
 .more a:hover { text-decoration: underline; text-decoration-color: var(--green); }

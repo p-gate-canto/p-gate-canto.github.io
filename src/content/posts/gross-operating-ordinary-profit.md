@@ -3,7 +3,8 @@ title: 粗利・営業利益・経常利益の違いは？損益計算書の5つ
 slug: gross-operating-ordinary-profit
 description: 損益計算書には、売上総利益（粗利）・営業利益・経常利益・税引前当期純利益・当期純利益の5つの利益があります。それぞれ何を表すのか、金融機関がどこを見るのかを、1つの数値例で整理します。
 type: comparison
-category: management-accounting
+category: accounting
+topic: financial-statements
 tags:
 - 経営層向け
 - 経理担当者向け

@@ -3,8 +3,8 @@ title: CSR・ESG・SDGs・CSVの違いは？主語と目的で整理し、中小
 slug: csr-esg-sdgs-csv
 description: CSR・ESG・SDGs・CSV・サステナビリティは、似ているようで主語と目的が違います。それぞれの意味と生まれた背景、CSRの4つの責任、フィランソロピーとメセナ、ISO26000、中小企業が取り組みやすい制度を整理します。
 type: comparison
-category: governance
-topic: compliance
+category: strategy
+topic: governance
 tags:
 - 経営層向け
 pubDate: 2026-11-20

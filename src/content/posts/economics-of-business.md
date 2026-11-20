@@ -3,8 +3,8 @@ title: 事業の経済性とは？規模の経済・経験曲線・範囲の経�
 slug: economics-of-business
 description: 事業の経済性は、コストを下げたり価値を高めたりする仕組みの総称です。規模の経済、経験曲線効果、範囲の経済、シナジー、速度の経済、連結の経済、ネットワーク外部性、デファクトスタンダードを、違い・例・中小企業での使い方・試験のポイントとあわせて整理します。
 type: glossary
-category: competitive-strategy
-topic: competitive-advantage
+category: strategy
+topic: competitive-strategy
 tags:
 - 診断士受験生向け
 exam:

@@ -3,7 +3,7 @@ title: 定期同額給与・事前確定届出給与・業績連動給与の違�
 slug: officer-pay-three-types
 description: 役員給与が法人税の損金になるのは、定期同額給与・事前確定届出給与・業績連動給与の3つだけです。それぞれの要件、改定や届出の期限、中小企業での使い方と注意点を整理します。
 type: comparison
-category: corporate-tax
+category: tax
 topic: officer-pay
 tags:
 - 経営層向け

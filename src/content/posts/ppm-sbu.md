@@ -3,8 +3,8 @@ title: PPM（プロダクト・ポートフォリオ・マネジメント）と�
 slug: ppm-sbu
 description: PPMは、市場成長率と相対的市場シェアの2軸で事業を4つに分け、資金の配分を考える方法です。2つの軸の意味と前提、花形・金のなる木・問題児・負け犬の資金の流れと戦略、SBU、PPMの限界とビジネススクリーン、中小企業での使い方、試験のポイントを整理します。
 type: explainer
-category: corporate-strategy
-topic: portfolio
+category: strategy
+topic: corporate-strategy
 tags:
 - 診断士受験生向け
 exam:

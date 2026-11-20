@@ -3,7 +3,7 @@ title: 法人税・法人住民税・法人事業税の違いは？中小企業�
 slug: corporate-taxes-overview
 description: 会社の利益にかかる税金は、法人税だけではありません。法人税・地方法人税・防衛特別法人税（国税）と、法人住民税・法人事業税・特別法人事業税（地方税）の違い、税率、申告期限、赤字でもかかる税金を整理します。
 type: comparison
-category: corporate-tax
+category: tax
 topic: corporate-income-tax
 tags:
 - 経営層向け

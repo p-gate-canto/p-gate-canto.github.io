@@ -3,8 +3,8 @@ title: 役員報酬と配当はどちらが得か？社長の所得水準で変�
 slug: officer-pay-vs-dividend
 description: 中小企業のオーナー社長が会社からお金を受け取るなら、役員報酬と配当のどちらが有利か。法人税・所得税・住民税・社会保険料をまとめて試算し、所得水準ごとの判断基準を示します。年金・融資・自社株評価への影響もあわせて整理します。
 type: comparison
-category: personal-tax
-topic: income-split
+category: tax
+topic: officer-pay
 tags:
 - 経営層向け
 - 実務家向け

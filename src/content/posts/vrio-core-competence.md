@@ -3,8 +3,8 @@ title: VRIO分析とコア・コンピタンス｜経営資源で競争優位を
 slug: vrio-core-competence
 description: VRIO分析は、経営資源を価値・希少性・模倣困難性・組織の4つの問いで評価し、競争優位の源泉かどうかを判定する方法です。リソース・ベースト・ビューの背景、判定表、模倣困難性の4つの要因、コア・コンピタンスの3条件、製造業の例、試験のポイントを整理します。
 type: explainer
-category: competitive-strategy
-topic: vrio
+category: strategy
+topic: competitive-strategy
 tags:
 - 診断士受験生向け
 exam:

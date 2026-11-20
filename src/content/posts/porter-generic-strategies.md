@@ -3,8 +3,8 @@ title: ポーターの3つの基本戦略と競争回避戦略｜コストリー
 slug: porter-generic-strategies
 description: ポーターの3つの基本戦略は、コストリーダーシップ・差別化・集中の3つです。それぞれの考え方・成功の条件・リスク、スタック・イン・ザ・ミドル、中小企業の差別化集中の例、競争を避けるための参入障壁・移動障壁・撤退障壁と戦略グループ、試験のポイントを整理します。
 type: comparison
-category: competitive-strategy
-topic: competitive-advantage
+category: strategy
+topic: competitive-strategy
 tags:
 - 診断士受験生向け
 exam:

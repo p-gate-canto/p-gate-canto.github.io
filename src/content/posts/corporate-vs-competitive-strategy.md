@@ -3,7 +3,8 @@ title: 企業戦略と競争戦略の違いは？迷ったときの「3つの判
 slug: corporate-vs-competitive-strategy
 description: 企業戦略は「どの事業で戦うか」、競争戦略は「その事業でどう勝つか」を決める戦略です。多角化・M&A・価格設定など紛らわしい論点も、3つの問いで振り分けられます。中小企業での使い方と、診断士試験での整理もあわせて解説します。
 type: comparison
-category: corporate-strategy
+category: strategy
+topic: corporate-strategy
 tags:
 - 診断士受験生向け
 exam:

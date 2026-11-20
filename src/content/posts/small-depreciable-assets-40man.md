@@ -3,7 +3,7 @@ title: 少額減価償却資産の特例が40万円未満に｜2026年4月から
 slug: small-depreciable-assets-40man
 description: 令和8年度税制改正で、中小企業者等の少額減価償却資産の特例が「30万円未満」から「40万円未満」に引き上げられ、適用期限も2029年3月31日まで延長されました。いつ取得した資産から使えるか、年300万円の上限、10万円未満・20万円未満の制度との使い分け、償却資産税の注意点を整理します。
 type: explainer
-category: corporate-tax
+category: tax
 topic: tax-planning
 tags:
 - 経営層向け

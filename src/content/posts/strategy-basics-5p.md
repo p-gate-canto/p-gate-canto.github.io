@@ -3,7 +3,8 @@ title: 経営戦略とは？ミンツバーグの5P・意図的戦略と創発�
 slug: strategy-basics-5p
 description: 経営戦略は、計画だけを指す言葉ではありません。ミンツバーグの戦略の5P、意図的戦略と創発的戦略、戦略の4つの構成要素（ドメイン・資源展開・競争優位性・シナジー）、環境分析から評価までの流れ、3つの階層、試験のポイントと中小企業での使い方まで整理します。
 type: explainer
-category: corporate-strategy
+category: strategy
+topic: corporate-strategy
 tags:
 - 診断士受験生向け
 exam:

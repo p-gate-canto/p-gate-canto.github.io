@@ -2,7 +2,6 @@
 import PageHero from '../../components/PageHero.astro';
 import Base from '../../layouts/Base.astro';
 import PostList from '../../components/PostList.astro';
-import MidCard from '../../components/MidCard.astro';
 import WorkMap from '../../components/WorkMap.astro';
 import { PILLARS, MIDS, pillarOf } from '../../consts';
 import { getPosts, countBy, pillarOfPost } from '../../lib';
@@ -20,11 +19,7 @@ const counts = countBy(posts);
   <section class="section">
     <div class="wrap">
       <h2 class="section-title">分野</h2>
-      {pillar === 'work' ? (
-        <WorkMap counts={counts} />
-      ) : (
-        <div class="toc">{MIDS.filter((m) => m.pillar === pillar).map((m) => <MidCard mid={m.key} count={counts[m.key] ?? 0} />)}</div>
-      )}
+      <WorkMap counts={counts} pillar={pillar} />
     </div>
   </section>
   <section class="section">

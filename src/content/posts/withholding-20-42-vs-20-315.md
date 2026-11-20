@@ -3,8 +3,8 @@ title: 20.42%と20.315%の違いは？配当の源泉徴収税率を「住民税
 slug: withholding-20-42-vs-20-315
 description: 配当の源泉徴収でよく見る20.42%と20.315%。違いは、住民税5%が入っているかどうかです。非上場会社の配当と上場株式の配当での使い分け、受け取った後の申告、2027年からの防衛特別所得税での内訳の変化まで整理します。
 type: comparison
-category: personal-tax
-topic: income-tax
+category: tax
+topic: withholding
 tags:
 - 経営層向け
 - 経理担当者向け

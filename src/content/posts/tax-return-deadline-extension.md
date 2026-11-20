@@ -3,7 +3,7 @@ title: 法人税の申告期限を1か月延ばす方法｜延長の特例の申
 slug: tax-return-deadline-extension
 description: 法人税の確定申告の期限は、原則として事業年度終了の日の翌日から2か月以内です。定款で定時株主総会の時期を定めている会社は、申請すれば1か月延ばせます。申請の期限、納付期限は延びないことと利子税、消費税申告期限延長届出書、地方税の扱いを整理します。
 type: explainer
-category: corporate-tax
+category: tax
 topic: corporate-income-tax
 tags:
 - 経理担当者向け

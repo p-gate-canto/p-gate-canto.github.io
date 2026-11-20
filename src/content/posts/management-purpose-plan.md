@@ -3,8 +3,8 @@ title: 経営理念・経営目標・経営計画の違いは？長期・中期�
 slug: management-purpose-plan
 description: 経営理念は「どうありたいか」という価値の面、経営目標は「どこまで到達するか」という事実の面を表し、経営計画はそれを行動に落とし込んだものです。期間別の計画、ローリング方式、BSCと戦略マップ、ローカルベンチマークなど実務で使える道具まで整理します。
 type: comparison
-category: management-plan
-topic: midterm-plan
+category: strategy
+topic: management-plan
 tags:
 - 経営層向け
 pubDate: 2026-11-20
