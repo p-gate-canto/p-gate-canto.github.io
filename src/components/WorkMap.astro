@@ -2,8 +2,10 @@
 // WORK の地図：理念 → 企業戦略 → 競争戦略 → 機能別戦略 の4層
 import { LAYERS, MIDS } from '../consts';
 import MidCard from './MidCard.astro';
-interface Props { counts: Record<string, number> }
-const { counts } = Astro.props;
+import { midUrl } from '../consts';
+// compact：トップページ用。分野名だけを並べた一覧にして、縦に長くならないようにする
+interface Props { counts: Record<string, number>; compact?: boolean }
+const { counts, compact = false } = Astro.props;
 let n = 0;
 const layers = LAYERS.map((l) => ({ ...l, mids: MIDS.filter((m) => m.pillar === 'work' && m.layer === l.key).map((m) => ({ ...m, no: String(++n).padStart(2, '0') })) }));
 ---
@@ -11,9 +13,17 @@ const layers = LAYERS.map((l) => ({ ...l, mids: MIDS.filter((m) => m.pillar === 
   {layers.map((l) => (
     <section class="layer">
       <h3 class="layer-head"><span class="layer-no">{l.no}</span>{l.label}<span class="layer-q">{l.question}</span></h3>
-      <div class="toc">
-        {l.mids.map((m) => <MidCard mid={m.key} count={counts[m.key] ?? 0} no={m.no} />)}
-      </div>
+      {compact ? (
+        <ul class="mid-links">
+          {l.mids.map((m) => (
+            <li><a href={midUrl(m.key)}><span class="toc-no">{m.no}</span>{m.label}{(counts[m.key] ?? 0) > 0 && <span class="mid-count">{counts[m.key]}</span>}</a></li>
+          ))}
+        </ul>
+      ) : (
+        <div class="toc">
+          {l.mids.map((m) => <MidCard mid={m.key} count={counts[m.key] ?? 0} no={m.no} />)}
+        </div>
+      )}
     </section>
   ))}
 </div>

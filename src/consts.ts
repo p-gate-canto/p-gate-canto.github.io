@@ -10,6 +10,7 @@ export const SITE_DESCRIPTION = site.description;
 export const FOOTER_NOTE = site.footerNote;
 export const AUTHOR_NAME = site.authorName;
 export const AUTHOR_BIO = site.authorBio;
+export const SITE_KEYWORDS: string[] = (site as { keywords?: string[] }).keywords ?? [];
 
 // 分類（大分類・中カテゴリー・小カテゴリー・タグ・記事タイプ）は src/data/taxonomy.json で定義する
 export type Topic = { slug: string; label: string };

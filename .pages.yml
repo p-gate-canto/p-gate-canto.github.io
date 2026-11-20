@@ -665,3 +665,7 @@ content:
   - name: authorBio
     label: 筆者紹介（記事末の筆者欄）
     type: text
+  - name: keywords
+    label: トップの検索窓の下に出すキーワード（6個前後）
+    type: string
+    list: true

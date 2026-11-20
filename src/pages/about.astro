@@ -4,8 +4,13 @@ import Base from '../layouts/Base.astro';
 import { Content, frontmatter } from '../content/pages/about.md';
 ---
 <Base title={frontmatter.title} description={frontmatter.description} current="about">
+  <section class="hero">
+    <div class="wrap">
+      <h1>{frontmatter.title}</h1>
+      {frontmatter.description && <p>{frontmatter.description}</p>}
+    </div>
+  </section>
   <article class="wrap">
-    <header class="article-head"><h1>{frontmatter.title}</h1></header>
     <div class="prose"><Content /></div>
   </article>
 </Base>

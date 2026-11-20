@@ -18,6 +18,8 @@
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: 88px; }
+/* ページの長さでスクロールバーの有無が変わっても、ヘッダーの位置がずれないようにする（PCのみ） */
+@media (hover: hover) and (pointer: fine) { html { scrollbar-gutter: stable; } }
 body {
   margin: 0; color: var(--text);
   background: var(--bg) radial-gradient(ellipse 120% 900px at 30% 0%, var(--bg-hi) 0%, var(--bg) 60%, var(--bg-lo) 100%) no-repeat;
@@ -35,27 +37,28 @@ a:hover { color: var(--accent); }
 
 /* header */
 .site-header { background: rgba(255, 255, 255, 0.82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 50; }
-.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 18px; padding-bottom: 18px; flex-wrap: wrap; }
-.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.logo-mark { width: 10px; height: 30px; background: linear-gradient(180deg, var(--green), var(--lime) 70%, var(--yellow)); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%); }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; flex-wrap: nowrap; }
+.logo { display: flex; flex: none; align-items: center; gap: 12px; text-decoration: none; }
+.logo-mark { flex: none; width: 10px; height: 30px; background: linear-gradient(180deg, var(--green), var(--lime) 70%, var(--yellow)); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%); }
 .logo-text { font-size: 20px; font-weight: 700; letter-spacing: 0.08em; white-space: nowrap; color: var(--ink); }
-.nav { display: flex; gap: 18px; font-size: 14px; flex-wrap: wrap; }
+.nav { display: flex; gap: 18px; font-size: 14px; flex-wrap: nowrap; }
 .nav a { text-decoration: none; color: var(--muted); white-space: nowrap; padding-bottom: 2px; border-bottom: 2px solid transparent; }
 .nav a:hover { color: var(--text); }
 .nav a[aria-current] { color: var(--text); border-image: var(--grad) 1; }
 
 /* hero：左上に濃色とグリーンの斜めの面、右下に薄いグリーンの面 */
-.hero { position: relative; overflow: hidden; padding: 64px 0 48px; border-bottom: 1px solid var(--line); }
+.hero { position: relative; overflow: hidden; display: flex; align-items: center; min-height: 232px; padding: 52px 0 44px; border-bottom: 1px solid var(--line); }
+.hero > .wrap { width: 100%; }
 .hero::before, .hero::after { content: ''; position: absolute; pointer-events: none; }
 .hero::before {
-  inset: 0 auto auto 0; width: 300px; height: 100%;
+  inset: 0 auto auto 0; width: 300px; height: 232px;
   background:
     linear-gradient(135deg, var(--deep) 0 18%, transparent 18.2%),
     linear-gradient(125deg, transparent 0 20%, rgba(95, 174, 62, 0.9) 20.2% 30%, rgba(201, 222, 37, 0.85) 38%, transparent 38.2%);
   opacity: 0.95;
 }
 .hero::after {
-  right: 0; bottom: 0; width: 280px; height: 70%;
+  right: 0; bottom: 0; width: 280px; height: 160px;
   background: linear-gradient(160deg, transparent 0 55%, rgba(95, 174, 62, 0.18) 55.2% 80%, rgba(201, 222, 37, 0.28) 100%);
 }
 .hero h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0.1em; color: var(--ink); }
@@ -168,13 +171,19 @@ a:hover { color: var(--accent); }
 /* search (Pagefind) */
 #search { --pagefind-ui-primary: #4f9a32; --pagefind-ui-text: #0b1820; --pagefind-ui-background: #ffffff; --pagefind-ui-border: #d9dde2; --pagefind-ui-tag: #eef0f3; --pagefind-ui-border-radius: 0; --pagefind-ui-font: inherit; }
 
-/* home hero：検索窓と読者別の入口 */
+/* home：検索窓・よく読まれるテーマ・読む人から探す */
 .hero-search { display: flex; margin: 24px 0 0; max-width: 520px; background: #fff; border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(8, 21, 29, 0.06); }
 .hero-search input { flex: 1; min-width: 0; border: 0; padding: 12px 14px; font: inherit; font-size: 15px; background: transparent; color: var(--text); }
 .hero-search input:focus { outline: 2px solid var(--green); outline-offset: -2px; }
 .hero-search button { border: 0; padding: 0 20px; font: inherit; font-size: 14px; font-weight: 700; color: #fff; background: var(--ink); cursor: pointer; }
 .hero-search button:hover { background: var(--accent); }
-.reader-lead { margin: 28px 0 10px !important; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: var(--ink) !important; }
+.hero-keywords { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 14px 0 0; font-size: 12px; }
+.hero-keywords .kw-label { color: var(--muted); letter-spacing: 0.06em; margin-right: 2px; }
+.hero-keywords a { padding: 3px 12px; border: 1px solid var(--line); background: rgba(255, 255, 255, 0.9); text-decoration: none; white-space: nowrap; line-height: 1.8; }
+.hero-keywords a:hover { border-color: var(--green); color: var(--text); }
+.section-band { background: rgba(255, 255, 255, 0.55); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.section-lead { margin: -6px 0 16px; font-size: 13px; color: var(--muted); }
+.reader-count { display: block; margin-top: 8px; font-size: 11px; color: var(--accent); font-weight: 700; letter-spacing: 0.04em; }
 .readers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
 .reader { position: relative; display: block; padding: 14px 14px 12px; background: rgba(255, 255, 255, 0.9); border: 1px solid var(--line); text-decoration: none; }
 .reader::after { content: '→'; position: absolute; right: 12px; top: 13px; font-size: 13px; color: var(--accent); }
@@ -186,6 +195,11 @@ a:hover { color: var(--accent); }
 .layer-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; margin: 0 0 10px; font-size: 16px; color: var(--ink); }
 .layer-no { font-size: 12px; font-weight: 700; color: #fff; background: var(--ink); padding: 1px 8px; letter-spacing: 0.08em; }
 .layer-q { font-size: 12px; font-weight: 400; color: var(--muted); }
+.mid-links { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 6px; }
+.mid-links a { display: flex; align-items: baseline; gap: 10px; padding: 9px 12px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; font-size: 14px; line-height: 1.5; color: var(--ink); }
+.mid-links a:hover { border-color: var(--green); color: var(--text); }
+.mid-links .toc-no { flex: none; font-size: 11px; white-space: nowrap; }
+.mid-count { margin-left: auto; font-size: 11px; font-weight: 700; color: #fff; background: var(--accent); padding: 0 7px; }
 .type-chip { display: inline-block; padding: 0 8px; font-size: 11px; line-height: 20px; color: var(--ink); background: #eef0f3; border: 1px solid var(--line); text-decoration: none; }
 a.type-chip:hover { border-color: var(--green); }
 .pillars.pillars-3 { grid-template-columns: repeat(3, 1fr); }
@@ -215,30 +229,32 @@ a.type-chip:hover { border-color: var(--green); }
 .site-footer p:first-child { color: #e6ebee; letter-spacing: 0.08em; }
 
 @media (max-width: 560px) {
-  .hero { padding: 76px 0 32px; }
+  .hero { min-height: 196px; padding: 76px 0 32px; }
   .hero::before { width: 170px; height: 60px; }
   .site-footer { padding-top: 128px; }
   .site-footer::before { left: -60%; right: -60%; }
-  .hero::after { width: 140px; }
+  .hero::after { width: 140px; height: 96px; }
   .hero h1 { font-size: 24px; }
   .article-head h1 { font-size: 22px; }
   .prose table { display: block; overflow-x: auto; width: auto; font-size: 13px; }
   .prose th, .prose td { padding: 8px; min-width: 8.5em; }
   .prose td:first-child { min-width: 7.5em; }
   .prose td:last-child { min-width: 11em; }
-  .site-header .wrap { padding-top: 12px; }
+  .site-header .wrap { height: auto; flex-wrap: wrap; padding-top: 12px; }
   .logo-text { font-size: 18px; }
   .site-header .wrap { padding-bottom: 0; }
   .nav-home { display: none; }
   .toc { grid-template-columns: 1fr; }
   .pillars, .pillars.pillars-3 { grid-template-columns: 1fr; }
   .readers { grid-template-columns: 1fr 1fr; }
-  .hero-home::after { display: none; }
+  .hero-keywords .kw-label { flex-basis: 100%; }
+  .mid-links { grid-template-columns: 1fr 1fr; }
+  .mid-links a { font-size: 13px; padding: 8px 10px; gap: 8px; }
   .reader strong { font-size: 13px; }
   .pager { grid-template-columns: 1fr; }
   .pager-next { text-align: left; }
   .topics { grid-template-columns: 1fr 1fr; }
   .topic { font-size: 12.5px; padding: 8px 9px; letter-spacing: 0; white-space: nowrap; }
-  .nav { gap: 12px; flex-wrap: nowrap; overflow-x: auto; width: 100%; padding-bottom: 12px; scrollbar-width: none; }
+  .nav { gap: 12px; overflow-x: auto; width: 100%; padding-bottom: 12px; scrollbar-width: none; }
   .nav::-webkit-scrollbar { display: none; }
 }
