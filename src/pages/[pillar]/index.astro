@@ -18,13 +18,13 @@ const counts = countBy(posts);
   <PageHero slot="hero" title={p.label} lead={p.desc} />
   <section class="section">
     <div class="wrap">
-      <h2 class="section-title">分野</h2>
+      <h2 class="section-title" data-en="FIELDS">分野</h2>
       <WorkMap counts={counts} pillar={pillar} />
     </div>
   </section>
   <section class="section">
     <div class="wrap">
-      <h2 class="section-title">新着記事</h2>
+      <h2 class="section-title" data-en="LATEST">新着記事</h2>
       <PostList posts={posts.slice(0, 10)} empty={`${p.en}の記事は準備中です。`} />
     </div>
   </section>

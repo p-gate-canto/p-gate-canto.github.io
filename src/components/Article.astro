@@ -37,19 +37,24 @@ const examName = d.tags.map((t) => EXAM_NAMES[t]).find(Boolean);
 {/* 読み進み具合のバーと、目次の「いま読んでいる見出し」の表示（スクリプトは末尾） */}
 <div class="read-progress" aria-hidden="true"><span></span></div>
 <div class="article-layout">
-<article class="article-main" data-pagefind-body={preview ? undefined : ''}>
+<article class="article-main" data-pagefind-body={preview ? undefined : ''} data-post-id={preview ? undefined : post.id} data-post-title={preview ? undefined : d.title}>
   {!preview && <Fragment><span hidden data-pagefind-meta={`title:${d.title}`}></span><span hidden data-pagefind-meta={`date:${fmtDate(d.pubDate)}`}></span><span hidden data-pagefind-meta={`category:${tLabel ?? mid.label}`}></span><span hidden data-pagefind-meta={`type:${type.label}`}></span></Fragment>}
   {preview && <p class="preview-banner">下書きプレビューです。公開されておらず、検索にも出ません。</p>}
   <header class="article-head">
     <nav class="crumb" aria-label="現在地" data-pagefind-ignore>
       <a href={url('/')}>ホーム</a> › <a href={pillarUrl(pil.key)}>{pil.en}</a> › <a href={midUrl(d.category)}>{mid.label}</a>{d.topic && tLabel && <Fragment> › <a href={midUrl(d.category, d.topic)}>{tLabel}</a></Fragment>}
     </nav>
-    <div class="meta" data-pagefind-ignore>
-      <time datetime={isoDate(d.pubDate)}>{fmtDate(d.pubDate)}</time>{d.updatedDate && <Fragment>{'\n'}<span>更新 <time datetime={isoDate(d.updatedDate)}>{fmtDate(d.updatedDate)}</time></span></Fragment>}
-      <a class="type-chip" href={typeUrl(type.key)}>{type.label}</a>
-      <span>約{minutes}分で読めます</span>
-    </div>
+    <p class="kicker" data-pagefind-ignore><a href={pillarUrl(pil.key)}>{pil.en}</a>{'\u2003'}<a class="kicker-ja" href={midUrl(d.category)}>{mid.label}</a></p>
     <h1 data-pagefind-ignore set:html={phraseHtml(d.title)} />
+    {d.description && <p class="dek" data-pagefind-ignore>{d.description}</p>}
+    <div class="article-actions" data-pagefind-ignore>
+      <div class="meta">
+        <time datetime={isoDate(d.pubDate)}>{fmtDate(d.pubDate)}</time>{d.updatedDate && <Fragment>{'\n'}<span>更新 <time datetime={isoDate(d.updatedDate)}>{fmtDate(d.updatedDate)}</time></span></Fragment>}
+        <a class="type-chip" href={typeUrl(type.key)}>{type.label}</a>
+        <span>約{minutes}分で読めます</span>
+      </div>
+      {!preview && <button type="button" class="shiori-btn" aria-pressed="false"><span class="shiori-icon" aria-hidden="true"></span><span class="shiori-off">しおりをはさむ</span><span class="shiori-on">しおり済み</span></button>}
+    </div>
     {d.tags.length > 0 && (
       <div class="tags" data-pagefind-ignore>{d.tags.map((t) => <Fragment>{'\n'}{preview ? <span>#{t}</span> : <a href={tagUrl(t)}>#{t}</a>}</Fragment>)}</div>
     )}
@@ -93,7 +98,7 @@ const examName = d.tags.map((t) => EXAM_NAMES[t]).find(Boolean);
 
   {series && (
     <section class="series-next" data-pagefind-ignore>
-      <h2 class="section-title">次に読む</h2>
+      <h2 class="section-title" data-en="NEXT">次に読む</h2>
       <p class="series-name">{series.wrapped ? `シリーズ「${series.name}」の最初の記事に戻る` : `シリーズ「${series.name}」の${series.index + 1}本目（全${series.total}本）`}</p>
       <PostList posts={[series.next]} />
     </section>
@@ -101,7 +106,7 @@ const examName = d.tags.map((t) => EXAM_NAMES[t]).find(Boolean);
 
   {related.length > 0 && (
     <section class="related" data-pagefind-ignore>
-      <h2 class="section-title">関連する記事</h2>
+      <h2 class="section-title" data-en="RELATED">関連する記事</h2>
       <PostList posts={related} />
     </section>
   )}
@@ -113,6 +118,13 @@ const examName = d.tags.map((t) => EXAM_NAMES[t]).find(Boolean);
   )}
 
 </article>
+{!preview && (
+  <nav class="dock" aria-label="記事の操作" data-pagefind-ignore>
+    {showToc ? <button type="button" class="dock-toc">目次</button> : <a href={url('/posts/')}>記事一覧</a>}
+    <button type="button" class="shiori-btn" aria-pressed="false"><span class="shiori-icon" aria-hidden="true"></span><span class="shiori-off">しおり</span><span class="shiori-on">しおり済み</span></button>
+    <button type="button" class="dock-top">上へ</button>
+  </nav>
+)}
 {showToc ? (
   <aside class="article-side" aria-label="目次" data-pagefind-ignore>
     <nav class="article-toc side-toc">
@@ -153,6 +165,10 @@ const examName = d.tags.map((t) => EXAM_NAMES[t]).find(Boolean);
         map[current.id].classList.add('is-current');
       }
     }
+    var dt = document.querySelector('.dock-toc'), inline = document.querySelector('.toc-inline');
+    if (dt && inline) dt.addEventListener('click', function () { inline.open = true; inline.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+    var up = document.querySelector('.dock-top');
+    if (up) up.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
     update();

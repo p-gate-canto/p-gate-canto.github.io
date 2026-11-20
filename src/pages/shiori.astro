@@ -1,0 +1,53 @@
+---
+// しおり：あとで読む記事と、読みかけの記事。この端末のブラウザ（localStorage）だけに保存し、サーバーには送らない
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+---
+<Base title="しおり" description="しおりをはさんだ記事と、読みかけの記事の一覧。" current="shiori" noindex>
+  <PageHero slot="hero" title="しおり" lead="あとで読む記事と、読みかけの記事。この端末のブラウザだけに保存しています。" />
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title" data-en="SAVED">しおりをはさんだ記事</h2>
+      <div id="shiori-saved"><p class="empty">まだありません。記事の「しおりをはさむ」を押すと、ここに並びます。</p></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title" data-en="IN PROGRESS">読みかけの記事</h2>
+      <div id="shiori-progress"><p class="empty">まだありません。記事を途中まで読むと、ここに並びます。</p></div>
+    </div>
+  </section>
+  <script is:inline>
+    (function () {
+      var S = window.Shiori; if (!S) return;
+      var esc = function (s) { return String(s || '').replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+      var day = function (t) { var d = new Date(t); return d.getFullYear() + '/' + ('0' + (d.getMonth() + 1)).slice(-2) + '/' + ('0' + d.getDate()).slice(-2); };
+      function render() {
+        var saved = S.get('shiori:saved', []) || [];
+        var box = document.getElementById('shiori-saved');
+        if (saved.length) {
+          box.innerHTML = '<ul class="posts shiori-list">' + saved.map(function (x) {
+            return '<li><a class="card" href="' + esc(x.u) + '"><span class="meta"><span>' + day(x.at) + ' にはさんだ</span></span><span class="card-title">' + esc(x.t) + '</span></a>' +
+              '<p class="card-meta"><button type="button" class="shiori-remove" data-id="' + esc(x.id) + '">しおりを外す</button></p></li>';
+          }).join('') + '</ul>';
+          box.querySelectorAll('.shiori-remove').forEach(function (b) {
+            b.addEventListener('click', function () {
+              var id = b.getAttribute('data-id');
+              S.set('shiori:saved', (S.get('shiori:saved', []) || []).filter(function (x) { return x.id !== id; }));
+              render();
+              document.querySelectorAll('.shiori-count').forEach(function (el) { var n = (S.get('shiori:saved', []) || []).length; el.textContent = n; el.hidden = !n; });
+            });
+          });
+        }
+        var prog = S.get('shiori:progress', {}) || {};
+        var list = Object.keys(prog).map(function (k) { return prog[k]; }).filter(function (x) { return x && x.u && x.p < 0.95; }).sort(function (a, b) { return b.at - a.at; });
+        if (list.length) {
+          document.getElementById('shiori-progress').innerHTML = '<ul class="posts">' + list.map(function (x) {
+            return '<li><a class="card" href="' + esc(x.u) + '?r=' + x.p.toFixed(2) + '"><span class="meta"><span>' + day(x.at) + ' に読んだ</span><span>' + Math.round(x.p * 100) + '%まで</span></span><span class="card-title">' + esc(x.t) + '</span><span class="progress-line"><span style="width:' + Math.round(x.p * 100) + '%"></span></span></a></li>';
+          }).join('') + '</ul>';
+        }
+      }
+      render();
+    })();
+  </script>
+</Base>

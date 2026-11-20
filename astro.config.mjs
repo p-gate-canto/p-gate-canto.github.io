@@ -61,7 +61,7 @@ const sitemapSerialize = (item) => {
 };
 const sitemapFilter = (page) => {
   const path = new URL(page).pathname.replace(/^\/|\/$/g, '');
-  if (/^(drafts|tags|search)(\/|$)/.test(path)) return false;
+  if (/^(drafts|tags|search|shiori)(\/|$)/.test(path)) return false;
   if (/^(work|life)\/[\w-]+/.test(path) || /^types\/[\w-]+/.test(path)) return used.has(path);
   return true;
 };

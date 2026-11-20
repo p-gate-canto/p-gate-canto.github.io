@@ -1,9 +1,11 @@
 ---
-// トップページ：何のメディアか → まず読む3本 → 読む人から探す → 新着 → 分野から探す → 筆者
+// トップページ：何のメディアか（＋今月の期限・続きから読む） → まず読む3本 → 新着 → 連載 → 読む人から探す → 分野から探す → 筆者
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
 import WorkMap from '../components/WorkMap.astro';
 import Count from '../components/Count.astro';
+import Deadlines from '../components/Deadlines.astro';
+import seriesData from '../data/series.json';
 import { SITE_TITLE, SITE_SUBTITLE, SITE_TAGLINE, SITE_KEYWORDS, SITE_FEATURED, PILLARS, READERS, MIDS, AUTHOR_NAME, AUTHOR_BIO, url, pillarUrl, tagUrl, midOf, typeOf, topicLabel, fmtDate, isoDate } from '../consts';
 import { getPosts, countBy, phraseHtml } from '../lib';
 import { websiteLd } from '../seo';
@@ -12,6 +14,11 @@ const counts = countBy(all);
 const featured = SITE_FEATURED.map((s) => all.find((p) => p.id === s)).filter((p) => p !== undefined).slice(0, 3);
 const featuredIds = new Set(featured.map((p) => p.id));
 const latest = all.filter((p) => !featuredIds.has(p.id)).slice(0, 8);
+// 連載：公開済みの記事が2本以上あるシリーズだけ。最初の記事へつなぐ
+const serials = seriesData
+  .map((s) => ({ name: s.name, posts: s.posts.map((id) => all.find((p) => p.id === id)).filter((p) => p !== undefined) }))
+  .filter((s) => s.posts.length >= 2 && !s.name.includes('診断士'))
+  .slice(0, 6);
 // 読む人：実務の読者と受験生を分けて並べる（混ぜないルールに合わせる）
 const readerGroups = [
   { label: '仕事で読む', readers: READERS.filter((r) => !r.tag.includes('受験生')) },
@@ -20,7 +27,8 @@ const readerGroups = [
 ---
 <Base current="home" jsonld={[websiteLd()]} layout="full">
   <section class="hero-home">
-    <div class="wrap">
+    <div class="wrap hero-grid">
+      <div class="hero-main">
       <p class="home-eyebrow">{SITE_SUBTITLE}</p>
       <h1>{SITE_TITLE}</h1>
       <p class="home-tagline">{SITE_TAGLINE}</p>
@@ -39,13 +47,32 @@ const readerGroups = [
           {SITE_KEYWORDS.map((k) => <a href={`${url('/search/')}?q=${encodeURIComponent(k)}`}>{k}</a>)}
         </p>
       )}
+      <a class="resume glass-dark" href="#" data-resume hidden><span class="resume-label">CONTINUE<span class="resume-ja">　続きから読む</span></span><span class="resume-title"></span><span class="resume-bar"><span></span></span></a>
+      </div>
+      <div class="hero-panel glass-dark"><Deadlines limit={5} /></div>
     </div>
   </section>
+  <script is:inline>
+    /* 続きから読む：読みかけ（5〜95%）の記事のうち、いちばん最近のもの */
+    (function () {
+      var el = document.querySelector('[data-resume]');
+      if (!el || !window.Shiori) return;
+      var prog = window.Shiori.get('shiori:progress', {}) || {};
+      var last = Object.keys(prog).map(function (k) { return prog[k]; })
+        .filter(function (x) { return x && x.u && x.p > 0.05 && x.p < 0.95; })
+        .sort(function (a, b) { return b.at - a.at; })[0];
+      if (!last) return;
+      el.href = last.u + '?r=' + last.p.toFixed(2);
+      el.querySelector('.resume-title').textContent = last.t;
+      el.querySelector('.resume-bar span').style.width = Math.round(last.p * 100) + '%';
+      el.hidden = false;
+    })();
+  </script>
 
   {featured.length > 0 && (
     <section class="section">
       <div class="wrap">
-        <h2 class="section-title">まず読む{featured.length}本</h2>
+        <h2 class="section-title" data-en="EDITOR'S PICKS">まず読む{featured.length}本</h2>
         <p class="section-lead">初めての方に。中小企業の経営者と経理の担当者から、よく聞かれるテーマです。</p>
         <ul class="featured">
           {featured.map((p, i) => (
@@ -66,9 +93,36 @@ const readerGroups = [
     </section>
   )}
 
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title" data-en="LATEST">新着記事</h2>
+      <PostList posts={latest} />
+      <p class="more"><a href={url('/posts/')}>記事一覧へ（{all.length}本） →</a></p>
+    </div>
+  </section>
+
+  {serials.length > 0 && (
+    <section class="section">
+      <div class="wrap">
+        <h2 class="section-title" data-en="SERIES">連載</h2>
+        <p class="section-lead">読む順番に並べたシリーズ。1本目から順に読むと、そのテーマの全体がつかめます。</p>
+        <div class="cats cats-3">
+          {serials.map((s, i) => (
+            <a class="cat" href={url(`/posts/${s.posts[0]!.id}/`)}>
+              <span class="serial-no">SERIES {String(i + 1).padStart(2, '0')}</span>
+              <strong class="serial-name">{s.name}</strong>
+              <span class="cat-desc serial-desc" set:html={'1本目：' + phraseHtml(s.posts[0]!.data.title.split('｜')[0]!)} />
+              <span class="card-meta"><Count n={s.posts.length} /></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
   <section class="section section-band">
     <div class="wrap">
-      <h2 class="section-title">読む人から探す</h2>
+      <h2 class="section-title" data-en="READERS">読む人から探す</h2>
       <p class="section-lead">立場に合わせて、役に立つ記事をまとめています。</p>
       {readerGroups.map((g) => (
         <section class="layer">
@@ -89,15 +143,7 @@ const readerGroups = [
 
   <section class="section">
     <div class="wrap">
-      <h2 class="section-title">新着記事</h2>
-      <PostList posts={latest} />
-      <p class="more"><a href={url('/posts/')}>記事一覧へ（{all.length}本） →</a></p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <h2 class="section-title">分野から探す</h2>
+      <h2 class="section-title" data-en="FIELDS">分野から探す</h2>
       <p class="section-lead">仕事（WORK）の13分野と、学びと働き方（LIFE）の4分野に分けています。</p>
       {PILLARS.map((p) => (
         <section class="layer">

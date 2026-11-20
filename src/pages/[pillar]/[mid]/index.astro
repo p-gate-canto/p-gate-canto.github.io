@@ -29,7 +29,7 @@ const guideDesc = m.guide ? (m.guide.length > 120 ? m.guide.slice(0, m.guide.ind
   {m.guide && posts.length > 0 && (
     <section class="section">
       <div class="wrap">
-        <h2 class="section-title">この分野で扱うこと</h2>
+        <h2 class="section-title" data-en="SCOPE">この分野で扱うこと</h2>
         <div class="prose mid-guide"><p>{m.guide}</p></div>
       </div>
     </section>
@@ -37,20 +37,20 @@ const guideDesc = m.guide ? (m.guide.length > 120 ? m.guide.slice(0, m.guide.ind
   {start.length > 0 && (
     <section class="section">
       <div class="wrap">
-        <h2 class="section-title">まず読む記事</h2>
+        <h2 class="section-title" data-en="START HERE">まず読む記事</h2>
         <PostList posts={start} />
       </div>
     </section>
   )}
   <section class="section">
     <div class="wrap">
-      <h2 class="section-title">小カテゴリー</h2>
+      <h2 class="section-title" data-en="TOPICS">小カテゴリー</h2>
       <TopicGrid mid={mid} counts={counts} />
     </div>
   </section>
   <section class="section">
     <div class="wrap">
-      <h2 class="section-title">記事</h2>
+      <h2 class="section-title" data-en="ARTICLES">記事</h2>
       <PostList posts={posts} empty="この分野の記事は準備中です。" />
     </div>
   </section>

@@ -33,11 +33,12 @@ YELLOW = (255, 230, 0)
 GREEN = (134, 188, 37)
 FONT_DIR = pathlib.Path('/usr/share/fonts/opentype/noto')
 PARSER = budoux.load_default_japanese_parser()
-VERSION = 'og-v2'  # デザインを変えたら上げる（全記事つくり直しの目印）
+VERSION = 'og-v3'  # デザインを変えたら上げる（全記事つくり直しの目印）
 
 
-def font(weight, size):
-    return ImageFont.truetype(str(FONT_DIR / f'NotoSansCJK-{weight}.ttc'), size, index=0)  # index 0 = JP
+def font(weight, size, family='Sans'):
+    # family：Sans（ゴシック）／Serif（明朝。サイトの見出しと同じ）。index 0 = JP
+    return ImageFont.truetype(str(FONT_DIR / f'Noto{family}CJK-{weight}.ttc'), size, index=0)
 
 
 def front(text):
@@ -121,7 +122,7 @@ def render(meta, out):
     img = Image.new('RGB', (W, H), BLACK)
     d = ImageDraw.Draw(img)
     bookmark(img, PAD, 64)
-    d.text((PAD + 40, 66), SITE.get('title', '税理士のしおり'), font=font('Bold', 30), fill=WHITE)
+    d.text((PAD + 40, 66), SITE.get('title', '税理士のしおり'), font=font('SemiBold', 30, 'Serif'), fill=WHITE)
     lab = label_of(meta['category'], meta['topic'])
     if lab:
         d.text((PAD, 150), lab, font=font('Bold', 26), fill=YELLOW)
@@ -130,7 +131,7 @@ def render(meta, out):
     main, sub = (title.split('｜', 1) + [''])[:2]
     width = W - PAD * 2
     for size in (64, 58, 52, 46, 42):
-        fm = font('Bold', size)
+        fm = font('SemiBold', size, 'Serif')
         lines = wrap(main, fm, width, 3)
         if lines:
             break

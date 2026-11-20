@@ -1,0 +1,83 @@
+---
+// 今月と来月の期限（税務・労務）。ビルドした日の分を書き出し、表示するときにブラウザの日付で計算し直す
+import data from '../data/deadlines.json';
+interface Props { limit?: number }
+const { limit = 5 } = Astro.props;
+
+type Item = { date: string; label: string; title: string; note: string; kind: string; shifted: boolean };
+const WD = ['日', '月', '火', '水', '木', '金', '土'];
+const pad = (n: number) => String(n).padStart(2, '0');
+const key = (d: Date) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const holidays = new Set(data.holidays);
+const closed = (d: Date) => d.getDay() === 0 || d.getDay() === 6 || holidays.has(key(d)) || (d.getMonth() === 11 && d.getDate() >= 29) || (d.getMonth() === 0 && d.getDate() <= 3);
+function build(today: Date): Item[] {
+  const out: Item[] = [];
+  for (let k = 0; k < 2; k++) {
+    const y = today.getFullYear() + Math.floor((today.getMonth() + k) / 12);
+    const m = (today.getMonth() + k) % 12;
+    const rows = [...data.monthly, ...data.annual.filter((a) => a.month === m + 1)];
+    for (const r of rows) {
+      if (r.day === null) {
+        out.push({ date: `${y}-${pad(m + 1)}-00`, label: `${m + 1}月中`, title: r.title, note: r.note, kind: r.kind, shifted: false });
+        continue;
+      }
+      const day = r.day === 'end' ? new Date(y, m + 1, 0).getDate() : Number(r.day);
+      const d = new Date(y, m, day);
+      let shifted = false;
+      while (closed(d)) { d.setDate(d.getDate() + 1); shifted = true; }
+      out.push({ date: key(d), label: `${d.getMonth() + 1}/${d.getDate()}（${WD[d.getDay()]}）`, title: r.title, note: r.note, kind: r.kind, shifted });
+    }
+  }
+  const t = key(today);
+  return out
+    .filter((x) => x.date.endsWith('-00') ? x.date.slice(0, 7) >= t.slice(0, 7) : x.date >= t)
+    .sort((a, b) => a.date.localeCompare(b.date));
+}
+// ビルド時（日本時間）の分
+const now = new Date(Date.now() + 9 * 3600 * 1000);
+const items = build(new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())).slice(0, limit);
+---
+<div class="deadlines" data-deadlines data-limit={limit}>
+  <p class="deadlines-head"><span class="deadlines-en">DEADLINES</span>今月と来月の期限</p>
+  <ol class="deadlines-list">
+    {items.map((x) => (
+      <li>
+        <time datetime={x.date.endsWith('-00') ? x.date.slice(0, 7) : x.date}>{x.label}</time>
+        <span class="deadlines-body"><span class="deadlines-kind">{x.kind}</span><strong>{x.title}</strong><span class="deadlines-note">{x.note}{x.shifted && '（休日のため翌平日）'}</span></span>
+      </li>
+    ))}
+  </ol>
+  <p class="deadlines-foot"><span>休日に当たる期限は、翌平日にずらしています。</span><span>決算日や特例の有無で、会社ごとに変わります。</span></p>
+</div>
+<script is:inline define:vars={{ data }}>
+  (function () {
+    var root = document.querySelector('[data-deadlines]');
+    if (!root) return;
+    var limit = Number(root.getAttribute('data-limit')) || 5;
+    var WD = ['日', '月', '火', '水', '木', '金', '土'];
+    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    var key = function (d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); };
+    var hol = {}; data.holidays.forEach(function (h) { hol[h] = 1; });
+    var closed = function (d) { var m = d.getMonth(), dd = d.getDate(); return d.getDay() === 0 || d.getDay() === 6 || hol[key(d)] || (m === 11 && dd >= 29) || (m === 0 && dd <= 3); };
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    var out = [];
+    for (var k = 0; k < 2; k++) {
+      var y = today.getFullYear() + Math.floor((today.getMonth() + k) / 12), m = (today.getMonth() + k) % 12;
+      var rows = data.monthly.concat(data.annual.filter(function (a) { return a.month === m + 1; }));
+      rows.forEach(function (r) {
+        if (r.day === null) { out.push({ date: y + '-' + pad(m + 1) + '-00', label: (m + 1) + '月中', r: r, s: false }); return; }
+        var day = r.day === 'end' ? new Date(y, m + 1, 0).getDate() : Number(r.day);
+        var d = new Date(y, m, day), s = false;
+        while (closed(d)) { d.setDate(d.getDate() + 1); s = true; }
+        out.push({ date: key(d), label: (d.getMonth() + 1) + '/' + d.getDate() + '（' + WD[d.getDay()] + '）', r: r, s: s });
+      });
+    }
+    var t = key(today);
+    out = out.filter(function (x) { return /-00$/.test(x.date) ? x.date.slice(0, 7) >= t.slice(0, 7) : x.date >= t; })
+      .sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; }).slice(0, limit);
+    var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+    root.querySelector('.deadlines-list').innerHTML = out.map(function (x) {
+      return '<li><time datetime="' + (/-00$/.test(x.date) ? x.date.slice(0, 7) : x.date) + '">' + x.label + '</time><span class="deadlines-body"><span class="deadlines-kind">' + esc(x.r.kind) + '</span><strong>' + esc(x.r.title) + '</strong><span class="deadlines-note">' + esc(x.r.note) + (x.s ? '（休日のため翌平日）' : '') + '</span></span></li>';
+    }).join('');
+  })();
+</script>

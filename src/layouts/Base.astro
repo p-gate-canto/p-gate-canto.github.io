@@ -14,8 +14,9 @@ interface Props {
   image?: string; // OGP画像のパス（記事ページは public/og/<slug>.png）。なければ共通の og.png
   // side：本文＋右サイドバー（PCの広い画面だけ）。full：トップページ用の広い1列。plain：記事ページ（自前で目次の列を持つ）
   layout?: 'side' | 'full' | 'plain';
+  dock?: boolean; // 記事ページ：スマホ・タブレットの下にガラスのバー（目次・しおり・上へ）を出す
 }
-const { title, description = SITE_DESCRIPTION, current = '', type = 'website', noindex = false, published, modified, jsonld = [], layout = 'side', image } =
+const { title, description = SITE_DESCRIPTION, current = '', type = 'website', noindex = false, published, modified, jsonld = [], layout = 'side', image, dock = false } =
   Astro.props;
 const pageTitle = title ? `${title}｜${SITE_TITLE}` : `${SITE_TITLE}｜${SITE_SUBTITLE}`;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -27,6 +28,7 @@ const nav = [
   { href: url('/posts/'), label: '記事一覧', key: 'posts' },
   { href: url('/about/'), label: 'このブログ', key: 'about' },
   { href: url('/search/'), label: '検索', key: 'search' },
+  { href: url('/shiori/'), label: 'しおり', key: 'shiori' },
 ];
 // スマホのメニューとフッターだけに出す補助の入口
 const subNav = [
@@ -64,8 +66,16 @@ const subNav = [
     <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
     <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href={url('/rss.xml')} />
     <link rel="sitemap" href={url('/sitemap-index.xml')} />
+    <link rel="stylesheet" href={url('/fonts/noto-serif-jp/600.css')} />
+    <script is:inline>
+      /* しおりの保存先：この端末のブラウザ（localStorage）だけ。使えない環境では何もしない */
+      window.Shiori = {
+        get: function (k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+        set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+      };
+    </script>
   </head>
-  <body>
+  <body class:list={[{ 'has-dock': dock }]}>
     <header class="site-header">
       <div class="wrap">
         <a class="logo" href={url('/')}>
@@ -73,12 +83,12 @@ const subNav = [
           <span class="logo-text">{SITE_TITLE}</span>
         </a>
         <nav class="nav" aria-label="メインメニュー">
-          {nav.filter((n) => n.key !== 'home').map((n) => <Fragment>{'\n'}<a href={n.href} aria-current={current === n.key ? 'page' : undefined}>{n.label}</a></Fragment>)}
+          {nav.filter((n) => n.key !== 'home').map((n) => <Fragment>{'\n'}<a href={n.href} class:list={[{ 'nav-shiori': n.key === 'shiori' }]} aria-current={current === n.key ? 'page' : undefined}>{n.label}{n.key === 'shiori' && <span class="shiori-count" hidden></span>}</a></Fragment>)}
         </nav>
         <details class="menu">
           <summary aria-label="メニューを開く"><span class="menu-icon" aria-hidden="true"></span>メニュー</summary>
           <nav class="menu-panel" aria-label="メニュー">
-            {nav.map((n) => <a href={n.href} aria-current={current === n.key ? 'page' : undefined}>{n.label}</a>)}
+            {nav.map((n) => <a href={n.href} aria-current={current === n.key ? 'page' : undefined}>{n.key === 'shiori' ? <span>しおり <span class="shiori-count" hidden></span></span> : n.label}</a>)}
             <div class="menu-sub">{subNav.map((n) => <a href={n.href}>{n.label}</a>)}</div>
           </nav>
         </details>
@@ -113,5 +123,56 @@ const subNav = [
         <p>&copy; {new Date().getFullYear()} {SITE_TITLE}</p>
       </div>
     </footer>
+    <script is:inline>
+      /* しおり（あとで読む）と、読みかけの記録。この端末のブラウザ（localStorage）だけに保存する */
+      (function () {
+        var S = window.Shiori;
+        /* ヘッダー：本文と重なったら（スクロールしたら）すりガラスに */
+        var hd = document.querySelector('.site-header');
+        var glass = function () { if (hd) hd.classList.toggle('is-glass', scrollY > 8); };
+        addEventListener('scroll', glass, { passive: true }); glass();
+        function saved() { var v = S.get('shiori:saved', []); return Array.isArray(v) ? v : []; }
+        function count() {
+          var n = saved().length;
+          document.querySelectorAll('.shiori-count').forEach(function (el) { el.textContent = n; el.hidden = !n; });
+        }
+        var art = document.querySelector('[data-post-id]');
+        if (art) {
+          var id = art.getAttribute('data-post-id'), title = art.getAttribute('data-post-title'), href = location.pathname;
+          var btns = document.querySelectorAll('.shiori-btn');
+          var on = function () { return saved().some(function (x) { return x.id === id; }); };
+          var paint = function () { var v = on(); btns.forEach(function (b) { b.setAttribute('aria-pressed', v ? 'true' : 'false'); }); };
+          btns.forEach(function (b) {
+            b.addEventListener('click', function () {
+              var list = saved().filter(function (x) { return x.id !== id; });
+              if (!on()) list.unshift({ id: id, t: title, u: href, at: Date.now() });
+              S.set('shiori:saved', list.slice(0, 200)); paint(); count();
+            });
+          });
+          paint();
+          /* 読みかけの位置：本文をどこまで読んだか（0〜1） */
+          var main = document.querySelector('.article-main'), tick = 0;
+          var record = function () {
+            tick = 0; if (!main) return;
+            var r = main.getBoundingClientRect(), total = r.height - innerHeight;
+            var p = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 1;
+            var prog = S.get('shiori:progress', {}) || {};
+            prog[id] = { t: title, u: href, p: Math.max(p, (prog[id] && prog[id].p) || 0), at: Date.now() };
+            var keys = Object.keys(prog).sort(function (a, b) { return prog[b].at - prog[a].at; });
+            keys.slice(30).forEach(function (k) { delete prog[k]; });
+            S.set('shiori:progress', prog);
+          };
+          addEventListener('scroll', function () { if (!tick) tick = setTimeout(record, 600); }, { passive: true });
+          setTimeout(record, 1500);
+          /* 「続きから読む」で来たとき（?r=0.42）は、その位置まで送る */
+          var m = /[?&]r=(0\.\d+)/.exec(location.search);
+          if (m && main) setTimeout(function () {
+            var r = main.getBoundingClientRect(), total = r.height - innerHeight;
+            scrollTo(0, scrollY + r.top + total * Number(m[1]));
+          }, 50);
+        }
+        count();
+      })();
+    </script>
   </body>
 </html>
