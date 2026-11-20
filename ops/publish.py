@@ -2,12 +2,13 @@
 """公開キューの先頭から、まだ下書きの記事を N 本だけ公開設定にする。
 
 使い方:
-  python3 ops/publish.py --count 20 --date 2026-11-21           # 実行（毎朝は最大20本）
+  python3 ops/publish.py --count 10 --date 2026-11-21           # 実行（毎朝は最大10本）
   python3 ops/publish.py --count 5 --date 2026-11-21 --dry-run  # 確認だけ（ファイルは変えない）
 
 - 対象の記事は draft: true → false、pubDate を公開日にする
 - 公開した記事は ops/published.log に「日付<TAB>slug」で追記する
 - キューにあるのに記事ファイルがない、frontmatter が読めない場合はエラーで止まる
+- 行頭に「保留」と書いた記事は公開しない（筆者の回答待ちなど）
 - 最後に「キューの残り本数」を表示する（10本を切ったら補充が必要）
 """
 import argparse
@@ -22,10 +23,11 @@ LOG = ROOT / 'ops' / 'published.log'
 
 
 def read_queue():
+    """キューを読む。行頭が「保留」の記事は飛ばす（順番は残したまま、公開だけ止める）。"""
     slugs = []
     for line in QUEUE.read_text(encoding='utf-8').splitlines():
         s = line.split('#', 1)[0].strip()
-        if s:
+        if s and not s.startswith('保留'):
             slugs.append(s)
     return slugs
 
