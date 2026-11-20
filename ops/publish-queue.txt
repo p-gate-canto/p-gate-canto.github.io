@@ -76,3 +76,14 @@ crm-adoption
 business-flow-chart
 ai-task-selection
 sme-security-basics
+# 追加（2026/11/20 ユーザー承認：下書き30本の3回目、回答反映済み）
+pricing-power
+business-succession-five-steps
+monthly-closing-speed
+psychological-safety
+sme-ma-guideline
+brand-basics
+sme-accounting-guideline
+okr-vs-kpi
+lean-startup
+mckinsey-7s
