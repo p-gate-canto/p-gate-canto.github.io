@@ -97,7 +97,7 @@ a:hover { color: var(--accent); }
 .prose table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 20px 0; }
 .prose th, .prose td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; background: var(--surface); }
 .prose th { background: #eef0f3; white-space: nowrap; }
-.prose td:first-child { white-space: nowrap; }
+.prose td:first-child { min-width: 7em; }
 .prose code { background: #eef0f3; padding: 2px 6px; font-size: 0.9em; }
 .prose pre { background: var(--deep) !important; color: #e6e9ec; padding: 16px; overflow-x: auto; }
 .prose hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
@@ -223,7 +223,9 @@ a.type-chip:hover { border-color: var(--green); }
   .hero h1 { font-size: 24px; }
   .article-head h1 { font-size: 22px; }
   .prose table { display: block; overflow-x: auto; width: auto; font-size: 13px; }
-  .prose th, .prose td { padding: 8px; }
+  .prose th, .prose td { padding: 8px; min-width: 8.5em; }
+  .prose td:first-child { min-width: 7.5em; }
+  .prose td:last-child { min-width: 11em; }
   .site-header .wrap { padding-top: 12px; }
   .logo-text { font-size: 18px; }
   .site-header .wrap { padding-bottom: 0; }
