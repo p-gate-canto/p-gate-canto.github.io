@@ -199,6 +199,7 @@ a.type-chip:hover { color: var(--ink); border-color: var(--ink); }
 .search-clear { border: 0; background: none; padding: 0 16px; font: inherit; font-size: 12px; color: var(--muted); cursor: pointer; }
 .search-count { margin: 28px 0 12px; font-size: 13px; font-weight: 700; color: var(--ink); }
 .search-suggest .topics { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.search-q #search-suggest { display: none; }
 .btn-more { font: inherit; font-size: 14px; font-weight: 700; color: var(--ink); background: transparent; border: 1px solid var(--ink); padding: 12px 32px; cursor: pointer; }
 .btn-more:hover { background: var(--ink); color: #fff; }
 #search { --pagefind-ui-primary: #2e2e38; --pagefind-ui-text: #2e2e38; --pagefind-ui-background: #ffffff; --pagefind-ui-border: #e3e3e8; --pagefind-ui-tag: #f6f6f8; --pagefind-ui-border-radius: 0; --pagefind-ui-font: inherit; }

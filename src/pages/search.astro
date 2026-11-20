@@ -4,6 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import { SITE_KEYWORDS, url } from '../consts';
 ---
 <Base title="サイト内検索" description="税理士のしおりの記事を検索" current="search" noindex>
+  <script is:inline slot="head">if (/[?&]q=[^&]/.test(location.search)) document.documentElement.classList.add('search-q');</script>
   <PageHero slot="hero" title="サイト内検索" lead="キーワードで記事を探せます。" />
   <section class="section">
     <div class="wrap">
@@ -32,7 +33,9 @@ import { SITE_KEYWORDS, url } from '../consts';
       var count = document.getElementById('search-count');
       var list = document.getElementById('search-results');
       var more = document.getElementById('search-more');
-      var pagefind = null, results = [], shown = 0, seq = 0;
+      var results = [], shown = 0, seq = 0;
+      // 検索の仕組みは、ページを開いたらすぐ読み込み始める（入力してから待たせない）
+      var ready = import('/pagefind/pagefind.js').then(function (pf) { return pf.init().then(function () { return pf; }); });
       function esc(t) { return String(t || '').replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
       function card(r) {
         var m = r.meta || {};
@@ -59,15 +62,19 @@ import { SITE_KEYWORDS, url } from '../consts';
         shown += next.length;
         more.hidden = shown >= results.length;
       }
-      async function run(q) {
+      async function run(q, first) {
         var my = ++seq;
+        document.documentElement.classList.remove('search-q');
         clear.hidden = !q;
         var u = new URL(location.href);
         if (q) u.searchParams.set('q', q); else u.searchParams.delete('q');
         history.replaceState(null, '', u);
         if (!q) { list.innerHTML = ''; count.hidden = true; more.hidden = true; suggest.hidden = false; return; }
-        if (!pagefind) { pagefind = await import('/pagefind/pagefind.js'); await pagefind.init(); }
-        var s = await pagefind.debouncedSearch(q, {}, 200);
+        // 結果が出るまでは「検索しています」だけを出し、おすすめのキーワード一覧は隠したままにする
+        suggest.hidden = true;
+        if (first) { count.hidden = false; count.textContent = '「' + q + '」を検索しています…'; }
+        var pagefind = await ready;
+        var s = first ? await pagefind.search(q) : await pagefind.debouncedSearch(q, {}, 200);
         if (s === null || my !== seq) return;
         results = s.results; shown = 0; list.innerHTML = '';
         suggest.hidden = results.length > 0;
@@ -79,7 +86,7 @@ import { SITE_KEYWORDS, url } from '../consts';
       clear.addEventListener('click', function () { input.value = ''; run(''); input.focus(); });
       more.addEventListener('click', showMore);
       var q0 = new URLSearchParams(location.search).get('q');
-      if (q0) { input.value = q0; run(q0); }
+      if (q0) { input.value = q0; run(q0, true); }
     })();
   </script>
 </Base>
