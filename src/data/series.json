@@ -24,6 +24,18 @@
     "posts": ["family-business-models", "ma-methods-glossary"]
   },
   {
+    "name": "人事・労務の基本",
+    "posts": ["work-rules-obligation", "saburoku-kyotei-overtime-limit", "social-insurance-expansion-part-time", "turnover-rate-and-reasons"]
+  },
+  {
+    "name": "資金繰りと財務の基本",
+    "posts": ["cash-flow-forecast", "financial-health-three-indicators", "guaranteed-loan-vs-proper-loan", "subsidy-vs-grant"]
+  },
+  {
+    "name": "DXと経理のデジタル化",
+    "posts": ["dx-vs-digitalization", "electronic-transaction-data-storage"]
+  },
+  {
     "name": "診断士 企業経営理論：経営戦略",
     "posts": ["corporate-vs-competitive-strategy", "strategy-basics-5p", "domain-diversification", "ppm-sbu", "economics-of-business", "five-forces", "porter-generic-strategies", "kotler-competitive-position", "vrio-core-competence", "first-mover-advantage", "ir-framework", "takeover-defense-glossary"]
   },
