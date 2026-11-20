@@ -49,3 +49,7 @@ ir-framework
 first-mover-advantage
 valley-of-death
 takeover-defense-glossary
+# 追加（2026/11/20 ユーザー承認）
+year-end-bonus-deduction
+tax-return-deadline-extension
+loss-carryforward-carryback
