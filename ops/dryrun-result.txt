@@ -1,0 +1,15 @@
+# 自動公開 試験運転の結果（実行日：2026-11-20 JST）
+
+1. リポジトリの準備：成功（既存のクローンを git pull --rebase、Already up to date）
+2. CLAUDE.md の読み込み：成功
+3. 依存のインストール：成功（npm ci 正常終了。Python playwright と /usr/bin/google-chrome は導入済み）
+4. publish.py --dry-run：成功（終了コード 0、ファイルの変更なし）
+   出力：
+   （確認のみ）公開設定：officer-pay-vs-dividend
+   （確認のみ）公開設定：withholding-20-42-vs-20-315
+   （確認のみ）公開設定：sonkin-vs-keihi
+   （確認のみ）公開設定：swot-cross-swot
+   （確認のみ）公開設定：ppm-sbu
+   公開した本数：5　キューの残り：29本
+5. npm run build：成功（終了コード 0、「[しおり]」の警告・エラーなし）
+6. ops/check.py：成功（確認したページ：101（PC・スマホ）、問題なし）
