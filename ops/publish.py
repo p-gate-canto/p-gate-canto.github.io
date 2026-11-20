@@ -2,7 +2,7 @@
 """公開キューの先頭から、まだ下書きの記事を N 本だけ公開設定にする。
 
 使い方:
-  python3 ops/publish.py --count 5 --date 2026-11-21            # 実行
+  python3 ops/publish.py --count 20 --date 2026-11-21           # 実行（毎朝は最大20本）
   python3 ops/publish.py --count 5 --date 2026-11-21 --dry-run  # 確認だけ（ファイルは変えない）
 
 - 対象の記事は draft: true → false、pubDate を公開日にする

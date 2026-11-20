@@ -25,7 +25,7 @@ const posts = defineCollection({
         (v) => (v === null || v === '' ? [] : typeof v === 'string' ? v.split(/[,、]\s*/) : v),
         z.array(z.string()).default([]),
       ),
-      // 受験生向けの記事だけに付ける：中小企業診断士1次試験の科目名（冒頭に「〇〇で問われる内容です」と表示する）
+      // 受験生向けの記事だけに付ける：試験科目名。読者タグ（税理士・社労士・診断士受験生向け）に応じて、冒頭に「〇〇試験の「科目」で問われる内容です。」と表示する
       exam: z.preprocess(
         (v) => (v === null || v === '' || v === undefined ? [] : typeof v === 'string' ? v.split(/[,、]\s*/) : v),
         z.array(z.string()).default([]),
@@ -56,8 +56,8 @@ const posts = defineCollection({
         type = 'explainer';
       }
       const tags = [...new Set(d.tags)].filter((t) => ALL_TAGS.includes(t) || (warn(`タグ ${t} は一覧にないため外しました`), false));
-      if (tags.length > 5) warn('タグが5個を超えたため、先頭の5個だけを使います');
-      return { ...d, category, topic, type, tags: tags.slice(0, 5) };
+      if (tags.length > 6) warn('タグが6個を超えたため、先頭の6個だけを使います');
+      return { ...d, category, topic, type, tags: tags.slice(0, 6) };
     }),
 });
 

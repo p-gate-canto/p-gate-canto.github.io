@@ -6,7 +6,7 @@ type: explainer
 category: corporate-tax
 topic: tax-planning
 tags:
-- 経営者向け
+- 経営層向け
 - 経理担当者向け
 - 令和8年度税制改正
 pubDate: 2026-11-20

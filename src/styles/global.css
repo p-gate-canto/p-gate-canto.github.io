@@ -115,6 +115,7 @@ a:hover { color: var(--accent); }
 .cats { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
 .cats.cats-3 { grid-template-columns: repeat(3, 1fr); }
 .cats.cats-4 { grid-template-columns: repeat(4, 1fr); }
+.cats.cats-6 { grid-template-columns: repeat(3, 1fr); }
 .cat, .toc-card, .topic, .mid-links a {
   position: relative; overflow: hidden; background: var(--surface); border: 1px solid var(--line);
   box-shadow: 0 1px 2px rgba(8, 21, 29, 0.04); text-decoration: none; color: var(--ink); transition: border-color 0.2s;
@@ -270,7 +271,7 @@ a.type-chip:hover { border-color: var(--green); }
   .nav-home { display: none; }
   .toc { grid-template-columns: 1fr; }
   .cats, .cats.cats-3 { grid-template-columns: 1fr; }
-  .cats.cats-4 { grid-template-columns: 1fr 1fr; }
+  .cats.cats-4, .cats.cats-6 { grid-template-columns: 1fr 1fr; }
   .hero-keywords .kw-label { flex-basis: 100%; }
   .mid-links { grid-template-columns: 1fr 1fr; }
   .pager { grid-template-columns: 1fr; }

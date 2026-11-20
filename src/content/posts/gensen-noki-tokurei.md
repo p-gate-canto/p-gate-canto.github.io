@@ -7,7 +7,7 @@ category: personal-tax
 topic: income-tax
 tags:
 - 経理担当者向け
-- 経営者向け
+- 経営層向け
 - 創業期
 pubDate: 2026-11-20
 lawBaseDate: 2026-11-20

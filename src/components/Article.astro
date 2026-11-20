@@ -23,6 +23,13 @@ const idx = all.findIndex((p) => p.id === post.id);
 const newer = idx > 0 ? all[idx - 1] : undefined;
 const older = idx >= 0 && idx < all.length - 1 ? all[idx + 1] : undefined;
 const minutes = readingMinutes(post.body);
+// 受験生向けの記事：読者タグから試験名を決める（1記事につき1つの試験）
+const EXAM_NAMES: Record<string, string> = {
+  税理士受験生向け: '税理士試験',
+  社労士受験生向け: '社会保険労務士試験',
+  診断士受験生向け: '中小企業診断士1次試験',
+};
+const examName = d.tags.map((t) => EXAM_NAMES[t]).find(Boolean);
 ---
 <article class="wrap" data-pagefind-body={preview ? undefined : ''}>
   {preview && <p class="preview-banner">下書きプレビューです。公開されておらず、検索にも出ません。</p>}
@@ -39,7 +46,7 @@ const minutes = readingMinutes(post.body);
     {d.tags.length > 0 && (
       <div class="tags">{d.tags.map((t) => <Fragment>{'\n'}{preview ? <span>#{t}</span> : <a href={tagUrl(t)}>#{t}</a>}</Fragment>)}</div>
     )}
-    {d.exam.length > 0 && <p class="basedate exam-lead">中小企業診断士1次試験の{d.exam.map((s) => `「${s}」`).join('')}で問われる内容です。</p>}
+    {examName && d.exam.length > 0 && <p class="basedate exam-lead">{examName}の{d.exam.map((s) => `「${s}」`).join('')}で問われる内容です。</p>}
     {d.lawBaseDate && <p class="basedate">この記事は {fmtDate(d.lawBaseDate)} 時点の法令にもとづいています。</p>}
     {isStale(d.lawBaseDate) && (
       <p class="stale">基準日から1年以上たっています。その後の税制改正・法改正で内容が変わっている可能性があります。</p>

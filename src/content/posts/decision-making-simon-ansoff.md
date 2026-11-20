@@ -6,8 +6,7 @@ type: explainer
 category: philosophy
 topic: judgment-axis
 tags:
-- 中小企業診断士
-- 受験生向け
+- 診断士受験生向け
 exam:
 - 企業経営理論
 pubDate: 2026-11-20

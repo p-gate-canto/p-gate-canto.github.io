@@ -6,7 +6,7 @@ type: explainer
 category: corporate-tax
 topic: officer-pay
 tags:
-- 経営者向け
+- 経営層向け
 - 経理担当者向け
 - 税理士×社労士
 pubDate: 2026-11-20

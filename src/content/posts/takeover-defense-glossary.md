@@ -6,8 +6,7 @@ type: glossary
 category: ma
 topic: ma-strategy
 tags:
-- 中小企業診断士
-- 受験生向け
+- 診断士受験生向け
 exam:
 - 企業経営理論
 - 経営法務

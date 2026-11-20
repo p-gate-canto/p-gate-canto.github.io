@@ -6,7 +6,7 @@ type: explainer
 category: corporate-tax
 topic: corporate-income-tax
 tags:
-- 経営者向け
+- 経営層向け
 - 経理担当者向け
 pubDate: 2026-11-20
 lawBaseDate: 2026-11-20

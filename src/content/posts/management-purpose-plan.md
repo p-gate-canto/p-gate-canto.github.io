@@ -6,7 +6,7 @@ type: comparison
 category: management-plan
 topic: midterm-plan
 tags:
-- 経営者向け
+- 経営層向け
 pubDate: 2026-11-20
 draft: false
 ---

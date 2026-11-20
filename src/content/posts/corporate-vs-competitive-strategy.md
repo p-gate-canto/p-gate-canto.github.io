@@ -5,8 +5,7 @@ description: 企業戦略は「どの事業で戦うか」、競争戦略は「�
 type: comparison
 category: corporate-strategy
 tags:
-- 受験生向け
-- 中小企業診断士
+- 診断士受験生向け
 exam:
 - 企業経営理論
 pubDate: 2026-11-20

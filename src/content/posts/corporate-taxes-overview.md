@@ -6,7 +6,7 @@ type: comparison
 category: corporate-tax
 topic: corporate-income-tax
 tags:
-- 経営者向け
+- 経営層向け
 - 経理担当者向け
 - 創業期
 - 令和8年度税制改正

@@ -6,7 +6,7 @@ type: comparison
 category: corporate-tax
 topic: officer-pay
 tags:
-- 経営者向け
+- 経営層向け
 - 経理担当者向け
 - 実務家向け
 pubDate: 2026-11-20

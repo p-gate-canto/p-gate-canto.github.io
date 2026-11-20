@@ -489,26 +489,24 @@ content:
       - name: listening
         label: コミュニケーション｜聞く力・質問力
   - name: tags
-    label: タグ（最大5個）
+    label: タグ（最大6個。読者タグは1記事に1種類。経営層・経理・実務家向けと受験生向けは混ぜない）
     type: select
     options:
       multiple: true
-      max: 5
+      max: 6
       values:
-      - name: 中小企業診断士
-        label: 資格｜中小企業診断士
-      - name: 社会保険労務士
-        label: 資格｜社会保険労務士
-      - name: 税理士試験
-        label: 資格｜税理士試験
-      - name: 経営者向け
-        label: 読者｜経営者向け
+      - name: 経営層向け
+        label: 読者｜経営層向け
       - name: 経理担当者向け
         label: 読者｜経理担当者向け
       - name: 実務家向け
         label: 読者｜実務家向け
-      - name: 受験生向け
-        label: 読者｜受験生向け
+      - name: 税理士受験生向け
+        label: 読者｜税理士受験生向け
+      - name: 社労士受験生向け
+        label: 読者｜社労士受験生向け
+      - name: 診断士受験生向け
+        label: 読者｜診断士受験生向け
       - name: 創業期
         label: 会社のステージ｜創業期
       - name: 成長期
@@ -541,31 +539,64 @@ content:
         label: 視点｜税理士×社労士
       - name: 税理士×診断士
         label: 視点｜税理士×診断士
-  - name: pubDate
-    label: 公開日
-    type: date
-    required: true
-    options:
-      format: yyyy-MM-dd
-  - name: updatedDate
-    label: 更新日（更新したときだけ）
-    type: date
-    default: ''
-    options:
-      format: yyyy-MM-dd
   - name: exam
-    label: 診断士試験の科目（受験生向けの記事だけ。選ぶと冒頭に「〇〇で問われる内容です」と出る）
+    label: 試験科目（受験生向けの記事だけ。読者タグの試験に合わせて選ぶと、冒頭に「〇〇試験の「科目」で問われる内容です」と出る）
     type: select
     options:
       multiple: true
       values:
-      - 企業経営理論
-      - 財務・会計
-      - 運営管理
-      - 経済学・経済政策
-      - 経営法務
-      - 経営情報システム
-      - 中小企業経営・中小企業政策
+      - name: 企業経営理論
+        label: 診断士｜企業経営理論
+      - name: 財務・会計
+        label: 診断士｜財務・会計
+      - name: 運営管理
+        label: 診断士｜運営管理
+      - name: 経済学・経済政策
+        label: 診断士｜経済学・経済政策
+      - name: 経営法務
+        label: 診断士｜経営法務
+      - name: 経営情報システム
+        label: 診断士｜経営情報システム
+      - name: 中小企業経営・中小企業政策
+        label: 診断士｜中小企業経営・中小企業政策
+      - name: 簿記論
+        label: 税理士｜簿記論
+      - name: 財務諸表論
+        label: 税理士｜財務諸表論
+      - name: 法人税法
+        label: 税理士｜法人税法
+      - name: 所得税法
+        label: 税理士｜所得税法
+      - name: 相続税法
+        label: 税理士｜相続税法
+      - name: 消費税法
+        label: 税理士｜消費税法
+      - name: 酒税法
+        label: 税理士｜酒税法
+      - name: 国税徴収法
+        label: 税理士｜国税徴収法
+      - name: 住民税
+        label: 税理士｜住民税
+      - name: 事業税
+        label: 税理士｜事業税
+      - name: 固定資産税
+        label: 税理士｜固定資産税
+      - name: 労働基準法及び労働安全衛生法
+        label: 社労士｜労働基準法及び労働安全衛生法
+      - name: 労働者災害補償保険法
+        label: 社労士｜労働者災害補償保険法
+      - name: 雇用保険法
+        label: 社労士｜雇用保険法
+      - name: 労務管理その他の労働に関する一般常識
+        label: 社労士｜労務管理その他の労働に関する一般常識
+      - name: 社会保険に関する一般常識
+        label: 社労士｜社会保険に関する一般常識
+      - name: 健康保険法
+        label: 社労士｜健康保険法
+      - name: 厚生年金保険法
+        label: 社労士｜厚生年金保険法
+      - name: 国民年金法
+        label: 社労士｜国民年金法
   - name: lawBaseDate
     label: 法令の基準日（税務・労務の記事は必ず入れる）
     type: date

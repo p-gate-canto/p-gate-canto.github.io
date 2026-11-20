@@ -5,7 +5,7 @@ description: 損益計算書には、売上総利益（粗利）・営業利益�
 type: comparison
 category: management-accounting
 tags:
-- 経営者向け
+- 経営層向け
 - 経理担当者向け
 pubDate: 2026-11-20
 draft: false

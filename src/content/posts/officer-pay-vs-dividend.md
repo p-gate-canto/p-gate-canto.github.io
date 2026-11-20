@@ -6,7 +6,7 @@ type: comparison
 category: personal-tax
 topic: income-split
 tags:
-- 経営者向け
+- 経営層向け
 - 実務家向け
 - 税理士×社労士
 - 令和8年度税制改正

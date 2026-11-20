@@ -6,7 +6,7 @@ type: explainer
 category: succession
 topic: family-succession
 tags:
-- 経営者向け
+- 経営層向け
 - 承継期
 - 令和8年度税制改正
 pubDate: 2026-11-20

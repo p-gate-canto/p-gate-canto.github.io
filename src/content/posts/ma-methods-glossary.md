@@ -6,7 +6,7 @@ type: glossary
 category: ma
 topic: ma-scheme
 tags:
-- 経営者向け
+- 経営層向け
 - 実務家向け
 - 承継期
 pubDate: 2026-11-20
