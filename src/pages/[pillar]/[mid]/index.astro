@@ -14,15 +14,34 @@ const m = midOf(mid)!;
 const p = pillarOf(pillar)!;
 const posts = (await getPosts()).filter((x) => x.data.category === mid);
 const counts = countBy(posts);
+// まず読む記事：taxonomy.json の start の順。公開済みのものだけ
+const start = (m.start ?? []).map((s) => posts.find((x) => x.id === s)).filter((x) => x !== undefined);
+const guideDesc = m.guide ? (m.guide.length > 120 ? m.guide.slice(0, m.guide.indexOf('。') + 1) || m.guide.slice(0, 120) : m.guide) : undefined;
 ---
 <Base
-  title={m.label}
-  description={`${m.label}（${m.topics.map((t) => t.label).join('、')}）の記事一覧`}
+  title={m.seoTitle ?? m.label}
+  description={guideDesc ?? `${m.label}（${m.topics.map((t) => t.label).join('、')}）の記事一覧`}
   current={pillar}
   noindex={posts.length === 0}
   jsonld={[breadcrumbLd([[p.en, pillarUrl(pillar)], [m.label, Astro.url.pathname]])]}
 >
   <PageHero slot="hero" title={m.label} lead={m.desc} crumbs={[[p.en, pillarUrl(pillar)]]} />
+  {m.guide && posts.length > 0 && (
+    <section class="section">
+      <div class="wrap">
+        <h2 class="section-title">この分野で扱うこと</h2>
+        <div class="prose mid-guide"><p>{m.guide}</p></div>
+      </div>
+    </section>
+  )}
+  {start.length > 0 && (
+    <section class="section">
+      <div class="wrap">
+        <h2 class="section-title">まず読む記事</h2>
+        <PostList posts={start} />
+      </div>
+    </section>
+  )}
   <section class="section">
     <div class="wrap">
       <h2 class="section-title">小カテゴリー</h2>

@@ -16,7 +16,8 @@ export const SITE_FEATURED: string[] = (site as { featured?: string[] }).feature
 
 // 分類（大分類・中カテゴリー・小カテゴリー・タグ・記事タイプ）は src/data/taxonomy.json で定義する
 export type Topic = { slug: string; label: string };
-export type Mid = { key: string; pillar: string; label: string; desc: string; topics: Topic[] };
+// seoTitle：分野ページの title。guide：分野ページの案内文（説明文にも使う）。start：「まず読む記事」の順番（slug）
+export type Mid = { key: string; pillar: string; label: string; desc: string; topics: Topic[]; seoTitle?: string; guide?: string; start?: string[] };
 
 export const PILLARS = taxonomy.pillars;
 export const MIDS = taxonomy.mids as Mid[];

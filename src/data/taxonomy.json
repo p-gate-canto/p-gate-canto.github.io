@@ -52,6 +52,13 @@
           "slug": "governance",
           "label": "ガバナンス・CSR"
         }
+      ],
+      "seoTitle": "経営戦略の基本と実務｜経営理念・SWOT分析・経営計画のつくり方",
+      "guide": "中小企業の経営戦略を、経営理念とビジョンの決め方から、SWOT分析などの環境分析、全社戦略と事業戦略、経営計画とKPIまで扱います。理念と計画の違いを押さえてから自社の分析に進む順に読むと、経営計画書や補助金の事業計画にそのまま使えます。",
+      "start": [
+        "mission-vision-value",
+        "management-purpose-plan",
+        "swot-cross-swot"
       ]
     },
     {
@@ -80,6 +87,13 @@
           "slug": "channel",
           "label": "販路"
         }
+      ],
+      "seoTitle": "マーケティングの基本と実務｜3C分析・価格の決め方・ブランディング",
+      "guide": "中小企業のマーケティングを、市場と顧客の分析、ブランド、価格、集客、販路の5つに分けて扱います。広告の前に、誰に選んでもらうのか、いくらで売るのかを決めることが出発点です。",
+      "start": [
+        "3c-analysis",
+        "pricing-power",
+        "brand-basics"
       ]
     },
     {
@@ -104,6 +118,14 @@
           "slug": "customer-management",
           "label": "顧客管理・販売力"
         }
+      ],
+      "seoTitle": "営業の仕組みづくり｜パイプライン管理・CRM・LTVで売上を管理する",
+      "guide": "営業を個人の頑張りではなく、仕組みとして管理する方法を扱います。商談を段階に分けて数字で見るパイプライン管理、売ることに使える時間の増やし方、顧客情報を1か所に集めるCRM、顧客1人の価値を測るLTVの順に読むと、営業会議の材料がそろいます。",
+      "start": [
+        "sales-pipeline-management",
+        "selling-time-ratio",
+        "crm-adoption",
+        "customer-lifetime-value"
       ]
     },
     {
@@ -124,6 +146,13 @@
           "slug": "culture",
           "label": "組織風土"
         }
+      ],
+      "seoTitle": "組織づくりの基本｜7S・心理的安全性・組織論",
+      "guide": "組織の形と動き方を扱います。戦略と組織のかみ合わせを点検する7S、成果を出すチームの条件である心理的安全性、組織論の歴史まで、経営者が人と組織を動かすときの判断材料を集めています。",
+      "start": [
+        "mckinsey-7s",
+        "psychological-safety",
+        "organization-theory-history"
       ]
     },
     {
@@ -160,6 +189,14 @@
           "slug": "work-rules",
           "label": "就業規則・労働時間"
         }
+      ],
+      "seoTitle": "人事・労務の基本と実務｜就業規則・36協定・社会保険の適用拡大・離職率",
+      "guide": "採用から退職まで、中小企業の人事・労務で押さえておきたい法令と実務を扱います。就業規則と36協定の義務、パートの社会保険の適用拡大の日程、離職率の計算と辞める理由など、経営者と担当者が判断に迷いやすい論点から順に書いています。",
+      "start": [
+        "work-rules-obligation",
+        "saburoku-kyotei-overtime-limit",
+        "social-insurance-expansion-part-time",
+        "turnover-rate-and-reasons"
       ]
     },
     {
@@ -184,6 +221,14 @@
           "slug": "closing",
           "label": "決算・経理実務"
         }
+      ],
+      "seoTitle": "会計の基本と実務｜決算書の読み方・損益分岐点・中小会計要領・月次決算",
+      "guide": "決算書の読み方から管理会計、決算と経理の実務までを扱います。5つの利益の違いと損益分岐点で会社の数字の見方を押さえ、中小会計要領と月次決算の早期化で、経営と融資に使える数字のつくり方へ進みます。",
+      "start": [
+        "gross-operating-ordinary-profit",
+        "contribution-margin-breakeven",
+        "sme-accounting-guideline",
+        "monthly-closing-speed"
       ]
     },
     {
@@ -228,6 +273,14 @@
           "slug": "tax-audit",
           "label": "税務調査"
         }
+      ],
+      "seoTitle": "中小企業の税務｜法人税・役員報酬・源泉徴収・年末調整の実務",
+      "guide": "中小企業と個人事業主にかかわる税金を、法人税、役員給与、源泉徴収、年末調整、地方税の順に扱います。どの記事も根拠の条文・通達と法令の基準日を示し、税制改正があれば書き直しています。",
+      "start": [
+        "corporate-taxes-overview",
+        "officer-pay-three-types",
+        "officer-pay-vs-dividend",
+        "withholding-10-21-vs-20-42"
       ]
     },
     {
@@ -256,6 +309,14 @@
           "slug": "subsidy",
           "label": "補助金・助成金"
         }
+      ],
+      "seoTitle": "財務の基本と実務｜資金繰り表・財務指標・融資・補助金",
+      "guide": "お金を回し、借り、守るための判断材料を扱います。資金繰り表で先の残高を見ることから始め、財務体質の指標、保証協会付き融資とプロパー融資、補助金と助成金の順に読むと、金融機関との話に必要な材料が一通りそろいます。",
+      "start": [
+        "cash-flow-forecast",
+        "financial-health-three-indicators",
+        "guaranteed-loan-vs-proper-loan",
+        "subsidy-vs-grant"
       ]
     },
     {
@@ -276,6 +337,14 @@
           "slug": "business-process",
           "label": "業務プロセス・生産性"
         }
+      ],
+      "seoTitle": "業務改善と生産性｜労働生産性・7つのムダ・業務フロー図・在庫管理",
+      "guide": "日々の仕事の進め方を見直し、同じ人数でより多くを回すための方法を扱います。労働生産性の測り方から入り、トヨタ生産方式の7つのムダ、業務フロー図、在庫回転日数と、現場で使える道具を順に紹介しています。",
+      "start": [
+        "labor-productivity",
+        "seven-wastes-office-work",
+        "business-flow-chart",
+        "inventory-turnover-days"
       ]
     },
     {
@@ -300,6 +369,14 @@
           "slug": "data",
           "label": "データ活用"
         }
+      ],
+      "seoTitle": "中小企業のDX｜デジタル化の進め方・電子帳簿保存法・生成AI・セキュリティ対策",
+      "guide": "DXを、ツールの導入ではなく仕事のやり方を変えることとして扱います。デジタル化との違い、電子取引データの保存、生成AIに任せる業務の選び方、最低限のセキュリティ対策の順に読むと、最初の一歩が決まります。",
+      "start": [
+        "dx-vs-digitalization",
+        "electronic-transaction-data-storage",
+        "ai-task-selection",
+        "sme-security-basics"
       ]
     },
     {
@@ -320,6 +397,13 @@
           "slug": "business-model",
           "label": "ビジネスモデル"
         }
+      ],
+      "seoTitle": "新規事業とイノベーション｜リーンスタートアップ・エフェクチュエーション",
+      "guide": "新しい事業や商品を生み出すときの考え方を扱います。小さく試して確かめるリーンスタートアップ、手持ちの資源から動くエフェクチュエーション、イノベーションの種類など、計画どおりに進まない新規事業の判断材料を集めています。",
+      "start": [
+        "lean-startup",
+        "effectuation",
+        "innovation-types-au-model"
       ]
     },
     {
@@ -344,6 +428,12 @@
           "slug": "succession-scheme",
           "label": "承継スキーム"
         }
+      ],
+      "seoTitle": "事業承継の進め方｜5ステップ・事業承継税制・ファミリービジネス",
+      "guide": "親族、社員、社外への事業承継を扱います。中小企業庁のガイドラインの5ステップで全体像をつかみ、事業承継税制の期限、家族経営に特有の論点へと読み進める構成です。",
+      "start": [
+        "business-succession-five-steps",
+        "family-business-models"
       ]
     },
     {
@@ -372,6 +462,12 @@
           "slug": "pmi",
           "label": "PMI・組織再編"
         }
+      ],
+      "seoTitle": "中小企業のM&A｜手法の違い・中小M&Aガイドライン・仲介会社の選び方",
+      "guide": "中小企業のM&Aを、売り手と買い手の両方の立場から扱います。株式譲渡や事業譲渡などの手法の違い、仲介会社の選び方を示した中小M&Aガイドライン、経営者保証の扱いなど、契約の前に知っておきたい論点を集めています。",
+      "start": [
+        "ma-methods-glossary",
+        "sme-ma-guideline"
       ]
     },
     {
@@ -400,7 +496,10 @@
           "slug": "motivation",
           "label": "モチベーション"
         }
-      ]
+      ],
+      "seoTitle": "勉強法・資格｜働きながら資格を取るための勉強法",
+      "guide": "働きながら資格の勉強を続けるための勉強法、学習計画、記憶の工夫、試験対策を扱います。",
+      "start": []
     },
     {
       "key": "learn",
@@ -420,7 +519,10 @@
           "slug": "learning-tools",
           "label": "学習ツール・AI活用"
         }
-      ]
+      ],
+      "seoTitle": "学び直し・読書｜実務の学び直しと読書の記録",
+      "guide": "実務の学び直しと読書、学習に使っている道具を扱います。",
+      "start": []
     },
     {
       "key": "workstyle",
@@ -444,7 +546,10 @@
           "slug": "health",
           "label": "体調管理"
         }
-      ]
+      ],
+      "seoTitle": "仕事術・習慣｜時間管理と習慣化",
+      "guide": "時間管理、習慣化、仕事の生産性、体調管理など、仕事を続けるための工夫を扱います。",
+      "start": []
     },
     {
       "key": "career",
@@ -468,6 +573,11 @@
           "slug": "communication",
           "label": "コミュニケーション"
         }
+      ],
+      "seoTitle": "考え方・キャリア｜働き方と仕事の考え方",
+      "guide": "仕事の考え方、キャリア、チームづくり、コミュニケーションを扱います。",
+      "start": [
+        "hello-shiori"
       ]
     }
   ],

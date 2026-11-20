@@ -108,6 +108,7 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
   font-size: 20px; font-weight: 700; line-height: 1.5; letter-spacing: 0.06em; color: var(--ink);
 }
 .section-title::before { content: ''; position: absolute; left: 0; top: -2px; width: 56px; height: 4px; background: var(--grad); }
+.prose.mid-guide { max-width: var(--max); padding: 0; }
 .section-lead { margin: 0 0 20px; font-size: 14px; color: var(--muted); }
 .section-title + :not(.section-lead) { margin-top: 18px; }
 /* グループの見出し（WORKの地図の層、サイドバー、タグのグループ） */
