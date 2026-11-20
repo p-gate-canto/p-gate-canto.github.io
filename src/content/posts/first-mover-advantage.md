@@ -9,8 +9,8 @@ tags:
 - 診断士受験生向け
 exam:
 - 企業経営理論
-pubDate: 2026-11-20
-draft: true
+pubDate: 2026-11-21
+draft: false
 ---
 ## 結論
 

@@ -10,9 +10,9 @@ tags:
 exam:
 - 企業経営理論
 - 経営法務
-pubDate: 2026-11-20
+pubDate: 2026-11-21
 lawBaseDate: 2026-11-20
-draft: true
+draft: false
 ---
 ## 結論
 
