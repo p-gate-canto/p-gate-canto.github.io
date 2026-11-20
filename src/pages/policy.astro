@@ -1,0 +1,12 @@
+---
+import PageHero from '../components/PageHero.astro';
+import Base from '../layouts/Base.astro';
+// 本文は src/content/pages/policy.md（Pages CMS の「編集方針」）で編集する
+import { Content, frontmatter } from '../content/pages/policy.md';
+---
+<Base title={frontmatter.title} description={frontmatter.description}>
+  <PageHero slot="hero" title={frontmatter.title} lead={frontmatter.description} />
+  <article class="wrap">
+    <div class="prose"><Content /></div>
+  </article>
+</Base>

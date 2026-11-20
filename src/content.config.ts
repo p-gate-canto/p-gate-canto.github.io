@@ -32,6 +32,11 @@ const posts = defineCollection({
         z.array(z.string()).default([]),
       ),
       lawBaseDate: optDate, // 法令の基準日
+      // 更新履歴：改正への対応や訂正をしたとき、日付と直した内容を1行ずつ残す（記事の末尾に表示）
+      updates: z.preprocess(
+        (v) => (v === null || v === '' || v === undefined ? [] : v),
+        z.array(z.object({ date: z.coerce.date(), note: z.string() })).default([]),
+      ),
       draft: z.boolean().default(false),
     })
     // 入力ミスがあってもビルドを止めない：小カテゴリーから中カテゴリーを決め、合わないものは外す

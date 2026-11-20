@@ -8,6 +8,7 @@ const publisherLd = () => ({
   name: SITE_TITLE,
   url: SITE_URL,
   logo: { '@type': 'ImageObject', url: abs('apple-touch-icon.png'), width: 180, height: 180 },
+  publishingPrinciples: abs('policy/'),
 });
 
 /** 筆者（公開する肩書きは「税理士・会社役員」まで） */

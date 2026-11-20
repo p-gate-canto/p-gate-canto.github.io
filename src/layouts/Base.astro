@@ -104,7 +104,7 @@ const subNav = [
           <p>{SITE_SUBTITLE}</p>
         </div>
         <nav class="footer-nav" aria-label="サイトの案内">
-          {[...nav.filter((n) => n.key !== 'home'), ...subNav].map((n) => <a href={n.href}>{n.label}</a>)}
+          {[...nav.filter((n) => n.key !== 'home'), ...subNav, { href: url('/policy/'), label: '編集方針' }].map((n) => <a href={n.href}>{n.label}</a>)}
         </nav>
       </div>
       <div class="wrap footer-bottom">

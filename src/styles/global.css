@@ -322,6 +322,12 @@ details[open] > summary.article-toc-title::after { content: '－'; }
 .author p { margin: 0 0 6px; }
 .author-name { font-weight: 700; color: var(--ink); }
 .author-bio { font-size: 14px; line-height: 1.8; color: var(--muted); }
+.author-links { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 4px 0 0; }
+.updates { margin-top: 2em; }
+.updates ul { margin: 0; padding: 0; list-style: none; font-size: 14px; line-height: 1.8; }
+.updates li { display: grid; grid-template-columns: auto 1fr; gap: 0 1em; }
+.updates li + li { margin-top: 4px; }
+.updates time { color: var(--muted); font-feature-settings: 'tnum'; white-space: nowrap; }
 .author a { font-size: 13px; font-weight: 700; color: var(--ink); text-decoration: none; }
 .author a:hover { text-decoration: underline; text-decoration-color: var(--green); }
 .series-next { margin: 56px 0 0; }

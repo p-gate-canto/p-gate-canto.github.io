@@ -449,6 +449,24 @@ content:
     options:
       format: markdown
       media: false
+- name: policy
+  label: 編集方針
+  type: file
+  path: src/content/pages/policy.md
+  format: yaml-frontmatter
+  fields:
+  - name: title
+    label: ページ名
+    type: string
+  - name: description
+    label: 説明文（検索結果に出る）
+    type: text
+  - name: body
+    label: 本文
+    type: rich-text
+    options:
+      format: markdown
+      media: false
 - name: about
   label: このブログについて
   type: file

@@ -73,12 +73,21 @@ const examName = d.tags.map((t) => EXAM_NAMES[t]).find(Boolean);
 
   <div class="prose"><Content /></div>
 
+  {d.updates.length > 0 && (
+    <section class="updates callout callout-note" aria-label="更新履歴" data-pagefind-ignore>
+      <p class="callout-label">更新履歴</p>
+      <ul>
+        {[...d.updates].sort((x, y) => y.date.valueOf() - x.date.valueOf()).map((u) => <li><time datetime={isoDate(u.date)}>{fmtDate(u.date)}</time>{u.note}</li>)}
+      </ul>
+    </section>
+  )}
+
   <aside class="author" data-pagefind-ignore>
     <span class="author-mark" aria-hidden="true"></span>
     <div>
       <p class="author-name">{AUTHOR_NAME}</p>
       <p class="author-bio">{AUTHOR_BIO}</p>
-      <a href={url('/about/')}>このブログについて →</a>
+      <p class="author-links"><a href={url('/about/')}>このブログについて →</a><a href={url('/policy/')}>編集方針 →</a></p>
     </div>
   </aside>
 
