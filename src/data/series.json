@@ -25,7 +25,11 @@
   },
   {
     "name": "人事・労務の基本",
-    "posts": ["work-rules-obligation", "saburoku-kyotei-overtime-limit", "social-insurance-expansion-part-time", "turnover-rate-and-reasons", "competency-vs-skillset"]
+    "posts": ["work-rules-obligation", "saburoku-kyotei-overtime-limit", "social-insurance-expansion-part-time", "turnover-rate-and-reasons"]
+  },
+  {
+    "name": "評価と育成の基本",
+    "posts": ["what-is-skillset", "what-is-competency", "competency-vs-skillset"]
   },
   {
     "name": "資金繰りと財務の基本",
