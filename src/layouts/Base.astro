@@ -11,14 +11,15 @@ interface Props {
   published?: Date;
   modified?: Date;
   jsonld?: object[];
+  image?: string; // OGP画像のパス（記事ページは public/og/<slug>.png）。なければ共通の og.png
   // side：本文＋右サイドバー（PCの広い画面だけ）。full：トップページ用の広い1列。plain：記事ページ（自前で目次の列を持つ）
   layout?: 'side' | 'full' | 'plain';
 }
-const { title, description = SITE_DESCRIPTION, current = '', type = 'website', noindex = false, published, modified, jsonld = [], layout = 'side' } =
+const { title, description = SITE_DESCRIPTION, current = '', type = 'website', noindex = false, published, modified, jsonld = [], layout = 'side', image } =
   Astro.props;
 const pageTitle = title ? `${title}｜${SITE_TITLE}` : `${SITE_TITLE}｜${SITE_SUBTITLE}`;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const ogImage = new URL(url('/og.png'), Astro.site).href;
+const ogImage = new URL(url(image ?? '/og.png'), Astro.site).href;
 const nav = [
   { href: url('/'), label: 'ホーム', key: 'home' },
   { href: url('/work/'), label: 'WORK', key: 'work' },

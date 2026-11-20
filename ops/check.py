@@ -3,7 +3,7 @@
 
 使い方:  npm run build && python3 ops/check.py
 - dist を一時サーバーで配信し、全ページ種類と全記事・全下書きを PC（1280px）とスマホ（390px）で開く
-- 横スクロール、表のはみ出し、記事本文の画像ファイルの有無、記事へのリンク切れ、ページの読み込み失敗を調べる
+- 横スクロール、表のはみ出し、記事本文の画像ファイルの有無、記事へのリンク切れ、ページの読み込み失敗、記事ごとのOGP画像の有無を調べる
 - 問題が1つでもあれば終了コード1で止まる
 必要なもの: pip install playwright（ブラウザは /usr/bin/google-chrome、なければ playwright 同梱の chromium）
 """
@@ -81,6 +81,10 @@ def main():
                     problems.append(f'{w}px {u}：画像ファイルがない {broken}')
         b.close()
     srv.shutdown()
+    # 記事ごとのOGP画像（ops/og.py でつくる）があるか
+    for d in sorted((DIST / 'posts').iterdir()) if (DIST / 'posts').is_dir() else []:
+        if (d / 'index.html').exists() and not (ROOT / 'public' / 'og' / f'{d.name}.png').exists():
+            problems.append(f'/posts/{d.name}/：OGP画像がない（python3 ops/og.py を実行する）')
     print(f'確認したページ：{len(urls)}（PC・スマホ）')
     if problems:
         print('問題あり：')

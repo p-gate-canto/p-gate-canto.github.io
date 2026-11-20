@@ -42,7 +42,7 @@ export const breadcrumbLd = (items: [string, string][]) => ({
   })),
 });
 
-export const articleLd = (a: { title: string; description: string; path: string; published: Date; modified?: Date }) => ({
+export const articleLd = (a: { title: string; description: string; path: string; published: Date; modified?: Date; image?: string }) => ({
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: a.title,
@@ -52,7 +52,7 @@ export const articleLd = (a: { title: string; description: string; path: string;
   datePublished: a.published.toISOString(),
   dateModified: (a.modified ?? a.published).toISOString(),
   inLanguage: 'ja',
-  image: new URL('og.png', SITE_URL).href,
+  image: abs((a.image ?? '/og.png').replace(/^\//, '')),
   author: authorLd(),
   publisher: publisherLd(),
 });

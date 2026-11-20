@@ -4,6 +4,7 @@ import Article from '../../components/Article.astro';
 import { midOf, midUrl, pillarOf, pillarUrl, topicLabel } from '../../consts';
 import { getPosts } from '../../lib';
 import { articleLd, breadcrumbLd } from '../../seo';
+import { existsSync } from 'node:fs';
 export async function getStaticPaths() {
   const posts = await getPosts();
   return posts.map((post) => ({ params: { slug: post.id }, props: { post, all: posts } }));
@@ -16,11 +17,13 @@ const pil = pillarOf(mid.pillar)!;
 const crumbs: [string, string][] = [[pil.en, pillarUrl(pil.key)], [mid.label, midUrl(d.category)]];
 if (d.topic && tLabel) crumbs.push([tLabel, midUrl(d.category, d.topic)]);
 crumbs.push([d.title, Astro.url.pathname]);
+// 記事ごとのOGP画像（ops/og.py でつくる）。なければ共通の画像
+const image = existsSync(`public/og/${post.id}.png`) ? `/og/${post.id}.png` : undefined;
 const jsonld = [
-  articleLd({ title: d.title, description: d.description, path: Astro.url.pathname, published: d.pubDate, modified: d.updatedDate }),
+  articleLd({ title: d.title, description: d.description, path: Astro.url.pathname, published: d.pubDate, modified: d.updatedDate, image }),
   breadcrumbLd(crumbs),
 ];
 ---
-<Base title={d.title} description={d.description} current={mid.pillar} type="article" published={d.pubDate} modified={d.updatedDate} jsonld={jsonld} layout="plain">
+<Base title={d.title} description={d.description} current={mid.pillar} type="article" published={d.pubDate} modified={d.updatedDate} jsonld={jsonld} image={image} layout="plain">
   <Article post={post} all={all} />
 </Base>
