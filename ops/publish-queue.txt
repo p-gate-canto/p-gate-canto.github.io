@@ -65,3 +65,14 @@ subsidy-vs-grant
 turnover-rate-and-reasons
 financial-health-three-indicators
 保留 year-end-adjustment-2026  # 筆者の回答待ち（2026/11/20）
+# 追加（2026/11/20 ユーザー承認：下書き30本の2回目、回答反映済み）
+sales-pipeline-management
+inventory-turnover-days
+selling-time-ratio
+seven-wastes-office-work
+customer-lifetime-value
+labor-productivity
+crm-adoption
+business-flow-chart
+ai-task-selection
+sme-security-basics
