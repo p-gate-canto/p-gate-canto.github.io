@@ -5,6 +5,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      mode:
+        description: 'IndexNow で知らせる範囲（changed：新しく公開・更新した記事／all：全ページ）'
+        type: choice
+        options: [changed, all]
+        default: changed
   # 毎週月曜 6:00（日本時間）に再ビルドして、「基準日から1年経過」の注意書きなどを最新にする
   schedule:
     - cron: '0 21 * * 0'
@@ -42,3 +48,18 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # 公開のあと、新しく公開・更新した記事を Bing などへ IndexNow で知らせる（毎週の再ビルドでは送らない）
+  # コミットのメッセージに [indexnow:all] を入れると、全ページを知らせる
+  indexnow:
+    needs: deploy
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: sleep 20
+      - run: node ops/indexnow.mjs ${{ ((github.event_name == 'workflow_dispatch' && inputs.mode == 'all') || contains(github.event.head_commit.message, '[indexnow:all]')) && 'all' || 'changed' }}
+        continue-on-error: true
