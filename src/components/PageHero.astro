@@ -1,0 +1,16 @@
+---
+// 全ページ共通の上部見出し。パンくず（ホーム › …）・見出し・説明文の3段をそろえる
+import { url } from '../consts';
+interface Props { title: string; lead?: string; crumbs?: [string, string][] }
+const { title, lead, crumbs = [] } = Astro.props;
+---
+<section class="hero">
+  <div class="wrap">
+    <nav class="crumb" aria-label="現在地">
+      <a href={url('/')}>ホーム</a>{crumbs.map(([label, href]) => <Fragment>{' › '}<a href={href}>{label}</a></Fragment>)}
+    </nav>
+    <h1>{title}</h1>
+    {lead && <p>{lead}</p>}
+    <slot />
+  </div>
+</section>

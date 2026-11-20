@@ -1,4 +1,5 @@
 ---
+import PageHero from '../../../components/PageHero.astro';
 import Base from '../../../layouts/Base.astro';
 import PostList from '../../../components/PostList.astro';
 import TopicGrid from '../../../components/TopicGrid.astro';
@@ -22,13 +23,7 @@ const counts = countBy(posts);
   noindex={posts.length === 0}
   jsonld={[breadcrumbLd([[p.en, pillarUrl(pillar)], [m.label, Astro.url.pathname]])]}
 >
-  <section class="hero">
-    <div class="wrap">
-      <p class="crumb"><a href={pillarUrl(pillar)}>{p.en}</a>{layer && <Fragment> › {layer.label}</Fragment>}</p>
-      <h1>{m.label}</h1>
-      {layer && <p>{layer.question}</p>}
-    </div>
-  </section>
+  <PageHero title={m.label} lead={layer ? `${layer.label}｜${layer.question}` : `${m.topics.slice(0, 3).map((t) => t.label).join('・')}など`} crumbs={[[p.en, pillarUrl(pillar)]]} />
   <section class="section">
     <div class="wrap">
       <h2 class="section-title">小カテゴリー</h2>
@@ -38,7 +33,7 @@ const counts = countBy(posts);
   <section class="section">
     <div class="wrap">
       <h2 class="section-title">記事</h2>
-      <PostList posts={posts} />
+      <PostList posts={posts} empty="この分野の記事は準備中です。" />
     </div>
   </section>
 </Base>

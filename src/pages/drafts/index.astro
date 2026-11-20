@@ -1,32 +1,16 @@
 ---
+import PostList from '../../components/PostList.astro';
+import PageHero from '../../components/PageHero.astro';
 import Base from '../../layouts/Base.astro';
 import { url, fmtDate } from '../../consts';
 import { getDrafts } from '../../lib';
 const drafts = await getDrafts();
 ---
 <Base title="下書き一覧" noindex>
-  <section class="hero">
-    <div class="wrap">
-      <h1>下書き一覧</h1>
-      <p>公開前の記事のプレビューです。このページは検索に出ません。</p>
-    </div>
-  </section>
+  <PageHero title="下書き一覧" lead="公開前の記事のプレビューです。このページは検索に出ません。" />
   <section class="section">
     <div class="wrap">
-      {drafts.length === 0 ? (
-        <p class="empty">下書きはありません。</p>
-      ) : (
-        <ul class="posts">
-          {drafts.map((p) => (
-            <li>
-              <a class="card" href={url(`/drafts/${p.id}/`)}>
-                <div class="meta"><span>{fmtDate(p.data.pubDate)}</span></div>
-                <h3 class="card-title">{p.data.title}</h3>
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
+      <PostList posts={drafts} base="/drafts/" empty="下書きはありません。" />
     </div>
   </section>
 </Base>

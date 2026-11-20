@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
 import { url } from '../consts';
 ---
 <Base title="ページが見つかりません" noindex>
@@ -24,15 +25,14 @@ import { url } from '../consts';
       }
     })();
   </script>
-  <section class="hero">
-    <div class="wrap">
-      <h1>ページが見つかりません</h1>
-      <p>移転や整理により、URLが変わった可能性があります。</p>
-    </div>
-  </section>
+  <PageHero title="ページが見つかりません" lead="移転や整理により、URLが変わった可能性があります。" />
   <section class="section">
     <div class="wrap">
-      <p><a href={url('/')}>トップページへ</a>　<a href={url('/work/')}>WORKの地図へ</a></p>
+      <div class="cats">
+        <a class="cat" href={url('/')}><strong>トップページ</strong><span class="cat-desc">新着記事と、読む人別の入口</span></a>
+        <a class="cat" href={url('/work/')}><strong>WORK</strong><span class="cat-desc">経営・財務・税務など20分野の地図</span></a>
+        <a class="cat" href={url('/search/')}><strong>サイト内検索</strong><span class="cat-desc">キーワードで記事を探す</span></a>
+      </div>
     </div>
   </section>
 </Base>

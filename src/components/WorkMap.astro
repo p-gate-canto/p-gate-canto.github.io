@@ -2,6 +2,7 @@
 // WORK の地図：理念 → 企業戦略 → 競争戦略 → 機能別戦略 の4層
 import { LAYERS, MIDS } from '../consts';
 import MidCard from './MidCard.astro';
+import Count from './Count.astro';
 import { midUrl } from '../consts';
 // compact：トップページ用。分野名だけを並べた一覧にして、縦に長くならないようにする
 interface Props { counts: Record<string, number>; compact?: boolean }
@@ -16,7 +17,7 @@ const layers = LAYERS.map((l) => ({ ...l, mids: MIDS.filter((m) => m.pillar === 
       {compact ? (
         <ul class="mid-links">
           {l.mids.map((m) => (
-            <li><a href={midUrl(m.key)}><span class="toc-no">{m.no}</span>{m.label}{(counts[m.key] ?? 0) > 0 && <span class="mid-count">{counts[m.key]}</span>}</a></li>
+            <li><a href={midUrl(m.key)}><span class="toc-no">{m.no}</span><span>{m.label}</span><Count n={counts[m.key]} /></a></li>
           ))}
         </ul>
       ) : (

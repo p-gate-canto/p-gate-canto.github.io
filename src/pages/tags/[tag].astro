@@ -1,4 +1,5 @@
 ---
+import PageHero from '../../components/PageHero.astro';
 import Base from '../../layouts/Base.astro';
 import PostList from '../../components/PostList.astro';
 import { ALL_TAGS, READERS, url } from '../../consts';
@@ -12,16 +13,10 @@ const { posts } = Astro.props;
 const reader = READERS.find((r) => r.tag === tag);
 ---
 <Base title={reader ? reader.label : `#${tag}`} description={`タグ「${tag}」の記事一覧`} noindex>
-  <section class="hero">
-    <div class="wrap">
-      <p class="crumb"><a href={url('/tags/')}>タグ</a></p>
-      <h1>{reader ? reader.label : `#${tag}`}</h1>
-      <p>{reader ? reader.desc : `タグ「${tag}」の記事`}</p>
-    </div>
-  </section>
+  <PageHero title={reader ? reader.label : `#${tag}`} lead={reader ? reader.desc : `タグ「${tag}」の記事`} crumbs={[['タグ', url('/tags/')]]} />
   <section class="section">
     <div class="wrap">
-      {posts.length === 0 ? <p class="empty">このタグの記事は準備中です。</p> : <PostList posts={posts} />}
+      <PostList posts={posts} empty="このタグの記事は準備中です。" />
     </div>
   </section>
 </Base>

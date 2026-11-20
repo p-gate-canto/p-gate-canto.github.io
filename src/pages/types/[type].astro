@@ -1,4 +1,5 @@
 ---
+import PageHero from '../../components/PageHero.astro';
 import Base from '../../layouts/Base.astro';
 import PostList from '../../components/PostList.astro';
 import { TYPES, url } from '../../consts';
@@ -11,16 +12,10 @@ const { t } = Astro.props;
 const posts = (await getPosts()).filter((p) => p.data.type === t.key);
 ---
 <Base title={t.label} description={`${t.desc}の記事一覧`} current="types" noindex={posts.length === 0} jsonld={[breadcrumbLd([['記事タイプ', url('/types/')], [t.label, Astro.url.pathname]])]}>
-  <section class="hero">
-    <div class="wrap">
-      <p class="crumb"><a href={url('/types/')}>記事タイプ</a></p>
-      <h1>{t.label}</h1>
-      <p>{t.desc}</p>
-    </div>
-  </section>
+  <PageHero title={t.label} lead={t.desc} crumbs={[['記事タイプ', url('/types/')]]} />
   <section class="section">
     <div class="wrap">
-      {posts.length === 0 ? <p class="empty">この記事タイプの記事は準備中です。</p> : <PostList posts={posts} />}
+      <PostList posts={posts} empty="この記事タイプの記事は準備中です。" />
     </div>
   </section>
 </Base>

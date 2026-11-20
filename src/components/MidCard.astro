@@ -1,5 +1,6 @@
 ---
 import { midOf, midUrl } from '../consts';
+import Count from './Count.astro';
 interface Props { mid: string; count: number; no?: string }
 const { mid, count, no } = Astro.props;
 const m = midOf(mid)!;
@@ -9,9 +10,6 @@ const m = midOf(mid)!;
   <span class="toc-body">
     <strong>{m.label}</strong>
     <span class="toc-en">{m.topics.map((t) => t.label).slice(0, 3).join('・')}など</span>
-    <span class="toc-meta">
-      <span>{m.topics.length}項目</span>
-      {count > 0 ? <span class="toc-posts">{count}記事</span> : <span class="toc-soon">準備中</span>}
-    </span>
+    <span class="card-meta"><span>{m.topics.length}項目</span><Count n={count} /></span>
   </span>
 </a>

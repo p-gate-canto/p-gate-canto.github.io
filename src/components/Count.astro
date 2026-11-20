@@ -1,0 +1,6 @@
+---
+// 記事数の表示を全ページで統一する部品。記事があるときだけ緑の帯で「N記事」を出す
+interface Props { n?: number }
+const { n = 0 } = Astro.props;
+---
+{n > 0 && <span class="count">{n}記事</span>}

@@ -1,16 +1,17 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { midOf, typeOf, url, fmtDate, isoDate, topicLabel } from '../consts';
-interface Props { posts: CollectionEntry<'posts'>[] }
-const { posts } = Astro.props;
+// base：記事ページの置き場所（下書き一覧では /drafts/）。empty：記事がないときの文言
+interface Props { posts: CollectionEntry<'posts'>[]; base?: string; empty?: string }
+const { posts, base = '/posts/', empty = '記事は準備中です。' } = Astro.props;
 ---
 {posts.length === 0 ? (
-  <p class="empty">まだ記事はありません。</p>
+  <p class="empty">{empty}</p>
 ) : (
   <ul class="posts">
     {posts.map((p) => (
       <li>
-        <a class="card" href={url(`/posts/${p.id}/`)}>
+        <a class="card" href={url(`${base}${p.id}/`)}>
           <div class="meta">
             <time datetime={isoDate(p.data.pubDate)}>{fmtDate(p.data.pubDate)}</time>
             <span class="badge">{topicLabel(p.data.category, p.data.topic) ?? midOf(p.data.category)?.label}</span>

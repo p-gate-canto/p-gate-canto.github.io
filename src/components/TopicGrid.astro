@@ -1,5 +1,6 @@
 ---
 import { midOf, midUrl } from '../consts';
+import Count from './Count.astro';
 interface Props { mid: string; counts: Record<string, number> }
 const { mid, counts } = Astro.props;
 const m = midOf(mid);
@@ -7,9 +8,9 @@ const m = midOf(mid);
 <ul class="topics">
   {m?.topics.map((x) => (
     <li>
-      <a class={counts[x.slug] ? 'topic' : 'topic is-empty'} href={midUrl(mid, x.slug)}>
+      <a class="topic" href={midUrl(mid, x.slug)}>
         <span>{x.label}</span>
-        {counts[x.slug] ? <span class="topic-count">{counts[x.slug]}</span> : null}
+        <Count n={counts[x.slug]} />
       </a>
     </li>
   ))}

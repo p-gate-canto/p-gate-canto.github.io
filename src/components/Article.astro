@@ -27,9 +27,11 @@ const minutes = readingMinutes(post.body);
 <article class="wrap" data-pagefind-body={preview ? undefined : ''}>
   {preview && <p class="preview-banner">下書きプレビューです。公開されておらず、検索にも出ません。</p>}
   <header class="article-head">
+    <nav class="crumb" aria-label="現在地">
+      <a href={url('/')}>ホーム</a> › <a href={pillarUrl(pil.key)}>{pil.en}</a> › <a href={midUrl(d.category)}>{mid.label}</a>{d.topic && tLabel && <Fragment> › <a href={midUrl(d.category, d.topic)}>{tLabel}</a></Fragment>}
+    </nav>
     <div class="meta">
       <time datetime={isoDate(d.pubDate)}>{fmtDate(d.pubDate)}</time>{d.updatedDate && <Fragment>{'\n'}<span>更新 <time datetime={isoDate(d.updatedDate)}>{fmtDate(d.updatedDate)}</time></span></Fragment>}
-      <span class="badge"><a href={pillarUrl(pil.key)}>{pil.en}</a> › <a href={midUrl(d.category)}>{mid.label}</a>{d.topic && tLabel && <Fragment> › <a href={midUrl(d.category, d.topic)}>{tLabel}</a></Fragment>}</span>
       <a class="type-chip" href={typeUrl(type.key)}>{type.label}</a>
       <span>約{minutes}分で読めます</span>
     </div>

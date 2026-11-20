@@ -1,15 +1,11 @@
 ---
+import PageHero from '../components/PageHero.astro';
 import Base from '../layouts/Base.astro';
 // 本文は src/content/pages/about.md（Pages CMS の「このブログについて」）で編集する
 import { Content, frontmatter } from '../content/pages/about.md';
 ---
 <Base title={frontmatter.title} description={frontmatter.description} current="about">
-  <section class="hero">
-    <div class="wrap">
-      <h1>{frontmatter.title}</h1>
-      {frontmatter.description && <p>{frontmatter.description}</p>}
-    </div>
-  </section>
+  <PageHero title={frontmatter.title} lead={frontmatter.description} />
   <article class="wrap">
     <div class="prose"><Content /></div>
   </article>

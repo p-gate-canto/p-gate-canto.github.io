@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
 import WorkMap from '../components/WorkMap.astro';
+import Count from '../components/Count.astro';
 import { SITE_TITLE, SITE_TAGLINE, SITE_KEYWORDS, PILLARS, READERS, TYPES, MIDS, AUTHOR_NAME, AUTHOR_BIO, url, pillarUrl, tagUrl, typeUrl } from '../consts';
 import { getPosts, countBy } from '../lib';
 import { websiteLd } from '../seo';
@@ -38,12 +39,12 @@ const featuredTypes = ['glossary', 'news', 'checklist', 'tool'].map((k) => TYPES
     <div class="wrap">
       <h2 class="section-title">読む人から探す</h2>
       <p class="section-lead">立場に合わせて、役に立つ記事をまとめています。</p>
-      <div class="readers">
+      <div class="cats cats-4">
         {READERS.map((r) => (
-          <a class="reader" href={tagUrl(r.tag)}>
+          <a class="cat" href={tagUrl(r.tag)}>
             <strong>{r.label}</strong>
-            <span>{r.desc}</span>
-            <span class="reader-count">{counts[`tag:${r.tag}`] ?? 0}記事</span>
+            <span class="cat-desc">{r.desc}</span>
+            <span class="card-meta"><Count n={counts[`tag:${r.tag}`]} /></span>
           </a>
         ))}
       </div>
@@ -53,13 +54,13 @@ const featuredTypes = ['glossary', 'news', 'checklist', 'tool'].map((k) => TYPES
   <section class="section">
     <div class="wrap">
       <h2 class="section-title">3つの柱</h2>
-      <div class="pillars pillars-3">
+      <div class="cats cats-3">
         {PILLARS.map((p) => (
-          <a class="pillar" href={pillarUrl(p.key)}>
-            <span class="pillar-en">{p.en}</span>
+          <a class="cat" href={pillarUrl(p.key)}>
+            <span class="cat-en">{p.en}</span>
             <strong>{p.label}</strong>
-            <span class="pillar-desc">{p.desc}</span>
-            <span class="toc-count">{MIDS.filter((m) => m.pillar === p.key).length}分野・{counts[`pillar:${p.key}`] ?? 0}記事</span>
+            <span class="cat-desc">{p.desc}</span>
+            <span class="card-meta"><span>{MIDS.filter((m) => m.pillar === p.key).length}分野</span><Count n={counts[`pillar:${p.key}`]} /></span>
           </a>
         ))}
       </div>
@@ -81,7 +82,8 @@ const featuredTypes = ['glossary', 'news', 'checklist', 'tool'].map((k) => TYPES
         {featuredTypes.map((t) => (
           <a class="cat" href={typeUrl(t.key)}>
             <strong>{t.label}</strong>
-            <span>{t.desc}</span>
+            <span class="cat-desc">{t.desc}</span>
+            <span class="card-meta"><Count n={counts[`type:${t.key}`]} /></span>
           </a>
         ))}
       </div>

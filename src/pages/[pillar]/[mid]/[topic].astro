@@ -1,4 +1,5 @@
 ---
+import PageHero from '../../../components/PageHero.astro';
 import Base from '../../../layouts/Base.astro';
 import PostList from '../../../components/PostList.astro';
 import { MIDS, midOf, pillarOf, pillarUrl, midUrl } from '../../../consts';
@@ -20,15 +21,11 @@ const posts = (await getPosts()).filter((x) => x.data.category === mid && x.data
   noindex={posts.length === 0}
   jsonld={[breadcrumbLd([[p.en, pillarUrl(pillar)], [m.label, midUrl(mid)], [label, Astro.url.pathname]])]}
 >
-  <section class="hero">
-    <div class="wrap">
-      <p class="crumb"><a href={pillarUrl(pillar)}>{p.en}</a> › <a href={midUrl(mid)}>{m.label}</a></p>
-      <h1>{label}</h1>
-    </div>
-  </section>
+  <PageHero title={label} lead={`${m.label}の小カテゴリー`} crumbs={[[p.en, pillarUrl(pillar)], [m.label, midUrl(mid)]]} />
   <section class="section">
     <div class="wrap">
-      {posts.length === 0 ? <p class="empty">この項目の記事は準備中です。</p> : <PostList posts={posts} />}
+      <h2 class="section-title">記事</h2>
+      <PostList posts={posts} empty="この小カテゴリーの記事は準備中です。" />
     </div>
   </section>
 </Base>

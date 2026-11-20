@@ -70,11 +70,6 @@ a:hover { color: var(--accent); }
 .section-title { display: inline-block; font-size: 13px; letter-spacing: 0.2em; color: var(--ink); margin: 0 0 18px; font-weight: 700; padding-bottom: 6px; border-bottom: 2px solid; border-image: var(--grad) 1; }
 
 /* category chips */
-.cats { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
-.cat { display: block; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; box-shadow: 0 1px 2px rgba(8, 21, 29, 0.04); }
-.cat:hover { border-color: var(--green); color: var(--text); }
-.cat strong { display: block; font-size: 15px; }
-.cat span { font-size: 12px; color: var(--muted); line-height: 1.6; display: block; }
 
 /* post list */
 .posts { list-style: none; margin: 0; padding: 0; }
@@ -87,7 +82,7 @@ a:hover { color: var(--accent); }
 .card-title { font-size: 18px; font-weight: 700; margin: 4px 0; color: var(--ink); }
 .card-title a { text-decoration: none; }
 .card-desc { font-size: 14px; color: var(--muted); margin: 0; line-height: 1.8; }
-.empty { color: var(--muted); font-size: 14px; }
+.empty { margin: 0; padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); font-size: 14px; }
 
 /* article */
 .article-head { padding: 48px 0 24px; border-bottom: 1px solid var(--line); }
@@ -107,33 +102,57 @@ a:hover { color: var(--accent); }
 .tags { display: flex; gap: 8px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
 .back { display: inline-block; margin-bottom: 48px; font-size: 14px; }
 
+
+/* ===== カード（全ページ共通）=====
+   一覧・分野・記事タイプ・読む人・3つの柱・小カテゴリー・タグは、すべてこの見た目にそろえる */
+.cats { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.cats.cats-3 { grid-template-columns: repeat(3, 1fr); }
+.cats.cats-4 { grid-template-columns: repeat(4, 1fr); }
+.cat, .toc-card, .topic, .mid-links a {
+  position: relative; overflow: hidden; background: var(--surface); border: 1px solid var(--line);
+  box-shadow: 0 1px 2px rgba(8, 21, 29, 0.04); text-decoration: none; color: var(--ink); transition: border-color 0.2s;
+}
+.cat::after, .toc-card::after, .topic::after, .mid-links a::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--grad);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.25s;
+}
+.cat:hover, .toc-card:hover, .topic:hover, .mid-links a:hover { border-color: var(--green); color: var(--ink); }
+.cat:hover::after, .toc-card:hover::after, .topic:hover::after, .mid-links a:hover::after { transform: scaleX(1); }
+
+/* 大きいカード：見出し＋説明＋下端の件数 */
+.cat { display: flex; flex-direction: column; padding: 16px 18px; }
+.cat strong { display: block; font-size: 15px; line-height: 1.6; color: var(--ink); }
+.cat-en { display: block; font-size: 11px; letter-spacing: 0.12em; color: var(--accent); font-weight: 700; line-height: 1.6; }
+.cat-desc { display: block; margin-top: 2px; font-size: 12px; line-height: 1.7; color: var(--muted); }
+.toc-card { display: flex; align-items: stretch; gap: 14px; padding: 16px 18px; }
+
+/* 小さいカード（1行）：名前＋右端の件数 */
+.topics { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 6px; }
+.mid-links { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 6px; }
+.topics > li, .mid-links > li { display: flex; }
+.topic, .mid-links a { flex: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 9px 12px; font-size: 14px; line-height: 1.5; }
+.mid-links a { display: grid; grid-template-columns: auto 1fr auto; }
+.topic > span:first-child, .mid-links a > span:not(.toc-no):not(.count) { flex: 1 1 auto; min-width: 0; word-break: auto-phrase; overflow-wrap: normal; }
+.mid-links a > .count { grid-column: 3; }
+
+/* 件数（全ページ共通）：記事があるときだけ緑の帯で表示 */
+.card-meta { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 10px; min-height: 30px; font-size: 11px; line-height: 1.6; color: var(--muted); white-space: nowrap; }
+.count { flex: none; font-size: 11px; font-weight: 700; line-height: 1.7; color: #fff; background: var(--accent); padding: 0 7px; white-space: nowrap; }
+
 /* table of contents */
 .toc { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
-.toc-card { position: relative; overflow: hidden; display: flex; align-items: stretch; gap: 14px; padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; }
-.toc-card { box-shadow: 0 1px 2px rgba(8, 21, 29, 0.04); }
-.toc-card::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--grad); transform: scaleX(0); transform-origin: left; transition: transform 0.25s; }
-.toc-card:hover { border-color: var(--line); color: var(--text); }
-.toc-card:hover::after { transform: scaleX(1); }
 .toc-no { color: var(--accent); font-weight: 700; font-size: 13px; letter-spacing: 0.1em; font-variant-numeric: tabular-nums; }
 .toc-card .toc-no { flex: none; align-self: flex-start; padding-top: 3px; white-space: nowrap; }
 .toc-body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .toc-body strong { display: block; font-size: 15px; line-height: 1.6; }
 .toc-en { display: block; font-size: 11px; color: var(--muted); letter-spacing: 0.04em; line-height: 1.6; }
 .toc-count { display: block; font-size: 11px; color: var(--muted); margin-top: 6px; }
-.toc-meta { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 10px; font-size: 11px; line-height: 1.6; color: var(--muted); white-space: nowrap; }
-.toc-posts { font-weight: 700; color: #fff; background: var(--accent); padding: 0 7px; }
-.toc-soon { color: var(--muted); border: 1px solid var(--line); padding: 0 6px; }
 .more { margin: 16px 0 0; font-size: 14px; text-align: right; }
 .toc-block { margin-bottom: 40px; }
 .toc-head { color: var(--ink); display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; font-size: 18px; margin: 0 0 12px; padding-bottom: 8px; border-bottom: 2px solid; border-image: var(--grad) 1; }
 .toc-head a { text-decoration: none; }
 .toc-head .toc-en { display: inline; }
-.topics { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 6px; }
-.topic { display: flex; justify-content: space-between; gap: 8px; padding: 9px 12px; font-size: 14px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; line-height: 1.5; }
-.topic:hover { border-color: var(--green); color: var(--text); }
-.topic.is-empty { color: var(--muted); }
-.topic-count { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.crumb { font-size: 12px; color: var(--muted); margin: 0 0 8px !important; }
+.crumb { font-size: 12px; line-height: 1.6; color: var(--muted); margin: 0 0 8px; }
 .crumb a { color: var(--muted); }
 .hero-no { color: var(--accent); font-size: 0.6em; letter-spacing: 0.1em; margin-right: 12px; vertical-align: middle; }
 .badge a { color: var(--accent); text-decoration: none; }
@@ -187,36 +206,17 @@ a:hover { color: var(--accent); }
 .hero-keywords a:hover { border-color: var(--green); color: var(--text); }
 .section-band { background: rgba(255, 255, 255, 0.55); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .section-lead { margin: -6px 0 16px; font-size: 13px; color: var(--muted); }
-.reader-count { display: block; margin-top: 8px; font-size: 11px; color: var(--accent); font-weight: 700; letter-spacing: 0.04em; }
-.readers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-.reader { position: relative; display: block; padding: 14px 14px 12px; background: rgba(255, 255, 255, 0.9); border: 1px solid var(--line); text-decoration: none; }
-.reader::after { content: '→'; position: absolute; right: 12px; top: 13px; font-size: 13px; color: var(--accent); }
-.reader:hover { border-color: var(--green); color: var(--text); }
-.reader strong { display: block; font-size: 14px; color: var(--ink); padding-right: 16px; }
-.reader span { display: block; margin-top: 4px; font-size: 12px; line-height: 1.6; color: var(--muted); }
 /* WORK の地図 */
-.workmap .layer { margin-bottom: 26px; }
+.layer { margin-bottom: 26px; }
+.layer:last-child { margin-bottom: 0; }
 .layer-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; margin: 0 0 10px; font-size: 16px; color: var(--ink); }
 .layer-no { font-size: 12px; font-weight: 700; color: #fff; background: var(--ink); padding: 1px 8px; letter-spacing: 0.08em; }
 .layer-q { font-size: 12px; font-weight: 400; color: var(--muted); }
-.mid-links { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 6px; }
-.mid-links a { display: flex; align-items: baseline; gap: 10px; padding: 9px 12px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; font-size: 14px; line-height: 1.5; color: var(--ink); }
-.mid-links a:hover { border-color: var(--green); color: var(--text); }
 .mid-links .toc-no { flex: none; font-size: 11px; white-space: nowrap; }
-.mid-count { margin-left: auto; font-size: 11px; font-weight: 700; color: #fff; background: var(--accent); padding: 0 7px; }
 .type-chip { display: inline-block; padding: 0 8px; font-size: 11px; line-height: 20px; color: var(--ink); background: #eef0f3; border: 1px solid var(--line); text-decoration: none; }
 a.type-chip:hover { border-color: var(--green); }
-.pillars.pillars-3 { grid-template-columns: repeat(3, 1fr); }
-.pillar-en { font-size: 11px; letter-spacing: 0.12em; color: var(--accent); font-weight: 700; margin: 0 0 2px !important; }
 
 /* pillars */
-.pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.pillar { position: relative; display: block; padding: 18px 18px 16px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; overflow: hidden; box-shadow: 0 1px 2px rgba(8, 21, 29, 0.04); }
-.pillar::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--green), var(--lime) 70%, var(--yellow)); }
-.pillar:hover { border-color: var(--green); color: var(--text); }
-.pillar-en { display: block; font-size: 11px; letter-spacing: 0.12em; color: var(--accent); font-weight: 700; }
-.pillar strong { display: block; font-size: 18px; color: var(--ink); margin: 2px 0 4px; }
-.pillar-desc { display: block; font-size: 13px; color: var(--muted); line-height: 1.7; }
 
 /* footer：地球の夜景をイメージした濃紺の帯と、地平線の光 */
 .site-footer {
@@ -233,7 +233,7 @@ a.type-chip:hover { border-color: var(--green); }
 .site-footer p:first-child { color: #e6ebee; letter-spacing: 0.08em; }
 
 @media (max-width: 560px) {
-  .hero { min-height: 196px; padding: 76px 0 32px; }
+  .hero { min-height: 264px; padding: 76px 0 32px; }
   .hero::before { width: 170px; height: 60px; }
   .site-footer { padding-top: 128px; }
   .site-footer::before { left: -60%; right: -60%; }
@@ -249,16 +249,15 @@ a.type-chip:hover { border-color: var(--green); }
   .site-header .wrap { padding-bottom: 0; }
   .nav-home { display: none; }
   .toc { grid-template-columns: 1fr; }
-  .pillars, .pillars.pillars-3 { grid-template-columns: 1fr; }
-  .readers { grid-template-columns: 1fr 1fr; }
+  .cats, .cats.cats-3 { grid-template-columns: 1fr; }
+  .cats.cats-4 { grid-template-columns: 1fr 1fr; }
   .hero-keywords .kw-label { flex-basis: 100%; }
   .mid-links { grid-template-columns: 1fr 1fr; }
-  .mid-links a { font-size: 13px; padding: 8px 10px; gap: 8px; }
-  .reader strong { font-size: 13px; }
   .pager { grid-template-columns: 1fr; }
   .pager-next { text-align: left; }
   .topics { grid-template-columns: 1fr 1fr; }
-  .topic { font-size: 12.5px; padding: 8px 9px; letter-spacing: 0; white-space: nowrap; }
+  .topic, .mid-links a { font-size: 13px; padding: 8px 10px; gap: 4px 8px; }
+  .mid-links a { font-size: 12.5px; gap: 4px 6px; letter-spacing: 0; }
   .nav { gap: 12px; overflow-x: auto; width: 100%; padding-bottom: 12px; scrollbar-width: none; }
   .nav::-webkit-scrollbar { display: none; }
 }
