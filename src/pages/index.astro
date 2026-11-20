@@ -12,6 +12,11 @@ const counts = countBy(all);
 const featured = SITE_FEATURED.map((s) => all.find((p) => p.id === s)).filter((p) => p !== undefined).slice(0, 3);
 const featuredIds = new Set(featured.map((p) => p.id));
 const latest = all.filter((p) => !featuredIds.has(p.id)).slice(0, 8);
+// 読む人：実務の読者と受験生を分けて並べる（混ぜないルールに合わせる）
+const readerGroups = [
+  { label: '仕事で読む', readers: READERS.filter((r) => !r.tag.includes('受験生')) },
+  { label: '試験勉強で読む', readers: READERS.filter((r) => r.tag.includes('受験生')) },
+];
 ---
 <Base current="home" jsonld={[websiteLd()]} layout="full">
   <section class="hero-home">
@@ -65,15 +70,20 @@ const latest = all.filter((p) => !featuredIds.has(p.id)).slice(0, 8);
     <div class="wrap">
       <h2 class="section-title">読む人から探す</h2>
       <p class="section-lead">立場に合わせて、役に立つ記事をまとめています。</p>
-      <div class="cats cats-6">
-        {READERS.map((r) => (
-          <a class="cat" href={tagUrl(r.tag)}>
-            <strong>{r.label}</strong>
-            <span class="cat-desc">{r.desc}</span>
-            <span class="card-meta"><Count n={counts[`tag:${r.tag}`]} /></span>
-          </a>
-        ))}
-      </div>
+      {readerGroups.map((g) => (
+        <section class="layer">
+          <h3 class="layer-head">{g.label}</h3>
+          <div class:list={['cats', 'cats-4', { 'cats-stack-sp': g.readers.length !== 4 }]}>
+            {g.readers.map((r) => (
+              <a class="cat" href={tagUrl(r.tag)}>
+                <strong>{r.label}</strong>
+                <span class="cat-desc">{r.desc}</span>
+                <span class="card-meta"><Count n={counts[`tag:${r.tag}`]} /></span>
+              </a>
+            ))}
+          </div>
+        </section>
+      ))}
     </div>
   </section>
 

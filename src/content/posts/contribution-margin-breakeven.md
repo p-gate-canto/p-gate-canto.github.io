@@ -7,6 +7,7 @@ category: turnaround
 topic: breakeven
 tags:
 - 経営層向け
+- マーケ・営業向け
 pubDate: 2026-11-20
 draft: false
 ---

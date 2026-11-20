@@ -1,7 +1,8 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
-import { MID_KEYS, ALL_TAGS, TYPES, topicOwner } from './consts';
+import { MID_KEYS, ALL_TAGS, READERS, TYPES, topicOwner } from './consts';
+const READER_TAGS = READERS.map((r) => r.tag);
 
 // 空欄（""）は未入力として扱う（Pages CMS で空のまま保存した場合への対応）
 const blank = (v: unknown) => (v === '' || v === null ? undefined : v);
@@ -56,8 +57,10 @@ const posts = defineCollection({
         type = 'explainer';
       }
       const tags = [...new Set(d.tags)].filter((t) => ALL_TAGS.includes(t) || (warn(`タグ ${t} は一覧にないため外しました`), false));
-      if (tags.length > 6) warn('タグが6個を超えたため、先頭の6個だけを使います');
-      return { ...d, category, topic, type, tags: tags.slice(0, 6) };
+      // タグは6個まで。ブログの紹介記事（hello-shiori）だけは、全読者の入口に出すため読者タグ7つを付ける
+      const max = tags.length === 7 && tags.every((t) => READER_TAGS.includes(t)) ? 7 : 6;
+      if (tags.length > max) warn(`タグが${max}個を超えたため、先頭の${max}個だけを使います`);
+      return { ...d, category, topic, type, tags: tags.slice(0, max) };
     }),
 });
 

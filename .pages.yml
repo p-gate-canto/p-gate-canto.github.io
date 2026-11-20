@@ -489,16 +489,18 @@ content:
       - name: listening
         label: コミュニケーション｜聞く力・質問力
   - name: tags
-    label: タグ（最大6個。読者タグは1記事に1種類。経営層・経理・実務家向けと受験生向けは混ぜない）
+    label: タグ（最大6個。読者タグは実務の読者（経営層・経理・マーケ営業・実務家）か受験生のどちらかに決め、混ぜない）
     type: select
     options:
       multiple: true
-      max: 6
+      max: 7
       values:
       - name: 経営層向け
         label: 読者｜経営層向け
       - name: 経理担当者向け
         label: 読者｜経理担当者向け
+      - name: マーケ・営業向け
+        label: 読者｜マーケ・営業向け
       - name: 実務家向け
         label: 読者｜実務家向け
       - name: 税理士受験生向け

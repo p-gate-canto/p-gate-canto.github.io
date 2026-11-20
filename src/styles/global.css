@@ -437,6 +437,7 @@ details[open] > summary.article-toc-title::after { content: '－'; }
   .toc { grid-template-columns: 1fr; }
   .cats, .cats.cats-3 { grid-template-columns: 1fr; }
   .cats.cats-4, .cats.cats-6 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 20px; }
+  .cats.cats-stack-sp { grid-template-columns: 1fr; }
   .cats-6 .cat-desc { font-size: 12px; }
   .mid-links, .topics { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 20px; }
   .topics > li, .mid-links > li { min-width: 0; }
