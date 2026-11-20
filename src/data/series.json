@@ -17,11 +17,11 @@
   },
   {
     "name": "経営計画のつくり方",
-    "posts": ["mission-vision-value", "management-purpose-plan", "swot-cross-swot", "3c-analysis", "effectuation", "csr-esg-sdgs-csv"]
+    "posts": ["mission-vision-value", "management-purpose-plan", "swot-cross-swot", "3c-analysis", "effectuation", "lean-startup", "csr-esg-sdgs-csv"]
   },
   {
     "name": "事業承継とM&A",
-    "posts": ["family-business-models", "ma-methods-glossary"]
+    "posts": ["business-succession-five-steps", "family-business-models", "sme-ma-guideline", "ma-methods-glossary"]
   },
   {
     "name": "人事・労務の基本",
@@ -38,6 +38,18 @@
   {
     "name": "営業の仕組みづくり",
     "posts": ["sales-pipeline-management", "selling-time-ratio", "crm-adoption", "customer-lifetime-value"]
+  },
+  {
+    "name": "売れる理由と値決め",
+    "posts": ["brand-basics", "pricing-power"]
+  },
+  {
+    "name": "強い組織をつくる",
+    "posts": ["mckinsey-7s", "psychological-safety", "okr-vs-kpi"]
+  },
+  {
+    "name": "経営に使える会計",
+    "posts": ["sme-accounting-guideline", "monthly-closing-speed"]
   },
   {
     "name": "現場の生産性を上げる",
