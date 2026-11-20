@@ -38,8 +38,12 @@ decision-making-simon-ansoff
 effectuation
 csr-esg-sdgs-csv
 organization-theory-history
-innovation-types-au-model
+保留 innovation-types-au-model  # 筆者の回答なし（2026/11/20）
 economics-of-business
+# 追加（2026/11/20 ユーザー承認）
+small-depreciable-assets-40man
+entertainment-expenses-10000yen
+advance-fixed-salary-notification
 # 7日目
 ir-framework
 first-mover-advantage
