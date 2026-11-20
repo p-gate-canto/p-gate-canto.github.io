@@ -40,6 +40,8 @@ body {
   min-height: 100vh; display: flex; flex-direction: column;
 }
 main { flex: 1; }
+/* 旧URLから転送する間（404ページ）は、ヘッダーだけを見せる */
+.redirecting main, .redirecting .site-footer { visibility: hidden; }
 ::selection { background: var(--yellow); color: var(--ink); }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 /* 本文は1文字ごとに折り返す（禁則つき）。見出し・タイトルは文節の区切りでだけ改行し、最後の行が短くなりすぎないようにする */

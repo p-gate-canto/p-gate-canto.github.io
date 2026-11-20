@@ -6,7 +6,7 @@ import { url } from '../consts';
 <Base title="ページが見つかりません" noindex>
   <script is:inline slot="head">
     // 旧URL（/zeirishi-shiori/〜、/contents/、/category/〜、/tools/）を新しいURLへ転送する。
-    // 画面を描く前に実行し、「ページが見つかりません」が一瞬見えないようにする
+    // 画面を描く前に実行し、「ページが見つかりません」が一瞬見えないようにする（ヘッダーだけ残し、本文とフッターを隠す）
     (function () {
       var OLD = {
         strategy: '/work/corporate-strategy/', finance: '/work/finance/', tax: '/work/corporate-tax/',
@@ -20,7 +20,7 @@ import { url } from '../consts';
       var m = n.match(/^\/category\/([\w-]+)\//);
       if (m) n = OLD[m[1]] || '/';
       if (n !== p) {
-        document.documentElement.style.visibility = 'hidden';
+        document.documentElement.classList.add('redirecting');
         location.replace(n + location.search + location.hash);
       }
     })();

@@ -78,11 +78,11 @@ function formatOutput() {
             if (e.isDirectory()) await walk(p);
             else if (/\.(html|css)$/.test(e.name) && !e.name.startsWith('google')) {
               let src = await readFile(p, 'utf8');
-              // 転送専用ページは、文字を一切出さずに即座に移動させる（「ページが見つかりません」も英語の案内も見せない）
+              // 転送専用ページは、文字を一切出さずに即座に移動させる。移動先と同じ黒いヘッダーの帯だけを描き、画面が切り替わったように見せない
               const to = src.includes('http-equiv="refresh"') && src.match(/url=([^"]+)"/)?.[1];
               if (to) {
                 const abs = new URL(to, 'https://p-gate-canto.github.io/').href;
-                src = `<!doctype html><html lang="ja" style="background:#f3f4f6"><head><meta charset="utf-8"><title>移動しています</title><meta http-equiv="refresh" content="0;url=${to}"><meta name="robots" content="noindex"><link rel="canonical" href="${abs}"><script>location.replace(${JSON.stringify(to)}+location.hash)</script></head><body></body></html>`;
+                src = `<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>税理士のしおり</title><meta name="theme-color" content="#16161d"><meta http-equiv="refresh" content="0;url=${to}"><meta name="robots" content="noindex"><link rel="canonical" href="${abs}"><script>location.replace(${JSON.stringify(to)}+location.hash)</script><style>body{margin:0;background:#fff}i{display:block;height:62px;background:#16161d;border-bottom:2px solid #ffe600}@media(max-width:860px){i{height:56px}}</style></head><body><i></i></body></html>`;
               }
               const parser = e.name.endsWith('.css') ? 'css' : 'html';
               await writeFile(p, await prettier.format(src, { parser, printWidth: 120 }));
@@ -112,7 +112,8 @@ export default defineConfig({
     '/category/tax': '/work/corporate-tax/',
     '/category/strategy': '/work/corporate-strategy/',
   },
-  build: { assets: 'assets' },
+  // CSSはHTMLの中に埋め込む。CSSのファイルを別に読まないので最初の表示が速く、公開直後に古いCSSと新しいHTMLが混ざって崩れることもない
+  build: { assets: 'assets', inlineStylesheets: 'always' },
   compressHTML: false,
   vite: {
     build: {
