@@ -27,12 +27,15 @@ body {
   background: var(--bg) radial-gradient(ellipse 120% 900px at 30% 0%, var(--bg-hi) 0%, var(--bg) 60%, var(--bg-lo) 100%) no-repeat;
   font-family: var(--font); font-size: 16px; line-height: 1.9;
   letter-spacing: 0.02em;
-  word-break: auto-phrase; line-break: strict; overflow-wrap: anywhere;
+  word-break: normal; line-break: strict; overflow-wrap: anywhere;
   min-height: 100vh; display: flex; flex-direction: column;
 }
 main { flex: 1; }
-/* 見出しとカードのタイトル：句読点・記号の位置でだけ改行し（単語の途中で切らない）、行の長さをそろえる */
-h1, h2, h3, .card-title { text-wrap: balance; line-height: 1.5; word-break: keep-all; overflow-wrap: anywhere; }
+/* 本文：1文字ごとに折り返す（禁則つき）。行末がそろい、不自然な余白が出ない */
+/* 見出し・カードのタイトル：文節の区切りでだけ改行し、1行目は横幅いっぱいまで使う。最後の行が短くなりすぎないようにする */
+h1, h2, h3, .card-title { text-wrap: pretty; line-height: 1.5; word-break: keep-all; overflow-wrap: anywhere; }
+/* 1〜2行の短い文（ページの説明・基準日・目次・表のセル）：文節で改行する */
+.hero p, .basedate, .side-toc a, .article-toc a, .prose td, .prose th { word-break: auto-phrase; }
 p, li { text-wrap: pretty; }
 a { color: var(--text); text-decoration-color: var(--green); text-underline-offset: 3px; }
 a:hover { color: var(--accent); }
