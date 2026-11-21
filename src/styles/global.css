@@ -247,12 +247,11 @@ a.type-chip:hover { color: var(--ink); border-color: var(--ink); }
 /* ---------- トップページ ---------- */
 .home-workmap { margin-top: 44px; }
 .home-author { margin-top: 0; }
-/* 黒地に12列のグリッド線と、右上から差す黄・緑の光。ガラスのパネルはこの上に置く */
+/* 黒地に12列（スマホは6列）の縦のグリッド線と、右上から差す黄・緑の光。横線は入れない（読む人から探すの罫線とぶつかるため）。ガラスのパネルはこの上に置く */
 .hero-home {
   position: relative; color: #fff; padding: 72px 0 64px; overflow: hidden;
   background:
     linear-gradient(to right, var(--grid-line-dark) 1px, transparent 1px) 0 0 / calc(100% / 12) 100%,
-    linear-gradient(to bottom, var(--grid-line-dark) 1px, transparent 1px) 0 0 / 100% 96px,
     radial-gradient(ellipse 42% 55% at 92% 8%, rgba(255, 230, 0, 0.11), transparent 70%),
     radial-gradient(ellipse 50% 65% at 100% 100%, rgba(134, 188, 37, 0.2), transparent 70%),
     var(--black);
@@ -547,7 +546,7 @@ details[open] > summary.article-toc-title::after { content: '－'; }
   .section { padding: 40px 0; }
   .section-band + .section, .section + .section-band { padding-top: 40px; }
   .section-title { font-size: 20px; padding-top: 34px; }
-  .hero-home { padding: 48px 0 40px; }
+  .hero-home { padding: 48px 0 40px; background-size: calc(100% / 6) 100%, auto, auto; }
   .hero-home h1 { font-size: 36px; letter-spacing: 0.12em; }
   .readers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hero-search { margin-top: 24px; }
