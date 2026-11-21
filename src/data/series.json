@@ -94,5 +94,9 @@
   {
     "name": "売り方の基本",
     "posts": ["stp-analysis", "sales-channel-jizokuka-hojokin", "toriteki-ho-price-negotiation", "tokutei-denshi-mail-sales"]
+  },
+  {
+    "name": "ハイパフォーマーの科学",
+    "posts": ["high-performer-science", "job-performance-predictors", "conscientiousness-work-performance", "deliberate-practice-expertise", "goal-setting-theory", "habit-formation-systems", "multitasking-attention-residue", "feedback-debrief-science", "recovery-from-work-science", "high-performer-teamwork"]
   }
 ]
