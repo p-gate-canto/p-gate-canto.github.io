@@ -9,7 +9,6 @@ tags:
 - マーケ・営業向け
 - 経営層向け
 pubDate: 2026-11-21
-lawBaseDate: 2026-11-21
 draft: true
 ---
 ## 結論
