@@ -5,7 +5,7 @@
   },
   {
     "name": "源泉徴収の実務",
-    "posts": ["withholding-10-21-vs-20-42", "withholding-20-42-vs-20-315", "gensen-noki-tokurei", "year-end-adjustment-2026", "gensen-choshuhyo-vs-shiharai-chosho"]
+    "posts": ["withholding-10-21-vs-20-42", "withholding-20-42-vs-20-315", "gensen-noki-tokurei", "year-end-adjustment-2026", "gensen-choshuhyo-vs-shiharai-chosho", "bonus-withholding-calculation"]
   },
   {
     "name": "法人税のしくみ",
@@ -66,5 +66,13 @@
   {
     "name": "診断士 企業経営理論：技術経営と組織",
     "posts": ["innovation-types-au-model", "valley-of-death", "decision-making-simon-ansoff", "organization-theory-history"]
+  },
+  {
+    "name": "年末から1月の手続き",
+    "posts": ["tax-deadlines-2026-12-to-2027-03", "withholding-payment-slip-year-end", "statutory-reports-summary-2027", "salary-payment-report", "depreciable-assets-declaration"]
+  },
+  {
+    "name": "個人事業主の申告とインボイス",
+    "posts": ["blue-return-deduction-2027", "invoice-2wari-3wari-tokurei", "simplified-tax-election-deadline", "invoice-transitional-measure-70"]
   }
 ]
