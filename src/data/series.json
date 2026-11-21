@@ -13,7 +13,7 @@
   },
   {
     "name": "会社の数字の読み方",
-    "posts": ["gross-operating-ordinary-profit", "contribution-margin-breakeven"]
+    "posts": ["gross-operating-ordinary-profit", "balance-sheet-how-to-read", "cash-flow-statement-how-to-read", "contribution-margin-breakeven"]
   },
   {
     "name": "経営計画のつくり方",
@@ -74,5 +74,17 @@
   {
     "name": "個人事業主の申告とインボイス",
     "posts": ["blue-return-deduction-2027", "invoice-2wari-3wari-tokurei", "simplified-tax-election-deadline", "invoice-transitional-measure-70"]
+  },
+  {
+    "name": "決算の基本",
+    "posts": ["depreciation-basics", "accrued-prepaid-expenses", "allowance-provisions-basics"]
+  },
+  {
+    "name": "働きながら資格を取る",
+    "posts": ["study-time-working-adults", "effective-study-methods"]
+  },
+  {
+    "name": "士業の試験の仕組み",
+    "posts": ["zeirishi-exam-structure", "sharoushi-exam-structure", "shindanshi-exam-structure"]
   }
 ]
