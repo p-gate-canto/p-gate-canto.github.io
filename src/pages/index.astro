@@ -21,8 +21,8 @@ const serials = seriesData
   .slice(0, 6);
 // 読む人：実務の読者と受験生を分けて並べる（混ぜないルールに合わせる）
 const readerGroups = [
-  { label: '仕事で読む', readers: READERS.filter((r) => !r.tag.includes('受験生')) },
-  { label: '試験勉強で読む', readers: READERS.filter((r) => r.tag.includes('受験生')) },
+  { key: 'work', en: 'FOR WORK', label: '仕事で読む', readers: READERS.filter((r) => !r.tag.includes('受験生')) },
+  { key: 'exam', en: 'FOR EXAMS', label: '試験勉強で読む', readers: READERS.filter((r) => r.tag.includes('受験生')) },
 ];
 ---
 <Base current="home" jsonld={[websiteLd()]} layout="full">
@@ -34,8 +34,8 @@ const readerGroups = [
       <nav class="hero-readers" aria-label="読む人から探す">
         <p class="hero-label">READERS<span class="hero-label-ja">　読む人から探す</span></p>
         {readerGroups.map((g) => (
-          <div class="reader-group">
-            <p class="reader-group-label">{g.label}</p>
+          <div class={`reader-group reader-group--${g.key}`}>
+            <p class="reader-group-label"><span class="rg-en">{g.en}</span>{g.label}</p>
             <ul class="readers">
               {g.readers.map((r) => (
                 <li><a class="reader" href={tagUrl(r.tag)}><strong>{r.label}</strong><Count n={counts[`tag:${r.tag}`]} /></a></li>
