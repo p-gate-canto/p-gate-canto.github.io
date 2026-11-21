@@ -4,6 +4,18 @@
 # 行頭に「保留 」を付けた記事は、順番を残したまま公開を止める（例：保留 mission-vision-value）。
 # 2026/11/20：毎朝の公開本数は最大10本に変更。
 
+# 2026/11/21 ユーザー承認：先頭に追加（個人の確定申告6本・売り方の基本4本）
+kakutei-shinkoku-who-needs-2027
+side-job-tax-return
+iryohi-vs-self-medication
+furusato-nozei-one-stop-vs-kakutei
+housing-loan-deduction-2026
+kakutei-shinkoku-payment-2027
+stp-analysis
+sales-channel-jizokuka-hojokin
+toriteki-ho-price-negotiation
+tokutei-denshi-mail-sales
+
 # 1日目
 officer-pay-vs-dividend
 withholding-20-42-vs-20-315

@@ -86,5 +86,13 @@
   {
     "name": "士業の試験の仕組み",
     "posts": ["zeirishi-exam-structure", "sharoushi-exam-structure", "shindanshi-exam-structure"]
+  },
+  {
+    "name": "個人の確定申告",
+    "posts": ["kakutei-shinkoku-who-needs-2027", "side-job-tax-return", "iryohi-vs-self-medication", "furusato-nozei-one-stop-vs-kakutei", "housing-loan-deduction-2026", "kakutei-shinkoku-payment-2027"]
+  },
+  {
+    "name": "売り方の基本",
+    "posts": ["stp-analysis", "sales-channel-jizokuka-hojokin", "toriteki-ho-price-negotiation", "tokutei-denshi-mail-sales"]
   }
 ]
