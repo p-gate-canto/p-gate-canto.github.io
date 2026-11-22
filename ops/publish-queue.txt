@@ -124,3 +124,25 @@ officer-pay-midterm-change
 kessan-mae-setsuzei
 incorporation-criteria
 jishakabu-hyoka
+
+# 2026/11/22 ユーザー承認（いちばん少ないカテゴリー「学び直し・読書」に20本、キュー最後へ）
+relearning-statistics-japan
+adult-learning-theory
+70-20-10-model
+training-transfer
+learning-styles-myth
+education-training-benefit
+university-relearning
+digital-skill-standard
+reading-survey-japan
+how-to-read-a-book
+speed-reading-science
+paper-vs-screen-reading
+audiobook-comprehension
+handwritten-vs-typed-notes
+primary-sources-research
+genai-learning-guardrails
+ai-tutor-learning
+genai-research-caution
+online-course-completion
+video-playback-speed

@@ -106,5 +106,17 @@
   {
     "name": "税務調査の基本",
     "posts": ["zeimu-chosa-nagare", "zeimu-chosa-shiteki"]
+  },
+  {
+    "name": "大人の学び直し",
+    "posts": ["relearning-statistics-japan", "adult-learning-theory", "70-20-10-model", "training-transfer", "learning-styles-myth", "education-training-benefit", "university-relearning", "digital-skill-standard"]
+  },
+  {
+    "name": "読書とインプット",
+    "posts": ["reading-survey-japan", "how-to-read-a-book", "speed-reading-science", "paper-vs-screen-reading", "audiobook-comprehension", "handwritten-vs-typed-notes", "primary-sources-research"]
+  },
+  {
+    "name": "AI時代の学び方",
+    "posts": ["genai-learning-guardrails", "ai-tutor-learning", "genai-research-caution", "online-course-completion", "video-playback-speed"]
   }
 ]

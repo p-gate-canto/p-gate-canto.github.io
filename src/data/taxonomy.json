@@ -520,9 +520,14 @@
           "label": "学習ツール・AI活用"
         }
       ],
-      "seoTitle": "学び直し・読書｜実務の学び直しと読書の記録",
-      "guide": "実務の学び直しと読書、学習に使っている道具を扱います。",
-      "start": []
+      "seoTitle": "学び直し・読書｜社会人の学び直し、本の読み方、AIを使った学び方",
+      "guide": "働きながらの学び直しを、国の統計と研究で確かめます。大人の学び方の理論、研修を仕事に活かす条件、教育訓練給付金や大学の制度、本の読み方と紙・画面・音声の違い、生成AIやオンライン講座の使い方を扱います。",
+      "start": [
+        "relearning-statistics-japan",
+        "adult-learning-theory",
+        "how-to-read-a-book",
+        "genai-learning-guardrails"
+      ]
     },
     {
       "key": "workstyle",

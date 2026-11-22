@@ -126,3 +126,23 @@ incorporation-criteria	法人成り 目安	法人成り タイミング、法人
 officer-pay-midterm-change	役員報酬 期中 変更	役員報酬 減額 業績悪化、定期同額給与 改定、臨時改定事由	判断したい
 jishakabu-hyoka	自社株 評価方法	非上場株式 評価、類似業種比準価額、純資産価額 38%	知りたい
 kessan-mae-setsuzei	決算前 節税	決算対策 節税 方法、短期前払費用、経営セーフティ共済 節税	判断したい
+relearning-statistics-japan	社会人 学び直し 実態	リスキリング 実態 調査、自己啓発 割合 正社員	知りたい
+education-training-benefit	教育訓練給付金 条件	教育訓練給付金 専門実践 80%、教育訓練休暇給付金	手続きしたい
+adult-learning-theory	成人学習理論	アンドラゴジー ノールズ、経験学習モデル コルブ	知りたい
+70-20-10-model	70:20:10 法則	70:20:10 根拠、ロミンガー 70:20:10	知りたい
+training-transfer	研修 学んだこと 活かす	学習の転移、研修 効果 職場	判断したい
+learning-styles-myth	学習スタイル 視覚型 聴覚型	学習スタイル 神話、VAK 根拠	知りたい
+university-relearning	社会人 学び直し 大学院	履修証明プログラム、職業実践力育成プログラム BP	判断したい
+digital-skill-standard	デジタルスキル標準 DXリテラシー	DX推進スキル標準 類型、DXリテラシー標準 内容	知りたい
+reading-survey-japan	読書離れ 実態	1か月に1冊も読まない 割合、国語に関する世論調査 読書	知りたい
+speed-reading-science	速読 効果	速読 嘘、速読 研究	判断したい
+paper-vs-screen-reading	紙 画面 理解	紙の本 電子書籍 理解度、画面 読解 メタ分析	判断したい
+audiobook-comprehension	オーディオブック 理解	聞く読書 効果、耳読 理解度	判断したい
+how-to-read-a-book	難しい本 読み方	本を読む本 要約、点検読書 分析読書	やり方を知りたい
+handwritten-vs-typed-notes	手書き パソコン メモ	手書き 記憶 研究、ノート 手書き タイピング	判断したい
+primary-sources-research	一次情報 調べ方	e-Gov法令検索 使い方、通達 調べ方	やり方を知りたい
+genai-learning-guardrails	生成AI 勉強 逆効果	ChatGPT 勉強 効果、生成AI 学習 影響	判断したい
+ai-tutor-learning	AI 家庭教師 学習効果	AIチューター 効果、生成AI 勉強法	判断したい
+genai-research-caution	生成AI 調べもの 注意	生成AI 個人情報 入力、ハルシネーション 対策	手続きしたい
+online-course-completion	オンライン講座 修了率	MOOC 修了率、オンライン学習 続かない	知りたい
+video-playback-speed	倍速視聴 理解	動画 倍速 勉強、2倍速 理解度	判断したい
