@@ -10,9 +10,9 @@ tags:
 - 実務家向け
 - 経営層向け
 - 令和8年度税制改正
-pubDate: 2026-11-20
+pubDate: 2026-11-23
 lawBaseDate: 2026-11-20
-draft: true
+draft: false
 ---
 ## 結論
 

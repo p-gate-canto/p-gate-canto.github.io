@@ -8,9 +8,9 @@ topic: income-tax
 tags:
 - 実務家向け
 - 経理担当者向け
-pubDate: 2026-11-21
+pubDate: 2026-11-23
 lawBaseDate: 2026-11-21
-draft: true
+draft: false
 ---
 ## 結論
 
