@@ -70,6 +70,8 @@ a { color: inherit; text-decoration-color: var(--green); text-decoration-thickne
 a:hover { color: var(--ink); text-decoration-color: var(--ink); }
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; position: relative; }
 .nw { white-space: nowrap; }
+/* 見出し・タイトルの文節（phraseHtml・rehype が付ける）。文節の途中では改行しない。区切りの <wbr> でだけ改行する */
+.ph { white-space: nowrap; }
 /* 黄色のマーカー（強調・ホバー）：下線を太くして文字の下に敷く */
 .prose strong, .card:hover .card-title, .cat:hover strong, .feature:hover .card-title, .toc-card:hover strong {
   text-decoration: underline; text-decoration-color: var(--yellow-soft); text-decoration-thickness: 0.4em;

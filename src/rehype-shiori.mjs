@@ -148,7 +148,7 @@ function unlinkDrafts(node) {
 function splitLong(seg) {
   if (seg.length <= 10) return [seg];
   const out = [];
-  for (const p of seg.split(/(?<=[ァ-ヴー])(?=[^ァ-ヴー・])/)) {
+  for (const p of seg.split(/(?<=[ァ-ヴー])(?=[^ァ-ヴー・])|(?<=[・、」』）])(?=[^・、」』）])/)) {
     if (out.length && (p.length < 3 || out[out.length - 1].length < 3)) out[out.length - 1] += p;
     else out.push(p);
   }
@@ -159,15 +159,27 @@ function wbrHeading(node) {
   for (const c of node.children ?? []) {
     if (c.type !== 'text') { if (c.type === 'element') wbrHeading(c); kids.push(c); continue; }
     const segs = [];
-    for (let seg of budoux.parse(c.value).flatMap(splitLong)) {
-      const lead = seg.match(/^[｜|／]+/);
+    let carry = '';
+    for (let seg of budoux.parse(c.value).flatMap((s) => s.split(/(?<=[｜|／])/)).flatMap(splitLong)) {
+      const lead = seg.match(/^[｜|／・：；、。，．）」』】〉》〕］｝”’)\]]+/);
       if (lead && segs.length) { segs[segs.length - 1] += lead[0]; seg = seg.slice(lead[0].length); if (!seg) continue; }
-      if (segs.length && seg.length <= 2) segs[segs.length - 1] += seg;
-      else segs.push(seg);
+      seg = carry + seg; carry = '';
+      if (segs.length && seg.length <= 2) {
+        if (/[｜|／]$/.test(segs[segs.length - 1])) carry = seg;
+        else segs[segs.length - 1] += seg;
+      } else segs.push(seg);
     }
+    if (carry) { if (segs.length) segs[segs.length - 1] += carry; else segs.push(carry); }
+    // 開きかっこは次の文節に送る（行末禁則）。src/lib.ts の carryOpen と同じ
+    for (let i = 0; i < segs.length - 1; i++) {
+      const m = segs[i].match(/[「『（【〈《〔［｛“‘([]+$/);
+      if (m && m[0].length < segs[i].length) { segs[i] = segs[i].slice(0, -m[0].length); segs[i + 1] = m[0] + segs[i + 1]; }
+    }
+    // 10文字以下の文節は nowrap の span で包み、文節の途中（かっこの前後など）で改行させない
     segs.forEach((seg, i) => {
       if (i) kids.push({ type: 'element', tagName: 'wbr', properties: {}, children: [] });
-      kids.push({ type: 'text', value: seg });
+      if (seg.length <= 10) kids.push({ type: 'element', tagName: 'span', properties: { className: ['ph'] }, children: [{ type: 'text', value: seg }] });
+      else kids.push({ type: 'text', value: seg });
     });
   }
   node.children = kids;
