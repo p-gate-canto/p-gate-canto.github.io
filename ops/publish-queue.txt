@@ -113,3 +113,14 @@ sme-accounting-guideline
 okr-vs-kpi
 lean-startup
 mckinsey-7s
+
+# 2026/11/22 ユーザー承認（最適解で進めて）：相続・贈与／税務調査／法人成り／役員報酬／自社株／決算前節税 9本
+sozokuzei-kiso-kojo
+rekinen-zoyo-vs-seisan-kazei
+zoyozei-shinkoku-2027
+zeimu-chosa-nagare
+zeimu-chosa-shiteki
+officer-pay-midterm-change
+kessan-mae-setsuzei
+incorporation-criteria
+jishakabu-hyoka

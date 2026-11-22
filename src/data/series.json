@@ -1,7 +1,7 @@
 [
   {
     "name": "役員報酬の基本",
-    "posts": ["officer-pay-three-types", "advance-fixed-salary-notification", "officer-pay-vs-dividend", "withholding-20-42-vs-20-315", "year-end-bonus-deduction", "company-car-sale-to-officer"]
+    "posts": ["officer-pay-three-types", "advance-fixed-salary-notification", "officer-pay-midterm-change", "officer-pay-vs-dividend", "withholding-20-42-vs-20-315", "year-end-bonus-deduction", "company-car-sale-to-officer"]
   },
   {
     "name": "源泉徴収の実務",
@@ -9,7 +9,7 @@
   },
   {
     "name": "法人税のしくみ",
-    "posts": ["corporate-taxes-overview", "sonkin-vs-keihi", "kintowari", "entertainment-expenses-10000yen", "small-depreciable-assets-40man", "year-end-bonus-deduction", "loss-carryforward-carryback", "tax-return-deadline-extension"]
+    "posts": ["corporate-taxes-overview", "sonkin-vs-keihi", "kintowari", "entertainment-expenses-10000yen", "small-depreciable-assets-40man", "year-end-bonus-deduction", "loss-carryforward-carryback", "tax-return-deadline-extension", "kessan-mae-setsuzei"]
   },
   {
     "name": "会社の数字の読み方",
@@ -21,7 +21,7 @@
   },
   {
     "name": "事業承継とM&A",
-    "posts": ["business-succession-five-steps", "family-business-models", "sme-ma-guideline", "ma-methods-glossary"]
+    "posts": ["business-succession-five-steps", "jishakabu-hyoka", "family-business-models", "sme-ma-guideline", "ma-methods-glossary"]
   },
   {
     "name": "人事・労務の基本",
@@ -73,7 +73,7 @@
   },
   {
     "name": "個人事業主の申告とインボイス",
-    "posts": ["blue-return-deduction-2027", "invoice-2wari-3wari-tokurei", "simplified-tax-election-deadline", "invoice-transitional-measure-70"]
+    "posts": ["blue-return-deduction-2027", "invoice-2wari-3wari-tokurei", "simplified-tax-election-deadline", "invoice-transitional-measure-70", "incorporation-criteria"]
   },
   {
     "name": "決算の基本",
@@ -98,5 +98,13 @@
   {
     "name": "ハイパフォーマーの科学",
     "posts": ["high-performer-science", "job-performance-predictors", "conscientiousness-work-performance", "deliberate-practice-expertise", "goal-setting-theory", "habit-formation-systems", "multitasking-attention-residue", "feedback-debrief-science", "recovery-from-work-science", "high-performer-teamwork"]
+  },
+  {
+    "name": "相続・贈与の基本",
+    "posts": ["sozokuzei-kiso-kojo", "rekinen-zoyo-vs-seisan-kazei", "zoyozei-shinkoku-2027"]
+  },
+  {
+    "name": "税務調査の基本",
+    "posts": ["zeimu-chosa-nagare", "zeimu-chosa-shiteki"]
   }
 ]
