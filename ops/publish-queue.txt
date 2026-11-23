@@ -4,6 +4,25 @@
 # 行頭に「保留 」を付けた記事は、順番を残したまま公開を止める（例：保留 mission-vision-value）。
 # 2026/11/20：毎朝の公開本数は最大10本に変更。
 
+# 2026/11/23 ユーザー承認：先頭に追加し、同日にスポット公開（マーケ・営業の新規10本と既存の下書き7本）
+marketing-mix-4p-4c
+net-promoter-score
+brand-basics
+pricing-power
+keihyo-ho-advertising
+keihin-gendogaku
+ec-tokushoho-display
+inside-sales-division
+spin-selling
+sales-pipeline-management
+selling-time-ratio
+crm-adoption
+customer-lifetime-value
+homon-denwa-tokushoho
+tokutei-denshi-mail-sales
+freelance-act-sales-outsourcing
+credit-management-receivables
+
 # 2026/11/22 ユーザー承認：年末調整の時期なので先頭へ移す
 year-end-adjustment-2026
 
@@ -29,7 +48,6 @@ kakutei-shinkoku-payment-2027
 stp-analysis
 sales-channel-jizokuka-hojokin
 toriteki-ho-price-negotiation
-tokutei-denshi-mail-sales
 
 # 1日目
 officer-pay-vs-dividend
@@ -92,23 +110,17 @@ subsidy-vs-grant
 turnover-rate-and-reasons
 financial-health-three-indicators
 # 追加（2026/11/20 ユーザー承認：下書き30本の2回目、回答反映済み）
-sales-pipeline-management
 inventory-turnover-days
-selling-time-ratio
 seven-wastes-office-work
-customer-lifetime-value
 labor-productivity
-crm-adoption
 business-flow-chart
 ai-task-selection
 sme-security-basics
 # 追加（2026/11/20 ユーザー承認：下書き30本の3回目、回答反映済み）
-pricing-power
 business-succession-five-steps
 monthly-closing-speed
 psychological-safety
 sme-ma-guideline
-brand-basics
 sme-accounting-guideline
 okr-vs-kpi
 lean-startup

@@ -41,7 +41,7 @@
   },
   {
     "name": "営業の仕組みづくり",
-    "posts": ["sales-pipeline-management", "selling-time-ratio", "crm-adoption", "customer-lifetime-value"]
+    "posts": ["sales-pipeline-management", "selling-time-ratio", "inside-sales-division", "spin-selling", "crm-adoption", "customer-lifetime-value", "credit-management-receivables", "freelance-act-sales-outsourcing"]
   },
   {
     "name": "売れる理由と値決め",
@@ -93,7 +93,11 @@
   },
   {
     "name": "売り方の基本",
-    "posts": ["stp-analysis", "sales-channel-jizokuka-hojokin", "toriteki-ho-price-negotiation", "tokutei-denshi-mail-sales"]
+    "posts": ["stp-analysis", "marketing-mix-4p-4c", "net-promoter-score", "sales-channel-jizokuka-hojokin", "toriteki-ho-price-negotiation"]
+  },
+  {
+    "name": "広告と販売のルール",
+    "posts": ["keihyo-ho-advertising", "keihin-gendogaku", "ec-tokushoho-display", "homon-denwa-tokushoho", "tokutei-denshi-mail-sales"]
   },
   {
     "name": "ハイパフォーマーの科学",
