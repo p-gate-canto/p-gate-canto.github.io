@@ -8,9 +8,9 @@ topic: retention
 tags:
 - 経営層向け
 - 成長期
-pubDate: 2026-11-20
+pubDate: 2026-11-24
 lawBaseDate: 2026-11-20
-draft: true
+draft: false
 ---
 ## 結論
 

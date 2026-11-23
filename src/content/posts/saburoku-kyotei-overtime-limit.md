@@ -8,9 +8,9 @@ topic: work-rules
 tags:
 - 経営層向け
 - 経理担当者向け
-pubDate: 2026-11-20
+pubDate: 2026-11-24
 lawBaseDate: 2026-11-20
-draft: true
+draft: false
 ---
 ## 結論
 
