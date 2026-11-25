@@ -7,8 +7,8 @@ category: strategy
 topic: management-plan
 tags:
 - 経営層向け
-pubDate: 2026-11-20
-draft: true
+pubDate: 2026-11-26
+draft: false
 ---
 > 結論：KPIはいつもの状態を保てているかを測る体温計、OKRはまだできていないことに挑むための目標です。中小企業なら、売上・粗利・資金などはKPIで毎月見て、会社として本当に変えたいことを1つか2つだけOKRにする、という使い分けが扱いやすい形です。
 

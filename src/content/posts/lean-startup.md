@@ -7,9 +7,9 @@ category: innovation
 topic: new-business
 tags:
 - 経営層向け
-pubDate: 2026-11-20
+pubDate: 2026-11-26
 lawBaseDate: 2026-11-20
-draft: true
+draft: false
 ---
 > 結論：リーンスタートアップは、売れるかどうか分からないものに大きなお金と時間をかける前に、小さく出して顧客の反応で確かめる進め方です。新規事業の前提は外れることが多いので、外れたことに早く安く気づくことが、成功への近道になります。
 

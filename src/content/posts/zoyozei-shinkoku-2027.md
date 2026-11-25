@@ -8,9 +8,9 @@ topic: inheritance-tax
 tags:
 - 経営層向け
 - 実務家向け
-pubDate: 2026-11-22
+pubDate: 2026-11-26
 lawBaseDate: 2026-11-22
-draft: true
+draft: false
 ---
 ## 結論
 
