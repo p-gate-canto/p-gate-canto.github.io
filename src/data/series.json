@@ -88,6 +88,18 @@
     "posts": ["zeirishi-exam-structure", "sharoushi-exam-structure", "shindanshi-exam-structure"]
   },
   {
+    "name": "税理士試験 財務諸表論",
+    "posts": ["revenue-recognition-5-steps"]
+  },
+  {
+    "name": "社労士試験 労働基準法",
+    "posts": ["annual-paid-leave-rules"]
+  },
+  {
+    "name": "診断士 財務・会計",
+    "posts": ["npv-irr-investment"]
+  },
+  {
     "name": "個人の確定申告",
     "posts": ["kakutei-shinkoku-who-needs-2027", "side-job-tax-return", "iryohi-vs-self-medication", "furusato-nozei-one-stop-vs-kakutei", "housing-loan-deduction-2026", "kakutei-shinkoku-payment-2027"]
   },

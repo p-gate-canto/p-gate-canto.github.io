@@ -138,3 +138,8 @@ incorporation-criteria
 jishakabu-hyoka
 
 # 2026/11/22 「学び直し・読書」の20本は、ユーザーの指示（公開して）で同日にスポット公開済み
+
+# 2026/11/24 ユーザー承認：末尾に追加（受験生向け3本：社労士・税理士・診断士）
+annual-paid-leave-rules
+revenue-recognition-5-steps
+npv-irr-investment
