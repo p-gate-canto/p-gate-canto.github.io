@@ -3,6 +3,7 @@
 import PageHero from '../../components/PageHero.astro';
 import Base from '../../layouts/Base.astro';
 import PostList from '../../components/PostList.astro';
+import Refine from '../../components/Refine.astro';
 import { getPosts } from '../../lib';
 import { breadcrumbLd } from '../../seo';
 const posts = await getPosts();
@@ -11,6 +12,7 @@ const posts = await getPosts();
   <PageHero slot="hero" title="記事一覧" lead={`公開中の${posts.length}本を、新しい順に並べています。`} />
   <section class="section">
     <div class="wrap">
+      <Refine posts={posts} />
       <PostList posts={posts} />
     </div>
   </section>

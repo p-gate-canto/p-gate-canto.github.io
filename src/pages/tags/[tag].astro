@@ -2,6 +2,7 @@
 import PageHero from '../../components/PageHero.astro';
 import Base from '../../layouts/Base.astro';
 import PostList from '../../components/PostList.astro';
+import Refine from '../../components/Refine.astro';
 import { ALL_TAGS, READERS, url } from '../../consts';
 import { getPosts } from '../../lib';
 export async function getStaticPaths() {
@@ -16,6 +17,7 @@ const reader = READERS.find((r) => r.tag === tag);
   <PageHero slot="hero" title={reader ? reader.label : `#${tag}`} lead={reader ? reader.desc : `タグ「${tag}」の記事`} crumbs={[['タグ', url('/tags/')]]} />
   <section class="section">
     <div class="wrap">
+      <Refine posts={posts} />
       <PostList posts={posts} empty="このタグの記事は準備中です。" />
     </div>
   </section>

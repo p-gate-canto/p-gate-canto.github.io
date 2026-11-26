@@ -2,6 +2,7 @@
 import PageHero from '../../components/PageHero.astro';
 import Base from '../../layouts/Base.astro';
 import PostList from '../../components/PostList.astro';
+import Refine from '../../components/Refine.astro';
 import { TYPES, url } from '../../consts';
 import { getPosts } from '../../lib';
 import { breadcrumbLd } from '../../seo';
@@ -15,6 +16,7 @@ const posts = (await getPosts()).filter((p) => p.data.type === t.key);
   <PageHero slot="hero" title={t.label} lead={t.desc} crumbs={[['記事タイプ', url('/types/')]]} />
   <section class="section">
     <div class="wrap">
+      <Refine posts={posts} />
       <PostList posts={posts} empty="この記事タイプの記事は準備中です。" />
     </div>
   </section>

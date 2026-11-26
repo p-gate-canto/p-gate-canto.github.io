@@ -1,0 +1,118 @@
+---
+// 一覧の絞り込み（タグ・読む人のページ）。分野 → 小カテゴリー（税務なら税目）の2段。
+// 下の PostList の各行に付いた data-mid・data-topic で表示を切り替える。URL は ?f=分野&t=小カテゴリー。
+// JS が動かない環境では部品ごと出さない（一覧は全件のまま）。
+import type { CollectionEntry } from 'astro:content';
+import Count from './Count.astro';
+import { MIDS } from '../consts';
+import { phraseHtml } from '../lib';
+interface Props { posts: CollectionEntry<'posts'>[] }
+const { posts } = Astro.props;
+const order = (key: string) => MIDS.findIndex((m) => m.key === key);
+const mids = MIDS.map((m) => ({
+  key: m.key,
+  label: m.label,
+  n: posts.filter((p) => p.data.category === m.key).length,
+  topics: m.topics
+    .map((t) => ({ slug: t.slug, label: t.label, n: posts.filter((p) => p.data.category === m.key && p.data.topic === t.slug).length }))
+    .filter((t) => t.n > 0)
+    .sort((a, b) => b.n - a.n),
+}))
+  .filter((m) => m.n > 0)
+  .sort((a, b) => b.n - a.n || order(a.key) - order(b.key));
+const show = mids.length > 1 || mids.some((m) => m.topics.length > 1);
+---
+{show && (
+  <details class="refine" data-refine hidden>
+    <summary class="refine-summary"><span class="refine-en">FILTER</span><span class="refine-title">絞り込み</span><span class="refine-now" data-refine-now>すべて</span></summary>
+    <div class="refine-row">
+      <p class="refine-label"><span class="refine-en">FIELD</span>分野</p>
+      <ul class="refine-list">
+        <li><button type="button" class="refine-item" data-f="" aria-pressed="true"><span class="refine-name"><span>すべて</span></span><Count n={posts.length} /></button></li>
+        {mids.map((m) => (
+          <li><button type="button" class="refine-item" data-f={m.key} aria-pressed="false"><span class="refine-name"><span set:html={phraseHtml(m.label)} /></span><Count n={m.n} /></button></li>
+        ))}
+      </ul>
+    </div>
+    {mids.filter((m) => m.topics.length > 1).map((m) => (
+      <div class="refine-row" data-refine-topics={m.key} hidden>
+        <p class="refine-label"><span class="refine-en">TOPIC</span>{m.key === 'tax' ? '税目' : `${m.label}の小カテゴリー`}</p>
+        <ul class="refine-list">
+          <li><button type="button" class="refine-item" data-t="" aria-pressed="true"><span class="refine-name"><span>すべて</span></span><Count n={m.n} /></button></li>
+          {m.topics.map((t) => (
+            <li><button type="button" class="refine-item" data-t={t.slug} aria-pressed="false"><span class="refine-name"><span set:html={phraseHtml(t.label)} /></span><Count n={t.n} /></button></li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </details>
+  <p class="refine-result" data-refine-result aria-live="polite" hidden></p>
+)}
+<script is:inline>
+(function () {
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
+  function init() {
+  var box = document.querySelector('[data-refine]');
+  if (!box) return;
+  var list = box.parentNode.querySelector('.posts');
+  if (!list) return;
+  var rows = Array.prototype.slice.call(list.children);
+  var result = box.parentNode.querySelector('[data-refine-result]');
+  var now = box.querySelector('[data-refine-now]');
+  var wide = window.matchMedia('(min-width: 861px)');
+  var state = { f: '', t: '' };
+  function labelOf(sel) { var b = box.querySelector(sel); return b ? b.querySelector('.refine-name').textContent : ''; }
+  function apply(push) {
+    if (state.f && !box.querySelector('[data-f="' + state.f + '"]')) state.f = '';
+    var topicsRow = state.f ? box.querySelector('[data-refine-topics="' + state.f + '"]') : null;
+    if (!topicsRow || (state.t && !topicsRow.querySelector('[data-t="' + state.t + '"]'))) state.t = '';
+    box.querySelectorAll('[data-f]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.f === state.f)); });
+    box.querySelectorAll('[data-refine-topics]').forEach(function (r) {
+      r.hidden = r !== topicsRow;
+      r.querySelectorAll('[data-t]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.t === state.t)); });
+    });
+    var n = 0;
+    rows.forEach(function (li) {
+      var on = (!state.f || li.dataset.mid === state.f) && (!state.t || li.dataset.topic === state.t);
+      li.hidden = !on;
+      if (on) n++;
+    });
+    var parts = [];
+    if (state.f) parts.push(labelOf('[data-f="' + state.f + '"]'));
+    if (state.t && topicsRow) parts.push(topicsRow.querySelector('[data-t="' + state.t + '"] .refine-name').textContent);
+    now.textContent = parts.length ? parts[parts.length - 1] : 'すべて';
+    result.hidden = !parts.length;
+    result.textContent = parts.length ? parts.join(' › ') + '　' + n + '記事' : '';
+    if (push) {
+      try {
+        var u = new URL(location.href);
+        u.searchParams.delete('f'); u.searchParams.delete('t');
+        if (state.f) u.searchParams.set('f', state.f);
+        if (state.t) u.searchParams.set('t', state.t);
+        history.replaceState(null, '', u.pathname + u.search + u.hash);
+      } catch (e) {}
+    }
+  }
+  box.addEventListener('click', function (e) {
+    var b = e.target.closest('.refine-item');
+    if (!b) return;
+    if ('f' in b.dataset) { state.f = b.dataset.f; state.t = ''; }
+    else { state.t = b.dataset.t; }
+    apply(true);
+  });
+  try {
+    var q = new URLSearchParams(location.search);
+    state.f = q.get('f') || '';
+    state.t = q.get('t') || '';
+  } catch (e) {}
+  if (!state.f && state.t) {
+    var tb = box.querySelector('[data-t="' + state.t + '"]');
+    if (tb) state.f = tb.closest('[data-refine-topics]').dataset.refineTopics;
+  }
+  box.hidden = false;
+  box.open = wide.matches;
+  if (wide.addEventListener) wide.addEventListener('change', function (m) { if (m.matches) box.open = true; });
+  apply(false);
+  }
+})();
+</script>

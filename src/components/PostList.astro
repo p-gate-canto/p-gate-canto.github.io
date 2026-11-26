@@ -12,7 +12,7 @@ const { posts, base = '/posts/', empty = '記事は準備中です。', compact 
 ) : (
   <ul class:list={['posts', { 'posts-compact': compact }]}>
     {posts.map((p) => (
-      <li>
+      <li data-mid={p.data.category} data-topic={p.data.topic}>
         <a class="card" href={url(`${base}${p.id}/`)}>
           <span class="meta">
             <time datetime={isoDate(p.data.pubDate)}>{fmtDate(p.data.pubDate)}</time>
