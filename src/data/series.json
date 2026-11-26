@@ -92,6 +92,10 @@
     "posts": ["revenue-recognition-5-steps"]
   },
   {
+    "name": "税理士試験 消費税法",
+    "posts": ["shohizei-kazei-taisho", "shohizei-hikazei", "shohizei-yushutsu-menzei", "shohizei-nozei-gimu", "shohizei-menzei-tokurei", "shohizei-kazei-uriage-wariai", "shohizei-kobetsu-ikkatsu", "shohizei-chosei-kotei-shisan", "shohizei-kani-kazei", "shohizei-shiire-zeigaku-kojo-yoken"]
+  },
+  {
     "name": "社労士試験 労働基準法",
     "posts": ["annual-paid-leave-rules"]
   },
