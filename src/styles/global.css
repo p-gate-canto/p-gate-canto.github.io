@@ -355,22 +355,24 @@ details[open] > summary.article-toc-title::after { content: '－'; }
 .prose h2::after { content: counter(h2, decimal-leading-zero); position: absolute; left: 0; top: 13px; font-family: var(--font-en); font-size: 11px; font-weight: 700; letter-spacing: 0.22em; line-height: 1; color: var(--green-ink); }
 .prose h2::before { content: ''; position: absolute; left: 0; top: -2px; width: 48px; height: 3px; background: var(--grad); }
 .prose h3 { font-size: 18.5px; line-height: 1.55; color: var(--ink); }
-.prose blockquote { margin-left: 0; margin-right: 0; padding: 2px 0 2px 18px; border-left: 3px solid var(--line); color: var(--muted); }
+.prose blockquote { margin-left: 0; margin-right: 0; padding: 14px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--muted); }
 .prose blockquote > p { margin: 0; }
 .prose blockquote > p + p, .prose blockquote > p + :is(ul, ol), .prose blockquote > :is(ul, ol) + p { margin-top: 1em; }
-/* 囲み：結論は黄、ポイントは緑、注意はオレンジ、補足はグレーの縦線 */
-.callout { padding: 18px 20px; background: var(--tint); border-left: 4px solid var(--charcoal); }
+/* 囲み（2026/11/26 A案）：左の縦線と色の地はやめ、上に太い罫線・下に細い罫線。英字ラベル＋明朝の見出し、種類の色は見出しの下のマーカーだけ */
+.callout { padding: 16px 0 20px; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); }
 .callout > p { margin: 0; }
 .callout > p + p, .callout > p + :is(ul, ol), .callout > :is(ul, ol) + p { margin-top: 1em; }
 .callout > .callout-label + * { margin-top: 0; }
-.callout .callout-label { margin: 0 0 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; color: var(--ink); }
-.callout-conclusion { background: #fffbe3; border-left-color: var(--yellow); }
-.callout-point { background: #f4f8ec; border-left-color: var(--green); }
-.callout-point .callout-label { color: var(--green-ink); }
-.callout-caution { background: #fff6e8; border-left-color: #e08a00; }
-.callout-caution .callout-label { color: #9a5b00; }
-.callout-note { border-left-color: #b9b9c3; }
-.callout-note .callout-label { color: var(--muted); }
+.callout .callout-label { position: relative; display: inline-block; margin: 22px 0 10px; padding: 0 2px; font-family: var(--serif); font-size: 16px; font-weight: 600; letter-spacing: 0.12em; line-height: 1.5; color: var(--ink); background: linear-gradient(transparent 60%, var(--callout-mark, transparent) 60%); }
+.callout .callout-label::before { content: var(--callout-en, 'NOTE'); position: absolute; left: 0; top: -20px; font-family: var(--font-en); font-size: 10.5px; font-weight: 700; letter-spacing: 0.22em; line-height: 1; color: var(--green-ink); white-space: nowrap; }
+.callout-conclusion { --callout-en: 'CONCLUSION'; --callout-mark: var(--yellow-soft); }
+.callout-point { --callout-en: 'POINT'; --callout-mark: rgba(134, 188, 37, 0.32); }
+.callout-caution { --callout-en: 'CAUTION'; --callout-mark: rgba(224, 138, 0, 0.28); }
+.callout-note { --callout-en: 'NOTE'; }
+.updates.callout { --callout-en: 'UPDATES'; }
+/* 見出しの直後の囲みは、和文の見出し（結論など）が見出しと重なるので英字ラベルだけ残す */
+.prose h2 + .callout .callout-label { display: block; margin: 16px 0 14px; padding: 0; font-size: 0; line-height: 0; background: none; }
+.prose h2 + .callout .callout-label::before { position: static; display: block; font-size: 10.5px; line-height: 1; }
 /* 図版：図と出典を同じ枠で表示する */
 .prose figure.fig { margin-left: 0; margin-right: 0; padding: 22px 22px 14px; background: var(--tint); }
 .prose figure.fig img { display: block; width: 100%; max-width: 440px; height: auto; margin: 0 auto; border: 0; }
@@ -567,7 +569,7 @@ details[open] > summary.article-toc-title::after { content: '－'; }
   .prose h2 { font-size: 21px; padding-top: 32px; }
   .prose h3 { font-size: 17px; }
   .prose figure.fig { padding: 14px 12px 10px; }
-  .callout { padding: 16px; }
+  .callout { padding: 14px 0 18px; }
   /* 表（スマホ）：3列以下は画面幅に収める。4列以上は行ごとのカードにする */
   .prose table { font-size: 13px; table-layout: auto; }
   .prose th, .prose td { padding: 8px; min-width: 0; }
