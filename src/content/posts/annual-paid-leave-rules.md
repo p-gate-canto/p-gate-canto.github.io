@@ -9,9 +9,9 @@ tags:
 - 社労士受験生向け
 exam:
 - 労働基準法及び労働安全衛生法
-pubDate: 2026-11-24
+pubDate: 2026-11-27
 lawBaseDate: 2026-11-24
-draft: true
+draft: false
 ---
 ## 結論
 

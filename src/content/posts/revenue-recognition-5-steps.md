@@ -9,8 +9,8 @@ tags:
 - 税理士受験生向け
 exam:
 - 財務諸表論
-pubDate: 2026-11-24
-draft: true
+pubDate: 2026-11-27
+draft: false
 ---
 ## 結論
 

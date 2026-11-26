@@ -9,8 +9,8 @@ tags:
 - 診断士受験生向け
 exam:
 - 財務・会計
-pubDate: 2026-11-24
-draft: true
+pubDate: 2026-11-27
+draft: false
 ---
 ## 結論
 

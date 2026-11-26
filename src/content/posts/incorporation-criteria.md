@@ -8,9 +8,9 @@ topic: tax-planning
 tags:
 - 経営層向け
 - 創業期
-pubDate: 2026-11-22
+pubDate: 2026-11-27
 lawBaseDate: 2026-11-22
-draft: true
+draft: false
 ---
 ## 結論
 
