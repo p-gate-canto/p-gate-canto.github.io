@@ -56,6 +56,18 @@
     "posts": ["sme-accounting-guideline", "monthly-closing-speed"]
   },
   {
+    "name": "戦略管理会計",
+    "posts": ["strategic-management-accounting", "segment-profit-analysis", "activity-based-costing", "differential-cost-analysis", "balanced-scorecard"]
+  },
+  {
+    "name": "経営分析（財務分析）",
+    "posts": ["financial-analysis-five-views", "roa-roe-dupont", "working-capital-ccc", "labor-share", "local-benchmark"]
+  },
+  {
+    "name": "MAS監査と経営計画",
+    "posts": ["mas-kansa", "fixed-variable-cost-split", "management-plan-numbers", "budget-variance-analysis", "keiei-kaizen-405-valueup"]
+  },
+  {
     "name": "現場の生産性を上げる",
     "posts": ["labor-productivity", "seven-wastes-office-work", "business-flow-chart", "inventory-turnover-days"]
   },

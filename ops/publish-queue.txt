@@ -155,3 +155,20 @@ jishakabu-hyoka
 annual-paid-leave-rules
 revenue-recognition-5-steps
 npv-irr-investment
+
+# 2026/11/27 ユーザー承認：末尾に追加（戦略管理会計・経営分析・MAS監査の15本）。実務メモ未記入で校正リスク「高」の3本（BSC・ロカベン・固変分解）は2日目の最後に置く
+strategic-management-accounting
+segment-profit-analysis
+activity-based-costing
+differential-cost-analysis
+financial-analysis-five-views
+roa-roe-dupont
+working-capital-ccc
+labor-share
+mas-kansa
+management-plan-numbers
+budget-variance-analysis
+keiei-kaizen-405-valueup
+balanced-scorecard
+local-benchmark
+fixed-variable-cost-split
