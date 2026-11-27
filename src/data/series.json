@@ -56,6 +56,14 @@
     "posts": ["sme-accounting-guideline", "monthly-closing-speed"]
   },
   {
+    "name": "セールスミックス",
+    "posts": ["sales-mix-cvp", "optimal-sales-mix-single-constraint", "optimal-sales-mix-linear-programming", "sales-mix-variance", "market-share-variance"]
+  },
+  {
+    "name": "セグメント別損益と業績評価",
+    "posts": ["responsibility-accounting", "segment-pl-methods", "division-vs-manager-evaluation", "head-office-cost-allocation", "roi-residual-income-eva", "transfer-pricing"]
+  },
+  {
     "name": "戦略管理会計",
     "posts": ["strategic-management-accounting", "segment-profit-analysis", "activity-based-costing", "differential-cost-analysis", "balanced-scorecard"]
   },

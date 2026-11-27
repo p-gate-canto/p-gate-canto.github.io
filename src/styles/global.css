@@ -176,8 +176,8 @@ a.type-chip:hover { color: var(--ink); border-color: var(--ink); }
 .card-hits a:hover .card-hits-title { text-decoration: underline; text-decoration-color: var(--green); }
 .card-hits-title { display: block; font-size: 13.5px; font-weight: 700; color: var(--ink); line-height: 1.6; }
 .card-hits-text { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.7; }
-/* 一覧の絞り込み（Refine）：分野 → 小カテゴリー。箱にせず罫線で区切る。選んでいる項目は黄色のマーカー */
-.refine { margin: 0 0 28px; border-top: 2px solid var(--ink); }
+/* 一覧の絞り込み（Refine）：柱 → 分野 → 小カテゴリーの3段のツリー（2026/11/27 ユーザー指定）。PCは3列、スマホは字下げ。箱にせず罫線で区切る。選んでいる項目は黄色のマーカー */
+.refine { margin: 0 0 14px; border-top: 2px solid var(--ink); }
 .refine-summary { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 10px 0; font-size: 14px; font-weight: 700; color: var(--ink); cursor: pointer; list-style: none; }
 .refine-summary::-webkit-details-marker { display: none; }
 .refine-summary::after { content: '＋'; margin-left: auto; font-weight: 400; color: var(--muted); }
@@ -185,18 +185,40 @@ a.type-chip:hover { color: var(--ink); border-color: var(--ink); }
 .refine-title { flex: none; white-space: nowrap; }
 .refine-now { min-width: 0; font-weight: 400; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .refine-en { flex: none; font-family: var(--font-en); font-size: 10.5px; font-weight: 700; letter-spacing: 0.22em; line-height: 1; color: var(--green-ink); }
-.refine-row { padding: 16px 0 4px; }
-.refine-row + .refine-row { border-top: 1px solid var(--line); }
+.refine-tree { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) minmax(0, 1.15fr); padding-bottom: 6px; }
+.refine-col { min-width: 0; padding: 14px 18px 0; }
+.refine-col:first-child { padding-left: 0; }
+.refine-col:last-child { padding-right: 0; }
+.refine-col + .refine-col { border-left: 1px solid var(--line); }
 .refine-label { display: flex; align-items: baseline; gap: 10px; margin: 0 0 6px; font-size: 13px; font-weight: 700; color: var(--ink); }
-.refine-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 22px; }
-.refine-item { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 8px; width: 100%; min-height: 48px; padding: 8px 0; border: 0; border-top: 1px solid var(--line); background: none; font: inherit; font-size: 14px; line-height: 1.5; color: var(--ink); text-align: left; cursor: pointer; }
+.refine-list { list-style: none; margin: 0; padding: 0; }
+.refine-item { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 8px; width: 100%; min-height: 40px; padding: 7px 0; border: 0; border-top: 1px solid var(--line); background: none; font: inherit; font-size: 14px; line-height: 1.5; color: var(--ink); text-align: left; cursor: pointer; }
 .refine-name { flex: 0 1 auto; min-width: 0; word-break: keep-all; overflow-wrap: normal; }
+.refine-no { margin-right: 8px; font-family: var(--font-en); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: var(--green-ink); }
 .refine-item .count { margin-left: auto; }
 .refine-item:hover .refine-name > span, .refine-item[aria-pressed='true'] .refine-name > span { background: linear-gradient(transparent 60%, var(--yellow-soft) 60%); -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .refine-item[aria-pressed='true'] .refine-name { font-weight: 700; }
-.refine-result { margin: -12px 0 14px; font-size: 13px; font-weight: 700; color: var(--ink); }
+.refine-tree:not(.is-nested) [data-col='p'] .refine-item[aria-pressed='true']::after, .refine-tree:not(.is-nested) [data-col='f'] .refine-item[data-f]:not([data-f=''])[aria-pressed='true']::after { content: '›'; margin-left: 8px; font-weight: 700; color: var(--ink); }
+.refine-group[hidden] { display: none; }
+.refine-group { display: flex; align-items: baseline; gap: 8px; padding: 14px 0 4px; font-size: 12px; font-weight: 700; color: var(--muted); }
+.refine-hint { margin: 0; padding: 12px 0; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+.refine-path { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; margin: 0 0 18px; font-size: 13px; color: var(--muted); }
+.refine-path-label { margin-right: 4px; font-weight: 700; color: var(--ink); }
+.refine-path button { padding: 0; border: 0; background: none; font: inherit; color: var(--ink); text-decoration: underline; text-decoration-color: var(--green); text-underline-offset: 3px; cursor: pointer; }
+.refine-path button:hover { text-decoration-color: var(--yellow); }
+.refine-path strong { color: var(--ink); }
+.refine-sep { color: var(--muted); }
+.refine-path .count { margin-left: 6px; }
 @media (min-width: 861px) { .refine > .refine-summary { display: none; } .refine { padding-top: 4px; } }
-@media (max-width: 860px) { .refine-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 14px; } .refine-row { padding-top: 10px; } }
+@media (max-width: 860px) {
+  .refine-tree { display: block; }
+  .refine-col, .refine-col:first-child, .refine-col:last-child { padding: 0; border: 0; }
+  .refine-col[data-col='p'] > .refine-label { margin-top: 10px; }
+  .is-nested .refine-col[data-col='f'], .is-nested .refine-col[data-col='t'] { margin: 0 0 6px 12px; padding-left: 12px; border-left: 1px solid var(--line); }
+  .is-nested .refine-col[data-col='f'] > .refine-label, .is-nested .refine-col[data-col='t'] > .refine-label { margin: 8px 0 2px; font-size: 12px; }
+  .is-nested .refine-col.is-empty { display: none; }
+  .refine-item { min-height: 48px; }
+}
 .empty { margin: 0; padding: 20px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--muted); font-size: 14px; }
 
 /* ---------- まず読む3本（トップだけ） ---------- */

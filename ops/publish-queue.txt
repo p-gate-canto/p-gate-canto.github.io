@@ -172,3 +172,16 @@ keiei-kaizen-405-valueup
 balanced-scorecard
 local-benchmark
 fixed-variable-cost-split
+
+# 2026/11/27 ユーザー承認：末尾に追加（管理会計：セールスミックス5本・セグメント別損益と業績評価6本。6本目の「純益法と貢献利益法」はユーザー提示の題材をもとに独自に書いたもの）
+sales-mix-cvp
+optimal-sales-mix-single-constraint
+optimal-sales-mix-linear-programming
+sales-mix-variance
+market-share-variance
+responsibility-accounting
+segment-pl-methods
+division-vs-manager-evaluation
+head-office-cost-allocation
+roi-residual-income-eva
+transfer-pricing

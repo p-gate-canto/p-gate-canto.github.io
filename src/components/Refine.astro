@@ -1,52 +1,70 @@
 ---
-// 一覧の絞り込み（タグ・読む人のページ）。分野 → 小カテゴリー（税務なら税目）の2段。
-// 下の PostList の各行に付いた data-mid・data-topic で表示を切り替える。URL は ?f=分野&t=小カテゴリー。
+// 一覧の絞り込み（タグ・読む人・記事タイプ・記事一覧のページ）。柱 → 分野 → 小カテゴリーの3段のツリー。
+// PC は3列（左から柱・分野・小カテゴリー）、スマホは選んだ項目の真下に次の段が字下げで開く。
+// 下の PostList の各行の data-mid・data-topic で表示を切り替える。URL は ?p=柱&f=分野&t=小カテゴリー。
 // JS が動かない環境では部品ごと出さない（一覧は全件のまま）。
 import type { CollectionEntry } from 'astro:content';
 import Count from './Count.astro';
-import { MIDS } from '../consts';
+import { MIDS, PILLARS, midNo } from '../consts';
 import { phraseHtml } from '../lib';
 interface Props { posts: CollectionEntry<'posts'>[] }
 const { posts } = Astro.props;
-const order = (key: string) => MIDS.findIndex((m) => m.key === key);
+const midPillar = (key: string) => MIDS.find((m) => m.key === key)?.pillar ?? 'growth';
+const pillars = PILLARS.map((p) => ({ key: p.key, en: p.en, label: p.label, n: posts.filter((x) => midPillar(x.data.category) === p.key).length })).filter((p) => p.n > 0);
 const mids = MIDS.map((m) => ({
   key: m.key,
+  pillar: m.pillar,
+  no: midNo(m.key),
   label: m.label,
   n: posts.filter((p) => p.data.category === m.key).length,
   topics: m.topics
     .map((t) => ({ slug: t.slug, label: t.label, n: posts.filter((p) => p.data.category === m.key && p.data.topic === t.slug).length }))
-    .filter((t) => t.n > 0)
-    .sort((a, b) => b.n - a.n),
-}))
-  .filter((m) => m.n > 0)
-  .sort((a, b) => b.n - a.n || order(a.key) - order(b.key));
+    .filter((t) => t.n > 0),
+})).filter((m) => m.n > 0);
 const show = mids.length > 1 || mids.some((m) => m.topics.length > 1);
 ---
 {show && (
   <details class="refine" data-refine hidden>
     <summary class="refine-summary"><span class="refine-en">FILTER</span><span class="refine-title">絞り込み</span><span class="refine-now" data-refine-now>すべて</span></summary>
-    <div class="refine-row">
-      <p class="refine-label"><span class="refine-en">FIELD</span>分野</p>
-      <ul class="refine-list">
-        <li><button type="button" class="refine-item" data-f="" aria-pressed="true"><span class="refine-name"><span>すべて</span></span><Count n={posts.length} /></button></li>
-        {mids.map((m) => (
-          <li><button type="button" class="refine-item" data-f={m.key} aria-pressed="false"><span class="refine-name"><span set:html={phraseHtml(m.label)} /></span><Count n={m.n} /></button></li>
-        ))}
-      </ul>
-    </div>
-    {mids.filter((m) => m.topics.length > 1).map((m) => (
-      <div class="refine-row" data-refine-topics={m.key} hidden>
-        <p class="refine-label"><span class="refine-en">TOPIC</span>{m.key === 'tax' ? '税目' : `${m.label}の小カテゴリー`}</p>
+    <div class="refine-tree" data-refine-tree>
+      <div class="refine-col" data-col="p">
+        <p class="refine-label"><span class="refine-en">PILLAR</span>柱</p>
         <ul class="refine-list">
-          <li><button type="button" class="refine-item" data-t="" aria-pressed="true"><span class="refine-name"><span>すべて</span></span><Count n={m.n} /></button></li>
-          {m.topics.map((t) => (
-            <li><button type="button" class="refine-item" data-t={t.slug} aria-pressed="false"><span class="refine-name"><span set:html={phraseHtml(t.label)} /></span><Count n={t.n} /></button></li>
+          <li><button type="button" class="refine-item" data-p="" aria-pressed="true"><span class="refine-name"><span>すべて</span></span><Count n={posts.length} /></button></li>
+          {pillars.map((p) => (
+            <li><button type="button" class="refine-item" data-p={p.key} aria-pressed="false"><span class="refine-name"><span><span class="refine-no">{p.en}</span>{p.label}</span></span><Count n={p.n} /></button></li>
           ))}
         </ul>
       </div>
-    ))}
+      <div class="refine-col" data-col="f">
+        <p class="refine-label"><span class="refine-en">FIELD</span>分野</p>
+        <ul class="refine-list">
+          <li><button type="button" class="refine-item" data-f="" aria-pressed="true"><span class="refine-name"><span>すべて</span></span><span class="count" data-all-count></span></button></li>
+          {pillars.map((p) => (
+            <>
+              <li class="refine-group" data-group={p.key}><span class="refine-en">{p.en}</span>{p.label}</li>
+              {mids.filter((m) => m.pillar === p.key).map((m) => (
+                <li data-pillar={m.pillar}><button type="button" class="refine-item" data-f={m.key} aria-pressed="false"><span class="refine-name"><span><span class="refine-no">{m.no}</span><span set:html={phraseHtml(m.label)} /></span></span><Count n={m.n} /></button></li>
+              ))}
+            </>
+          ))}
+        </ul>
+      </div>
+      <div class="refine-col" data-col="t">
+        <p class="refine-label"><span class="refine-en">TOPIC</span><span data-topic-label>小カテゴリー</span></p>
+        <p class="refine-hint" data-topic-hint>分野を選ぶと、小カテゴリーが出ます。</p>
+        {mids.map((m) => (
+          <ul class="refine-list" data-topics={m.key} hidden>
+            <li><button type="button" class="refine-item" data-t="" aria-pressed="true"><span class="refine-name"><span>すべて</span></span><Count n={m.n} /></button></li>
+            {m.topics.map((t) => (
+              <li><button type="button" class="refine-item" data-t={t.slug} aria-pressed="false"><span class="refine-name"><span set:html={phraseHtml(t.label)} /></span><Count n={t.n} /></button></li>
+            ))}
+          </ul>
+        ))}
+      </div>
+    </div>
   </details>
-  <p class="refine-result" data-refine-result aria-live="polite" hidden></p>
+  <p class="refine-path" data-refine-path hidden></p>
 )}
 <script is:inline>
 (function () {
@@ -57,38 +75,78 @@ const show = mids.length > 1 || mids.some((m) => m.topics.length > 1);
   var list = box.parentNode.querySelector('.posts');
   if (!list) return;
   var rows = Array.prototype.slice.call(list.children);
-  var result = box.parentNode.querySelector('[data-refine-result]');
+  var tree = box.querySelector('[data-refine-tree]');
+  var colP = box.querySelector('[data-col="p"]');
+  var colF = box.querySelector('[data-col="f"]');
+  var colT = box.querySelector('[data-col="t"]');
+  var path = box.parentNode.querySelector('[data-refine-path]');
   var now = box.querySelector('[data-refine-now]');
   var wide = window.matchMedia('(min-width: 861px)');
-  var state = { f: '', t: '' };
-  function labelOf(sel) { var b = box.querySelector(sel); return b ? b.querySelector('.refine-name').textContent : ''; }
+  var state = { p: '', f: '', t: '' };
+  function q(sel, root) { return (root || box).querySelector(sel); }
+  function nameOf(b) { return b ? b.querySelector('.refine-name').textContent : ''; }
+  function pillarOfMid(f) { var b = q('[data-f="' + f + '"]'); return b ? b.parentNode.dataset.pillar || '' : ''; }
+  function place() {
+    // PC は3列に並べ、スマホは選んだ項目の真下に次の段を入れる（字下げのツリー）
+    if (wide.matches) {
+      tree.classList.remove('is-nested');
+      tree.appendChild(colP); tree.appendChild(colF); tree.appendChild(colT);
+    } else {
+      tree.classList.add('is-nested');
+      tree.appendChild(colP);
+      var pb = q('[data-p="' + state.p + '"]', colP);
+      (pb ? pb.parentNode : colP).appendChild(colF);
+      var fb = state.f ? q('[data-f="' + state.f + '"]', colF) : null;
+      if (fb) fb.parentNode.appendChild(colT); else colF.appendChild(colT);
+    }
+  }
   function apply(push) {
-    if (state.f && !box.querySelector('[data-f="' + state.f + '"]')) state.f = '';
-    var topicsRow = state.f ? box.querySelector('[data-refine-topics="' + state.f + '"]') : null;
-    if (!topicsRow || (state.t && !topicsRow.querySelector('[data-t="' + state.t + '"]'))) state.t = '';
+    if (state.f && !q('[data-f="' + state.f + '"]')) state.f = '';
+    if (state.f) state.p = pillarOfMid(state.f);
+    if (state.p && !q('[data-p="' + state.p + '"]')) state.p = '';
+    var topics = state.f ? q('[data-topics="' + state.f + '"]') : null;
+    if (!topics || (state.t && !q('[data-t="' + state.t + '"]', topics))) state.t = '';
+    box.querySelectorAll('[data-p]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.p === state.p)); });
     box.querySelectorAll('[data-f]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.f === state.f)); });
-    box.querySelectorAll('[data-refine-topics]').forEach(function (r) {
-      r.hidden = r !== topicsRow;
-      r.querySelectorAll('[data-t]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.t === state.t)); });
+    colF.querySelectorAll('[data-pillar]').forEach(function (li) { li.hidden = !!state.p && li.dataset.pillar !== state.p; });
+    colF.querySelectorAll('[data-group]').forEach(function (li) { li.hidden = !!state.p; });
+    var inPillar = function (li) { return !state.p || pillarOfMid(li.dataset.mid) === state.p; };
+    var all = 0; rows.forEach(function (li) { if (inPillar(li)) all++; });
+    q('[data-all-count]').textContent = all + '記事';
+    box.querySelectorAll('[data-topics]').forEach(function (u) {
+      u.hidden = u !== topics;
+      u.querySelectorAll('[data-t]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.t === state.t)); });
     });
+    q('[data-topic-hint]').hidden = !!topics;
+    colT.classList.toggle('is-empty', !topics);
+    q('[data-topic-label]').textContent = state.f === 'tax' ? '税目' : '小カテゴリー';
     var n = 0;
     rows.forEach(function (li) {
-      var on = (!state.f || li.dataset.mid === state.f) && (!state.t || li.dataset.topic === state.t);
+      var on = inPillar(li) && (!state.f || li.dataset.mid === state.f) && (!state.t || li.dataset.topic === state.t);
       li.hidden = !on;
       if (on) n++;
     });
-    var parts = [];
-    if (state.f) parts.push(labelOf('[data-f="' + state.f + '"]'));
-    if (state.t && topicsRow) parts.push(topicsRow.querySelector('[data-t="' + state.t + '"] .refine-name').textContent);
-    now.textContent = parts.length ? parts[parts.length - 1] : 'すべて';
-    result.hidden = !parts.length;
-    result.textContent = parts.length ? parts.join(' › ') + '　' + n + '記事' : '';
+    var crumbs = [{ go: 'all', label: 'すべて' }];
+    if (state.p) crumbs.push({ go: 'p', label: nameOf(q('[data-p="' + state.p + '"]')) });
+    if (state.f) crumbs.push({ go: 'f', label: nameOf(q('[data-f="' + state.f + '"]')) });
+    if (state.t && topics) crumbs.push({ go: 't', label: nameOf(q('[data-t="' + state.t + '"]', topics)) });
+    now.textContent = crumbs[crumbs.length - 1].label;
+    path.hidden = false;
+    path.textContent = '';
+    var lab = document.createElement('span'); lab.className = 'refine-path-label'; lab.textContent = '現在地'; path.appendChild(lab);
+    crumbs.forEach(function (c, i) {
+      if (i) { var s = document.createElement('span'); s.className = 'refine-sep'; s.textContent = '›'; path.appendChild(s); }
+      var last = i === crumbs.length - 1;
+      var b = document.createElement(last ? 'strong' : 'button');
+      if (!last) { b.type = 'button'; b.dataset.go = c.go; }
+      b.textContent = c.label; path.appendChild(b);
+    });
+    var cnt = document.createElement('span'); cnt.className = 'count'; cnt.textContent = n + '記事'; path.appendChild(cnt);
+    place();
     if (push) {
       try {
         var u = new URL(location.href);
-        u.searchParams.delete('f'); u.searchParams.delete('t');
-        if (state.f) u.searchParams.set('f', state.f);
-        if (state.t) u.searchParams.set('t', state.t);
+        ['p', 'f', 't'].forEach(function (k) { u.searchParams.delete(k); if (state[k]) u.searchParams.set(k, state[k]); });
         history.replaceState(null, '', u.pathname + u.search + u.hash);
       } catch (e) {}
     }
@@ -96,22 +154,30 @@ const show = mids.length > 1 || mids.some((m) => m.topics.length > 1);
   box.addEventListener('click', function (e) {
     var b = e.target.closest('.refine-item');
     if (!b) return;
-    if ('f' in b.dataset) { state.f = b.dataset.f; state.t = ''; }
+    if ('p' in b.dataset) { state.p = b.dataset.p; state.f = ''; state.t = ''; }
+    else if ('f' in b.dataset) { state.f = b.dataset.f; state.t = ''; }
     else { state.t = b.dataset.t; }
     apply(true);
   });
+  path.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-go]');
+    if (!b) return;
+    if (b.dataset.go === 'all') { state.p = ''; state.f = ''; state.t = ''; }
+    else if (b.dataset.go === 'p') { state.f = ''; state.t = ''; }
+    else if (b.dataset.go === 'f') { state.t = ''; }
+    apply(true);
+  });
   try {
-    var q = new URLSearchParams(location.search);
-    state.f = q.get('f') || '';
-    state.t = q.get('t') || '';
+    var sp = new URLSearchParams(location.search);
+    state.p = sp.get('p') || ''; state.f = sp.get('f') || ''; state.t = sp.get('t') || '';
   } catch (e) {}
   if (!state.f && state.t) {
-    var tb = box.querySelector('[data-t="' + state.t + '"]');
-    if (tb) state.f = tb.closest('[data-refine-topics]').dataset.refineTopics;
+    var tb = q('[data-t="' + state.t + '"]');
+    if (tb) state.f = tb.closest('[data-topics]').dataset.topics;
   }
   box.hidden = false;
   box.open = wide.matches;
-  if (wide.addEventListener) wide.addEventListener('change', function (m) { if (m.matches) box.open = true; });
+  if (wide.addEventListener) wide.addEventListener('change', function (m) { if (m.matches) box.open = true; place(); });
   apply(false);
   }
 })();
