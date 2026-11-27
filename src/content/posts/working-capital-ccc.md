@@ -8,8 +8,8 @@ topic: financial-health
 tags:
 - 経営層向け
 - 経理担当者向け
-pubDate: 2026-11-27
-draft: true
+pubDate: 2026-11-28
+draft: false
 ---
 ## 結論
 
